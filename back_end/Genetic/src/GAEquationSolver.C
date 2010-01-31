@@ -21,6 +21,8 @@
 #include "Roulette.h"
 #include "File.h"
 
+using std::ofstream;
+
 
 // -------------------------- GAEquationSolver ----------------------------- //
   

@@ -23,7 +23,7 @@
 #else
 # include <sys/filio.h>
 #endif
-#include <iostream.h>
+#include <iostream>
 #include <errno.h>
 
 

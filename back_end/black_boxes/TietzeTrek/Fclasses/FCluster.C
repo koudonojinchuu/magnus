@@ -3,7 +3,7 @@
 #include "FtoolBox.h"
 #include "operators.h"
 #ifndef Frank_GenuineMac
-#include <iostream.h>
+#include <iostream>
 #endif
 
 FCluster::FCluster()

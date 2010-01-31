@@ -20,6 +20,8 @@
 #include "RefCounter.h"
 #include "Word.h"
 
+using std::cin;
+
 
 class FSARep : public RefCounter {
 public:

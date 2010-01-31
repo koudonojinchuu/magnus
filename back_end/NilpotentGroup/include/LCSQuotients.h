@@ -24,7 +24,7 @@
 #include "PolyWord.h"
 #include "AbelianGroup.h"
 #include "MalcevSet.h"
-//#include <iostream.h>
+//#include <iostream>
 
 
 //========================================================================

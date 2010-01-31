@@ -1,5 +1,11 @@
 // system.h
 
+#include <fstream>
+#include <ios>
+
+using std::ios;
+using std::ofstream;
+
 
 
 enum alphabet_type         {GROUP, MONOID};

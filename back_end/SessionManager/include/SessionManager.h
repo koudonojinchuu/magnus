@@ -14,7 +14,7 @@
 #ifndef _SESSIONMANAGER_H_
 #define _SESSIONMANAGER_H_
 
-#include <iostream.h>
+#include <iostream>
 #include "ObjectSmith.h"
 #include "OutMessages.h"
 

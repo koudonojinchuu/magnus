@@ -1,5 +1,6 @@
 /* File todd_coxeter.c */
 #include "todd_coxeter.h"
+#include <stdlib.h>
 
 Void
 tc_todd_coxeter(restart,tc_pvar)

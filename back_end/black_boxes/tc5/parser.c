@@ -2,6 +2,8 @@
 #include "parser.h"
 #include "y.tab.h"
 #include "tcyacc.h"
+#include <stdlib.h>
+#include <string.h>
 extern	FILE    *fin, *fout;
 extern  Word_pt *w_pt, word_;
 extern	Gen_stk_type gen_stk[];

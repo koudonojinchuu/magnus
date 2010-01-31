@@ -14,7 +14,9 @@
 #define _ARC_H_
 
 
-#include <iostream.h>
+#include <iostream>
+
+using std::ostream;
 
 
 //---------------------------------------------------------------------------//

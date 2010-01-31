@@ -1,0 +1,5 @@
+# This script comes from upstream.
+magnus: csh-considered-harmful ./usr/lib/magnus/back_end/black_boxes/homology/bin/calchom
+
+# This is already provided by the tcl8.x/wish packages.
+magnus: missing-dep-for-interpreter tclsh => tclsh (./usr/share/magnus/front_end/copier.tcl)

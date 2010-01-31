@@ -12,7 +12,7 @@
 
 #include "Subgroup.h"
 
-#include <iostream.h>
+#include <iostream>
 
 main ( ) {
 

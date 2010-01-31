@@ -4,6 +4,9 @@
 
 #include "FdebugNode.h"
 #include "FGLstepper.h"
+
+using std::cout;
+
 FdebugNode::FdebugNode(ostream& s,FGLvar *v)
 	:FGLwalkNode(ZERO,v){
 	

@@ -21,11 +21,12 @@
 
 
 #include <stdio.h>
-#include <iostream.h>
+#include <iostream>
 #include "portable.h"
 #include "utility.h"
 #include "dots.h"
 
+using std::cout;
 
 // Variables defining the printing of dots.
 

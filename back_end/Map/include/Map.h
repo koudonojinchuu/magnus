@@ -52,7 +52,7 @@
 #ifndef _MAP_H_
 #define _MAP_H_
 
-#include <iostream.h>
+#include <iostream>
 
 #include "GenericObject.h"
 #include "DerivedObjectOf.h"

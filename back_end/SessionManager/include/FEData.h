@@ -15,7 +15,7 @@
 #define _FEDATA_H_
 
 
-#include <iostream.h>
+#include <iostream>
 #include "Chars.h"
 #include "OID.h"
 #include "ARCSlotID.h"

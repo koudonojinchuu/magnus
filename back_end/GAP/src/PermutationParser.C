@@ -24,6 +24,8 @@
 #include "conversions.h"
 #include "PermutationParser.h"
 
+using std::ends;
+
 
 //--------------------------- PermutationParser -----------------------------//
 

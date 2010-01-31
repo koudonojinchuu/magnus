@@ -21,9 +21,8 @@
 #define _GLOBAL_H_
 
 
-#include <stream.h>
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 //@njz
 //#include <strstream.h>
 #include <sstream>

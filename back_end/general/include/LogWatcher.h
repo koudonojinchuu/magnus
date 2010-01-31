@@ -13,9 +13,13 @@
 #ifndef _LOG_WATCHER_H_
 #define _LOG_WATCHER_H_
 
-#include <iostream.h>
+#include <fstream>
+#include <iostream>
 #include "Chars.h"
 #include "Timer.h"
+
+using std::fstream;
+using std::ios;
 
 const int WATCHER_BUF_SIZE = 4096;
 

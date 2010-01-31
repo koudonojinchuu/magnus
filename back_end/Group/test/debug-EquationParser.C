@@ -1,4 +1,4 @@
-#include <iostream.h>
+#include <iostream>
 #include "EquationParser.h"
 #include "FreeGroup.h"
 

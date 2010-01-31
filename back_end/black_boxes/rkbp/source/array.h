@@ -1,5 +1,8 @@
 // array.h
 
+#include <iostream>
+
+using std::istream;
 
 /*
    This file defines the following struct's and classes:

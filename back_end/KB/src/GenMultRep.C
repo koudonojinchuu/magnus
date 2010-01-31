@@ -10,7 +10,7 @@
 // Revision History:
 //
 
-#include <iostream.h>
+#include <iostream>
 #include <string.h>
 #include "List.h"
 #include "GenMultRep.h"

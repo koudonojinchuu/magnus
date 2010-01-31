@@ -7,7 +7,9 @@
 #define  NO                (response() == FALSE)
 #define  YES               (response() == TRUE)
 
+#include <istream>
 
+using std::istream;
 
 extern  _boolean_t       bool_t( int );
 extern  void          compress_file(char *);

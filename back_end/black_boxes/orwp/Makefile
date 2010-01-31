@@ -18,7 +18,7 @@ all: orwp
 
 orwp : orwp.C
 	g++ -DDEBUG -g -fno-operator-names -D_G_NO_NRV -Wno-deprecated -O2 -o orwp orwp.C
-	strip orwp*
+	strip orwp
 
 clean:
 	-rm -f orwp

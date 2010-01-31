@@ -320,7 +320,7 @@ private:
   {
     value += key;
     if( value.getCoefficient() == R(0) )
-      remove(value);
+      PBTree< Monomial<R>, Monomial<R> >::remove(value);
     //R c = value.getCoefficient();
     //value.setCoefficient( c + key.getCoefficient() ); 
   } 

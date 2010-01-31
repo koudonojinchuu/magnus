@@ -3,6 +3,7 @@
 #include "string.h"
 #include "parser.h"
 #include "stdio.h"
+#include <stdlib.h>
 extern int lineno;
 extern FILE *fin;
 char match[] = {

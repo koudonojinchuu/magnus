@@ -12,7 +12,7 @@
 // * 8/96 Dmitry B. made porting to gcc 2.7.2.
 //
 
-#include <iostream.h>
+#include <iostream>
 #include <string.h>
 #include "Set.h"
 #include "Word.h"

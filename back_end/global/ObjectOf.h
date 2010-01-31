@@ -56,7 +56,7 @@
 #define _OBJECT_OF_H_
 
 
-#include <iostream.h>
+#include <iostream>
 #include "RefCounter.h"
 
 

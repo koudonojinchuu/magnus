@@ -76,8 +76,12 @@
 #define _TYPE_H_
 
 
-#include <iostream.h>
- 
+#include <iostream>
+
+using std::istream;
+using std::ostream;
+
+
 class Type {
 public :
 

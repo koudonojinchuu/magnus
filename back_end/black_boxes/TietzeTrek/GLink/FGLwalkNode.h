@@ -10,7 +10,7 @@ class FGLwalkNode: public FGLnode{
 public:
 	FGLwalkNode(FObject *aSupervisor,FGLvar *aGLvar);	
 	~FGLwalkNode(void);
-	void FGLwalkNode::xGLwalkNode(void);		
+	void xGLwalkNode(void);		
 protected:	
 	
 					

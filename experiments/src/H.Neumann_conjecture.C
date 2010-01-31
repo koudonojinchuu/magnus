@@ -15,7 +15,7 @@
 // Next implementation steps:
 
 
-#include <iostream.h>
+#include <iostream>
 
 #include "SubgroupGraph.h"
 

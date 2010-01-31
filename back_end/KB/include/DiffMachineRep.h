@@ -91,9 +91,9 @@ public:
   Bool rewrite(Word & w) const;
   Bool rewrite(Word & w,const WordOrder & word_order) const;
   GroupDFSA wordAcceptor(const WordOrder & word_order) const;
-  void DiffMachineRep::buildDifferenceMachine(DiffMachineRep & D,
+  void buildDifferenceMachine(DiffMachineRep & D,
        const SetOf<Word> & differences,const WordOrder & word_order) const;
-  void DiffMachineRep::rebuildDifferenceMachine(const WordOrder & word_order);
+  void rebuildDifferenceMachine(const WordOrder & word_order);
 
 
   /////////////////////////////////////////////////////////////////////////

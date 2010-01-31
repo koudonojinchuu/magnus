@@ -11,8 +11,10 @@ Written by Frank Rimlinger, August 1992
 #ifdef Frank_GenuineMac
 #include "operators.h"
 #else
-#include <iostream.h>
+#include <iostream>
 #endif
+
+using std::ostream;
 
 class FGLink;
 class FBlockManager: public FList{

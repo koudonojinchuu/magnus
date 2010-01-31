@@ -126,8 +126,13 @@ DatabaseOf<T>::DatabaseOf(const Chars& f_name) : fileName(f_name), lastIDNumber(
     cfgFileName[l-3]='c';cfgFileName[l-2]='f';cfgFileName[l-1]='g';
     
     cfgFile.open(cfgFileName,  ios::in | ios::out);
-    if (!cfgFile)
-      error("Can't open the database configuration file");
+    if (!cfgFile) {
+      // Perhaps the file is installed read-only?
+      cfgFile.clear();
+      cfgFile.open(cfgFileName,  ios::in);
+      if (!cfgFile)
+        error("Can't open the database configuration file");
+    }
 
     if (!cfgFile.eof())
       //@njz
@@ -139,8 +144,13 @@ DatabaseOf<T>::DatabaseOf(const Chars& f_name) : fileName(f_name), lastIDNumber(
     error("Does not look like a database file.");
   
   dataFile.open(f_name, ios::in | ios::out);
-  if (!dataFile)
-    error("Can't open the database");
+  if (!dataFile) {
+    // Perhaps the file is installed read-only?
+    dataFile.clear();
+    dataFile.open(f_name, ios::in);
+    if (!dataFile)
+      error("Can't open the database");
+  }
 }
 
 template <class T>
@@ -250,8 +260,12 @@ void  DatabaseOf<T>::del( int i )
   tmp_out.close();
   
   dataFile.open(fileName, ios::in | ios::out);
-  if (!dataFile)
-    error("Can't open the database");
+  if (!dataFile) {
+    // Perhaps the file is installed read-only?
+    dataFile.open(fileName, ios::in);
+    if (!dataFile)
+      error("Can't open the database");
+  }
 }
 
 

@@ -18,7 +18,7 @@ class FTT2pnode:public FTTnode{
 	FTT2pnode(FGLnode *aSupervisor,FpTree *apTree,FTTpres *currentPres);
 	~FTT2pnode(void);	
 	static Boolean TT2pFunc(FGLnode *node);
-	Boolean FTT2pnode::TT2pgo(void);
+	Boolean TT2pgo(void);
 	Boolean presGo(void);
 	Boolean renumberGo(void);
 	virtual void auRevoir(void);

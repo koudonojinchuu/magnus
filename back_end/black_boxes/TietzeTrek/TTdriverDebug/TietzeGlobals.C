@@ -28,6 +28,8 @@ ostream cout;
 ofstream fout("/dev/null");
 #endif
 
+using std::cout;
+
 ostream &memout=cout;		//  defaults for debugging streams
 ostream &gout=cout;			//	you can reroute these if desired
 ostream &tout=cout;			//  but you'll have to write some support code.	

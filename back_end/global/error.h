@@ -10,6 +10,12 @@
 #ifndef _ERROR_H_
 #define _ERROR_H_
 
+using std::cerr;
+using std::cout;
+using std::endl;
+using std::flush;
+
+
 #ifdef __GNUG__
 //@jml This tells g++ that error does not return.
 inline volatile void error(const char *msg) {

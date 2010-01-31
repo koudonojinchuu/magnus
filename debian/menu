@@ -1,0 +1,3 @@
+?package(magnus):needs="X11" section="Applications/Science/Mathematics"\
+  title="Magnus" command="/usr/bin/magnus"\
+  icon="/usr/share/pixmaps/magnus.xpm"

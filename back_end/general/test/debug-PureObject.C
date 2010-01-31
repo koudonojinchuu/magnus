@@ -1,7 +1,7 @@
 // Principal Author: Stephane Collart
 
 
-#include <iostream.h>
+#include <iostream>
 
 #include "PureRep.h"
 #include "PureObject.h"

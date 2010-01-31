@@ -2,9 +2,9 @@
 
 
 #include <stdio.h>
-#include <iostream.h>
-#include <iomanip.h>
-#include <fstream.h>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
 #include <ctype.h>
 #include <limits.h>
 #include <string.h>

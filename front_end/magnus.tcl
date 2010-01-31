@@ -1,3 +1,4 @@
+#!/usr/bin/wish -f
 ##
 ##   $Id: magnus.tcl 97 2006-03-24 19:49:26Z ybryukhov $
 ##

@@ -3,6 +3,7 @@
 #include "string.h"
 #include "parser.h"
 #include "stdio.h"
+#include <stdlib.h>
 extern int lineno;
 extern char *eemalloc(); 
 extern	Keyword keywords[];

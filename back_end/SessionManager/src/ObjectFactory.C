@@ -10,7 +10,7 @@
 // Revision History:
 //
 
-#include <iostream.h>
+#include <iostream>
 #include "SMFPGroup.h"
 #include "ObjectFactory.h"
 //#include "FreeGroup.h"

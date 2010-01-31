@@ -17,6 +17,8 @@
 #include "QEqnSolutions.h"
 #include "SolutionsEnum.h"
 
+using std::ends;
+
 
 // ---------------------- EquationBasicSolutions ------------------------- //
 

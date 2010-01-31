@@ -14,7 +14,7 @@
 #define _ARCSLOTID_H_
 
 
-#include <iostream.h>
+#include <iostream>
 
 
 //---------------------------------------------------------------------------//

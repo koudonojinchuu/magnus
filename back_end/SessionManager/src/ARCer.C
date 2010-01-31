@@ -15,6 +15,9 @@
 
 #include "ARCer.h"
 
+using std::ios;
+using std::ofstream;
+
 #define DELETE_IPC_FILES
 
 

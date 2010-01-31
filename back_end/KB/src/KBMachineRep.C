@@ -12,7 +12,7 @@
 // 12/07/94 @rn Rewrote KBMachineRep::sizeLanguage.
 
 
-#include <iostream.h>
+#include <iostream>
 #include <string.h>
 #include "Word.h"
 #include "KBMachineRep.h"

@@ -18,7 +18,7 @@
 #include "FPGroup.h"
 #include "Chars.h"
 #include "ViewContents.h"
-#include <iostream.h>
+#include <iostream>
 
 // ------------------------------------  RandomDefinitionGenerate -----------------------------------
 class RandomDefinitionGenerate

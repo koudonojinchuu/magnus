@@ -19,11 +19,13 @@
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
-#include <fstream.h>
-#include <iostream.h>
+#include <fstream>
+#include <iostream>
 #include <sys/wait.h>
 #include "MagnusHome.h"
 #include "ComputationManager.h"
+
+using std::ifstream;
 
 
 // ----------------------------- ARCer ------------------------------------- //

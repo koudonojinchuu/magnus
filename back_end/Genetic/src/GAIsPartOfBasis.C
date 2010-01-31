@@ -22,6 +22,9 @@
 #include "File.h"
 #include "conversions.h"
 
+using std::ofstream;
+
+
 // --------------------------- GAIsPartOfBasis ---------------------------- //
 
 GAIsPartOfBasis::GAIsPartOfBasis( const FreeGroup& G, const ACConfig& config,

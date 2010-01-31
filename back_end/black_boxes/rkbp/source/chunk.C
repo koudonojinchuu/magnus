@@ -2,6 +2,9 @@
 
 #include "rkbp.h"
 
+using std::cout;
+using std::endl;
+
 
 static chunk  *head_chunk = NULL;
 static long    nfree      = 0;

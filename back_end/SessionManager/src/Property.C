@@ -16,6 +16,10 @@
 
 #include "Property.h"
 
+using std::ifstream;
+using std::ofstream;
+
+
 //@njz: removed
 //int SetData< QuickAssociation<PropertyType, Chars> >::hashElement(
 //  const QuickAssociation<PropertyType, Chars>& t) const;

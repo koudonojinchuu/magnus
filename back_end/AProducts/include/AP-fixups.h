@@ -31,6 +31,9 @@
 #include "Associations.h"
 #include "File.h"
 
+using std::ends;
+
+
 struct RelatorConjugate 
 {
 

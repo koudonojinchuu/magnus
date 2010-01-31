@@ -14,6 +14,8 @@
 #include "ORWordProblem.h"
 #include "MagnusHome.h"
 
+using std::ends;
+
 
 ORWordProblem::ORWordProblem(const Word& relator) :
   theRelator(relator),

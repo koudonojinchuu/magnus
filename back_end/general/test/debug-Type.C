@@ -14,7 +14,7 @@
 #include "PureRep.h"
 #include "PureObject.h"
 
-#include <iostream.h>
+#include <iostream>
 
 
 struct AR : PureRep {

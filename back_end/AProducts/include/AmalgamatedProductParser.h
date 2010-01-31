@@ -58,7 +58,7 @@ public:
 				    Chars& errMesg, int axRelators);
   
   void parseFactorsAndRelations(FreeGroup& f1, FreeGroup& f2,
-				VectorOf<Word>& gens1, VectorOf<Word>& gens1,
+				VectorOf<Word>&, VectorOf<Word>&,
 				int maxRelators, Chars& errMesg);
   
   AmalgProductOfFreeGroupsRep* parseAPofFreeGroups( Chars& errMesg );

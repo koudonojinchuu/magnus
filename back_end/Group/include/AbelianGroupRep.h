@@ -73,7 +73,7 @@ public:
   bool havePrimaryDecomposition( ) const { return primeBasisFound; }
   // True if the primary decomposition has been computed.
 
-  Chars AbelianGroupRep::getFileName( ) const;
+  Chars getFileName( ) const;
   // Returns name of the file containing new generators.
   // Calls error() if no file has been created.
   

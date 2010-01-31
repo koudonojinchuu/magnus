@@ -13,8 +13,8 @@
 #ifndef _DFSA_PARSER_H_
 #define _DFSA_PARSER_H_
 
-#include <iostream.h>
-#include <iomanip.h>
+#include <iostream>
+#include <iomanip>
 //#include <stdiostream.h>
 #include "global.h"
 #include "DFSARep.h"

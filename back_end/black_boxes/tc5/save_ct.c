@@ -3,6 +3,7 @@
 #include "tc.h"
 #include "tcyacc.h"
 #include <stdio.h>
+#include <string.h>
 char *
 tc_save(tc_pvar)
 struct tc_str_vars	*tc_pvar;

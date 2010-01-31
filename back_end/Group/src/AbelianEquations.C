@@ -15,7 +15,7 @@
 
 
 #include "AbelianEquations.h"
-#include <iostream.h>
+#include <iostream>
 
 
 AbelianEquationsSolver::AbelianEquationsSolver( const AbelianGroup& a , 

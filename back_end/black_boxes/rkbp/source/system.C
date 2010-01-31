@@ -3,6 +3,13 @@
 
 #include "rkbp.h"
 
+using std::cin;
+using std::cout;
+using std::endl;
+using std::ifstream;
+using std::setw;
+
+
 extern  double  hybrid_factor;
 extern  ulong   mask[33];
 extern  long    pack_size[12];

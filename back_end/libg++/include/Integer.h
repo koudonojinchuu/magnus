@@ -23,7 +23,11 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #endif
 #define _Integer_h 1
 
-#include <iostream.h>
+#include <iostream>
+
+using std::istream;
+using std::ostream;
+
 
 #undef OK
 
@@ -128,7 +132,7 @@ public:
 
 // (constructive binary operations are inlined below)
 
-#if defined (__GNUG__) && ! defined (__STRICT_ANSI__)
+#if 0 && defined (__GNUG__) && ! defined (__STRICT_ANSI__)
   friend Integer operator <? (const Integer& x, const Integer& y); // min
   friend Integer operator >? (const Integer& x, const Integer& y); // max
 #endif
@@ -688,7 +692,7 @@ inline Integer& Integer::operator >>= (long y)
   return *this;
 }
 
-#if defined (__GNUG__) && ! defined (__STRICT_ANSI__)
+#if 0 && defined (__GNUG__) && ! defined (__STRICT_ANSI__)
 inline Integer operator <? (const Integer& x, const Integer& y)
 {
   return (compare(x.rep, y.rep) <= 0) ? x : y;

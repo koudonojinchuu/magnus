@@ -1,5 +1,8 @@
 /* File print_ct.c */
 #include "print_ct.h"
+#include <string.h>
+#include <stdlib.h>
+
 #define CT_T(i,j)	ct[(i-1) * NCOL + j + 1]
 Void
 tc_print_ct(n1, n2, n3, tc_pvar)

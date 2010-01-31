@@ -2,6 +2,12 @@
 
 #include "rkbp.h"
 
+using std::cin;
+using std::cout;
+using std::endl;
+using std::setprecision;
+using std::setw;
+
 
 static long        nargs;
 static char       *args[20];

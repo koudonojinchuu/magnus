@@ -1,0 +1,64 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH MAGNUS 1 "July 21, 2005"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+magnus \- computational group theory software with GUI
+.SH SYNOPSIS
+.B magnus
+.SH DESCRIPTION
+The \fBMAGNUS\fP Computational Group Theory Package is an innovative
+symbolic algebra package providing facilities for doing calculations
+in and about infinite groups.  Almost all symbolic algebra systems
+are oriented toward finite computations that are guaranteed to
+produce answers, given enough time and resources.  By contrast,
+MAGNUS is concerned with experiments and computations on infinite
+groups which in some cases are known to terminate, while in others are
+known to be generally recursively unsolvable.
+.PP
+Features include:
+.PP
+.RS
+A graphical object and method based user interface which is easy
+and intuitive to use and naturally reflects the underlying C++ classes;
+.PP
+A kernel comprised of a ``session manager", to communicate between
+the user interface or front-end and the back-end where computations
+are carried out, and ``computation managers" which direct the
+computations which may involve several algorithms and ``information
+centers" where information is stored;
+.PP
+Facilities for performing several procedures in parallel and
+allocating resources to each of several simultaneous algorithms
+working on the same problem;
+.PP
+Enumerators which generate sizable finite approximations to both
+finite and infinite algebraic objects and make it possible to carry
+out searches for answers even when general algorithms may not exist;
+.PP
+Innovative genetic algorithms;
+.PP
+A package manager to ``plug in" more special purpose algorithms
+written by others.
+.RE
+.SH SEE ALSO
+See \fIhttp://www.grouptheory.org/\fP for further information.
+.SH AUTHOR
+Magnus was written by Dmitri Bormotov <bormotov@rio.sci.ccny.cuny.edu>,
+Gilbert Baumslag, C.F. Miller III, Hamish Short and many others.
+.br
+This manual page was prepared by Ben Burton <bab@debian.org>,
+for the Debian GNU/Linux system (but may be used by others).

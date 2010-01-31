@@ -19,6 +19,9 @@
 #include "ORProblems.h"
 #include "DecomposeInSubgroup.h"
 
+using std::ends;
+
+
 // ------------------------ IsTrivialChecker ------------------------------- //
 
 

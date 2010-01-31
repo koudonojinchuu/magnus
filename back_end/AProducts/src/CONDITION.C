@@ -1,5 +1,10 @@
-#include <iostream.h>
+#include <iostream>
+#include <stdlib.h>
 #include "CONDITION.h"
+
+using std::cerr;
+using std::endl;
+
 
 void debugMessage( int msgType, bool condition, const char *condDescription, 
 		   const char *fileName, int lineno )

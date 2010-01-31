@@ -38,6 +38,11 @@
   #include <malloc.h>
 #endif
 
+#include <iostream>
+
+using std::cout;
+using std::endl;
+using std::setw;
 
 
 /* Each block allocated by malloc is prefixed with a bucket whose

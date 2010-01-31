@@ -18,7 +18,7 @@
 
 //#include "Word.h"
 
-#include <iostream.h>
+#include <iostream>
 #include "IPC.h"
 //@njz:
 #include "error.h"

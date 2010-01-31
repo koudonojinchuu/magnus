@@ -1,0 +1,25 @@
+This package was debianised by Ben Burton <bab@debian.org> on
+Mon, 18 Feb 2002 09:26:11 +1100.
+
+It was downloaded from http://sourceforge.net/projects/magnus ;
+see also http://www.grouptheory.org/.
+
+Upstream Authors: Dmitri Bormotov <bormotov@rio.sci.ccny.cuny.edu>,
+                  Gilbert Baumslag, C.F. Miller III, Hamish Short
+                  and many others.
+
+Copyright (C) 1994-2005 The New York Group Theory Cooperative
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+On Debian systems, the complete text of the GNU General Public
+License can be found in /usr/share/common-licenses/GPL file.
+

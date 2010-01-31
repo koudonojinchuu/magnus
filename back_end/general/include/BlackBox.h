@@ -24,13 +24,17 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <iostream.h>
+#include <iostream>
 #include <strstream>
-#include <fstream.h>
+#include <fstream>
 //#include <stdiostream.h>
 
 #include "global.h"
 #include "Chars.h"
+
+using std::ifstream;
+using std::ofstream;
+
 
 extern "C" {
   char* tempnam(const char*,const char*); // Lib functions SunOS doesn't declare.

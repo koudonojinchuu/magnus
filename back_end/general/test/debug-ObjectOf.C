@@ -3,7 +3,7 @@
 #include "RefCounter.h"
 #include "ObjectOf.h"
 
-#include <iostream.h>
+#include <iostream>
 
 struct R : RefCounter {
 

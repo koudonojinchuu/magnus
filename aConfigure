@@ -19,7 +19,7 @@
 echo "Setting up default Magnus paths..."
 echo
 
-DEFAULT_MAGNUSHOME=`pwd`
+DEFAULT_MAGNUSHOME=/usr/share/magnus
 DEFAULT_MAGNUSCURRENTHOME=`pwd`
 DEFAULT_WISH=/usr/bin/wish
 DEFAULT_MAGNUSTMP=/tmp
@@ -28,7 +28,8 @@ MAGNUSTMP=/tmp
 echo "Enter the path to the Magnus source tree (the directory where"
 echo "the Magnus source is currently located):"
 echo -n "[$DEFAULT_MAGNUSCURRENTHOME]"
-read MAGNUSCURRENTHOME
+# read MAGNUSCURRENTHOME
+MAGNUSCURRENTHOME=
 if [ "$MAGNUSCURRENTHOME" = "" ]
 then
 	MAGNUSCURRENTHOME=$DEFAULT_MAGNUSCURRENTHOME
@@ -78,12 +79,14 @@ fi
 
 # in the meantime, just do this
 
-MAGNUSHOME=$MAGNUSCURRENTHOME
+# MAGNUSHOME=$MAGNUSCURRENTHOME
+MAGNUSHOME=$DEFAULT_MAGNUSHOME
 
 echo
 echo "Enter the path to the Wish executable (with the addinput extensions):"
 echo -n "[$DEFAULT_WISH]"
-read WISH
+# read WISH
+WISH=
 if [ "$WISH" = "" ]
 then
 	WISH=$DEFAULT_WISH
@@ -106,7 +109,8 @@ fi
 
 echo "Enter the path to the Magnus temporary directory:"
 echo -n  "[$DEFAULT_MAGNUSTMP]"
-read MAGNUSTMP
+# read MAGNUSTMP
+MAGNUSTMP=
 if [ "$MAGNUSTMP" = "" ]
 then
 	MAGNUSTMP=$DEFAULT_MAGNUSTMP

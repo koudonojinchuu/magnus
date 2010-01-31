@@ -77,7 +77,7 @@
 #define _VECTOR_PTR_H_
  
 
-#include <iostream.h>
+#include <iostream>
 
 #include "RefCounter.h"
 #include "ObjectOf.h"

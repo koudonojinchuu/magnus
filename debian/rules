@@ -1,0 +1,161 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+INSTALL_DIR = install -p -d -o root -g root -m 755
+INSTALL_FILE = install -p -o root -g root -m 644
+INSTALL_BIN = install -p -o root -g root -m 755
+
+tmp = $(CURDIR)/debian/magnus
+share = $(tmp)/usr/share/magnus
+lib = $(tmp)/usr/lib/magnus
+doc = $(tmp)/usr/share/doc/magnus
+backend = $(lib)/back_end
+overrides = $(tmp)/usr/share/lintian/overrides
+pixmaps = $(tmp)/usr/share/pixmaps
+
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+# General compiler flags:
+EXTRA_FLAGS = -Wno-deprecated -fno-operator-names -fsigned-char
+EXTRA_LDFLAGS =
+
+ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+  EXTRA_FLAGS += -g
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+  INSTALL_PROGRAM += -s
+endif
+
+ifeq ($(DEB_BUILD_GNU_TYPE),hppa-linux)
+  EXTRA_FLAGS += -ffunction-sections
+  EXTRA_LDFLAGS += -ffunction-sections
+endif
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	./configure
+	touch configure-stamp
+
+build: build-stamp
+build-stamp: configure-stamp 
+	dh_testdir
+	$(MAKE) EXTRA_FLAGS="$(EXTRA_FLAGS)" EXTRA_LDFLAGS="$(EXTRA_LDFLAGS)" \
+		DEBUG=
+	mkdir -p doc/manual/ps
+	cd doc/manual ; make
+	cd doc/manual ; dvips magnus.dvi
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	# The clean target keeps most of the Makefiles, but blows away the
+	# TietzeTrek Makefile.  Don't let that stop us from building from an
+	# already-clean source tree.
+	[ ! -f back_end/black_boxes/TietzeTrek/Makefile ] || $(MAKE) clean
+
+	rm -f back_end/global/config.h back_end/global/config.h.old
+	rm -f front_end/magnus front_end/magnus.old
+	rm -f back_end/black_boxes/TietzeTrek/Makefile.old
+
+	# TeX output files will be rebuilt.  Clearing them out now avoids
+	# problems when building twice in a row.
+	rm -f doc/manual/magnus.dvi doc/manual/magnus.aux \
+		doc/manual/magnus.log doc/manual/magnus.ps doc/manual/magnus.toc
+	rm -rf doc/manual/ps
+
+	# Some other files that are not shipped in the sources but are
+	# made on the fly at build time:
+	rm -f back_end/black_boxes/TietzeTrek/Makefile
+	rm -f back_end/black_boxes/tc5/y.tab.h
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	$(INSTALL_DIR) $(share)
+	$(INSTALL_DIR) $(lib)
+
+	# Install the back end.
+	$(INSTALL_DIR) $(backend)/SessionManager/test/bin
+	$(INSTALL_BIN) back_end/SessionManager/test/bin/magnus \
+		$(backend)/SessionManager/test/bin
+
+	# Install the black boxes.
+	for i in `find back_end/black_boxes -type f -perm +100`; do \
+	  $(INSTALL_DIR) $(lib)/`dirname $$i`; \
+	  $(INSTALL_BIN) $$i $(lib)/`dirname $$i`; \
+	done
+	rm -f $(backend)/black_boxes/ace/*.ps
+	rm -rf $(backend)/black_boxes/homology/src
+	rm -rf $(backend)/black_boxes/kbmag/gap
+	rm -rf $(backend)/black_boxes/TietzeTrek/DEFUNCT
+	
+	# Install the front end and miscellaneous files.
+	for i in `find front_end packages inventory -type d`; do \
+	  $(INSTALL_DIR) $(share)/$$i; done
+	for i in `find front_end packages inventory -type f -perm +100`; do \
+	  $(INSTALL_BIN) $$i $(share)/`dirname $$i`; done
+	for i in `find front_end packages inventory -type f -not -perm +100`; do \
+	  $(INSTALL_FILE) $$i $(share)/`dirname $$i`; done
+	rm -f $(share)/front_end/magnus.in $(share)/front_end/magnus.old
+	rm -f $(share)/front_end/.cvsignore
+
+	# Install the manual.
+	$(INSTALL_DIR) $(doc)
+	$(INSTALL_FILE) doc/manual/magnus.ps $(doc)/Manual.ps
+
+	# Remove CVS directories.
+	rm -rf `find $(tmp) -type d -name CVS`
+
+	# Install overrides.
+	$(INSTALL_DIR) $(overrides)
+	$(INSTALL_FILE) debian/overrides $(overrides)/magnus
+
+	# Install pixmaps.
+	$(INSTALL_DIR) $(pixmaps)
+	$(INSTALL_FILE) debian/*.xpm $(pixmaps)
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+#	dh_installdebconf	
+	dh_installdocs
+	dh_installexamples
+	dh_installmenu
+#	dh_installmime
+	dh_installman
+	dh_installchangelogs ChangeLog
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+#	dh_makeshlibs
+	dh_installdeb
+#	dh_perl
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

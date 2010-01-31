@@ -1,2 +1,2 @@
 #!/bin/sh
-%WISH% -f $0.tcl
+%WISH% -f /usr/share/magnus/front_end/magnus.tcl

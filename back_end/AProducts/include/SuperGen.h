@@ -17,7 +17,7 @@
 #ifndef __SUPERGEN_H__
 #define __SUPERGEN_H__
 
-#include <iostream.h>
+#include <iostream>
 #include "global.h"
 #include "Generator.h"
 //#include "Vector.h"

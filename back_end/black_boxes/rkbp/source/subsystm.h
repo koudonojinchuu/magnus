@@ -283,7 +283,7 @@ class subsystem {
   void hybrid_first_pass();
   void write( fstream &stream, char *file_name, long num );
 
-  void subsystem::unpack(
+  void unpack(
     long          length,
     long          origin,
     long          bit_pos,

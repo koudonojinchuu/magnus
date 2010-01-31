@@ -71,7 +71,7 @@ public:
   Rational&        operator *= (const Rational& y);
   Rational&        operator /= (const Rational& y);
 
-#if defined (__GNUG__) && ! defined (__STRICT_ANSI__)
+#if 0 && defined (__GNUG__) && ! defined (__STRICT_ANSI__)
   friend Rational  operator <? (const Rational& x, const Rational& y); // min
   friend Rational  operator >? (const Rational& x, const Rational& y); // max
 #endif
@@ -230,7 +230,7 @@ inline const Integer& Rational::numerator() const { return num; }
 inline const Integer& Rational::denominator() const { return den; }
 inline Rational::operator double() const { return ratio(num, den); }
 
-#if defined (__GNUG__) && ! defined (__STRICT_ANSI__)
+#if 0 && defined (__GNUG__) && ! defined (__STRICT_ANSI__)
 inline Rational operator <? (const Rational& x, const Rational& y)
 {
   if (compare(x, y) <= 0) return x; else return y;

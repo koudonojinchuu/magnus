@@ -1,4 +1,4 @@
-#include <iostream.h>
+#include <iostream>
 #include "RandomPrimitiveElement.h"
 #include "FreeGroup.h"
 #include "WhiteheadAutomorphisms.h"

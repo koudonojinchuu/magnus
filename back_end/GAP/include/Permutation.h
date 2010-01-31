@@ -41,7 +41,7 @@ public:
   //                                                          //
   //////////////////////////////////////////////////////////////
 
-  Permutation::Permutation( VectorOf<int> v = VectorOf<int>() );
+  Permutation( VectorOf<int> v = VectorOf<int>() );
   // Initialize the permutation given its bottom row v; v must define
   // a permutation; there's no check for correctness; if you need to
   // check use operator >>.

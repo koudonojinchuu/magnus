@@ -5,6 +5,10 @@
 
 #include  "rkbp.h"
 
+using std::cin;
+using std::cout;
+using std::endl;
+
 
 
 // The following are used in the recording of elapsed cpu time.

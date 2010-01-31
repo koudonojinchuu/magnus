@@ -16,7 +16,7 @@
 #ifndef _DCELL_H_
 #define _DCELL_H_
 
-#include <iostream.h>
+#include <iostream>
 #include "IPC.h"
 
 template<class T> class DCell {

@@ -1,0 +1,138 @@
+magnus (20060324-5.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Change build-depends on tetex-base, tetex-bin, tetex-extra to
+    texlive-latex-base to fix FTBFS.  (Closes: #562340)
+
+ -- Richard Darst <rkd@zgib.net>  Sat, 30 Jan 2010 23:15:37 -0500
+
+magnus (20060324-5.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix FTBFS with gcc 4.3 (closes: #455399):
+    - #include <iostream> instead of <iostream.h>, etc.
+    - #include assorted missing stdlib headers
+    - using std::foo
+    - don't re-#define RAND_MAX if the platform defines it correctly (which
+      we do)
+
+ -- Simon McVittie <smcv@ianadd.pseudorandom.co.uk>  Sat, 05 Apr 2008 20:33:52 +0000
+
+magnus (20060324-5) unstable; urgency=low
+
+  * Updated for new debian menu layout.  Menu entry has moved from Apps/Math
+    to Applications/Science/Mathematics.
+  * No longer ignores errors in the debian/rules clean target, unless those
+    errors are due to missing Makefiles.
+  * The debian/rules clean target now removes several TeX-related output
+    files from doc/manual/.  Some of these files are shipped in the sources
+    and remade at build time, which caused problems when building magnus
+    twice in a row (closes: #424564).
+  * Likewise, debian/rules clean now removes some other miscellaneous files
+    that are made at build time but were not being cleaned away.
+  * Added tcl8.4 | tclsh to the dependency list, since magnus includes a tclsh
+    script.  This was already brought in indirectly through the tk dependency,
+    but this extra clarification can't hurt.
+
+ -- Ben Burton <bab@debian.org>  Sat, 13 Oct 2007 07:46:20 +1000
+
+magnus (20060324-4) unstable; urgency=low
+
+  * Comment out deprecated <? and >? operators (closes: #386099).
+  * Switch from DH_COMPAT to debian/compat.
+
+ -- Ben Burton <bab@debian.org>  Sun, 02 Sep 2007 10:41:52 +1000
+
+magnus (20060324-3) unstable; urgency=low
+
+  * Sigh.  Use SIG_ERR instead of -1 to fix build error on 64-bit machines
+    (closes: #367362).
+
+ -- Ben Burton <bab@debian.org>  Tue, 16 May 2006 00:08:05 +1000
+
+magnus (20060324-2) unstable; urgency=low
+
+  * Added missing #includes (closes: #367343).
+  * Added missing build-depends on bison (closes: #367342).
+
+ -- Ben Burton <bab@debian.org>  Mon, 15 May 2006 19:33:12 +1000
+
+magnus (20060324-1) unstable; urgency=low
+
+  * New upstream release.
+  * Patched to build under g++-4.1 (closes: #355996).
+  * Now builds and installs the Magnus reference manual.
+  * Switched to DH_COMPAT=5 and updated build-depends accordingly.
+  * Updated standards-version to 3.7.2.0 (no changes required).
+  * Added reference to the new sourceforge distribution site in the
+    copyright file.
+
+ -- Ben Burton <bab@debian.org>  Sat, 13 May 2006 12:04:54 +1000
+
+magnus (20050624-1) unstable; urgency=low
+
+  * New upstream release.
+  * Builds using g++-4.x and tk8.4 instead of g++-3.x and tk8.3.
+  * Patched for g++-4.x compatibility.
+  * Patched to use const_cast where C-style casts were causing undefined
+    behaviour (and in particular, mangled session messages).
+  * Changed to new upstream URL.
+  * Bumped standards-version to 3.6.2.1 (no changes required).
+
+ -- Ben Burton <bab@debian.org>  Thu, 21 Jul 2005 08:10:09 +1000
+
+magnus (4.1.1-beta-7) unstable; urgency=low
+
+  * Initialise data member index to 0 in FEData::KeyRep constructor to
+    fix FTBFS (closes: #242401).
+  * Bumped standards-version to 3.6.1.
+
+ -- Ben Burton <bab@debian.org>  Thu, 22 Apr 2004 17:39:18 +1000
+
+magnus (4.1.1-beta-6) unstable; urgency=low
+
+  * Minor manpage update.
+  * Using high colour pixmap for debian menu entry.
+  * Bumped standards-version to 3.6.0.
+
+ -- Ben Burton <bab@debian.org>  Wed, 27 Aug 2003 20:04:25 +1000
+
+magnus (4.1.1-beta-5) unstable; urgency=low
+
+  * Changed #include <strstream.h> to #include <strstream> where it
+    occurs (closes: #196422).  At this point I'd rather just change the
+    legacy #includes than risk breaking the code with an upgrade to
+    stringstreams.
+  * Replaced ### with # in CONDITION.h to avoid preprocessor errors.
+  * Other minor cleanups for gcc3.3 compatibility.
+
+ -- Ben Burton <bab@debian.org>  Tue, 10 Jun 2003 17:58:37 +1000
+
+magnus (4.1.1-beta-4) unstable; urgency=low
+
+  * Using -fsigned-char (closes: #170532).
+  * New maintainer email address.
+  * Bumped standards-version to 3.5.8.
+
+ -- Ben Burton <bab@debian.org>  Fri, 31 Jan 2003 14:28:54 +1100
+
+magnus (4.1.1-beta-3) unstable; urgency=low
+
+  * Builds using -ffunction-sections for hppa (closes: #167035).
+
+ -- Ben Burton <benb@acm.org>  Wed,  6 Nov 2002 16:06:29 +1100
+
+magnus (4.1.1-beta-2) unstable; urgency=low
+
+  * Built using g++-3.2.
+  * Large code cleanup for gcc3 compatibility (closes: #142391).
+  * Bumped standards-version to 3.5.7.0.
+
+ -- Ben Burton <benb@acm.org>  Tue, 29 Oct 2002 17:11:11 +1100
+
+magnus (4.1.1-beta-1) unstable; urgency=low
+
+  * Initial Release (closes: Bug#134668).
+
+ -- Ben Burton <benb@acm.org>  Mon, 18 Feb 2002 09:26:11 +1100
+

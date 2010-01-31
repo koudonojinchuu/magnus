@@ -4,6 +4,7 @@
 #include "FdebugNode.h"
 #include "FfoldStepper.h"
 
+using std::cout;
 
 ostream& repReg(ostream& s,FGLvarInterface *v){
 	if(xDEBUG){

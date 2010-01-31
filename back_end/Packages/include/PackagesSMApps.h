@@ -7,6 +7,8 @@
 #ifndef _SMAppsPackages_h_
 #define _SMAppsPackages_h_
 
+using std::streampos;
+
 
 // ------------------------- PackageBlackBox --------------//
 

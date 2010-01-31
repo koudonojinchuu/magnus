@@ -12,10 +12,15 @@
 #include "GLfunctions.h"
 
 #ifndef Frank_GenuineMac
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
+using std::ofstream;
+
 extern ofstream fout;
 #endif
+
+using std::endl;
+using std::ostream;
 
 extern ostream &gout;
 extern ostream &memout;

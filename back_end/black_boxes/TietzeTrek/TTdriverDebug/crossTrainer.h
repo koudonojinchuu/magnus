@@ -18,10 +18,13 @@ extern ostream cout;
 // hidden by using the <= operators instead of the << operators.  In all 
 // versions, <= streams to both file and windown.
 
-#include <fstream.h>
+#include <fstream>
+using std::ofstream;
+
 extern ofstream fout;
 #endif
 
+using std::ostream;
 extern ostream &memout;
 extern ostream &tout;
 extern ostream &gout;

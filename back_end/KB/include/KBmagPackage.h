@@ -22,7 +22,7 @@
 #ifndef _KBmagPackage_H_
 #define _KBmagPackage_H_
 
-#include <iomanip.h>
+#include <iomanip>
 
 #include "Vector.h"
 #include "Chars.h"

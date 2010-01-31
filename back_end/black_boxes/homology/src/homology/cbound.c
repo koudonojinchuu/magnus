@@ -46,6 +46,7 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <homcommon.h>
 #include <grpinput.h>
 #include <2dimbdry.h>

@@ -26,7 +26,7 @@ class FrankStream{
 typedef FrankStream ostream;
 
 #else
-#include <iostream.h>
+#include <iostream>
 #endif
 
 void operator+(FGLvarInterface *v,const GLref& ref);
@@ -38,6 +38,8 @@ Ptr operator&(FGLvarInterface *v,const GLref& ref);
 // the following operators stream to both window and file
 // in the SUN version.  The Mac version is controlled dynamically
 // by the user.
+
+using std::ostream;
 
 ostream& operator<=(ostream& s,const Str255 str);
 ostream& operator<=(ostream& s,const char* str);

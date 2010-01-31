@@ -1,6 +1,6 @@
 // Principal Author: Roger Needham
 
-#include <iostream.h>
+#include <iostream>
 
 #include "TietzeTrekker.h"
 

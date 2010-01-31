@@ -2564,7 +2564,7 @@ public:
   //                                                                     //
   /////////////////////////////////////////////////////////////////////////
 
-void IsAbelianWordPowerOfSecondArcer::setArguments(const AbelianGroup& abGroup,
+void setArguments(const AbelianGroup& abGroup,
                                 const SMWord& w1,const SMWord& w2);
   // Inherited from ARCer:
   // bool takeControl( );

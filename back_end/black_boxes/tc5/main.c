@@ -12,6 +12,8 @@
 #include "sys/types.h"
 #include "miscellaneous.h"
 #include "parser.h"
+#include <stdlib.h>
+#include <string.h>
 extern Rel_stk_type *rel_pt;
 static Word_pt  word_;
 Word_pt *w_pt;

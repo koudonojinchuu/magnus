@@ -21,10 +21,16 @@
 //
 
 
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 #include <stdlib.h>
-#include <new.h>
+#include <new>
+
+using std::cerr;
+using std::cin;
+using std::cout;
+using std::endl;
+
 
 // #define INFILE
 //#define VERBOSE_MODE

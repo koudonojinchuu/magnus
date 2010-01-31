@@ -20,6 +20,7 @@
 #include "Ftime.h"
 #include "nodeMsg.h"
 
+using std::cout;
 
 // standard methods for FpTree
 

@@ -20,7 +20,7 @@
 #define _OUTMESSAGES_H_
 
 #include <stdio.h>
-#include <iostream.h>
+#include <iostream>
 #include "Chars.h"
 #include "List.h"
 #include "ARC.h"

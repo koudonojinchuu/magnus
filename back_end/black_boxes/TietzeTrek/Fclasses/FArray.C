@@ -3,7 +3,7 @@
 #include "operators.h"
 #ifndef Frank_GenuineMac
 #include "FtoolBox.h"
-#include <iostream.h>
+#include <iostream>
 #endif
 extern ostream &memout;
 

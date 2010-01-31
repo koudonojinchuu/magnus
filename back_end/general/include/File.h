@@ -30,8 +30,14 @@
 
 
 #include <stdio.h>
-#include <fstream.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <fstream>
 #include "MagnusHome.h"
+
+using std::fstream;
+using std::ios;
+
 
 // Colors have to be in form RGB,
 // where R,G or B represents one hexademical digit of red,

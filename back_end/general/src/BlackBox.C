@@ -17,6 +17,8 @@
 #include "List.h"
 #include <errno.h>
 
+using std::ends;
+
 
 ListOf< BlackBox* > BlackBox_known_BBs;
 //@am Compiler complains about not
@@ -73,7 +75,7 @@ void BlackBox_signal_handler(int sig)
     }
   
   void* oldsig = (void *) signal(sig, SIG_DFL);
-  if ((int)oldsig == -1) { perror("Signal"); exit(1); }
+  if (oldsig == SIG_ERR) { perror("Signal"); exit(1); }
   
   int err = kill(getpid(), sig);
   if (err == -1) { perror("Kill"); exit(1); }
@@ -116,17 +118,17 @@ void BlackBox::initialize(const Chars& startCommand, const Chars& restartCommand
 
   ptr = (void *) signal(SIGTERM, BlackBox_signal_handler);
   #ifdef DEBUG
-    if ((int)ptr == -1) perror("BlackBox::BlackBox: signal");
+    if (ptr == SIG_ERR) perror("BlackBox::BlackBox: signal");
   #endif
 
   ptr = (void *) signal(SIGINT, BlackBox_signal_handler);
   #ifdef DEBUG
-    if ((int)ptr == -1) perror("BlackBox::BlackBox: signal");
+    if (ptr == SIG_ERR) perror("BlackBox::BlackBox: signal");
   #endif
 
   ptr = (void *) signal(SIGHUP,  BlackBox_signal_handler);
   #ifdef DEBUG
-    if ((int)ptr == -1) perror("BlackBox::BlackBox: signal");
+    if (ptr == SIG_ERR) perror("BlackBox::BlackBox: signal");
   #endif
 }
 

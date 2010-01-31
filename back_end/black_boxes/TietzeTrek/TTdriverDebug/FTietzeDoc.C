@@ -23,6 +23,9 @@
 
 #include <stdio.h>
 
+using std::cin;
+using std::cout;
+
 FTietzeDoc::FTietzeDoc(void){
 	itsTietzeNode=0;
 	itsStrings=0;

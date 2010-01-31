@@ -54,7 +54,7 @@ public:
   // (the compiler would not understand g.member() if g were a Genref
   // and member() in Generator).
     
-  inline friend int ord( Generator g ) { return g.genrep; }
+  friend int ord( Generator g );
   // this is the only friend; all other functions in the public interface
   // of Generator are defined in terms of ord()
 
@@ -105,6 +105,7 @@ private:
 
 };
 
+inline int ord( Generator g ) { return g.genrep; }
 
 // functions for manipulating Generators
 

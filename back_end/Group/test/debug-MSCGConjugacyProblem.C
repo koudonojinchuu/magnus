@@ -10,7 +10,7 @@
 // Revision History:
 //
 
-#include "iostream.h"
+#include <iostream>
 #include "MSCGConjugacyProblem.h"
 #include "NormalRandomWord.h"
 

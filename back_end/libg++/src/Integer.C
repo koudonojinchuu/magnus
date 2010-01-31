@@ -34,9 +34,14 @@ Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include <limits.h>
 //#include <Obstack.h>
 #include <AllocRing.h>
-#include <new.h>
+#include <new>
 #include <builtin.h>
 #include "Integer.hP"
+
+using std::ios;
+using std::istream;
+using std::streambuf;
+
 
 #undef OK
 

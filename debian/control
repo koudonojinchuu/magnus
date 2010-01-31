@@ -1,0 +1,27 @@
+Source: magnus
+Section: math
+Priority: extra
+Maintainer: Ben Burton <bab@debian.org>
+Build-Depends: bison, debhelper (>> 5.0.0), gs-common, texlive-latex-base, tk8.4, transfig
+Standards-Version: 3.7.2.0
+
+Package: magnus
+Architecture: any
+Section: math
+Depends: ${shlibs:Depends}, tk8.4 | wish, tcl8.4 | tclsh
+Suggests: c-shell
+Description: Computational group theory software with GUI
+ The MAGNUS computational group theory package is an innovative
+ symbolic algebra package providing facilities for doing calculations
+ in and about infinite groups.  Almost all symbolic algebra systems
+ are oriented toward finite computations that are guaranteed to
+ produce answers, given enough time and resources.  By contrast,
+ MAGNUS is concerned with experiments and computations on infinite
+ groups which in some cases are known to terminate, while in others are
+ known to be generally recursively unsolvable.
+ .
+ MAGNUS features an intuitive graphical user interface, facilities for
+ running different algorithms on the same problem in parallel, generation
+ of approximations for working on otherwise infeasible problems, genetic
+ algorithms and a plug-in package manager.
+

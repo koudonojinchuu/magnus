@@ -16,7 +16,7 @@
 
 
 #include <sys/time.h>
-#include <iostream.h>
+#include <iostream>
 #include <IPC.h>
 #include "config.h"
 

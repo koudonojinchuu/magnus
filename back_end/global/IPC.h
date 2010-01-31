@@ -16,6 +16,9 @@
 #ifndef _IPC_H_
 #define _IPC_H_
 
+using std::istream;
+using std::ostream;
+
 
 // ------------------------- Output operators ------------------------------ //
 

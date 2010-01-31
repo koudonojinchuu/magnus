@@ -20,7 +20,7 @@
 #ifndef _RANDOMNUMBERS_H_
 #define _RANDOMNUMBERS_H_
 
-#include <iostream.h>
+#include <iostream>
 #include "IPC.h"
 #include "Timer.h"
 

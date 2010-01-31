@@ -223,13 +223,9 @@ public:
 	 return Word( look()->rightMultBy(x) );
   }
 
-  inline friend Word operator * ( const Generator& x, const Word& w ) {
-	 return Word( w.look()->leftMultBy(x) );
-  }
+  friend Word operator * ( const Generator& x, const Word& w );
 
-  inline friend Word operator * ( const Generator& x, const Generator& y ) {
-	 return Word( new WordRep(x, y) );
-  }
+  friend Word operator * ( const Generator& x, const Generator& y );
 
   Word operator *= ( const Word& w ) {
 	return *this = *this * w;
@@ -308,6 +304,13 @@ private:
 
 };
 
+inline Word operator * ( const Generator& x, const Word& w ) {
+	 return Word( w.look()->leftMultBy(x) );
+}
+
+inline Word operator * ( const Generator& x, const Generator& y ) {
+	 return Word( new WordRep(x, y) );
+}
 
 //--------------------------- Genref ------------------------------//
 

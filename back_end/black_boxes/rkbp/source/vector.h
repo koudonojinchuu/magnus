@@ -1,5 +1,16 @@
 // vector.h
 
+#include <fstream>
+#include <istream>
+#include <ostream>
+#include <ios>
+
+using std::fstream;
+using std::istream;
+using std::ostream;
+using std::ios;
+
+
 /////////////////////////////////////////////////////////////////
 //
 //                      vector_char

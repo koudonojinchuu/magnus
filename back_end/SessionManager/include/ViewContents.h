@@ -23,7 +23,7 @@
 
 #include "Chars.h"
 #include "Word.h"
-#include "iostream.h"
+#include <iostream>
 #include "ARCSlotID.h"
 #include "FreeGroup.h"
 #include "OID.h"

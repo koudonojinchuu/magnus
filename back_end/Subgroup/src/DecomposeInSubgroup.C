@@ -846,7 +846,7 @@ bool DecomposeInSubgroupOfFPGroup::readPiece(istream& istr, const Timer& timer)
 }
 
 /*
-#include <iostream.h>
+#include <iostream>
 //#include "CONDITION.h"
 
 void debugMessage( int msgType, bool condition, const char *condDescription, 

@@ -24,6 +24,8 @@
 #include "GeneticProblems.h"
 #include "FNWP.h"
 
+using std::ends;
+
 
 // ------------------------ ORWordProblemARCer ----------------------------- //
 

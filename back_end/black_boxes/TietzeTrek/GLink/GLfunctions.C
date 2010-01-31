@@ -304,9 +304,8 @@ clock_t getTime(void){
 }
 
 #include <math.h>
-#ifdef THINK_CPLUS
 #include <stdlib.h>
-#else
+#ifndef RAND_MAX
 // RAND_MAX is not defined in <stdlib.h> on the SUN
 #include <limits.h>
 #define RAND_MAX LONG_MAX

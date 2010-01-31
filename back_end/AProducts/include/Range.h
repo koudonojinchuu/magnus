@@ -17,7 +17,11 @@
 #ifndef __RANGE_H__
 #define __RANGE_H__
 
-#include <iostream.h>
+#include <iostream>
+
+using std::istream;
+using std::ostream;
+
 
 struct Range {
 

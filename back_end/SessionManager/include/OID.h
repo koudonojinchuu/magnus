@@ -14,7 +14,7 @@
 #define _OID_H_
 
 
-#include <iostream.h>
+#include <iostream>
 #include "IPC.h"
 
 

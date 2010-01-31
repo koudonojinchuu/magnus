@@ -61,7 +61,7 @@
 #include "List.h"
 #include "Set.h"
 
-#include <iostream.h>
+#include <iostream>
 
 
 //---------------------- class QuickAssociation -------------------------

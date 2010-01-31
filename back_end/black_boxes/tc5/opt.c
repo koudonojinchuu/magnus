@@ -4,6 +4,7 @@
 #include "tcyacc.h"
 #include "miscellaneous.h"
 #include "ct.h"
+#include <string.h>
 #define	MST(i,j)	MST_T[i+i+j-3]
 tc_mst(tc_pvar)
 struct  tc_str_vars     *tc_pvar;

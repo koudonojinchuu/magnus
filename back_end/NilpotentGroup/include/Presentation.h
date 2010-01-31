@@ -32,7 +32,7 @@
 #define _PRESENTATION_H_
 
 #include "MalcevSet.h"
-#include <iostream.h>
+#include <iostream>
 
 //=======================================================================
 //====================== NilpotentRelator ===============================

@@ -23,7 +23,7 @@
 #include "File.h"
 #include "Vector.h"
 #include "Word.h"
-#include <iostream.h>
+#include <iostream>
 
 class AbelianEquationsSolver {
 

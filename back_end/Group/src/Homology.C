@@ -14,6 +14,9 @@
 #include "Homology.h"
 #include "MagnusHome.h"
 
+using std::ends;
+using std::ws;
+
 
 // #define debug_Homology
 

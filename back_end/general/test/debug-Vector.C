@@ -1,6 +1,6 @@
 // Informal tests of class VectorOf<T>
 
-#include <iostream.h>
+#include <iostream>
 
 #include "Vector.h"
 

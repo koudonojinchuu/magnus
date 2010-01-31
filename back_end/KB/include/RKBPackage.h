@@ -20,7 +20,7 @@
 #ifndef _RKBPackage_H_
 #define _RKBPackage_H_
 
-#include <iomanip.h>
+#include <iomanip>
 
 #include "BlackBox.h"
 #include "Vector.h"

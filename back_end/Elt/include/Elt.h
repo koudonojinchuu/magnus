@@ -125,7 +125,7 @@ public:
 	 return Elt( look()->inverse() );
   }
 
-  friend Elt inverse( const Elt& e ) { return e.inverse(); }
+  friend Elt inverse( const Elt& e );
   // to make it more convenient to take the inverse of something which
   // can be converted to an Elt
 
@@ -185,6 +185,7 @@ protected:
 
 };
 
+inline Elt inverse( const Elt& e ) { return e.inverse(); }
 
 //----------------------- Associated Global ------------------------//
 //------------------------- Functions ------------------------------//
