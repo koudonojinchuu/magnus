@@ -1,0 +1,22 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		HNN-extension of free group
+
+Objects highlighted:	word W, homomorphism H
+
+Other objects present:	group G1, group G2
+
+Name in the menu:	Compute the image of W under H
+
+Problem type:		fast problem
+
+Help file:		none

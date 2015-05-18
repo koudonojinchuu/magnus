@@ -1,0 +1,70 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		one-relator group with torsion
+
+Objects highlighted:	map M
+
+Other objects present:	group G
+
+Name in the menu:	Extend M to a homomorphism
+
+Problem type:		problem object
+
+Help file:		ExtendToHomProblem.help
+
+
+			Fast checks:
+
+
+1. If the range group has MSC-property:
+
+   a) If images of the relators of the domain group are not trivial
+      in the range group
+	return no.
+
+   b) If the domain group is an abelian or a nilpotent group
+      and commutators of the generators of the domain group 
+      are not trivial in the range group 
+	return no.
+
+   c) Return yes.
+
+2. If the range group is one-relator:
+
+   a) If images of the relators of the domain group are not trivial
+      in the range group
+	return no.
+
+   b) If the domain group is an abelian or a nilpotent group
+      and commutators of the generators of the domain group 
+      are not trivial in the range group 
+	return no.
+
+   c) Return yes.
+
+3. If the domain group is free abelian and the range group is abelian group
+	return yes.
+
+
+			Algorithms:
+
+
+1. For the use of this problem
+
+2. Compute abelian invariants of G
+
+
+			Remarks:
+
+
+// @dp This problem finds the canonical decomposition for G abelianized
+//     but does nothing else and remains still working.

@@ -1,0 +1,28 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		finitely presented group 
+
+Objects highlighted:	subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Compute the index of H in G
+
+Problem type:		problem object
+
+Help file:		SGIndexProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem

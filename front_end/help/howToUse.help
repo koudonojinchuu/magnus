@@ -1,0 +1,448 @@
+@@Using Magnus
+
+It will be helpful to first read @About Magnus@aboutMagnus::About
+ Magnus@ before reading this description as to how to use Magnus. A
+few preliminary comments will facillitate the tutorial, which
+comprises an actual session with MAGNUS, that follows.
+
+In order to start using Magnus, the user has to first check a group
+into the Workspace. This is done by choosing "Check-in", i.e.,
+clicking with the left mouse button on Check-in. A menu then appears
+in the Workspace, listing a number of items (those which are not
+bold-faced have yet to be implemented). If one wants to check-in a
+finitely presented group, then one chooses the item "Finitely
+Presented Group".  A "Define a finitely presented group" window
+pops up, providing the user with a template for the definition of a
+finitely presented group and a suggestion of a name for the group,
+which the user can change,simply by retyping it. MAGNUS' first choice
+is G1, which we will adopt here. This will be described in more detail
+in the tutorial that follows. After completing the definition of the
+finitely presented group G1, the user chooses OK and an icon appears
+in the workspace representing G1. MAGNUS is programmed to immediately
+inspect any group that is checked in to the Workspace and to report,
+in the Session Log, on any finding that can be obtained with little
+effort, i.e., little expenditure of machine resources. For instance,
+if the presentation of G1 contains only a single defining relator,
+MAGNUS immediately reports in the session log that G1 has a solvable
+word problem. When group-theoretical objects are first checked-in to
+the Workspace, the icons representing them are blank, indicating that
+the facilities of MAGNUS are not yet available to them. Moving the
+cursor inside the icon and then clicking with the left mouse button,
+``activates'' the object, turning its icon black, reflecting the fact
+that the object is now active, thereby putting all of the tools of
+MAGNUS at its disposal. These tools are made available through Tools
+and Make in the Workspace. For example, suppose our objective is to
+determine what the order of G1 is. We choose Tools in the Workspace
+and then Compute the order of G1 from the resultant menu. A window
+entitled "Order problem" pops up on the screen. Now the
+computation of the order of a finitely presented group is a complex
+task and MAGNUS brings many different procedures to bear on it. These
+procedures are listed in the "Order problem" window and the user
+is provided with a facility to allocate a certain amount of machine
+time to each of them, with defaults provided by Magnus.  Once the user
+is satisfied with this allocation of resources, Magnus is told to go
+ahead by clicking on the OK button. An icon then appears in the
+Workspace, headed Order Prob, together with a blinking green light,
+which tells the user that Magnus is working on the Order Problem.  If
+the light turns yellow, the OrderProb has run out of resources and has
+been supended by Magnus. The user then has to double click, with the
+left mouse button, on the OrderProb icon, allocate some extra
+resources to the problem and then click on the resume button.
+Sometimes one needs to deactivate an icon. This is done by clicking on
+the icon with the right mouse button. The above comments will probably
+suffice to make the following session with Magnus intelligible.
+
+
+***************************************************************************
+
+TUTORIAL 
+
+...........................................................................
+
+A. Working with abelian groups.
+
+
+
+A1. Check in the  abelian group
+
+<a,b,c,d; a^2 b^2 c^2 d^2, a^3 b^5 c^7 d^9 >.
+
+It is important to note that since we are dealing with abelian
+groups, this notation represents a presentation in the category
+of abelian groups, i.e, the commuting of the generators is 
+assumed - Magnus simply adds the required relations without
+prompting by the user.
+
+A1.1. Click on check-in and then click (both with left mouse button) on
+Abelian Group. Type
+a,b,c,d; a^2 b^2 c^2 d^2, a^3 b^5 c^7 d^9
+in the appropriate box. Magnus provides the user with the name
+A1 for this group. Click on OK. Magnus places an icon in the
+Workspace representing A1.
+
+A1.2. Use tools menu to find the order of A1.
+
+Click on the icon for A1 to activate A1, then  click on Tools
+and then on Compute the order of A1 (all with left mouse button).
+In the window "Compute the order" leave the defaults as is and
+click on OK. Magnus finds the invariants of A1 and reports
+in both the mini log and the session log that the cyclic
+decomposition of A1 is Z x Z_3  and thence infinite.
+
+A1.2 Check in a word and then find out whether or not it
+represents the trivial element.
+
+Activate A1. Click on check-in and then on "A word in the generators
+of A1". In the pop-up window "Define a word" enter
+ 
+b^2 c^5 a^6 c^7 b^9
+
+
+
+
+Use word problem to check whether u = 1
+
+Delete A and u
+
+*******************************************************************************
+
+B. Finitely presented groups
+
+
+
+Check in a finitely presented group
+
+G (from file)
+
+<a,b,c; [b,a,a], [c,a] >
+
+Select G
+
+Use tools to check whether G is a small cancellation grop
+
+Use tools to see if G has an automatic structure
+
+Check in a word
+
+w1
+
+[a,b,b]
+
+Use tools to see if w1 =1.
+
+Deduce that G is not abelian
+
+Check in another word
+
+w2
+
+[[a,b,b,b]
+
+Syntax error
+
+[a,b,b,b]
+
+Use tools to see if w2 =1.
+
+So G is not nilpotent of class three.
+
+Check in another word
+
+w3
+
+{[a,b],[a,b,b,b]]
+
+Use tools to see if w3 = 1.
+
+So G is not a metabelian group
+
+Reorganise workspace so that the icons involving G1 are all together
+and that there is space in the workspace to continue
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - 
+
+Check in a finitely presented group
+
+BS (from file)
+
+<a,b; a^-1 b^2 a b^-3 >
+
+Use tools to see if BS is a small cancellation group
+
+Check in a word
+
+v1 (from file)
+
+[a b a^-1, b]
+
+Use tools to see if  w1 = 1.
+
+Check in a map
+
+m1
+
+a -> a
+b -> b^2
+
+Check in both v and m1
+
+Use tools to compute the image of v
+
+w1
+
+Check in w1
+
+Check to see if w1 = 1
+
+Deduce that BS is a group which is isomorphic to a proper quotient of itself
+
+
+Clear the whole workspace
+
+**************************************************************************
+
+C. Free groups
+
+
+Check in a free group (from file)
+
+F 
+
+< a,b,c,d >
+
+Check in a word (from file)
+
+f1
+
+a b b b a^-1 a b^-2 a^-1 b
+
+Select f1
+
+Use tools to see if u1 is a commutator
+
+Freely reduce f1
+
+Select F  (alone)
+
+Check in a subgroup (from file)
+
+H1
+
+{
+a^2, b^2, c^2, d^2, a^b, a^c, a^d, b^a, b^c, b^d, c^a, c^b, c^d,
+d^a, d^b, d^c
+}
+
+Select H1
+
+Use tools to find the index of H1 in F1
+
+Use tools to see if 
+
+H1 is normal
+
+Check in a word (from file) 
+
+f2
+
+a^-1 b^-1 a b a
+
+Select H1 and u2
+
+Use tools to determine if f2 is in H1
+
+Select H1
+
+Compute a Nielsen basis for H1
+
+Compute the normaliser of H1
+
+Check in a subgroup (from file)
+
+H2
+
+[a,b], [b,c], [c,d], [d,a]
+
+Select H2
+
+Use tools to see if H2 is normal
+
+Use tools to compute the index of H2 in F1
+
+Use tools to see if H1 is contained in H2 and vice-verse
+
+Compute a virtual free complement S1 of H2
+
+Use tools to find the index of S1 in F1
+
+Clean the workspace
+
+************************************************************************
+
+Nilpotent groups
+
+
+Check in a nilpotent group
+
+G2
+
+3< a,b >
+
+Select G2
+
+Check in a word h1 (from file)
+
+h1 
+
+[a,b,b][a,b,a]
+
+Select h1
+
+Check to see if h1 = 1
+
+Check in a word w (from file)
+
+h2
+
+[a,b,b][a,b,a^2]
+
+Select h1 and h2
+
+Use tools to see if h1 and h2 are conjugate
+
+************************************************************************
+
+D  Small cancellation groupss
+
+
+Check in a small cancellation group (from file)
+
+C
+
+< a, b; (a^-1 b^2 a b^-3)^3 >
+
+Select C
+
+Use tools to see if C is a small cancellation group
+
+Check in a word (from file)
+
+r
+
+a^-1 b^2 a b^-3
+
+(This is the defining relator of the group BS)
+
+Select r
+
+Use tools to check whether r = 1
+
+Select C
+
+Use tools to see if C has an automatic structure
+
+*********************************************************************
+
+E  Experiments
+
+The fact that one-relator groups with torsion are hyperbolic (and hence
+automatic) has rekindled interest in one-relator groups as a whole. It is
+still unknown whether one-relator groups are coherent (all finitely generated
+subgroups are finitely related) and whether one-relator groups whose
+abelian subgroups are virtually cyclic are automatic, even hyperbolic.
+Magnus can be used to provide some examples which can be looked at in
+more detail. Here I want to use Magnus to start looking at the possibility
+that one-relator groups with torsion are coherent - a special case of the
+problem formulated above. In dealing with one-relator groups there is a method
+due to Magnus which unravels the one-relator group in a series of steps, each
+of which involves a one-relator group, where the length of the relator becomes
+progressively shorter. At the penultimate stage of Magnus' procedure one
+arrives at a configuration, of a particularly (seemingly) simple kind. In the
+general case of one-relator groups, where one does not assume the
+existence of torsion, one comes across so-called free-by-cyclic groups. I will
+show how one can make, using our software package, examples of both kinds,
+examples which are not easy to arrive at by hand. 
+
+-----------------------------------------------------------------------
+
+First I want to look at the finitely generated subgroups of free-by-cyclic 
+groups
+
+Check in a free group (from file)
+
+F
+
+< a,b,c,d >
+
+Select F 
+
+Use tools to produce a random collection of automorphisms of F
+
+Select one of these automorphisms
+
+m 
+
+The one to select, using the random automorphism generator, is
+
+{ a -> bda^-1c^-1a^-1b^-1,  b -> bac, c -> bda^-1c^-1a^-1d, d -> c  }
+
+Check to see if it is inner
+
+Use tools to make an extension of F  by m  
+
+G2
+
+< a, b, c, d ,t ; a^t = m(a), b^t = m(b), c^t = m(c), d^t = m(d) >
+
+Check in G2
+
+See if G2 is a small cancellation group
+
+While we are at lunch we will set Magnus working to see if G2 has
+as automatic structure
+
+Check in a subgroup K (from file)
+
+K
+
+t^2a, b^2, [c,d], b^c
+
+Check in K
+
+Use tools to find relations of K
+
+--------------------------------------------------------------------
+
+Second, I will make some one-relator groups with torsion which arise
+at the penultimate stage of Magnus' procedure
+
+Select F 
+
+Select m 
+
+Define a finitely presented group B (from file) that is a free product of a
+free group and a finite cyclic group of order five:
+
+B
+
+<a,b,c,d; (b d a^-1 c^-1 a^-1 b^-1)^5  >
+
+((b d a^-1 c^-1 a^-1 b^-1) = m(a))
+
+Now form an HNN extension  O (from file) of B as follows:
+
+E 
+
+<t,a,b,c,d; (b d a^-1 c^-1 a^-1 b^-1)^5 , a^t=b, b^t=c, c^t=d >
+
+O is a one-relator group with torsion   
+
+Check in a subgroup J (from file)
+
+J
+
+t^3 a^-1 b, b^4
+
+Use tools to find relations
+
+********************************************************************

@@ -1,0 +1,51 @@
+@@How this problem works
+
+@@FP
+
+ \ni We simply invoke the solution of the word problem for finitely presented groups,
+checking if the given word commutes with all of the generators of the group in
+question - see @The word problem for finitely presented groups@probs/WordProblem::FP@
+
+\ni For a general discussion of finitely presented groups, see
+@General finitely presented groups@General_fp_gps::General discussion@
+
+@@ABELIAN
+
+@@NILPOTENT
+
+\ni We simply use the solution of the word problem to check whether a given word
+is central by inspecting all of the commutators of the given word with all of the
+generators and checking whether they are trivial in the given group.
+
+@@FREE
+
+@@AP_FREE
+
+\ni An amalgamated product of free groups is centerless unless both factors are
+cyclic. In this case, an element is central if its reduced form is of length
+at most 1 and the element is in the amalgamated subgroup, all of which can be
+determined algorithmically.
+
+@@AP_FREE_CYCLIC
+
+\ni See the discussion about @Amalgamated products of free groups@probs/IsEltCentral::AP_FREE@.
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+\ni We simply invoke the solution of the word problem for one-relator groups
+checking if the given word commutes with all of the generators of the group in
+question - see @The word problem for one-relator groups@probs/WordProblem::ONE_RELATOR@.
+
+\ni For a general discussion of one-relator groups, see
+@General one-relator groups@General_one-relator_groups::General discussion@.
+
+@@Deciding if an element is in the center
+
+\ni We simply invoke the solution of the word problem for one-relator groups
+checking if the given word commutes with all of the generators of the group in
+question - see @The word problem for one-relator groups@probs/WordProblem::ONE_RELATOR@.
+
+\ni For a general discussion of one-relator groups, see
+@General one-relator groups@General_one-relator_groups::General discussion@.

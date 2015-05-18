@@ -1,0 +1,29 @@
+#ifndef Frank_FstrToGLvarNode
+#define Frank_FstrToGLvarNode
+
+#include "FGLsyncNode.h"
+#include "text_functions.h"
+CLASS CStringArray;
+Fclass FAlgorithm;
+
+class FstrToGLvarNode:public FGLsyncNode{
+public:
+
+	FAlgorithm *itsAlg;
+	CStringArray *strs;
+	GLref itsRoot;
+	long lettersNo,beginIndex,endIndex;
+	long **letterToNumber;
+	long strIndex,elementSize;
+	
+	FstrToGLvarNode(FAlgorithm *anAlg);
+	virtual void processLine(Str255 s,long firstLetter);
+	virtual void getLineAttributes(lineAttributesInfo *info);
+	static Boolean castToStrToGLvar(FGLnode *n,FGLvar *v);
+	virtual Boolean strToGLvar(void);
+	virtual long collectExp(StringPtr s,long len,long& lastScannedi);
+	virtual void goodbyeKiss(void);
+	virtual void auRevoir(void);
+};
+
+#endif

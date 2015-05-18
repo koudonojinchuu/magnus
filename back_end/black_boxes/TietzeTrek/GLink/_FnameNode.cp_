@@ -1,0 +1,55 @@
+#include "patchCCompiler.h"
+#include "FnameNode.h"
+#include "nodeMsg.h"
+
+FnameNode::FnameNode(FGLnode *aSupervisor,FGLvar *aGLvar)
+	:FGLwalkNode(aSupervisor,aGLvar){
+	
+
+// put your initialization of v->bv,cv,e, and j here
+
+
+// In order for these initializations to take effect,we
+// reset the run registers
+
+	bvRun=v->bv;
+	cvRun=v->cv;
+	eRun=v->e;
+
+}
+
+FnameNode::~FnameNode(void){
+	// destroy objects created by the node
+}
+
+Boolean  FnameNode::vertex(void){
+
+// put your code here
+
+// control: the default is to continue the walk.
+// "return TRUE;"  calls vertex again
+// "return FALSE;" aborts the walk
+
+	return continueWalk();    
+}
+Boolean  FnameNode::maximalEdge(void){
+
+// put your code here
+
+// control: the default is to continue the walk.
+// "return TRUE;"  calls vertex again
+// "return FALSE;" aborts the walk
+
+	return continueWalk();    
+}
+
+Boolean  FnameNode::basisEdge(void){
+
+// put your code here
+
+// control: the default is to continue the walk.
+// "return TRUE;"  calls vertex again
+// "return FALSE;" aborts the walk
+
+	return continueWalk();    
+}

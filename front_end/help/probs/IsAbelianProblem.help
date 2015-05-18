@@ -1,0 +1,51 @@
+@@How this problem works
+
+@@FP
+
+\ni We check to see if all of the commutators of the generators are
+trivial. This involves using the various methods for solving the word 
+problem for an arbitrary finitely presented group - see 
+@The word problem@probs/WordProblem::FP@ for a discussion of the solution
+of the word problem.
+
+\ni For a general discussion of finitely presented groups, see
+@General finitely presented groups@General_fp_gps::General discussion@
+
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+\ni We check to see if all of the commutators of the generators are
+trivial, using the solution of the word problem for one-relator groups
+( for a discussion of the solution
+of the word problem.
+
+\ni For a general discussion of finitely presented groups, see
+@General finitely presented groups@General_fp_gps::General discussion@
+
+
+@@NILPOTENT
+
+\ni We check to see if all of the commutators of the generators are
+trivial, using the solution of the word problem for finitely generated
+nilpotent groups (see @The word problem@probs/WordProblem::NILPOTENT@).
+
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+\ni We check to see if all of the commutators of the generators are
+trivial, using the solution of the word problem for one-relator groups
+(see @The word problem@probs/WordProblem::ONE_RELATOR@).
+
+@@Deciding if a one-relator group is abelian
+
+\ni We check to see if all of the commutators of the generators are
+trivial, using the solution of the word problem for one-relator groups
+(see @The word problem@probs/WordProblem::ONE_RELATOR@).

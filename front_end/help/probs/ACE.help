@@ -1,0 +1,142 @@
+* @More info@tcl:open |gv $magnus_home/back_end/black_boxes/ace/ace3001.ps@
+
+@@FP
+
+Command summary:
+
+add gen[erators] / sg : <word list> ;
+
+add rel[ators] / rl : <relation list> ;
+
+aep : 1..7 ;
+
+ai / alter i[nput] : [<filename>] ; 
+
+ao / alter o[utput] : [<filename>] ;
+
+as[is] : [0/1] ;
+
+beg[in] / end / start ;
+
+bye / exit / q[uit] ;
+
+cc / coset coinc[idence] : int ;
+
+c[factor] / ct[ factor] : [int] ;
+
+check / redo ;
+
+com[paction] : [0..100] ;
+
+cont[inue] ;
+
+cy[cles] ;
+
+ded mo[de] / dmod[e] : [0..4] ;
+
+ded si[ze] / dsiz[e] : [0/1..] ;
+
+def[ault] ;
+
+del gen[erators] / ds : <int list> ;
+
+del rel[ators] / dr : <int list> ;
+
+d[ump] : [0/1/2[,0/1]] ;
+
+easy ;
+
+echo : [0/1] ;
+
+enum[eration] / group name : <string> ;
+
+fel[sch] : [0/1] ;
+
+f[factor] / fi[ll factor] : [0/1..] ;
+
+gen[erators] / subgroup gen[erators] : <word list> ;
+
+gr[oup generators]: [<letter list> / int] ;
+
+group relators / rel[ators] : <relation list> ;
+
+hard ;
+
+h[elp] ;
+
+hlt ;
+
+ho[le limit] : [-1/0..100] ;
+
+look[ahead] : [0/1..4] ;
+
+loop[ limit] : [/0/1..] ;
+
+max[ cosets] : [0/2..] ;
+
+mend[elsohn] : [0/1] ;
+
+mess[ages] / mon[itor] : [int] ;
+
+mo[de] ;
+
+nc / normal[ closure] : [0/1] ;
+
+no[ relators in subgroup] : [-1/0..] ;
+
+opt[ions] ;
+
+oo / order[ option] : int;
+
+par[ameters] ; - old option (ignored)
+
+path[ compression] : [0/1] ;
+
+pd mo[de] / pmod[e] : [0/1..3] ;
+
+pd si[ze] / psiz[e] : [0/2/4/8/...] ;
+
+print det[ails] / sr : [0/1] ;
+
+pr[int table] : [[-]int[,int[,int]]] ;
+
+pure c[t] ;
+
+pure r[t] ;
+
+rc / random coinc[idences]: int[,int] ;
+
+rec[over] / contig[uous] ;
+
+rep : 1..7[,int] ;
+
+restart ; - old option (ignored)
+
+r[factor] / rt[ factor] : [int] ;
+
+row[ filling] : [0/1] ;
+
+sc / stabil[ising cosets] : int ;
+
+sims : 1/3/5/7/9 ;
+
+st[andard table] ;
+
+stat[istics] / stats ;
+
+style ;
+
+subg[roup name] : <string> ;
+
+sys[tem] : <string> ;
+
+text : <string> ;
+
+ti[me limit] : [-1/0/1..] ;
+
+tw / trace[ word] : int,<word> ;
+
+wo[rkspace] : [int[k/m/g]] ;
+
+# ... <newline> - a comment (ignored)
+

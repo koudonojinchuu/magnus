@@ -1,0 +1,126 @@
+@@How to write stand-alone programs using Magnus
+
+\ni Although the graphical user interface of Magnus has been designed to
+be as flexible as possible, there are many experiments that cannot
+be handled directly by this interface. It is, however, possible to 
+bypass the interface and to take advantage of the power inherent in 
+Magnus by writing a few simple lines of code, which considerably widens
+its scope. 
+
+\ni We give here a few illustrations of how a user can carry out a few
+simple experiments. By mimicking these simple programs, the user can readily
+concoct much more complex ones, thereby tailoring Magnus to the specific 
+needs of a specific user.
+
+\ni The sample programs illustrating this discussion are contained in the
+directory ~/magnus/back_end/experiments. In order to 'run' a program
+of this kind, it is necessary to compile the code into an executable.
+This is done by typing 
+
+\ni make <filename>, 
+
+\ni where <filename> is the name of the sample program (or the one written by 
+the user). Notice that although all programs necessarily end with the 
+extension .C, the .C is omitted when using the 'make', which has been 
+tailored to this specific situation. It may take a while after you have 
+typed 'make' before the executable is produced, so do not get worried 
+if you cannot do anything for 30 minutes or more.
+
+\ni We have prepared 4 experiments, which are described in the directory
+~/back_end/experiments. The first of these is called 'abelianOrder'. To
+make an executable, simply type 
+
+\ni make abelianOrder
+
+\ni This produces 
+
+\ni abelianOrder*
+
+\ni in the directory ~/back_end/experiment/test/bin. If, assuming that you are
+in the directory ~/back_end/experiment, you now type 
+
+\ni ./test/bin/abelianOrder
+
+\ni your screen will fill with the results of the experiment. To stop the
+output, hold down the Ctrl key and press the  z  key.
+
+\ni If you want to write your own program, you have to add it's name to the 
+list of tests in the Makefile. In fact you will find, towards the end of
+Makefile, the line
+
+\ni TESTS = abelianOrder ortest primitive HNConjecture
+
+\ni This lists the experiments that have been prepared here. Add the name of your
+program at the end, without any extension .C. The program itself should be
+put into the directory ~/back_end/experiment/test and should be run in the
+manner described above.
+
+
+\ni THE LIST OF EXPERIMENTS
+
+ 
+\ni 1. abelianOrder	
+	 
+\ni In this first experiment, we work in the category of abelian groups. 
+So all of the presentations implicitly have the additional relations 
+specifying that all of the generators commute.
+
+\ni The program computes the orders of all abelian groups which can be 
+presented as follows:
+
+\ni          < a,b; a^2 b^3, a^3 b^2 >,
+     
+\ni          < a,b,c; a^2 b^3 c^4, a^3 b^4 c^2, a^4 b^2 c^3 >,
+
+\ni          <a,b,c,d; a^2 b^3 c^4 d^5, a^3 b^4 c^5 d^2, a^4 b^5 c^2 d^3,
+                                             a^5 b^2 c^3 d^4 >,
+
+          ...
+
+\ni The basic question is this: are all the groups presented in this manner,
+finite? And if so, what are their orders?
+
+
+\ni 2. ortest 
+
+\ni The objective of this program is, given a presentation with one relator,
+to find the shortest relator in the given group. The algorithm is horribly
+exponential, so if you give it a group with more then two generators, don't 
+expect results in a short time.
+
+
+\ni 3. primitive 
+
+\ni An element in a free group is said to be a primitive if it is part of some
+free set of generators of the given free group. The distribution of primitive
+elements is of considerable interest. This program counts the number of 
+primitive elements in a given free group.
+
+
+
+\ni 4. HNConjecture
+
+\ni The intersection of two finitely generated subgroups of a free group is 
+again finitely generated. This theorem was proved first by A.G. Howson.
+Some 30 years ago or so, Hanna Neumann conjectured that if A and B are 
+finitely generated subgroups of a free group and if I is the intersection 
+of A and B, then 
+
+\ni rk(I)-1 <= (rk(A)-1)(rk(B)-1),
+
+\ni where here rk(X) denotes the rank (i.e., minimal number of generators)
+of the subgroup X.
+
+\niHere we randomly concoct such finitely generated subgroups of a given free
+group, which can always be taken to be of rank 2, and compute the rank of
+their intersection, in the hope of finding a counter-example to Hanna
+Neumann's conjecture, or some hint as to how to prove it.
+
+
+
+
+
+
+
+
+

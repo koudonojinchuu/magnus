@@ -1,0 +1,39 @@
+@@How this problem works
+
+@@FP
+
+\ni Given word w. If exponential sums for all letters in w are
+equal to zero than w can be rewritten as a product of 
+commutators in the free group using standard operation.
+We get the first letter of w and find in w its inverse;
+then we find subword starting from the first letter and subword 
+ending by the first letter's inverse such that these subwords 
+are inverses, so the subword starting from the first letter 
+is 'a^-1' and the subword between found subwords is 'b^-1';
+finally we multiply w by 'b^-1' from the left and so have the 
+new word that have length less then w's one and so on. 
+
+\ni For example:
+
+     a b c a^-1 b^-1 a c^-1 a^-1
+    
+    (a   b c   a^-1)   b^-1 a c^-1 a^-1
+    
+    (a   b c   a^-1   (b c)^-1)   b c   b^-1 a c^-1 a^-1 
+    
+    [ a^-1 , (b c)^-1 ]   b c b^-1 a c^-1 a^-1 , 
+
+\ni where 'b c b^-1 a c^-1 a^-1' is the new word. 
+
+\ni If w doesn't have zero exponetial sums but w is trivial 
+in abelianization then multiplying w by some trivial word v 
+we can get the new word w_1 = w, but w_1 can be rewritten 
+as a product of commutators in the free group yet. To obtain
+v we find some solution for the equation 
+
+\ni w = r_1^x_1 ... r_k^x_k 
+
+\ni in abelianization. Then we work with w1.
+
+
+ 

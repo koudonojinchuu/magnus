@@ -1,0 +1,29 @@
+The file rkbp120.tar.Z in this directory contains Version 1.20 of the
+Rutgers Knuth-Bendix Package (RKBP).  To install the package, copy
+rkbp120.tar.Z to an appropriate directory.  Don't forget it is a
+binary file.  Then execute the following commands:
+
+uncompress rkbp120.tar
+tar xvf rkbp120.tar
+
+The result will be to create four subdirectories.  The directory bin
+contains an executable image rkbp compiled with version 2.4.5 of g++
+for Sun4 architectures.  The directory examples contains sample input
+data files.  The directory documentation contains a plain TeX file for
+the user's manual together with dvi and postscript files.  The
+directory source contains the header and C++ source files.  To compile
+them using g++, issue the command
+
+g++ -O -o rkbp *.C
+
+Version 2.4.5 of g++ as installed at Rutgers issues a few warnings but
+compiles correctly.  Put the file rkbp in a directory in your path.
+
+In 31 years of writing group-theoretic software, this is the first
+program I have distributed in any organized basis.  There are bound to
+be problems.  Please send mail to sims@math.rutgers.edu to let me know
+you have taken a copy.  Problem reports may be sent to the same
+address.
+
+
+                                                 Charles Sims

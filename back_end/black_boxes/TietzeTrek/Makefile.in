@@ -1,0 +1,86 @@
+## Copyright (C) 1994 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: GNU Makefile for TietzeTrek
+##
+## Authors: Stephane Collart & Roger Needham
+##
+## Status: Useable.
+##
+## Revision History:
+##
+
+## This is the first stage of the make'ing of TietzeTrek stuff, for
+## non-compilation targets. This circumvents the `feature' of gmake
+## which automtically remakes all makefile sources.
+
+
+# INCLUDE lists the relative pathname of every directory where
+# included header files are found:
+
+DIRS = Fclasses GLink GLinkGLvar GLvarSub pres TTdriverDebug TTnodesRsrc
+
+OTHERDIRS = Resources Testing precompile
+
+INCLUDE = $(foreach file,$(DIRS),-I$(file))
+
+
+# FILES lists all source files (without .[Cc] suffixes) which are
+# part of TietzeTrek:
+
+FILES1 = Fclasses/FArray Fclasses/FCluster Fclasses/FCollection  Fclasses/FfreeWord Fclasses/FList Fclasses/FObject Fclasses/FResources Fclasses/FStringArray Fclasses/FtoolBox Fclasses/text_functions
+
+FILES2 = GLink/debugGLink GLink/FBlockManager GLink/FcleanUpNode GLink/FcloneNode GLink/FdebugNode GLink/FfoldNode GLink/FfoldStepper GLink/FGLink GLink/FGLnode GLink/FGLrecycleStack GLink/FGLstack GLink/FGLstepper GLink/FGLwalkNode GLink/FgrowNode GLink/FrandomRef GLink/FreducedFoldNode GLink/FreducedVertexFolder GLink/FvertexFolder GLink/GLfunctions 
+
+FILES3 = GLinkGLvar/FGLvar GLinkGLvar/FGLvarHigh GLinkGLvar/FGLvarInitInfo GLinkGLvar/FGLvarInterface GLinkGLvar/FGLvarLow
+
+FILES4 = GLvarSub/FCayley GLvarSub/FCayleyInitInfo GLvarSub/FgTree GLvarSub/FgTreeInitInfo GLvarSub/FmapTree GLvarSub/FmapTreeInitInfo GLvarSub/FpLib GLvarSub/FpLibInitInfo GLvarSub/FpTree GLvarSub/FpTreeInitInfo GLvarSub/FrTree GLvarSub/FrTreeInitInfo GLvarSub/FuTree GLvarSub/FuTreeInitInfo
+
+FILES5 = pres/FCayleyCloneNode pres/FfreeList pres/FgTreeNode pres/FpLibNode pres/FpresCompareNode pres/FpresText pres/FrCloneNode pres/FrenumberPresNode pres/FrTreeNode pres/FstrToWordNode pres/FTTpres pres/FTTpresNode pres/FuNode pres/FwordsToGLvarNode pres/sortingFunctions
+
+FILES6 = TTdriverDebug/debugMemory TTdriverDebug/debugTT TTdriverDebug/FTietzeDoc TTdriverDebug/FTietzeNode TTdriverDebug/FTTdriverNode  TTdriverDebug/operators TTdriverDebug/TietzeGlobals TTdriverDebug/TietzeTrek
+
+FILES7 = TTnodesRsrc/FTT1node TTnodesRsrc/FTT1pnode TTnodesRsrc/FTT1pSubnode TTnodesRsrc/FTT2node TTnodesRsrc/FTT2pnode TTnodesRsrc/FTTnode
+
+FILES = $(FILES1) $(FILES2) $(FILES3) $(FILES4) $(FILES5) $(FILES6) $(FILES7)
+
+
+# List of object files:
+OBJ = $(foreach file,$(FILES),$(file).o)
+
+
+## Flags & switches:
+
+CC = g++
+DEBUG = -g
+DEFINE = 
+CFLAGS = $(DEBUG) $(DEFINE) $(INCLUDE) -O2 -DDEBUG -g -fno-operator-names -D_G_NO_NRV -Wno-deprecated -D%OS%
+
+
+## The targets:
+
+.PHONY: default all clean distclean mostlyclean realclean
+
+MAINTARGETS = all clean distclean mostlyclean realclean
+
+default:
+	@echo make one of $(MAINTARGETS)
+
+all: TietzeTrek
+
+clean: mostlyclean
+	-rm TietzeTrek
+
+distclean: clean
+
+mostlyclean:
+	-rm $(foreach dir,$(DIRS) $(OTHERDIRS),$(dir)/*[od])
+
+realclean: distclean
+
+# Anything not makable here gets delegated:
+
+export
+
+.DEFAULT:
+	$(MAKE) -f Compile.mk $@

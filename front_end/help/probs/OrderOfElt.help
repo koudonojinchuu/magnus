@@ -1,0 +1,33 @@
+@@How this problem works
+
+@@FP
+
+\ni There is no algorithm which determines whether or not any word in
+an arbitrarily given finitely presented group represents an element of
+finite order. However, in some instances, it may be possible to decide
+if a given word w in a finitely presented group G is of finite order.
+To begin with, we check to see if w is of finite order in the abelianization
+of G. If it is not, we check to see if w is of infinite order in some
+nilpotent quotient of G. If not, we check to see if G is a small cancellation
+group or a one-relator group, where the order problem is solvable. If these
+techniques fail, we look for an automatic structure or the existence of
+a finite rewriting system, which shows that the group has a solvable word
+problem, and successively compute powers of the given word. If one of them
+turns out to be equal to 1, we have solved the problem. Otherwise the
+procedure is inconclusive. In the event that none of these procedures
+works, i.e., if we have no knowledge of G except for the fact that it is
+a finitely presented group, we enumerate all of the relators of G and
+successively compute the powers of w and check to see if any of them
+lie in the list of relators being enumerated. 
+
+\ni For a general discussion about finitely presented groups, see
+@General discussion about finitely presented groups@General_fp_gps::General discussion@
+
+@@ONE-RELATOR
+
+\ni An element in a one-relator group is of finite order if and only if it 
+is conjugate to a power, in the ambient free group, of a generator of the
+centralizer of the given defining relator.
+
+\ni For a general discussion of one-relator groups, see 
+@General_discussion@General_one_relator_groups::General discussion@

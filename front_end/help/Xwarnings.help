@@ -1,0 +1,35 @@
+@@Warnings about X
+
+The Magnus front end relies indirectly on the X Window System, which
+is sometimes unpredictable. The window manager you use and the X
+database files such as  .Xresources, .Xdefaults, .xinitrc, .xmodmaprc, 
+.twmrc, .olwmrc  can produce the windows to behave in odd ways.
+The upshot is that if you use a window manager other than twm or olwm
+(there are many others), or if you have any even slightly unusual 
+entries in any of your X database files, Magnus may not work properly.
+
+We have little choice but to ask you to please let us know about
+whatever anomalies you encounter, so that we can try to work around
+them. In making such reports (see @feedback@feedback::Feedback@), 
+please indicate which window manager you use.
+
+
+We have taken care to make sure that most of the X resources used by 
+the Magnus front cannot be overridden by such things as .Xresources, 
+in order to have some control over the appearance and behavior of 
+Magnus windows. Thus, at this time, you cannot change things like 
+fonts, colors, or editing bindings by any of the (many, conflicting) 
+`usual' means.
+
+According to J. Ousterhout, the principal author of Tcl/Tk, few X
+applications alter the characteristics of a window after it is drawn
+(but Magnus does this frequently), so most window managers have not
+been thoroughly debugged in this area, although  twm seems to be ok.
+
+Some of Magnus' windows are deliberately non-shrinkable, because
+resizing a window so that its edge happens to straddle a vertical
+scroll bar sometimes crashes Tcl/Tk.
+
+For further reading, see `The X-Windows Disaster' in `The UNIX-Hater's
+Handbook', S. Garfinkel, D. Weise, S. Strassmann, IDG Books Worldwide,
+1994.

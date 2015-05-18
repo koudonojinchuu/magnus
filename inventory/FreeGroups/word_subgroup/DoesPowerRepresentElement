@@ -1,0 +1,22 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free group
+
+Objects highlighted:	word W, subgroup H
+
+Other objects present:	group F
+
+Name in the menu:	Does a power of W represent an element of H ?
+
+Problem type:		fast problem
+
+Help file:		none

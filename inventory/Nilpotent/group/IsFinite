@@ -1,0 +1,44 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group
+
+Objects highlighted:	group G 
+
+Name in the menu:	Is G finite ?
+
+Problem type:		problem object
+
+Help file:		IsFiniteProblem.help
+
+
+			     Fast checks:
+
+
+1. If the number of relators is less than the number of generators
+     	return no
+
+2. If there exists a generator with zero exponent sum in every relator
+   of the group
+  	return no
+
+			     Algorithms:
+
+
+1. Compute the torsion-free rank of the abelianization of G
+
+  
+  
+  
+
+
+
+

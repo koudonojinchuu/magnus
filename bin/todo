@@ -1,0 +1,29 @@
+#!/usr/local/bin/perl
+
+# Principal Author: Roger Needham
+
+# This looks for all to_do files in the current directory and prints a summary.
+
+@lt = localtime(time);
+$mm = substr("0".($lt[4]+1),-2);
+$dd = substr("0".$lt[3],-2);
+$yy = $lt[5];
+$HH = substr("0".$lt[2],-2);
+$MM = substr("0".$lt[1],-2);
+
+print "\n\nTo Do summary $mm/$dd/$yy $HH:$MM";
+
+open(FIND, "/bin/find . -type f -name to_do -print |")
+     || die "Couldn't run /bin/find: $!\n";
+
+while ($name = <FIND>) {
+  chop $name;
+  print "\n\n--------------------------------------------------------------\n";
+  print "In $name :\n\n";
+  open(TODO, $name) || print "** Couldn't open $name\n";
+  while(<TODO>) { print "  $_"; }
+  close(TODO);
+}
+close(FIND);
+print "\n--------------------------------------------------------------\n";
+print "\n\n";

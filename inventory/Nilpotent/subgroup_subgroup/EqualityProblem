@@ -1,0 +1,37 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	subgroup H1, subgroup H2 
+
+Other objects present:	group G
+
+Name in the menu:	Is  H1 = H2 ?
+
+Problem type:		problem object
+
+Help file:		SGOfNGequalSubgroupProblem.help
+
+
+			     Algorithms:
+
+
+1. Does H1 equal to  H2
+  // @am should be contain ?
+
+2. Compute a basis of the free preimage of H1
+
+3. Compute a basis of the free preimage of H2
+
+
+
+

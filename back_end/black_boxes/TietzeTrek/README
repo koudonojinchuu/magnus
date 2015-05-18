@@ -1,0 +1,35 @@
+The relevant output, besides the presentations, are the messages:
+
+"*** TRIVIAL ***\n";
+"*** CYCLIC ***\n";
+"*** NON-TRIVIAL FREE FACTOR ***\n";
+"*** FINITE group of order `number' ***\n";
+"*** FREE of rank `number' ***\n";
+
+
+Frank's programming ineptitudes and atrocities which have to be
+repaired at the cost of excruciating effort, if at all:
+
+
+* The input and output formats of words were different. On output, a
+  '^' was used for integer exponents, but on input the '^' was not
+  recognized. I'm not making this up.
+
+* New generators were output as integers. Now they are output as 'X'
+  with the integer as a subscript.
+
+* There was no subscripting of input generators. That's right folks,
+  you can have 52 generators, and you have to call 'em [a-zA-Z].
+
+* Input lines longer than 254 chars are not allowed. Someone,
+  please, just kill me.
+
+* If a generator in a presentation does not appear in any relator,
+  Frank doesn't know about it. Thus <a,b,c; a=b> is infinite cyclic.
+  Given Frank's flaky API, there is no good workaround. Giving a relator
+  c c^-1 doesn't work, since he freely reduces the input, and I can't
+  find where. Moreover, when a relator reduces to the empty word, it
+  triggers a bug.
+  The present kludge is to give relators like c x0 c^-1, x0. This
+  significantly delays the discovery of very obvious facts, but
+  presumably the caller has already checked for obvious free generators.

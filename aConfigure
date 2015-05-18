@@ -1,0 +1,182 @@
+#!/bin/sh
+##
+##
+
+## Copyright (C) 1994 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: Configuration script for Magnus
+##
+## Principal Author: Jon Lennox
+##
+## Status: Useable.
+##
+## Revision History:
+##
+## 05/30/95 Roger modified this for use with alpha releases.
+
+
+echo "Setting up default Magnus paths..."
+echo
+
+DEFAULT_MAGNUSHOME=`pwd`
+DEFAULT_MAGNUSCURRENTHOME=`pwd`
+DEFAULT_WISH=/usr/bin/wish
+DEFAULT_MAGNUSTMP=/tmp
+MAGNUSTMP=/tmp
+
+echo "Enter the path to the Magnus source tree (the directory where"
+echo "the Magnus source is currently located):"
+echo -n "[$DEFAULT_MAGNUSCURRENTHOME]"
+read MAGNUSCURRENTHOME
+if [ "$MAGNUSCURRENTHOME" = "" ]
+then
+	MAGNUSCURRENTHOME=$DEFAULT_MAGNUSCURRENTHOME
+fi
+
+echo -n "Checking existence of $MAGNUSCURRENTHOME ... "
+if [ -d $MAGNUSCURRENTHOME ]
+then
+	echo "ok"
+else
+	echo
+	echo "Uh-oh ... $MAGNUSCURRENTHOME doesn't seem to exist!"
+	echo -n "Continue? [n]"
+	read YN
+	if [ "`echo $YN | sed 's/\(.\).*/\1/'`" != "y" ]
+	then
+		exit 1
+	fi
+fi
+
+# this section should wait until we have a real install script
+
+#echo
+#echo "Enter the path to the Magnus root directory (the directory where "
+#echo "Magnus will eventually be installed):"
+#echo -n [$DEFAULT_MAGNUSHOME]"
+#read MAGNUSHOME
+#if [ "$MAGNUSHOME" = "" ]
+#then
+#	MAGNUSHOME=$DEFAULT_MAGNUSHOME
+#fi
+#
+#echo -n "Checking existence of $MAGNUSHOME ... "
+#if [ -d $MAGNUSHOME ]
+#then
+#	echo "ok"
+#else
+#	echo
+#	echo "Uh-oh ... $MAGNUSHOME doesn't seem to exist!"
+#	echo -n "Continue? [y]"
+#	read YN
+#	if [ "`echo $YN | sed 's/\(.\).*/\1/'`" = "n" ]
+#	then
+#		exit 1
+#	fi
+#fi
+
+# in the meantime, just do this
+
+MAGNUSHOME=$MAGNUSCURRENTHOME
+
+echo
+echo "Enter the path to the Wish executable (with the addinput extensions):"
+echo -n "[$DEFAULT_WISH]"
+read WISH
+if [ "$WISH" = "" ]
+then
+	WISH=$DEFAULT_WISH
+fi
+
+echo -n "Checking existence of $WISH ... "
+if [ -x $WISH ]
+then
+	echo "ok"
+else
+	echo
+	echo "Uh-oh ... $WISH doesn't seem to exist!"
+	echo -n "Continue? [n]"
+	read YN
+	if [ "`echo $YN | sed 's/\(.\).*/\1/'`" != "y" ]
+	then
+		exit 1
+	fi
+fi
+
+echo "Enter the path to the Magnus temporary directory:"
+echo -n  "[$DEFAULT_MAGNUSTMP]"
+read MAGNUSTMP
+if [ "$MAGNUSTMP" = "" ]
+then
+	MAGNUSTMP=$DEFAULT_MAGNUSTMP
+fi
+
+echo -n "Checking existence of $MAGNUSTMP ... "
+if [ -d $MAGNUSTMP ]
+then
+	echo "ok"
+else
+	echo
+	echo "Uh-oh ... $MAGNUSTMP doesn't seem to exist!"
+	echo -n "Continue? [n]"
+	read YN
+	if [ "`echo $YN | sed 's/\(.\).*/\1/'`" != "y" ]
+	then
+		exit 1
+	fi
+fi
+
+SEDSCRIPT="s,%MAGNUSHOME%,$MAGNUSHOME,;s,%WISH%,$WISH,;s,%MAGNUSTMP%,$MAGNUSTMP,"
+
+## Leave this out for alpha releases:
+##
+#echo
+#echo "Creating $MAGNUSCURRENTHOME/back_end/global/config.h ..."
+#if [ ! -f $MAGNUSCURRENTHOME/back_end/global/config.h.in ]
+#then
+#	echo "$MAGNUSCURRENTHOME/back_end/global/config.h.in is missing!"
+#	exit 1
+#fi
+#
+#if [ -f $MAGNUSCURRENTHOME/back_end/global/config.h ]
+#then
+#	echo "	$MAGNUSCURRENTHOME/back_end/global/config.h already exists!"
+#	echo "	Copying it to $MAGNUSCURRENTHOME/back_end/global/config.h.old"
+#	cp $MAGNUSCURRENTHOME/back_end/global/config.h $MAGNUSCURRENTHOME/back_end/global/config.h.old
+#fi
+#
+#sed $SEDSCRIPT < $MAGNUSCURRENTHOME/back_end/global/config.h.in > $MAGNUSCURRENTHOME/back_end/global/config.h
+#
+#echo "$MAGNUSCURRENTHOME/back_end/global/config.h created."
+
+echo
+echo "Creating $MAGNUSCURRENTHOME/front_end/magnus ..."
+if [ ! -f $MAGNUSCURRENTHOME/front_end/magnus.in ]
+then
+	echo "$MAGNUSCURRENTHOME/front_end/magnus.in is missing!"
+	exit 1
+fi
+
+if [ -f $MAGNUSCURRENTHOME/front_end/magnus ]
+then
+	echo "	$MAGNUSCURRENTHOME/front_end/magnus already exists!"
+	echo "	Copying it to $MAGNUSCURRENTHOME/front_end/magnus.old"
+	cp $MAGNUSCURRENTHOME/front_end/magnus $MAGNUSCURRENTHOME/front_end/magnus.old
+fi
+
+sed $SEDSCRIPT < $MAGNUSCURRENTHOME/front_end/magnus.in > $MAGNUSCURRENTHOME/front_end/magnus
+
+chmod ug+x $MAGNUSCURRENTHOME/front_end/magnus
+chmod 777 $MAGNUSCURRENTHOME
+chmod 777 $MAGNUSCURRENTHOME/back_end/SessionManager/test/bin/tmp
+
+echo "$MAGNUSCURRENTHOME/front_end/magnus created."
+
+echo
+echo "The executable is ./front_end/magnus"
+echo
+
+echo "Configuration complete."
+
+exit 0

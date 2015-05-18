@@ -1,0 +1,60 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	subgroup H 
+
+/*
+ *   $Id: ComputeOrderTorsionSubgroup 20 2005-03-24 03:18:00Z daly $
+ */
+ 
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	subgroup H 
+
+Other objects present:  group A
+
+Name in the menu:	Compute the order of the torsion subgroup of H
+
+Problem type:		problem object
+
+Help file:		AbelianOrderOfTheTorsionSubgroupOfSG.help
+
+
+
+			     Algorithms:
+
+
+1. Compute abelian invariants of parent A
+
+      Links:
+
+          Click here to see the generators of the canonical decomposition of A1
+
+
+2. Compute abelian invariants of subgroup H
+
+      Links:
+  
+          Click here to see the generators of the canonical decomposition of H
+

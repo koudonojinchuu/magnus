@@ -1,0 +1,51 @@
+# makefile for homology library
+# This is the general makefile, that produces object (.o) files.
+# "libhom_s.a" is the statistical version of the library (usually used
+# for debugging).  It may not be required.
+#
+# If you wish to only create the standard library (and not the statistics
+# library), then run "make libhom.a".  To create both, run "make".
+#
+# Edit the CC line if you are not using gcc.
+# Edit the CFLAGS line if your compiler can't handle optimisation level -O3.
+# You may need to change this to -O2 or -O
+#
+# Jamie P. Curmi, October 1994.
+
+CC=gcc
+SHELL=/bin/sh
+CFLAGS= -O3 -c
+LIB = libhom.a
+LIBOBJ = 2dimbdry.o grpinput.o rewrite.o matrix.o ndimbdry.o
+
+STATS_LIB = libhom_s.a
+STATS_LIBOBJ = 2dimbdry.o grpinput.o rewrite.o matrix.o ndimbdry_s.o
+
+all: ${LIB} ${STATS_LIB} clean
+
+$(LIB): $(LIBOBJ)
+	ar cr $(LIB) $(LIBOBJ)
+	ranlib $(LIB)
+
+2dimbdry.o:	2dimbdry.c 2dimbdry.h homcommon.h homlib.h
+	${CC} $(CFLAGS) 2dimbdry.c 
+ndimbdry.o:	ndimbdry.c ndimbdry.h homcommon.h homlib.h
+	${CC} $(CFLAGS) ndimbdry.c 
+grpinput.o:	grpinput.c grpinput.h homcommon.h homlib.h
+	${CC} $(CFLAGS) grpinput.c 
+rewrite.o:	rewrite.c rewrite.h homcommon.h homlib.h
+	${CC} $(CFLAGS) rewrite.c 
+matrix.o:	matrix.c matrix.h homcommon.h homlib.h
+	${CC} $(CFLAGS) matrix.c 
+
+$(STATS_LIB): $(STATS_LIBOBJ)
+	ar cr $(STATS_LIB) $(STATS_LIBOBJ)
+	ranlib $(STATS_LIB)
+
+ndimbdry_s.o:	ndimbdry.c ndimbdry.h homcommon.h homlib.h
+	/bin/cp ndimbdry.c ndimbdry_s.c
+	${CC} -D_STATS $(CFLAGS) ndimbdry_s.c 
+	/bin/rm -f ndimbdry_s.c
+
+clean:
+	rm -f *.o

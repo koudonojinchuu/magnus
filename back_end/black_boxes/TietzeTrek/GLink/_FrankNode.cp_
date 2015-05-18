@@ -1,0 +1,65 @@
+#include "patchCCompiler.h"
+#include "FrankNode.h"
+#include "nodeIndices.h"
+#include "FAlgorithm.h"
+#include "AlgorithmMsgIds.h"
+
+FrankNode::FrankNode(FAlgorithm *anAlg)
+	:FGLwalkNode(v,FrankNode::atVertex,
+				FrankNode::atMaximalEdge,
+				FrankNode::atBasisEdge){
+	itsAlg=anAlg;
+	v=itsAlg->primaryGLvar;	
+	v->j=0;
+	v->jLoc();
+	v->e=1;
+	v->iS();
+	rank=0;
+	bvRun=v->bv;
+	cvRun=v->cv;
+	eRun=v->e;
+}
+
+Boolean  FrankNode::atVertex(FGLnode *n, FGLvar *v){
+
+// put your code here
+
+//the rest of this stuff is glue needed to support the walk
+//just be sure it is at the end of your routine
+	n->func=((FGLwalkNode*)n)->castToWalk;
+	n->entryPoint=GLrun;
+	return(TRUE);
+}
+Boolean  FrankNode::atMaximalEdge(FGLnode *n, FGLvar *v){
+
+// put your code here
+
+//the rest of this stuff is glue needed to support the walk
+//just be sure it is at the end of your routine
+
+	n->func=((FGLwalkNode*)n)->castToWalk;
+	n->entryPoint=GLrun;
+	return(TRUE);
+}
+Boolean  FrankNode::atBasisEdge(FGLnode *n, FGLvar *v){
+
+	++((FrankNode*)n)->rank;  //this is the entire "program"
+
+//the rest of this stuff is glue needed to support the walk
+//just be sure it is at the end of your routine
+
+	n->func=((FGLwalkNode*)n)->castToWalk;
+	n->entryPoint=GLrun;
+	return(TRUE);
+}
+
+// algorithm notification
+		
+void FrankNode::auRevoir(void){
+	FGLwalkNode::auRevoir();
+	itsAlg->NotifyAlg(rankAuRevoirMsg);
+}
+
+void FrankNode::goodbyeKiss(void){
+	itsAlg->NotifyAlg(rankGoodbyeKissMsg);
+}

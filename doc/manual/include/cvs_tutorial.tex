@@ -1,0 +1,296 @@
+%% This is AMSLaTeX source, included by guidelines_incl.tex.
+
+
+%%--------------------------------------------------------------------
+\section{A {\bf cvs} Tutorial}
+
+%%....................................................................
+\subsection{Introduction}
+
+
+The \magnus\ project uses the Concurrent Versions System {\bf cvs(1)}
+for version control.
+
+This tutorial is not a substitute for the {\bf man} pages. Rather, it
+is an overall explanation of the {\bf cvs} commands, and a discussion
+of the very idea of version control.
+
+{\bf cvs} keeps a unique directory tree, called the {\em master
+repository}, which contains {\bf rcs(1)} archives of all project
+files. Each developer keeps at least one {\em working directory}, in
+which to perform the usual edit-compile-link-run-crash cycles. The
+directory structure of a working directory usually contains a
+subforest of the master tree.
+
+The {\bf cvs} paradigm differs from those with which you may be
+familiar, as it permits concurrent editing of files. That is, it does
+not lock a given source file so that only one developer at a time can
+edit it.
+
+A locking mechanism attempts to prevent conflicting changes to a
+source file by two or more people {\em before the fact}, by announcing
+to all developers that the file is `locked' by someone, and therefore
+should not be edited by anyone else.  However, any such mechanism has
+loopholes through which it can be inadvertently defeated. This can
+result in one revision shadowing another with no warning.
+
+In recognition of the fact that conflicts will occur, {\bf cvs}
+automatically checks for them, and attempts to resolve them, {\em
+after the fact}. This ensures that conflicts are always caught, but
+places a greater burden on those developers who edit a file
+concurrently. Because, as they attempt to check their changes into the
+master, {\bf cvs} will run {\bf merge(1)} on the original revision and
+the two changed ones. If the changes do not overlap, they are merged
+automatically, which is presumably the right thing.  Otherwise, one of
+the developers will have to resolve the conflict by hand, using the
+output from {\bf merge}.
+
+
+%%....................................................................
+\subsection{Getting Started}
+
+You must set the environment variable CVSROOT to the full path of the
+master repository. For example, put the line
+
+\vspace{8pt}
+
+{\tt setenv CVSROOT /home/users/magnus\_repository}
+
+\vspace{8pt}
+
+\noindent in your {\tt .cshrc} file.
+
+\vspace{8pt}
+
+\begin{quotation}
+
+The contents of \$CVSROOT are to be manipulated by {\bf cvs} only.
+
+NO ONE, UNDER ANY CIRCUMSTANCES OF ANY KIND WHATSOEVER, IS TO DIRECTLY
+ALTER OR REMOVE ANY FILE OR DIRECTORY IN OR BELOW $CVSROOT.
+
+\end{quotation}
+
+
+You must make a working directory. You do not necessarily need a copy
+of the entire master, but this is the easiest to do at first.  Switch
+to the directory where you want your working directory to go, then
+invoke the command
+
+\vspace{8pt}
+
+{\tt cvs checkout magnus}
+
+\vspace{8pt}
+
+This command is decribed in more detail, below. Whatever you do,
+remember that you must work in a directory tree created by the {\bf
+checkout} command, since {\bf cvs} will not recognize a tree which it
+did not create, unless you take special action (see the {\bf import}
+command).
+
+
+%%....................................................................
+\subsection{Common Commands}
+
+There are only five {\bf cvs} commands which a developer typically
+needs. Perhaps it goes without saying, but one should not use other
+commands, or the more esoteric options of the five below, until one
+fully understands the consequences.
+
+You will see that there is some subtle interaction between the {\bf
+checkout}, {\bf add}, and {\bf update} commands, because {\bf cvs}
+must be explicitly told which files in your working directory are to
+be considered for inclusion in the master. This conveniently allows
+you to have completely private files in your working directory,
+without {\bf cvs} constantly trying to inappropriately check them into
+the master.
+
+Below, `{\em module}' means a file or directory path relative to the
+master root, or a symbolic tag which refers to a collection of files.
+And `{\em files}' means files or directories in the current directory.
+
+\begin{description}
+
+\item{{\bf cvs checkout} [options] {\em modules}...}
+
+The purpose of this command is to make a working copy of some
+subforest of the master, along with the administrative files which
+{\bf cvs} needs to operate.
+
+This is typically used to initialize your working directory, but you
+can also use it to update an existing working subdirectory (see {\bf
+cvs(1)}).
+
+You may also, for example, use this command to create a duplicate of
+some working subdirectory, in which to do experimental work without
+disturbing the `real' one.
+
+For this reason, the {\bf create} command does not automatically put
+the checked out files in the same location, relative to the master
+root, as they are in the master. Rather, it puts the roots of any
+trees it creates in the directory from which it was invoked.
+
+If any of the {\em modules} you specify are directories, {\bf
+checkout} is recursive, unless you give the {\tt -l} (for local)
+option. The {\tt -n} option prints a summary of what would happen if
+the command were executed, but does not actually change anything. See
+{\bf cvs(1)} for more options.
+
+
+
+\item{{\bf cvs update} [options] {\em files}...}
+
+This changes your working directory, not the master repository.
+
+This brings your working files up to date with any changes which
+others have made in the master since the last time you did {\bf
+update} or {\bf checkout}. It is recursive unless you give the {\tt
+-l} option. It {\em does not} check any working files you have changed
+into the master. Use {\bf commit} for that.
+
+Examples:
+
+\begin{itemize}
+
+\item
+Someone has fixed a bug in {\tt
+magnus/back\_end/general/include/List.h}, and now you want it.
+Switch to the directory which contains your working root, and do
+
+\vspace{8pt}
+
+{\tt cvs update magnus/back\_end/general/include/List.h}
+
+\vspace{8pt}
+
+\item
+As above, but you can't remember what file in {\tt general/} was
+fixed.  If you do
+
+\vspace{8pt}
+
+{\tt cvs update magnus/back\_end/general}
+
+\vspace{8pt}
+
+\noindent then all of your files in {\tt general/} are brought up to date.
+
+\vspace{8pt}
+
+But what if you are working on, say, {\tt general/src/Set.C}, and you
+are not ready to check it in? Not to worry. The {\bf update} command
+never checks files in.
+
+\vspace{8pt}
+
+But what if {\em someone else} has also edited {\tt Set.C} in the mean
+time? In that case, {\bf update} will try to merge the other changes
+with your working copy of {\tt Set.C}. If you were working on disjoint
+parts of {\tt Set.C}, the merge is automatic. If you were both editing
+the same lines, {\bf update} will inform you that there is a conflict
+which you must resolve by hand (see \S\ref{resolving_conflicts}).
+
+\end{itemize}
+
+
+
+\item{{\bf cvs add} [options] {\em files}...}
+
+As you add new files to your working tree which are to be included in
+the master, you must inform {\bf cvs} of them. Otherwise, {\bf cvs}
+will assume that the file is for your private use, not part of the
+project, and ignore it.
+
+After you have made a new file, e.g., {\tt magnus/doc2/blurb.tex}, tell
+{\bf cvs} that it is part of the project by switching to {\tt
+magnus/doc2/}, and doing
+
+\vspace{8pt}
+
+{\tt cvs add blurb.tex}
+
+\vspace{8pt}
+
+Of course this assumes that the directory {\tt magnus/doc2/} was
+either created by the {\bf checkout} command, or that {\bf cvs} was
+told about it with the {\bf add} command.
+
+The file `{\tt blurb.tex}' will not be checked into the master until
+your run {\bf commit}.
+
+
+
+\item{{\bf cvs remove} [options] {\em files}...}
+
+Use this command to announce that the indicated files and directories
+are no longer part of the project. The command is recursive unless you
+give the {\tt -l} option.
+
+Consider carefully whether it is for you to decide that a file no
+longer part of the project.
+
+The command requires that you first {\tt rm} the indicated files and
+directories from your working tree. It does not change the master
+until you run {\bf commit}.
+
+Do {\em NOT\/} use this command when you merely wish to remove part of
+your working tree, pending a {\bf checkout} to restore it. See the
+{\bf release} command.
+
+
+
+\item{{\bf cvs commit} [options] [{\em files}...]}
+
+Use this command to check files into the master. They must all reside
+in directories created with the {\bf checkout} command, or announced
+with the {\bf add} command.
+
+If you do not specify a file or directory, the current directory is
+assumed. This command is recursive unless you give the {\tt -l}
+option. It supports the {\tt -n} option, which prints a summary of
+what would happen if you did commit, without actually changing
+anything.
+
+{\bf cvs} may detect that some of the specified files are not up to
+date with the current revision in the master. That is, someone else
+has also edited one of the files you want to commit, since the last
+time you ran {\bf commit} or {\bf update}. In this case, {\bf cvs}
+issues a warning to run {\bf update}, and exits without commiting any
+files.
+
+By default, this will invoke the editor pointed to by your EDITOR
+environment variable, to ask for a log message. You can suppress this
+with the {\tt -m ""} option. You may wish to alias this.
+
+
+\end{description}
+
+
+
+%%....................................................................
+\subsection{Other Commands}
+
+
+\begin{description}
+
+
+\item{{\bf cvs diff} [options] [{\em files or directories}...]}
+
+
+
+\item{{\bf cvs export} [options] [{\em files or directories}...]}
+
+\item{{\bf cvs import} [options] [{\em files or directories}...]}
+
+\item{{\bf cvs release} [options] [{\em files or directories}...]}
+
+\item{{\bf cvs status} [options] [{\em files or directories}...]}
+
+
+\end{description}
+
+
+
+%%....................................................................
+\subsection{Resolving Conflicts}\label{resolving_conflicts}

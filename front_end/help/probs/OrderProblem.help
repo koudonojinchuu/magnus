@@ -1,0 +1,50 @@
+@@How this problem works
+
+@@FP
+
+In order to determine the order of a finitely presented group,
+we check first whether its abelianization is infinite. If it
+is not, then we check to see if the group has a finite, confluent
+rewriting system, whether it has an automatic structure, whether
+the presentation is metric small cancellation and then use the
+information to compute the order.
+
+\ni For a general discussion of finitely presented groups, see
+@General_finitely_presented_groups@General_finitely_presented_groups::General discussion@
+
+@@ABELIAN
+The given group is decomposed into a direct product of infinite
+cyclic groups. The order is infinite if there are infinite cyclic
+factors; otherwise it is the product of the orders of the finite
+cyclic factors in the decomposition.
+
+For a discussion of general finitely generated abelian groups,
+see @General discussion@General_abelian_groups::general discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

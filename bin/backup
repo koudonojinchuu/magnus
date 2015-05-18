@@ -1,0 +1,174 @@
+#!/usr/local/bin/perl
+
+## Copyright (C) 1994 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: backup, a wrapper for cpio, for making an archive of the text
+##           files in a single directory, skipping obvious junk, and
+##           compressing it.
+##
+## Principal Author: Roger Needham
+##
+## Status: Useable
+##
+## Revision History:
+##
+## Next implementation steps:
+##
+
+
+######################################################################
+## Configuration parameters:
+
+# File name patterns to reject.
+$pattern = "(~|%|#.*#|\\.(BAK|log|ps|dvi|aux|toc|a|d|o))$";
+
+# Default values for command-line arguments:
+$only_rcs_p = 0;
+$to_do      = 0;   # 0 -> create, 1 -> extract, 2 -> table of contents
+
+######################################################################
+
+
+while ( $#ARGV != -1 ) {
+  $_ = shift;
+  if ( !/^-/ ) {
+    $dir_to_bu = $_;
+    if ( !(-e $dir_to_bu) ) {
+      print "\n*** Can't find $dir_to_bu\n";
+      exit 1;
+    }
+    last;
+  }
+  elsif ( /^-m$/ ) {
+    $only_rcs_p = !$only_rcs_p;
+  }
+  elsif ( /^-x$/ ) {
+    $to_do = 1;
+  }
+  elsif ( /^-t$/ ) {
+    $to_do = 2;
+  }
+  elsif ( /^-h$/ || /^--help$/) {
+    &help;
+    exit;
+  }
+  elsif ( /^-v$/ || /^--version$/) {
+    print "\nbackup version 1.0\n";
+    exit;
+  }
+  else {
+    print "Unknown option: $_\n\n";
+    &help;
+    exit 1;
+  }
+}
+
+
+if ( $to_do == 1 ) {
+
+  if ( !($dir_to_bu =~ /\.gz$/) ) {
+    print "\n*** Argument is not gzip'd.\n";
+  } else {
+    system "gunzip -q -c $dir_to_bu | cpio -idm";
+  }
+  exit;
+
+} elsif ( $to_do == 2 ) {
+
+  if ( !($dir_to_bu =~ /\.gz$/) ) {
+    print "\n*** Argument is not gzip'd.\n";
+  } else {
+    system "gunzip -q -c $dir_to_bu | cpio -it";
+  }
+  exit;
+
+}
+
+
+$home = $ENV{"HOME"};
+
+@lt = gmtime(time);
+$mm = substr("0".($lt[4]+1),-2);
+$dd = substr("0".$lt[3],-2);
+$yy = $lt[5];
+
+split(m:/:,$dir_to_bu);
+$dir_name = $_[$#_];
+$archive_name = "$home/$dir_name"."_".$mm."_".$dd."_".$yy.".cpio";
+
+if ( -e "$archive_name.gz" ) {
+  print "\n** $archive_name.gz already exists -- bailing.\n";
+  exit 1;
+}
+if ( -e $archive_name ) {
+  print "\n** $archive_name already exists -- bailing.\n";
+  exit 1;
+}
+
+chdir("$dir_to_bu/..");
+
+if ( $only_rcs_p ) {
+  open(FIND, "/bin/find $dir_name -name \"*,v\" -type f -print |")
+    || die "Unrecoverable error: couldn't run $find: $!\n";
+} else {
+  open(FIND, "/bin/find $dir_name -type f -print |")
+    || die "Unrecoverable error: couldn't run $find: $!\n";
+}
+
+if ( !open(CPIO, "| cpio -o > $archive_name") ) {
+  print "\n** problem with cpio -- bailing.\n";
+  close(FIND);
+  exit 1;
+}
+
+while ( $name = <FIND> ) {
+  chop($name);
+  if ( $name =~ /$pattern/o ) { next; }
+  if ( $name =~ m:$archive_name:o ) {
+    print "\n* Skipping $archive_name\n";
+    next;
+  }
+
+  if ( -T $name ) {
+    if ( length($name) > 126 ) {
+      print "** Warning: pathname too long:\n   $name\n   - skipped\n";
+      next;
+    } else {
+      print(CPIO "$name\n");
+    }
+  }
+}
+
+close(CPIO);
+close(FIND);
+
+system "gzip -q -9 $archive_name";
+
+print "\nBackup written to $archive_name.gz\n\n";
+
+
+## Subroutines:
+
+sub help {
+  print "\nThis is a wrapper for cpio. It automates backing up the text\n";
+  print "files in a directory, skipping obvious junk.\n";
+  print "Usage: backup [ -m | -t | -x ] <directory>\n";
+  print "With no switches, this creates a cpio archive of the specified\n";
+  print "directory in your home directory, and gzips it.\n";
+  print "\nCommand line options:\n";
+  print "-m  <directory>  archive rcs files only\n";
+  print "-t  <archive>    print table of contents\n";
+  print "-x  <archive>    extract archive in same directory as archive.\n";
+  print "-h\n";
+  print "--help     print this message and quit\n";
+  print "-v\n";
+  print "--version  print the version number and quit\n";
+  print "\nUnlike with tar, you may safely use full and relative pathnames\n";
+  print "to specify the directory to be backed up. `backup -x` will always\n";
+  print "place the extracted directory in the same directory as the archive\n";
+  print "file; use `backup -t | more` first if you are not absolutely sure\n";
+  print "that that won't overwrite something you want.\n";
+  print "You can change the name of the archive file without adverse effect,\n";
+  print "provided you leave the '.gz'.\n\n"
+}

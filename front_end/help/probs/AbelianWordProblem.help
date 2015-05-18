@@ -1,0 +1,44 @@
+@@How this problem works
+@@FP
+
+@@ABELIAN
+
+\ni Every finitely generated abelian group can be decomposed
+into a direct product of finitely many infinite cyclic groups
+and finitely many finite cyclic groups. By following the
+mechanism for obtaining such a decomposition, each of the
+given generators of the group can be re-expressed in terms
+of the so-called canonical generators which allows for a 
+decomposition of any given word in terms of these canononical 
+generators.  
+
+\ni For a general discussion see 
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

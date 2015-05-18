@@ -1,0 +1,27 @@
+On 5/12/95, Roger Needham made some changes to the source files for
+compatibility with gcc 2.6.3.
+  I had to
+
+* Globally change the identifier `bool' to `bool_t'.
+
+* Globally change the identifier `boolean' to `boolean_t'.
+
+* In portable.h
+  - change `enum boolean {FALSE, TRUE};' to `enum boolean_t_enum {FALSE, TRUE};'
+  - make the `typedef int boolean_t;'
+
+* In subsystm.C, line 343
+  - change
+      cout << "No index used with identities!" << cout;
+    to
+      cout << "No index used with identities!" << endl;
+
+* In subsystm.h, line 130
+  - change
+      { rule_by_origin(origin.extract_long(numb),p_rule); }
+    to
+      {
+        long temp = origin.extract_long(numb);
+        rule_by_origin(temp,p_rule);
+      }
+    so as not to pass an rvalue by reference.

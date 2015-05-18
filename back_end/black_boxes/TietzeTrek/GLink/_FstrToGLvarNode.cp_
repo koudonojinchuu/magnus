@@ -1,0 +1,275 @@
+#include "patchCCompiler.h"
+#include "FstrToGLvarNode.h"
+#include "AlgorithmMsgIds.h"
+#include "CStringArray.h"
+#include "FAlgorithm.h"
+#include "nodeIndices.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+FstrToGLvarNode::FstrToGLvarNode(FAlgorithm *anAlg){
+	itsAlg=anAlg;
+	v=itsAlg->primaryGLvar;
+	
+// the algorithm responds to the initStrToGLvarMsg by setting up
+
+// FStringArray* strs  				the string object to be parsed
+// lettersNo  						the number of letters in the words
+// long **letterToNumber			a handle to the letter to number look
+//									up table
+// long beginIndex					index of the first word to process
+// long endIndex					index of the last word to process, or zero if
+// 									list is empty
+// GLref itsRoot					the first word is attached at itsRoot
+
+// CAUTION: be sure to set up letter to number lut BEFORE initializing this node!
+	
+	itsAlg->NotifyAlg(initStrToGLvarMsg);
+	elementSize=strs->elementSize;
+	entryPoint=GLstart;
+	callAgain=TRUE;
+	func=castToStrToGLvar;
+}
+
+Boolean FstrToGLvarNode::castToStrToGLvar(FGLnode *node,FGLvar *v){
+	FstrToGLvarNode *n;
+	n=(FstrToGLvarNode*)node;
+	return n->strToGLvar();
+}
+
+Boolean FstrToGLvarNode::strToGLvar(void){
+
+	switch(entryPoint){
+		case GLstart:
+		
+// it is permissible to have either stringlist empty
+// we just notify the algorithm and quit
+
+			if(!endIndex){
+				itsAlg->NotifyAlg(emptyWordStrMsg);
+				return FALSE;
+			}				
+			strIndex=beginIndex;	
+			v->e=0;  	// this indicates that there is no
+						// edge from a previous line to be
+						// linked to the next line
+						
+			v->cv=itsRoot;		// the next edge is always linked at
+								// at the companion
+		
+			entryPoint=GLrun;
+			//runs into next case
+		case GLrun:{
+			Str255 s;
+			lineAttributesInfo info;
+		
+		// check for unexpected end
+			if(strIndex>endIndex)nodeErr(14);
+			
+		// ask the algorithm to remove the blanks, if any
+		// we don't do this here because if they were already removed
+		// earlier, its a waste of time, and only the alg knows about this
+		
+			itsAlg->NotifyAlg(removeBlanksMsg);
+				
+		// get the next string and its attributes
+			strs->GetItem(s,strIndex);
+			BlockMove(s,&info.s,elementSize);   
+			getLineAttributes(&info);
+			
+		//	if this is a continuation line, and this line is not
+		//  skipped, then we link companion to a new vertex,
+		//  and indicate that there is no longer an edge from the
+		//  previous line by setting v->e=0
+		
+			if(info.continuationLine && !info.skipLine){
+				v->bv=v->cv;
+				v->V();
+				v->e=0;
+			}
+						
+		// 	if this is not a continuation, and it is not a line
+		// 	that is skipped, and there is an edge from
+		//  the previous line, then we send the terminate word message
+		//  to the algorithm.  
+		//
+		//	CAUTION: it is the responsibility of the algorithm to properly
+		//  link the last edge of the string.  The algorithm may assume that
+		//  both bv and cv are the penultimate vertex, and v->e is the last
+		//  edge.
+		//
+		//	CAUTION: it is the responsibility of the algorithm to set
+		//  the companion vertex to whatever vertex the next string will
+		//  link to.  Typically this is itsRoot, but it doesn't have to be.
+		//
+		//  Finally, we indicate that there is no longer an edge from the
+		//  previous line by setting v->e=0
+		
+			if(!info.continuationLine && !info.skipLine && v->e!=0){
+				v->bv=v->cv;
+				itsAlg->NotifyAlg(terminateWordMsg);		
+				v->e=0;
+			}
+
+		//  if this line is not skipped, we link its letters
+
+			if(!info.skipLine){
+				processLine(s,info.firstLetter);
+			}
+			
+		//  if this is the last line, and there is an edge from a
+		//  previous line, then we send the terminate last word message
+		//  to the algorithm.  Typically the algorithm responds to this
+		//  message the same way it does to the terminate word message, but
+		//  it doesn't have to.
+		//
+		//	CAUTION: it is the responsibility of the algorithm to properly
+		//  link the last edge of the string.  The algorithm may assume that
+		//  both bv and cv are the penultimate vertex, and v->e is the last
+		//  edge.
+		
+			if(strIndex==endIndex && v->e!=0){
+				v->bv=v->cv;
+				itsAlg->NotifyAlg(terminateLastWordMsg);
+			}
+			
+		//  if this is not the last line, process next line,
+		//  otherwise quit
+					
+			++strIndex;
+			if(strIndex<=endIndex) return TRUE;
+			else return FALSE;
+		}
+		break;
+		default: nodeErr(6);
+	}
+}
+
+void FstrToGLvarNode::processLine(Str255 s,long  firstLetter){
+	Boolean scanning=TRUE;
+	long len=(long)s[0];
+	for(long i=firstLetter;i<=len && scanning;++i){
+		unsigned char c=s[i];
+		short charType=getCharType(c);
+		if(charType==GLcomment)scanning=FALSE;
+		else if(charType!=GLletter)nodeErr(13);
+		if(scanning){
+			// check for exponent, and
+			// create the edge(s) which represent the letters
+			// in the word
+			
+			long lastScannedi=i;
+			long exp=collectExp(s,len,lastScannedi);
+			Boolean closeTheCircle= lastScannedi==len;
+			v->e=(*letterToNumber)[c];
+			if(exp<0)v->e= -v->e;
+			
+			//create all but the last edge
+			long noAllButLast=Abs(exp)-1;
+			for(long notLasti=0;notLasti<noAllButLast;++notLasti){
+				v->bv=v->cv;
+				v->V();
+			}
+			
+			//set the last edge
+			if(closeTheCircle){	
+				// do nothing here, next line may continue
+				// the relation
+			}
+			else{
+				v->bv=v->cv;
+				v->V();
+			}
+			
+			//reset i to lastScannedi
+			i=lastScannedi;
+		}
+	}
+}
+
+void FstrToGLvarNode::getLineAttributes(lineAttributesInfo *info){
+	
+// initialize to output info to nominal values
+	info->firstLetter=1;
+	info->continuationLine=FALSE;
+	info->skipLine=FALSE;
+
+	long len=(long)info->s[0];
+	if(len==0)info->skipLine=TRUE;  		//skip this empty line
+	short charType;
+	if(!info->skipLine){
+		unsigned char c=info->s[1];
+		charType=getCharType(c);
+		if(charType==GLcomment)info->skipLine=TRUE;	//skip this comment line
+	}
+	
+//	check to see if this line is a continuation of the previous line
+//  and skip over the tilde if there is one.
+	if(!info->skipLine){
+		if(charType==GLtilde){
+			++info->firstLetter;
+			if(v->e!=0){
+				info->continuationLine=TRUE;
+			}
+		}
+	}
+	
+//	if this is an empty continuation line, we skip it
+	
+	if(info->continuationLine && len==1)info->skipLine=TRUE;
+}
+
+long FstrToGLvarNode::collectExp(StringPtr s,long len,long& lastScannedi){
+
+	// at entry time, lastScannedi indicates the letter to be processed
+	// it is not known whether or not this letter is followed by an exponent
+	unsigned char c;
+	Str255 numStr;
+	
+	long i=lastScannedi;
+	++i;
+	if(i>len)return(1);  //last letter has no explicit exponent
+	c=s[i];
+	long sign=1;
+	if(getCharType(c)==GLminus){
+		sign= -1;
+		++i;
+		if(i>len)nodeErr(13);   //ending with a minus should have
+								//already been screened out
+		c=s[i];
+	}
+	if(getCharType(c)==GLletter || getCharType(c)==GLcomment){
+		// no explicit exponent
+		
+		return(1);
+	}
+	long numi=0;
+	lastScannedi=i;
+	while(TRUE){	
+		numStr[numi]=c;			//numStr is set up as a C string
+		++numi;
+		++i;
+		c=s[i];
+		if(i>len || getCharType(c)!=GLnumber){
+			// at this point, we have collect the number in numStr,
+			// and *lastScannedi is correctly set.  Before converting
+			// the ascii number to long, we must add the terminating
+			// NULL.  A stitch in time saves nine.
+			numStr[numi]=0;
+			long exp;
+			sscanf((char *)numStr,"%ld",&exp);
+			return(exp*sign);
+		}
+		lastScannedi=i;
+	}
+}
+
+void FstrToGLvarNode::goodbyeKiss(){
+	itsAlg->NotifyAlg(strToGLvarGoodbyeKissMsg);
+}
+
+void FstrToGLvarNode::auRevoir(){
+	itsAlg->NotifyAlg(strToGLvarAuRevoirMsg);
+}
+

@@ -1,0 +1,33 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	subgroup H 
+
+Other objects present:  group A
+
+Name in the menu:	Is H isolated in A
+
+Problem type:		problem object
+
+Help file:		AbelianIsSGIsolatedProblem.help
+
+
+
+			     Algorithms:
+
+
+1. Compute abelian invariants of A/H
+
+ 
+  
+

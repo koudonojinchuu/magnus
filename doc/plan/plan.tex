@@ -1,0 +1,37 @@
+%% This is AMSLaTeX source.
+%% This file is a wrapper for analysis_incl.tex, design_incl.tex, and
+%% implementation_incl.tex, which contain the actual source.
+
+\documentstyle[11pt]{report}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\input{include/plan_macros}
+\input{include/epsf}
+\epsfverbosetrue
+
+\begin{document}
+
+	\begin{titlepage}
+
+		\vspace*{0.25\textheight}
+		\noindent{\Huge\bf Magnus Development Plan}\\
+		\rule{\textwidth}{1.5mm}
+		\begin{flushright}
+			11 September, 1995
+		\end{flushright}
+		\vfill
+		\noindent{\Large\bf The New York Group Theory Cooperative}\\
+		\rule{\textwidth}{0.75mm}
+		\vspace*{0.1\textheight}
+
+	\end{titlepage}
+
+	\tableofcontents
+
+	\input{include/analysis_incl}
+	\input{include/design_incl}
+	\input{include/implementation_incl}
+
+\end{document}

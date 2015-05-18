@@ -1,0 +1,22 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free group
+
+Objects highlighted:	homomorphism h
+
+Other objects present:	group F
+
+Name in the menu:	Is h an IA-automorphism ?
+
+Problem type:		fast problem
+
+Help file:		none

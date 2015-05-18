@@ -1,0 +1,34 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	word W 
+
+Other objects present:	group G
+
+Name in the menu:	Find in which term of the lower central series W lies
+
+Problem type:		problem object
+
+Help file:		NGweightOfWordProblem.help
+
+
+			     Algorithms:
+
+
+1. Compute a basis of G
+
+2. Determine in which term of the lower central series W
+
+
+
+

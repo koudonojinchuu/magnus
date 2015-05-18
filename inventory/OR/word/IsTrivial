@@ -1,0 +1,59 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		one relator group
+
+Objects highlighted:	word W 
+
+Other objects present:	group G
+
+Name in the menu:	Is W trivial in G ?
+
+Problem type:		problem object
+
+Help file:		WordProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+  
+2. Compute abelian invariants of G
+
+3. Compute the Magnus breakdown
+
+   Links:
+
+	Click here to see decomposition of W as product of conjugates 
+	of the relator.
+
+4. Enumerate normal closure of relators
+  
+5. Seek a rewriting system for G
+
+6. Seek a ShortLex automatic structure for G
+	
+   Links:
+	
+	Click here to see a word acceptor.
+
+	Click here to the first difference machine.
+
+	Click here to the second difference machine.
+
+	Click here to the general multiplier.
+
+7. Run genetic algorithm
+
+   Links:
+
+	Click here to see details of the genetic algorithm.

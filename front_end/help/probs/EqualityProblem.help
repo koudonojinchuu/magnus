@@ -1,0 +1,32 @@
+@@NILPOTENT
+
+
+
+@@FREE_NILPOTENT 
+
+
+
+@@ONE_RELATOR
+
+\ni In order to decide if two words u and v represent the same element, 
+we use the solution of the word problem for one-relator groups to 
+determine if u v^-1 = 1.
+
+@@Determine if two words are equal in a one-relator group
+
+\ni  In order to decide if two words u and v represent the same element, 
+we use the solution of the word problem for one-relator groups to 
+determine if u v^-1 = 1.
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+.TH rank 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBrank \-
+Calculates the rank of homology of dimension n of a given group and
+its rewriting system.
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBrank\fR \fIn\fR [\fIinputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP n 15
+The dimension (> 1).
+.IP inputfile
+The groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.  If no file name is given \fIStandard Input\fR is used.
+
+
+
+.SH \fIUsage
+
+Given a group and its complete rewriting system including finite state automata (the inputfile),
+calculates the rank of homology of dimension n.
+
+The boundary
+calculation algorithms used to do this are based on those given by J. R. J. Groves
+"Rewriting Systems and Homolgy of Groups" in his research report from
+The University of Melbourne, Department of Mathematics, 1990 and original
+algorithms by J.R.J.Groves 1993-1994.
+
+
+.SH \fIExample
+
+Suppose we have a groups rewriting system in a file "grpA.kbeqn".  We are
+interested in obtaining the rank of Homolgy dimension 3.
+We run
+\fBrank\fR as follows:
+
+        rank 3 grpA.kbeqn
+
+Output is to standard output - the result being, say:
+
+        Rank H3 = 1
+
+.SH \fIBugs
+If a rewriting system is not complete, the program may crash.  This is
+because certain tests are \fInot\fR performed to reduce execution time.
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+\fIchom(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (7/6/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

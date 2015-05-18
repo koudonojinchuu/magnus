@@ -1,0 +1,53 @@
+.TH cbound 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBcbound \-
+Calculates the boundary of a 2-tuple formed by the directed graph of the
+supplied rewriting system starting at that tuple.
+
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBcbound\fR [\fI-leftaction | -trivial\fR] [\fIinputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP -leftaction 15
+Left actions are retained in boundary calculations.
+.IP -trivial 15
+(Default) Left actions are regarded as trivial and not retained.
+.IP inputfile
+the groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.
+If no file name is given \fIStandard Output\fR is used.
+
+
+
+.SH \fIUsage
+
+This program is a 2-dimensional version of \fIcboundn\fR.  In general you should
+use the newer \fIcboundn\fR.  See \fIcboundn\fR for details.
+
+.SH \fINotes
+
+The program will use the first 2 rewriting rules encountered from the
+left in it's calculations.  The current implementation does not allow
+for users to choose which rewriting rules to use.
+
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+\fIcboundn(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (4/11/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

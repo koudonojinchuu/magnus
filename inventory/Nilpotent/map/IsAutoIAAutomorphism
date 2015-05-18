@@ -1,0 +1,36 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	automorphism h
+
+Other objects present:	group G
+
+Name in the menu:	Is h an IA-automorphism ?
+
+Problem type:		problem object
+
+Help file:		NGAutoIsIAAut.help
+
+
+			     Algorithms:
+
+
+1. Compute abelianization of G
+
+
+  
+  
+
+
+
+

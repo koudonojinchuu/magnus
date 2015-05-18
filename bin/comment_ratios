@@ -1,0 +1,160 @@
+#!/usr/local/bin/perl
+
+## Copyright (C) 1994 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: comment_ratios, which computes the ratio of comment characters
+##           to all characters, ignoring /*...*/, in all source, header, and
+##           Makefiles at and below the current directory.
+##
+## Principal Author: Roger Needham
+##
+## Status: Useable.
+##
+## Revision History:
+##
+## Next implementation steps:
+##
+
+
+$summary_p = 0;
+
+while ( $#ARGV != -1 ) {
+  $_ = shift;
+  if ( /^-s$/ ) {
+    $summary_p = !$summary_p;
+  }
+  elsif ( /^-h$/ || /--help/) {
+    &help;
+    exit;
+  }
+  else {
+    print "Unknown option: $_\n\n";
+    &help;
+    exit 1;
+  }
+}
+
+$author_index = 0;
+
+open( FIND, "/bin/find . -type f -print |");
+
+while ($name = <FIND>) {
+
+  if ( !($name =~ /(\.([Chc]|mk|tcl)$)|Makefile/) &&
+       !((-x $name) && (-T $name)) ) { next; }
+
+  #@rn include .in files?
+
+  $sharp_p = !($name =~ /\.[Chc]$/);
+  chop $name;
+  open(FILE, $name) || print "** Couldn't open $name\n";
+  if ( !$summary_p ) { print "\n$name:\n"; }
+
+  $total_char_count = 0;
+  $C_comment_char_count = 0;
+  $Cpp_comment_char_count = 0;
+  $reading_C_comment = 0;
+  $did_author = 0;
+  @authors = ("anonymous");
+
+  while( $line = <FILE> ) {
+
+    if ( !$did_author && ($line =~ /Principal Author.*:\s*(.+)$/) ) {
+      $did_author = 1;
+
+      # Get authors(s) of this file:
+      @authors = split(/,\s*/, $1);
+      foreach $author (@authors) {
+        if ( $author_indices{$author} == 0 ) {
+          $author_indices{$author} = ++$author_index;
+          $author_names{$author_index} = $author;
+          $a_com_count{$author_index} = 1;
+          $a_tot_count{$author_index} = 1;
+        }
+      }
+    }
+
+    # Now count:
+
+    $len = length($line);
+    $total_char_count += $len;
+
+    if ( $reading_C_comment ) {
+      $pos = index($line, "*/");
+      if ( $pos >= 0 ) {
+        $reading_C_comment = 0;
+        $C_comment_char_count += $pos + 2;
+      } else {
+        $C_comment_char_count += $len;
+      }
+    } else {
+
+      # Decide whether $line contains a comment:
+
+      $pos = index($line, "/*");
+      if ( $pos >= 0 ) {
+        $reading_C_comment = 1;
+        $C_comment_char_count += $len - $pos;
+      } else {
+        if ( $sharp_p ) {
+          $pos = index($line, "#");
+        } else {
+          $pos = index($line, "//");
+        }
+        if ( $pos >= 0 ) {
+          $Cpp_comment_char_count += $len - $pos;
+        }
+      }
+    }
+  }
+
+  if ( !$did_author && $author_indices{"anonymous"} == 0 ) {
+    $author_indices{"anonymous"} = ++$author_index;
+    $author_names{$author_index} = "anonymous";
+    $a_com_count{$author_index} = 1;
+    $a_tot_count{$author_index} = 1;
+  }
+
+  $total = $total_char_count - $C_comment_char_count;
+  if ( $total != 0 ) {
+    $ratio = int( 100 * $Cpp_comment_char_count / $total );
+  } else { $ratio = 0; }
+  if ( !$summary_p ) { print "ratio: $ratio%\n"; }
+
+  # Don't count largely codeless files in summary:
+
+  if ( $ratio < 80 ) {
+    foreach $author (@authors) {
+      $i = $author_indices{$author};
+      $a_com_count{$i} += $Cpp_comment_char_count;
+      $a_tot_count{$i} += $total;
+    }
+  }
+
+  close(FILE);
+}
+close(FIND);
+
+print "\n\nSummary by author:\n\n";
+
+$i = 1;
+while ( $i <= $author_index ) {
+  if ( $a_tot_count{$i} != 0 ) {
+    $ratio = int(100 * $a_com_count{$i} / $a_tot_count{$i});
+  } else { $ratio = 0; }
+  print " $ratio%  $author_names{$i}\n";
+  ++$i;
+}
+print "\n\n";
+exit;
+
+sub help {
+  print "\nThis computes the ratio of comment characters to all characters,\n";
+  print "ignoring /*...*/, in all source, header, and Makefiles at and\n";
+  print "below the current directory.\n";
+  print "Command line options:\n";
+  print "-s      toggles summary mode. Default: $summary_p\n";
+  print "-h\n";
+  print "--help  prints this and quits\n\n";
+}

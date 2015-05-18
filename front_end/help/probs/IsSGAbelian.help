@@ -1,0 +1,46 @@
+@@How this problem works
+
+@@FP 
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::FP@)
+
+@@ABELIAN 
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::ABELIAN@)
+
+@@NILPOTENT
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::NILPOTENT@)
+
+@@AP_FREE
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::AP_FREE@)
+
+@@AP_FREE_CYCLIC
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::AP_FREE_CYCLIC@)
+
+@@SMALL_CANCELLATION
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::SMALL_CANCELLATION@)
+
+
+@@ONE-RELATOR
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::ONE-RELATOR@)
+
+

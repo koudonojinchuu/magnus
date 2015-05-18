@@ -1,0 +1,129 @@
+@@About the Workspace
+
+1. @Introduction@Introduction to the Workspace@
+
+2. @Putting objects into the workspace@Putting objects into the Workspace@
+
+3. @Selecting objects@Selecting Objects in the Workspace@
+
+4. @What is the tools menu?@What is the Tools Menu?@
+
+5. @Moving objects@Moving Objects in the Workspace@
+
+
+@@Introduction to the Workspace
+
+The workspace holds all group theoretic objects that you work with.
+Before you can do anything, you have to @put@Putting objects into the Workspace@
+at least one group into the workspace. You do this by choosing the 
+kind of group you want from the Check-in menu, i.e., clicking on an 
+item in the Check-in menu with the left mouse button and clicking, 
+again with the left mouse button, on a specific type of group.
+
+You put objects other than groups in the workspace by first
+@selecting@Selecting Objects in the Workspace@ objects which are
+already in the workspace, and then choosing an appropriate item in the
+Check-in menu. The menu changes depending on what is selected.
+
+Follow @this link@checkinSynopsis::Synopsis of Group Theoretic
+Objects@ to see what kinds of group theoretic objects you can check
+in.
+
+You will notice that when, e.g., you enter a word in the generators of
+a group, there is a line connecting the word to the group. This
+indicates only that the word depends for its existence on the
+existence of the group.
+
+Similar lines are drawn for subgroups; they do not mark out a subgroup
+lattice. Indeed, subgroups of finitely presented groups are so
+computationally troublesome that we would almost never know where they
+belong in the lattice.
+
+We might represent other important relationships among workspace
+objects with similar graphical adornments. We welcome suggestions.
+
+
+@@Putting objects into the Workspace
+
+In order to put a group into the workspace, you need to click on the
+Check-in menu, with the left mouse button. Then click on a specific
+type of group, again with the left mouse button. A "Define a ..."
+window pops up, prompting you for the definition of the specific
+type of group that you are interested in. After entering in the definition
+of your group, click the OK button with the left mouse button and an
+icon for your group will appear in the workspace. In order to work on
+the group, you need to @select@Selecting Objects in the workspace@ In
+order to put a group-theoretic object connected to the group that you
+have just put into the workspace, say a word or a subgroup or a map,
+you have to go back to the Check-in menu. First click, with the left 
+mouse button, on the icon representing your group, in order to high-light 
+it, i.e., to make Magnus aware of it. Then click, with the left mouse
+button, on the check-in menu. A different menu now appears. In order
+to put, for example, a word that you are interested in, into the work-
+space, click, with the left mouse button, on the item "Word in ..",
+as is appropriate for your purposes. Again a define window appears, making
+it possible for you to define a word and then, on clicking the OK button,
+your word will appear, represented by an icon, in the workspace.
+
+@@Selecting Objects in the Workspace
+
+Before reading further, you might @put@Putting objects into the W
+orkspace@
+a group in the workspace, by choosing an item in the Check-in menu, so 
+that you can experiment with it.
+
+You select an object in the workspace by clicking on it with the left
+mouse button. It becomes highlighted to indicate that it is selected.
+You can select additional objects by clicking on them with the right
+button.
+
+You can select several objects at once by pressing the left mouse
+button in an empty area of the workspace, then moving the mouse with
+the button still pressed. This marks out a rectangle; every object
+within it when you release the button is selected as though you had
+clicked on each one individually.
+
+Moving the mouse while pressing one of its buttons is called
+`dragging'.
+
+There are several ways to unselect objects. The left button is for
+selecting only one object at a time, so if you click it on any object,
+any other selected ones become unselected. The right button is for
+selecting additional objects, but if you click it on an object which
+is already selected, that object becomes unselected (good for fixing
+mistakes). You can drag-select with the right button too. Finally, if
+you click the left button in an empty part of the workspace, all
+objects become unselected.
+
+
+@@What is the Tools Menu?
+
+You use the Tools menu to ask questions about the objects you have
+selected. The choices in the Tools menu change, depending on what you
+have selected. For example, if you select a word w in the generators
+of a group G, one of the choices is the question "is w trivial in G?".
+
+You can experiment by `tearing off' the Tools menu with the middle
+button. This leaves the menu open, so you can see how the choices
+change as you select different objects.
+
+Or, you can follow @this link@toolsSynopsis::Synopsis of Tools@ to see
+a summary of the tools available.
+
+
+@@Moving Objects in the Workspace
+
+You can move all of the selected objects at once by clicking on one of
+them with the middle mouse button, and moving the mouse (with the
+button still pressed). This is called dragging. You may notice that if
+you drag too quickly, the computer can't keep up with you.
+
+In fact, the middle button can be used to `drag' almost anything:
+
+* You can drag any text with the middle button, but beware that the
+middle button is also used for copying text (if any is selected -- see
+the `Editing' item in the Help menu of the Magnus window).
+
+* You can `tear off' menus with the middle button, and place them
+where you like.
+

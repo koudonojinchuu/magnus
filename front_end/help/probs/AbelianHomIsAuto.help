@@ -1,0 +1,16 @@
+@@How this problem works
+
+
+\ni Notice that an epimorphism of a finitely generated abelian group 
+is an automorphism, since a finitely generated abelian group is never
+isomorphic to any of its proper factor groups. Consequently, in order 
+to determine if an endomorphism is an automorphism, it suffices to
+check whether an endomorphism of a finitely generated abelian group is
+an automorphism, it suffices to check whether it is an epimorphism,
+i.e., whether the image of the given group coincides with the group
+itself. This is checked by means of an existing algorithm.
+
+
+\ni For a general discussion of general finitely generated abelian groups,
+see @General discussion@General_abelian_groups::general discussion@
+

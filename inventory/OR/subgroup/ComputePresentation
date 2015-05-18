@@ -1,0 +1,42 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		one relator group
+
+Objects highlighted:	subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Compute a presentation for H in G
+
+Problem type:		problem object
+
+Help file:		none	//@db need to provide a help file
+
+
+			     Algorithms:
+
+ 
+1. Approximation method
+
+   Links:
+
+	Click here to see the steps of RS-process that uses approximation method
+
+2. Compute Schreier transversal
+
+3. Method that uses Todd-Coxeter procedure
+	
+   Links:
+
+	Click here to see the steps of RS-process that uses Todd-Coxeter 
+	procedure
+

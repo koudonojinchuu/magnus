@@ -1,0 +1,94 @@
+@@Release Notes
+
+\ni This version of Magnus constitutes what we think of as a first,
+albeit incomplete, version of Magnus, which is still 
+very much in the process of development. The manual is also incomplete
+and we are experimenting with the form that it will eventually take.
+The user will find that there are, hopefully only a few, gaps in it.
+Our algorithms on nilpotent groups have undergone big changes, but
+much remains to be done. We have not yet been able to find a good way
+of managing the explosion in the size of the integers that arise in
+the computations with nilpotent groups. As is the case with Grobner bases
+that arise in ideals in polynomial rings, algorithms for nilpotent
+groups are sensitive to the ordering of generators. So, for example,
+replacing a by b and b by a, sometimes can have very beneficial effects.
+We still have to work out a good way of computing and displaying the 
+Hall polynomials for finitely generated torsion-free nilpotent groups. 
+The algorithm for solving the conjugacy problem in a finitely generated 
+nilpotent group needs some additional work. Hopefully, many of the other 
+algorithms are in reasonably good shape, but in order to useful they
+need to be made considerably faster. Although we have fixed a number 
+of bugs, we are sure that many still remain. We apologise, in advance, 
+for any problems that arise in working with Magnus and the resultant
+irritation that they are sure to provoke.
+
+\ni The Magnus Manual provides a fairly detailed tutorial as @how to
+use Magnus@howToUse::Using Magnus@.
+
+\ni This version of Magnus has a particularly useful feature, which
+provides a user the means to @write stand-alone programs@readme::How to write stand-alone programs using Magnus@.
+This feature allows even a beginning programmer to harness much of the
+power of Magnus for any special-purpose programs that such a programmer
+might have need of.
+
+\ni We have extensive plans for Magnus. The interested user might want
+to have a look at what we have in mind, in the section @Future
+Plans@futurePlans::Future Plans for Magnus@.
+
+\ni You can always get the current version of Magnus -- source code and a
+number of precompiled versions from our web site:
+
+\ni http://zebra.sci.ccny.cuny.edu/web/html/aboutmagnus.html
+
+\ni or from our anonymous ftp site:
+
+\ni zebra.sci.ccny.cuny.edu
+
+\ni in the directory /pub/Magnus. (Remember to set the file type to
+binary.)
+
+\ni You will get a gzipped, tarred version. Simply gunzip and extract
+the files as usual.
+
+\ni The INSTALL file will explain how to install Magnus.
+
+\ni If you have difficulty installing Magnus, the following commands will help to pinpoint some of the problems.
+
+\ni% uname -a
+
+\ni Look for a string like "SunOS <machine name> 4.1.x (5.4, 5.5) <other
+stuff>" or "Linux <machine name> 2.x.x ...". "SunOS", "Linux", "4.x",
+"2.x.x" are the important parts.
+
+\ni% wish
+
+\ni If you get "wish: Command not found.", you may not have Tcl/Tk!
+
+\ni% info tclversion
+ 
+\ni This should say "7.4" or later.
+
+\ni% puts $tk_version
+
+This should say "4.0" or later.
+
+\ni% exit (this gets you out of the "wish" program)
+
+\ni We have prepared three versions of Magnus, one which uses the operating
+system Solaris 3.5, a BSD version and a Linux version. The Linux version is
+still rather buggy. We think that this is perhaps due more to the current
+state of Linux rather than the version that we have prepared. It is
+likely that our version of Magnus for Linux will become more stable in time.
+
+\ni Your feedback will help us to improve Magnus and will be very much
+appreciated (see @feedback@feedback::Feedback@ for how to send your comments).
+
+\ni The best way to contribute to Magnus is to write to our 
+@chief programmer@chief_programmer::Chief Programmer@, Dmitri Bormotov,  and discuss your contribution with him. 
+If it fits in with our plans, he will give you detailed information 
+as how to proceed.
+
+There can be some minor problems when using X-windows. The comments
+@Some warnings about X windows@Xwarnings::Warnings about X@
+may be helpful to users who experience any difficulties.
+

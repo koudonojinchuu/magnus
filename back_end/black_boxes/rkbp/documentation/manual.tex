@@ -1,0 +1,2344 @@
+\magnification=\magstep1
+\font\twenty=cmr10 scaled \magstep4
+\font\fifteen=cmr10 scaled \magstep3
+\def\ttspace{\sfcode`\.1000 \sfcode`\:1000}
+\def\ind{\indent}
+\def\indb{\ind \ind}
+\def\indc{\ind \ind \ind}
+\def\indd{\ind \ind \ind \ind}
+\def\inde{\ind \ind \ind \ind \ind}
+
+\nopagenumbers
+
+\vskip 1in
+\centerline{\twenty User's Manual for the}
+\vskip .5in
+\centerline{\twenty  Rutgers Knuth-Bendix Package}
+\vskip .5in
+\centerline{\fifteen Version 1.25}
+\vskip 1in
+\centerline{\fifteen Charles C. Sims}
+\vskip 3in
+\centerline{Mathematics Department}
+\centerline{Rutgers University}
+\centerline{New Brunswick, New Jersey}
+
+\vfil
+
+\break
+\centerline{\fifteen Contents}
+
+\vskip 1in
+
+\noindent 1. The Knuth-Bendix procedure for strings\quad 1\par
+\ind 1.1 Basic definitions\quad 1\par
+\ind 1.2 Rewriting strategies\quad 3\par
+\ind 1.3 Finding overlaps\quad 3\par
+
+\medskip
+\noindent 2. Program data\quad 4\par
+\ind 2.1 Alphabets and words\quad 5\par
+\ind 2.2 Word orderings\quad 8\par
+\ind 2.3 Rewriting rules\quad 9\par
+\ind 2.4 Index structures\quad 9\par
+\indb 2.4.1 Lexicographic indexes\quad 9\par
+\indb 2.4.2 Rabin-Karp indexes\quad 10\par
+\indb 2.4.3 Automaton indexes\quad 11\par
+\indb 2.4.4 Hybrid indexes\quad 11\par
+\ind 2.5 Subsystems\quad 12\par
+\ind 2.6 Systems\quad 13\par
+\ind 2.7 File names\quad 14\par
+
+\medskip
+\noindent 3.  Basic operations\quad 14\par
+\ind 3.1 Rewriting\quad 15\par
+\ind 3.2 The save list\quad 15\par
+\ind 3.3 Balancing\quad 15\par
+\ind 3.4 Overlaps\quad 15\par
+\ind 3.5 Mutual reduction\quad 16\par
+\ind 3.6 Heuristics\quad 16\par
+\ind 3.7 Counting irreducible words\quad 16\par
+\ind 3.8 Power relations\quad 17\par
+
+\medskip
+\noindent 4.  Strategies\quad 17\par
+
+\medskip
+\noindent 5.  Memory management\quad 18\par
+
+\medskip
+\noindent 6.  Commands\quad 19\par
+
+\medskip
+\noindent 7.  Examples\quad 23\par
+
+\medskip
+\noindent 8.  Future plans\quad 32\par
+
+\medskip
+\noindent 9.  Changes by version\quad 33\par
+
+\vfil
+
+\break
+\footline={\hfil\tenrm\folio\hfil}
+\pageno=1
+
+The Rutgers Knuth-Bendix Package (RKBP) is a C++ implementation of
+the Knuth-Bendix procedure for strings.  The primary design goals of
+the package are:
+
+\smallskip
+
+\item{1.} Facilitate the study of very large rewriting systems, perhaps
+containing millions of rules.
+\item{2.} Permit the efficient use of both large alphabets (hundreds of
+generators) and small alphabets (two generators).
+\item{3.} Support a rich family of orderings on words.
+
+\medskip
+
+This manual describes how to prepare data for RKBP and how to use the
+program to study presentations of groups and monoids.  The reader is
+assumed to have a basic familiarity with the Knuth-Bendix procedure
+for strings as described in [Sims] and with the fundamentals of the C
+and C++ languages.  In defining large generating sets and complicated
+orderings on words, the user may take advantage of a number of input
+``conventions''.  These conventions make concise input files possible,
+but they require some study before they can be used with confidence.
+The impatient reader may wish to skip to Section 7, where examples of
+the use of RKBP are given.
+
+\bigskip
+
+\noindent 1. The Knuth-Bendix procedure for strings
+
+\nobreak
+
+This section briefly sketches the Knuth-Bendix procedure.  The main
+purpose is to set the terminology used in the remainder of the manual,
+not to provide a systematic treatment of the procedure.
+
+\bigskip
+
+\noindent 1.1 Basic definitions
+
+\nobreak
+
+An {\it alphabet\/} is a finite set.  An element of an alphabet is
+called a {\it generator}.  A {\it word\/} over an alphabet ${\cal A}$
+is a finite sequence of generators in ${\cal A}$.  The empty word is
+denoted by $\varepsilon$.  If $A$ is a word, then $|A|$ is its length.
+In this manual generators will be denoted by lowercase letters and
+words by uppercase letters.  The set of all words over ${\cal A}$ is
+the {\it free monoid\/} ${\cal A}^*$.  A {\it group alphabet} is an
+alphabet ${\cal X}$ with an even number of generators and a fixed-point-free
+involution ${}^{-1}$.  The involution ${}^{-1}$ is extended to ${\cal
+X}^*$ as follows:  Given a word $U$, we define $U^{-1}$ to be the word
+obtained by applying ${}^{-1}$ to each generator in $U$ and reversing
+the result.  It is easy to see that $(UV)^{-1} = V^{-1}U^{-1}$ for all
+words $U$ and $V$ in ${\cal X}^*$.
+
+A {\it reduction ordering\/} on ${\cal A}^*$ is a well-ordering $<$
+such that $A<B$ implies $UAV<UBV$ for all words $A$, $B$, $U$, and
+$V$.  If $<$ is a reduction ordering, then a {\it rewriting rule\/}
+with respect to $<$ is an ordered pair $(L,R)$ of words such that
+$L>R$.  The words $L$ and $R$ are called the {\it left\/} and {\it
+right sides\/}, respectively, of the rule.  The notation $L\to R$ is
+also used to denote the rule $(L,R)$.  A {\it rewriting system\/} is a
+set of rewriting rules.
+
+Let ${\cal R}$ be a rewriting system on ${\cal A}^*$.  The monoid $M$
+{\it presented\/} by the pair $({\cal A,R})$ is the quotient of ${\cal
+A}^*$ modulo the congruence generated by ${\cal R}$.  If $A\in {\cal
+A}^*$, then $[A]$ denotes the element of $M$ defined by $A$.  If
+${\cal A}$ is group alphabet, then it will always be assumed that
+${\cal R}$ contains all rules $aa^{-1}\to\varepsilon$ with $a$ in
+${\cal A}^*$, so that $M$ is a group.
+
+A word $A$ is {\it irreducible\/} with respect to ${\cal R}$ if no
+subword of $A$ is a left side of a rule in ${\cal R}$.  If $A$ is not
+irreducible, then we can find an irreducible word $B$ which defines
+the same element of $M$ as $A$ by {\it rewriting\/} $A$ with respect
+to ${\cal R}$ as follows:
+
+\medskip
+
+{\parindent = 2em \parskip = 0em \obeylines
+\ind Function REWRITE($A$)
+\nobreak
+\ind Begin
+\indb  $B$ := $A$;
+\smallskip
+\indb  While $B$ has a left side of a rule as a subword do begin
+\indc    Let $(L,R)$ be a rule and let $U$ and $V$ be words such that $B = ULV$;
+\indc    $B$ := $URV$
+\indb  End;
+\smallskip
+\indb  Return $B$
+\nobreak
+\ind End.}
+
+\medskip
+
+\noindent The function REWRITE is nondeterministic.  The rewriting
+system ${\cal R}$ is {\it confluent\/} if the result returned by REWRITE
+depends only on the input and not on the choices made during
+execution.
+
+As described, the function REWRITE executes {\it subword rewriting\/}
+since the rules can be used anywhere in the word.  It is possible to
+designate certain rules as {\it prefix rules}, rules which are used
+only when their left sides are prefixes of the word being rewritten.
+The prefix rules define a right congruence on the monoid defined by
+the subword rules.
+
+A prefix rule is {\it left reduced\/} if its left side is irreducible
+with respect to all other rules.  A subword rule is left reduced if
+its left side is irreducible with respect to all other subword rules.
+A rewriting system is left reduced if each of its rules is left
+reduced.
+
+A prefix rule is {\it right reduced\/} if its right side is
+irreducible with respect to all rules and a subword rule is right
+reduced if its right side is irreducible with respect to all subword
+rules.  A rewriting system is right reduced if each of its rules is
+right reduced.  A rule or a rewriting system is {\it reduced} if it is
+both left reduced and right reduced.
+
+An {\it overlap\/} is a triple $(A,B,C)$ of words such that
+
+\medskip
+{\parindent=20pt
+\item{(a)} There are rules $(AB,U)$ and $(BC,V)$.
+\item{(b)} The rule $(BC,V)$ is a subword rule.
+\item{(c)} The words $B$ and $C$ are nonempty.
+\item{(d)} If $(AB,U)$ is a subword rule, then $A$ is nonempty.\par}
+
+\medskip
+\noindent The {\it length} of the overlap $(A,B,C)$ is $|A|+|B|+|C|$.
+If ${\cal R}$ is left reduced, then $U$ and $V$ are unique.  We say
+{\it local confluence} holds at the overlap $(A,B,C)$ if some
+invocations of REWRITE($AV$) and REWRITE($UC$) yield the same result.
+Here prefix rules are allowed in the rewriting only if $(AB,U)$ is a
+prefix rule.  The overlap is {\it primitive} if $AB$ and $BC$ are the
+only left sides which are subwords of $ABC$.  A left reduced rewriting
+system is confluent if and only if local confluence holds at every
+primitive overlap.
+
+If in processing the overlap $(A,B,C)$ we find that $D$ =
+REWRITE($AV$) and $E$ = REWRITE($UC$) are different, then ${\cal R}$
+is not confluent.  Interchanging $D$ and $E$ if necessary, we may
+assume that $D>E$.  We then add the rule $(D,E)$ to ${\cal R}$.  The
+new rule is a prefix rule precisely when $(AB,U)$ is a prefix rule.
+
+The Knuth-Bendix procedure for strings alternates between processing
+overlaps and enforcing the condition of being left reduced.  In each
+of these activities the bulk of the time is spent rewriting.
+
+
+\bigskip
+
+\noindent 1.2 Rewriting strategies
+
+\nobreak
+
+Since REWRITE is nondeterministic, one must decide how the choices
+which arise in executing REWRITE are to be made.  In RKBP there are
+two rewriting strategies available, {\it rewriting from the left\/}
+and {\it global rewriting\/}, as defined by the following functions:
+
+\medskip
+
+{\parindent = 2em \parskip = 0em \obeylines
+\ind Function FROM\_LEFT($A$)
+\ind Begin
+\indb $U$ := $\varepsilon$;\quad $V$ := $A$;
+\smallskip
+\indb While $V\ne\varepsilon$ do begin
+\indc  Let $x$ be the first generator of $V$ and let $V=xW$;
+\indc  $U$ := $Ux$;\quad $V$ := $W$;
+\smallskip
+\indc  If there is a prefix rule $(U,Z)$ then begin
+\nobreak
+\indd   $U$ := $\varepsilon$;\quad $V$ := $ZV$
+\nobreak
+\indc  End
+\smallskip
+\indc  Else if there is a word $P$ and a subword rule $(Q,Z)$ such that $U=PQ$
+\indc \quad then begin
+\indd   $U$ := $P$;\quad $V$ := $ZV$
+\indc  End
+\indb End;
+\smallskip
+\indb Return $U$
+\ind End.}
+
+\medskip
+
+{\parindent = 2em \parskip = 0em \obeylines
+\ind Function GLOBAL($A$)
+\ind Begin
+\indb $B$ := $A$;
+\smallskip
+\indb While $B$ can be rewritten using at least one rule do
+\indc  Among all rules $(L,R)$ which can be applied to $B$, choose one for which
+\indc \quad $|R|-|L|$ is as small as possible and apply that rule to $B$;
+\smallskip
+\indb Return $B$
+\ind End.}
+
+\medskip
+
+\noindent The description of GLOBAL leaves unspecified which rule to
+take or where to apply it if there is more than one occurrence of a
+left side of a rule $(L,R)$ which minimizes $|R|-|L|$.
+
+In order to be able to rewrite words rapidly using either of these
+strategies, we must be able to locate left sides efficiently.  In the
+case of FROM\_LEFT, it must be possible to decide quickly whether
+a given word $U$ is the left side of a prefix rule or has as a suffix
+the left side of a subword rule.  This normally requires some sort of
+index structure for the rewriting system.
+
+\bigskip
+
+\noindent 1.3 Finding overlaps
+
+\nobreak
+
+Locating primitive overlaps quickly also requires an index structure.
+The approach used in RKBP to find overlaps is to choose a rule $(L,R)$
+and then do a backtrack search for words $C$ such that there exists a
+decomposition of $L$ as $AB$ for which $(A,B,C)$ is a primitive
+overlap.  The backtrack search uses the following auxiliary condition
+on a word $C$ to prune the search tree:
+\smallskip
+
+{\narrower \noindent The longest suffix $S$ of $LC$ such that $S$ is a
+prefix of the left side of a subword rule satisfies $|S|>|C|$.\par}
+
+\medskip
+
+The search for overlaps with a given rule $(L,R)$ is outlined in
+the following procedure, which assumes that the rewriting system
+${\cal R}$ is left reduced and that the elements of the alphabet
+${\cal A}$ are linearly ordered with $a$ the first element and $z$ the
+last.
+
+\medskip
+
+{\parindent = 2em \parskip = 0em \obeylines
+\ind Function OVERLAP($L,R$)
+\ind Begin
+\indb $C$ := $a$;
+\smallskip
+\indb While $C\neq\varepsilon$ do
+\indc  If the auxiliary condition is true and no suffix of $LC$ is the left side
+\indc \quad of a subword rule then
+\indd    $C$ := $Ca$
+\smallskip
+\indc  Else begin
+\indd   If the auxiliary condition is true then begin
+\inde    Let $A$ and $B$ be words such that $L=AB$ and there is a
+\inde \quad subword rule $(BC,Z)$;
+\inde    Check local confluence at $(A,B,C)$
+\indd   End;
+\smallskip
+\indd   While $C\ne\varepsilon$ and the last term of $C$ is $z$ do
+\inde    Delete the last term of $C$;
+\smallskip
+\indd   If $C\ne\varepsilon$ then replace the last term of $C$ by its successor
+\indc  End
+\indb End
+\ind End.}
+
+\medskip
+
+The requirements for an index used to locate overlaps quickly are
+slightly different from those for an index used to support rewriting.
+For finding overlaps, we want to know, for a given word $X$, the
+longest suffix $S$ of $X$ such that $S$ is a prefix of some subword
+rule.  We may assume that we know the answer for all proper prefixes
+of $X$.  If $X=Yx$ and $T$ is the longest suffix of $Y$ which is a
+prefix of some subword rule, then $S$ is a suffix of $Tx$.  For
+rewriting, we want to know the longest suffix of $X$, if any, which is
+the left side of a subword rule.  Indexes which support rewriting may
+not provide the extra information needed to locate overlaps.
+
+\bigskip
+\noindent 2. Program data
+
+\nobreak
+
+The program RKBP is designed to work with very large problems.  For
+this reason, input data is frequently read from files, not from the
+standard input. This section describes the format of the various types
+of files and the information they must contain.  Data files are
+standard ASCII files containing keywords and data. Both keywords and
+data items are strings of nonblank ASCII printing characters separated
+by ``white space characters'', blanks, tabs, and newlines.  Keywords
+which define the type of specific data items are followed by colons.
+Other keywords indicate the nature of an entire file and are not
+followed by colons.
+
+\bigskip
+\noindent 2.1 Alphabets and words
+
+\nobreak
+
+The elements of an alphabet have external names, which are character
+strings. However, internally an alphabet with $n$ elements is always
+the set $\{0,\dots,n-1\}$. It might be more appropriate to call such a
+set an (internal) monoid alphabet and define an internal group
+alphabet to be a set of the form $\{-n,-(n-\nobreak
+1),\dots,-1,1,\dots,n-1,n\}$ for some nonnegative integer $n$.
+However, such alphabets are not used in RKBP.
+
+Words have several external representations. The basic representation
+is the concatenation of the external names of the generators in the
+word.  This concatenation is written without an explicit symbol for
+multiplication. In parsing a string to break it up into a sequence of
+external generator names, the program always looks for the longest
+prefix of the unparsed portion of the string which is an external
+generator name. To make this representation of words unambiguous, some
+care must be exercised in selecting the external generator names. Thus
+the names {\tt x1}, {\tt x11}, and {\tt x111} would be acceptable for
+generators in the same alphabet, but if these names are used, then
+{\tt x1x} and {\tt x11x1x} would not be permitted. No external name
+$u$ should be a prefix of a concatenation $v_{1}v_{2}\cdots v_{s}$ of
+external names with $v_1$ shorter than $u$.
+
+External generator names must be sequences of nonblank ASCII printing
+characters other than {\tt @} and {\tt \&}. The symbol {\tt @}, the
+``at sign'', set off by white space is used to represent the empty
+word. A concatenation of external generator names representing a word
+may be broken up into substrings of arbitrary length separated by
+white space. Each substring except the last must end with {\tt \&}.
+This makes it possible to improve readability and to write words which
+require more than one line of a file.  Normally breaks occur between
+external names of generators, but this is not required.
+
+Throughout this manual, $n$ will be the number of elements in the
+current alphabet and $r$ will be the smallest integer such that $n \le
+2^r$, so that $r$ is the minimum number of bits needed to represent
+the internal names of generators.
+
+\smallskip
+Example. As an illustration, we shall use the alphabet whose
+generators have external names {\tt x1}, {\tt x2}, {\tt y1}, and {\tt
+y2}, and corresponding internal names 0, 1, 2, and 3.  Thus $n = 4$
+and $r = 2$. The string
+\medskip
+\noindent\quad {\tt x1y1y2x1y2}
+\medskip
+\noindent and the strings
+\medskip
+\noindent\quad {\tt x1y1\&\quad y2x1\&\quad y2}
+\medskip
+\noindent represent the same word. This word is also represented by the pair of
+lines
+\medskip
+{\obeylines \tt \parindent=1em
+x1y1y2\&
+x1y2
+}
+
+\medskip
+
+There are several other ways to represent words in files. In order to
+use the Unix sort routine to sort words according to length, the
+length must be explicitly present. In this case the length precedes
+the word and is separated from it by white space. The word in the
+above example would be represented
+
+\medskip
+\noindent\quad {\tt 5 x1y1y2x1y2}
+\medskip
+\noindent and the empty word would be represented
+\medskip
+\noindent\quad {\tt 0 @}
+\medskip
+
+\noindent The symbol {\tt @} is redundant, but is present so that in this
+representation every word has (at least) two fields. This facilitates
+sorting. The concatenation of the external generator names may be
+broken into substrings as above, but doing so makes sorting difficult.
+
+Another possible representation of a word in a file is obtained by
+listing the internal numbers of the generators preceded by the length
+and with all items separated by white space.  Using this format, our
+sample word would be represented
+
+\medskip
+\noindent\quad {\tt 5 0 2 3 0 3}
+\medskip
+
+The final representation of words is useful when one has many words
+over a small alphabet. To a word $W$ of length $m$, we can associate a
+bit string $S$ of length $mr$ by concatenating the $r$-bit binary
+representations of the internal names of the generators in $W$.  To
+get the {\it external packed representation\/} of $W$,
+we pad $S$ on the right with zeros until the length is a multiple of 6.
+Then this string of bits is broken up into groups of six bits. Each
+group is interpreted as an integer between 0 and 63. The value of this
+integer is added to 48 and the ASCII character with that number is
+recorded.  These ASCII characters, preceded by the length of the word,
+form the external packed representation of $W$. The empty word is again
+represented by
+
+\medskip
+\noindent\quad {\tt 0 @}
+\medskip
+
+\noindent In this format, the ASCII string following the length may not be
+broken into substrings.
+
+To get the packed representation of our sample word, we form the bit
+string
+$${\tt 0010110011}$$
+\noindent and pad it with zeros to obtain
+$${\tt 001011001100}$$
+\noindent We then break this string into groups of six bits.
+$${\tt 001011\quad001100}$$
+\noindent Now $001011_2+48 = 11+48 = 59$ and
+$001100_2+48 = 12+48 =60$. Since ASCII characters 59 and 60 are {\tt
+;} and {\tt <}, respectively, the external packed representation of
+our word is
+
+\medskip
+\noindent\quad {\tt 5 ;<}
+\medskip
+
+
+The four external formats for words discussed above are described to
+RKBP by the following keywords:
+$${\tt names\qquad len\_names\qquad len\_numbers\qquad len\_6bit}$$
+\noindent The function which decodes words written in {\tt len\_6bit}
+format currently requires that $r+5$ not exceed the number of bits in an
+unsigned long int.
+
+RKBP distinguishes between ordinary (or monoid) alphabets and group
+alphabets.  The term {\it number of generators\/} will refer to the
+number of pairs $\{a,a^{-1}\}$ in the group case and to the total number of
+generators in the monoid case.
+
+To facilitate the use of large alphabets, various conventions are
+available for naming and numbering generators.  For group alphabets
+there are two conventions for naming inverses.  In the {\it case
+convention\/}, the name of the second generator in each pair is
+obtained from the name of the first generator by reversing the case of
+all letters, leaving all other characters unchanged.  In the {\it
+exponent convention\/}, the name of the second generator in a pair is
+obtained from the name of the first by appending the characters {\tt
+\^{ }-1}.  For example, if {\tt x1} is the name of the first generator of
+an inverse pair, then under the case convention the name of the second
+generator would be {\tt X1}, while under the exponent convention the
+name would be {\tt x1\^{ }-1}.  If neither of these conventions is
+used, then the inverse pairs must be explicitly listed.  In the case
+of a monoid alphabet, certain generators may be identified as defining
+invertible elements and words, which may or may not consist of a
+single generator, provided to describe their inverses.  Here the {\tt
+names} external representation must be used for the words.  Giving the
+program explicit information about inverses facilitates the balancing
+of rules discussed in Section 3.3.
+
+Although information about inverses is given in defining the alphabet,
+the rules incorporating the inverse relations must still be present
+along with the other rules.  When a rewriting system is read into RBKP
+using the {\tt input} command, the inverse relations are automatically
+included.  This is not the case when {\tt restore} is used, since that
+command assumes that the input is exactly as would have been produced
+by the {\tt output} command.
+
+There are two conventions which may be used to define names of
+generators.  If either of these conventions is used in describing a
+group alphabet, then one of the inverse conventions must also be used.
+In the {\it letters convention\/}, generators are single letters
+beginning with a specified starting letter, which should be lower
+case.  For example, using the letters convention beginning with {\tt
+x} for a three-generator monoid alphabet produces generators with
+external names {\tt x}, {\tt y}, and {\tt z}.  The same naming
+convention used with the case inverse convention for a three-generator
+group alphabet produces the names {\tt x}, {\tt X}, {\tt y}, {\tt Y},
+{\tt z}, and {\tt Z}.
+
+In the {\it prefix\/} naming convention, a character string prefix $P$
+is specified.  The names of the generators are then obtained by
+appending the numbers 1, 2, \dots\ to $P$.  If a 10-generator group
+alphabet is being specified using the prefix and case conventions with
+$P$ equal to {\tt x}, then the names of the generators and their
+inverses are {\tt x1}, {\tt X1}, {\tt x2}, {\tt X2}, \dots, {\tt x10},
+{\tt X10}.
+
+If no naming convention is used, then the external names of the
+generators must be listed in order of their internal representation.
+However, if one of the naming conventions has been used, then it is
+still necessary to specify the internal representations of the
+generators.  That is, the generators must be numbered 0, 1, \dots.  In
+monoid alphabets, the numbering is obvious.  With the letter
+convention the numbering is alphabetic and with the prefix convention
+the internal representation $i$ is associated with the generator whose
+external name is obtained by appending the decimal representation of
+$i+1$ to the prefix $P$.
+
+In group alphabets, one must determine where the inverse generators
+fit in.  Again two conventions are available.  In one convention the
+``ordinary generators'' are listed first, followed by their inverses
+in the same order.  In the other convention each generator is followed
+immediately by its inverse.  The keywords for these two conventions
+are {\tt 1\_2} and {\tt 1\_-1}, respectively.  In the prefix
+convention example above, the {\tt 1\_2} convention would number the
+generators and inverses from 0 to 19 in the order {\tt x1}, {\tt x2},
+\dots, {\tt x10}, {\tt X1}, \dots, {\tt X10}, while the {\tt 1\_-1}
+convention would take them in the order {\tt x1}, {\tt X1}, {\tt x2},
+{\tt X2}, \dots, {\tt x10}, {\tt X10}.
+
+The basic internal representation of a single word is by a pair of C
+variables {\tt u} and {\tt lu}.  Here {\tt u} is a (pointer to) an
+array of unsigned long ints listing the internal names of the
+generators making up the word and {\tt lu} is a long int giving the
+length of the word.  On a workstation with four-byte long ints, an
+alphabet could theoretically have $2^{32}$ elements and a single word
+could have length $2^{31}-1$.
+
+When large collections of rules must be stored, a more compact
+representation is desirable.  A list of rules is represented by an
+array of unsigned long ints.  Let $m$ be the number of bits in a long
+int and let $(L,R)$ be a rule.  The lengths $|L|$ and $|R|$ are stored
+in consecutive unsigned long ints.  The bit string of length $r|LR|$
+associated with $LR$ is padded with zeros on the right until its length
+is a multiple of $m$.  This bit string is then broken up into groups of
+$m$ bits, which are stored in consecutive unsigned long ints
+immedidately following the lengths of the two sides.
+
+\bigskip
+
+\noindent 2.2  Word orderings
+
+\nobreak
+
+The Knuth-Bendix procedure for strings must be able to orient new
+rules. This means that it must be given a reduction ordering on words.
+RKBP accepts reduction orderings which can be defined using the
+following information: the lengths of the words, the internal
+representations of the generators making up the words, and two
+positive integers associated with each generator. These two integers
+are arbitrarily called the {\it weight} and the {\it level} of the
+generator. A simple ordering such as length-plus-lexicographic does
+not need either the weights or the levels. However, very complicated
+orderings obtained as wreath products of weighted
+length-plus-lexicographic orderings are available.
+
+The keywords for the reduction orderings currently defined are
+$${\tt lenlex\qquad wtlenlex\qquad wrlenlex\qquad wrwtlenlex}$$
+\noindent They refer to the length-plus-lexicographic
+ordering and three weighted and wreath product extensions of it.
+Lexicographic ordering is left-to-right based on the internal
+generator numbers. In the weighted length-plus-lexicographic ordering,
+words are compared first by their weight, which is defined to be the
+sum of the weights of the generators in them. In the wreath product
+length-plus-lexicographic ordering, words involving generators at a
+fixed level are ordered using the length-plus-lexicographic ordering
+and the wreath product of these orderings is formed with generators of
+small level considered to be higher up or greater than generators of
+larger levels. Similarly, {\tt wrwtlenlex} orderings are wreath
+products of orderings of type {\tt wtlenlex}. See [Sims] for a
+definition of wreath product orderings. All of these orderings are in
+fact orderings of type {\tt wrwtlenlex}.  However, to speed up
+comparisons of words where possible, specialized routines have been
+written to handle the simpler orderings. Note than none of the
+orderings relies on a knowledge of the external names of the generators.
+
+If the {\it constant weight convention} is specified, then all
+generators are assigned the weight 1.  Otherwise, the weights of the
+generators must be explicitly listed in the order of their internal
+representations.  Three level conventions are available, the {\it
+constant}, {\it basic wreath}, and {\it inverse pair wreath}
+conventions.  For monoid alphabets, only the constant and basic wreath
+conventions are defined.  In the basic wreath convention the $i$-th
+generator is assigned the level $i$.  In the basic wreath convention
+for a group alphabet, the $i$-th generator is assigned the level $2i$
+and its inverse is assigned the level $2i-1$.  The inverse pair
+convention is available only if the numbering convention {\tt 1\_-1}
+is used.  In this convention the $i$-th generator and its inverse are
+each given the level $i$.
+
+\bigskip
+\noindent 2.3  Rewriting rules
+
+\nobreak
+
+The external representation of a rule consists of the external
+representation of its left side followed by the external
+representation of its right side. In a given file, all words must be
+in the same external format. In order to use the Unix sort routine on
+such a file, each line must contain the left and right side of exactly
+one rule. Because of the desire to be able to sort these files, no
+keywords or other data is included in the file. On a Unix system with
+the C-shell, one can sort a file {\tt infile} of rules in {\tt
+len\_6bit} format and remove duplicates by entering
+
+\bigskip
+\vbox{\tt \obeylines \obeyspaces \parindent=1em
+alias lenlexlenlex sort +0 -1n +1 -2 +2 -3n +3 -4 -u
+lenlexlenlex infile >outfile
+}
+\bigskip
+
+Here rules are compared by first comparing their left sides in the
+length-plus-lexico\-graphic ordering and then, if necessary, comparing
+their right sides in the same ordering.  If external generator names
+are single characters and the internal generator numbers are in the
+same order as the ASCII collating sequence for the external names,
+then the same sort command will sort a file of rules in {\tt
+len\_names} format, provided the {\tt names} part of each word is
+written as a single string.
+
+Both prefix and subword rewriting rules are recognized in RKBP.  All
+the rules in a particular file must be of the same type.  The subword
+rules give a monoid presentation for a monoid $M$. The prefix rules
+generate a right congruence on $M$. It is possible that the right
+congruence has finitely many classes even when no finite, confluent
+subword rewriting system can be found for $M$.
+
+
+\bigskip
+\noindent 2.4  Index structures
+
+\nobreak
+
+In order to be able to rewrite words and locate overlaps efficiently,
+one should have some type of index structure for the rewriting system.
+There are important tradeoffs between space and time associated with
+the various types of indexes.  Currently three types of indexes are
+supported. They are identified by the following keywords:
+
+$$\hbox{\tt automaton\quad rabin\_karp\quad hybrid}$$
+
+\noindent How the indexes are used depends on which rewriting strategy
+is being followed.
+
+\bigskip
+\noindent 2.4.1  Lexicographic indexes
+
+\nobreak
+
+The most space-efficient index is obtained by sorting the rules
+lexicographically by their left sides and performing binary searches.
+In RKBP the rules are not physically sorted.  Instead a list of
+pointers to the starting locations of the rules is sorted.  Note that
+when a new rule is added, it must be placed in its proper sorted
+position.  This requires moving on average half of the pointers, a
+time-consuming process.
+
+For rewriting from the left with respect to a set of subword rules, it
+might seem most natural to use the right-to-left lexicographic
+ordering to make a sorted index. The basic step in rewriting from the
+left is determining whether a given word $U$ ends with a left side. If
+we have a right-to-left dictionary of the left sides, then to answer
+this question we have only to look $U$ up in the dictionary. However,
+as noted above, the determination of overlaps is facilitated if we can
+tell for a given word $L$ the longest suffix of $L$ which is a prefix
+of some left side. For this task, the left-to-right lexicographic
+ordering is better.
+
+The left-to-right lexicographic ordering can also be used for
+rewriting from the left with respect to subword rules. We keep track
+of the longest suffix $S$ of the irreducible part $U$ of the word
+being rewritten such that $S$ is a prefix of at least one left side.
+We also remember pointers to the first and last rules whose left sides
+have $S$ as a prefix. When the next generator $x$ is considered, a
+binary search is performed on this list to see if any of the rules
+have $Sx$ as prefix of their left side. If not, then the proper
+suffixes $P$ of $Sx$ are considered in decreasing order of their
+length. A binary search over the entire list of rules is performed to
+see if any rules have $P$ as a prefix of their left sides.
+
+Although sorted indexes do not require much space, rewriting using
+them can be quite slow.  If $l$ and $L$ are the minimum and maximum
+lengths, respectively, of the left sides of the rules, then up to
+$|W|-l+1$ binary searches will be required to decide if a word $W$
+contains a left side.  The time needed for a binary search is
+logarithmic in the number $m$ of rules.  The average time $t$ needed
+to compare words during the search is difficult to estimate, but it
+increases as the lengths of the rules increase.  Certainly $t$ is at
+worst proportional to $L$.  These relatively crude considerations give
+an upper bound for the time needed to locate one left side in $W$ of
+the form $$O(L \log m\,(|W|-l+1)).$$
+
+RKBP does not support lexicographic indexes as a separate type.
+However, the hybrid indexes described below can be made very similar
+to lexicographic indexes.
+
+\bigskip
+\noindent 2.4.2  Rabin-Karp indexes
+
+\nobreak
+
+Rabin-Karp indexes make locating left sides much more efficient, but
+they do not permit one to determine the longest suffix of a given word
+which is a prefix of some left side. Let $m$ be the number of rules.
+To make a Rabin-Karp index we choose two primes $p$ and $q$ and a
+positive integer $l$. We choose $p$ to be slightly smaller than the
+largest integer which can be stored in a long int. We choose $q$ to be
+roughly $1.3m$.  Finally we set $d = 2^r$ and choose $l$ to be equal
+to or slightly less than the length of the shortest left side.  Now
+for a word $U$ with length at least $l$, let $a_{l-1}$, \dots, $a_0$
+be the internal numbers of the last $l$ generators in $U$. We compute
+the value $s$ of $a_{l-1}d^{l-1}+\ldots+a_0$ modulo $p$.  This number
+is called the {\it signature} of $U$. We construct arrays of lengths
+$m$ and $q$, respectively. The $i$-th entry in the first array is the
+signature $s$ of the left side of the $i$-th rule. If $j$ is the value
+of $s$ modulo $q$, then we make a hash table entry of $i$ at (or as
+close as possible following) the $j$-th position in the second array.
+(In RKBP, $j$ is actually taken to be $128s$ mod q.)
+
+To determine whether a word $U$ of length at least $l$ ends with a
+left side, we compute the signature of $U$ and use the hash table to
+find all rules whose left sides have the same signature. These rules
+must be examined in turn to see if one of their left sides is a suffix
+of $U$. The observation of Rabin and Karp that, given the signature of
+$U$, it is very easy to compute the signature of $Ux$ means that this
+approach is quite fast on average.  Space could be saved if the
+signatures of the left sides were stored with the rules, for then the
+hash table could contain the pointers to the rules. However, this is
+approach is not used.
+
+The average update time for a Rabin-Karp index is fairly small.
+Occasionally the two arrays must be increased in size and the
+signatures of the left sides rehashed. If an attempt is made to add a
+rule whose left side is shorter than $l$, then a new value of $l$ must
+be chosen and the entire structure recomputed.  If $l$ becomes too
+small relative to the number of rules, then the number of clashes in
+the hash table will grow to the point that performance is seriously
+affected.
+
+\bigskip
+\noindent 2.4.3 Automaton indexes
+
+\nobreak
+
+Automaton indexes produce the fastest rewriting but require the most
+memory. They are currently implemented only for sets of rules which
+are left reduced.  The index automaton is based on a binary alphabet.
+There are states in the automaton corresponding to the proper prefixes
+of the bit strings associated with the left sides of rules.  Let $0$
+denote the state defined by the empty string.
+
+Let us assume first that our rules are subword rules.  In this case,
+there are $r-1$ additional ``dummy states'' used to synchronize the
+lookup process.  The dummy states will be labeled $1$, $\ldots$ , $r-1$.
+If $S$ is a bit string defining a state $\sigma$ and if $x$ is 0 or 1,
+then the $x$-transition from $\sigma$ is defined as follows: If $T =
+Sx$ has length a multiple of $r$ and has a suffix which corresponds to
+a left side (which by assumption is unique), then the transition is a
+pointer to the rule with that left side.  Otherwise, suppose that
+there is a suffix $U$ of $T$ which defines a state $\tau$ and is
+obtained from $T$ by deleting a (possibly empty) prefix whose length
+is a multiple to $r$.  Choose $U$ to be as long as possible.  The
+$x$-transition from $\sigma$ goes to the state defined by $U$.
+Finally, if no $U$ exists, then $|T|$ is not divisible by $r$ and the
+transition goes to the dummy state whose label is congruent to $|T|$
+modulo $r$.
+If $\sigma$ is a dummy state, then both transitions go to $\sigma+1$
+if $\sigma<r-1$ and both transitions go to $0$ if $\sigma=r-1$.
+
+Once the index is built, the time to decide whether a word $W$
+contains a left side is at most proportional to the number of bits
+defining $W$, that is, the product $r|W|$.
+
+In the case of a set of prefix rules the transitions are simpler.
+There are no dummy states.  If $T$ above corresponds to a left side,
+then the $x$-transition from $\sigma$ is to the associated rule.
+Otherwise, if $T$ defines a state $\tau$, then the $x$-transition is
+to $\tau$.
+
+It is difficult to estimate quickly the number of states in an
+automaton index for a particular set of rules.  The total bit-length
+of the left sides gives an upper bound, but this is frequently
+pessimistic. The time needed to add a rule to an automaton index for a
+set of subword rules is large compared to the time for a Rabin-Karp
+index, particularly if subword rules are involved.
+
+\bigskip
+\noindent 2.4.4 Hybrid indexes
+
+\nobreak
+
+Hybrid indexes form a continuum stretching from lexicographic indexes
+to automaton indexes.  The closer they are to lexicographic indexes
+the more space-efficient they become; the closer to automaton indexes,
+the faster they make rewriting.  As with lexicographic indexes, the
+rules are assumed to be sorted lexicographically by their left sides.
+
+The details of a hybrid index depend on whether prefix or subword
+rules are involved.  Suppose first that we have a prefix system.  Fix
+a positive integer $m$ and let $L$ be the set of prefixes of length at
+most $m$ of the bit strings associated with the left sides.  The
+hybrid index ${\cal I}$ is an automaton whose edges are labeled by 0
+or 1.  The set of states for ${\cal I}$ is the union of $L$ and
+$\{\#\}$.  The state \# represents the condition in which no left side
+is a prefix of the word being examined.  Both transitions from \# go
+to
+\#.
+
+Let $U$ be an element of $L$.  Suppose first that either $U$
+corresponds to a left side or the length of $U$ is $m$.  Then the
+0-transition from $U$ is actually a pointer to the first rule of whose
+left side $U$ is a (bit string) prefix and the 1-transition is a
+pointer to the last such rule.
+
+Now suppose that $U$ does not correspond to a left side and $U$ has
+length less than $m$.  Let $x$ be a binary digit.  If $Ux$ is in $L$,
+then the $x$-transition from $U$ is to $Ux$.  Otherwise the
+$x$-transition is to \#.
+
+
+Now suppose we are building a hybrid index ${\cal I}$ for a set of
+subword rules.  There are still states in ${\cal I}$ associated with
+the elements of $L$, but there is no state \#.  There are, however,
+$r-1$ ``dummy states'', with ``lengths'' 1, 2, ..., $r-1$.  If $1 \le
+i < r-1$, then both transitions from the dummy state of length i are
+to the dummy state with length $i+1$.  The transitions from the dummy
+state with length $r-1$ are to the state associated with the empty
+word in $L$.
+
+For states corresponding to bit strings $U$ in $L$ which either
+correspond to left sides or have length $m$, the transitions are
+defined as before.  Suppose that $U$ is in $L$, that $U$ has length
+less than $m$, and $U$ does not correspond to a left side.  Let $x$ be
+a binary digit.  If $Ux$ is in $L$, then the $x$-transition from $U$
+is to $Ux$.  Suppose that $Ux$ is not in $L$.  If there are words $V$
+and $W$ such that $Ux = VW$, $V$ is nonempty, $|V|$ is divisible by
+$r$, and $W$ is in $L$, then the $x$-transition from $U$ is to the
+longest such $W$.  If no words $V$ and $W$ exit, then $|Ux|$ is not
+divisible by $r$ (since otherwise $V = Ux$ and $W = \varepsilon$ would
+work).  In this case, the $x$-transition from $U$ is to the dummy state
+whose length is congruent to $|Ux|$ modulo $r$.
+
+If $m$ is larger than the length of any element of $L$, then the
+hybrid index is essentially an automaton index of the type described
+in Section 2.4.3.  If $m$ is 0, then the index is essentially a
+lexicographic index.
+
+
+\bigskip
+\noindent 2.5 Subsystems
+
+\nobreak
+
+In RKBP, rewriting rules are collected into sets called {\it
+subsystems}.  All the rules for a particular subsystem are stored
+externally in a single file and so must be of the same type.  For a
+subsystem consisting of a very large number of rules, the file of
+rules may be kept in compressed form.  In this case the file must be
+uncompressed before it can be read by a program.
+
+A subsystem is normally defined by a file which gives the name of the
+file containing the rules, the rule type, and the type of index to be
+used with the subsystem.  If the subsystem contains ``broken rules'',
+(see Section 3.5), no index is needed since broken rules are not used
+in rewriting or overlap formation.  The format of the subsystem file
+is as follows:
+
+\medskip
+{\obeylines \parindent=1em
+{\tt subsystem}
+{\tt rule\_type:}
+either {\tt prefix} or {\tt subword}
+{\tt index\_type:}
+one of {\tt automaton}, {\tt rabin\_karp}, {\tt hybrid}, or {\tt none}
+{\tt external:}
+one of {\tt names}, {\tt len\_names}, {\tt len\_numbers}, or {\tt len\_6bit}
+{\tt compressed:}
+either {\tt yes} or {\tt no}
+{\tt rule\_file:}
+the name of the file containing the rules
+}
+
+\medskip
+\noindent The name of the rule file listed is the name of the
+uncompressed file.  If the file of rules is compressed, then the
+actual name of the file is obtained by appending ``{\tt .Z}'' to the
+name as given.  The rule file is automatically uncompressed by RKBP,
+read in, and then recompressed.
+
+It often happens that short rules are used frequently in rewriting
+while long rules are used very infrequently.  Splitting the rules into
+more than one subsystem permits a time-efficient index to be used with
+the short rules and a space-efficient index to be used with the long
+rules. Also, the entire set of rules may be too large to fit in memory
+at the same time. In this case, some of the subsystems could be read
+into memory and the rest saved in files for later processing.  (This
+feature has not yet been implemented.)
+
+\bigskip
+\noindent 2.6 Systems
+
+\nobreak
+
+A {\it system} consists of an alphabet with inverse data, a reduction
+ordering, and a collection of subsystems. Systems are the main input
+and output objects of RKBP.
+
+A system is defined by a file.  The exact format of that file depends
+on whether a monoid or group alphabet is being used and on the
+conventions, if any, used in the description.  Every system file
+begins as follows:
+
+\medskip
+\vbox{\obeylines \parindent=1em
+{\tt system}
+{\tt word\_type:}
+{\tt monoid} or {\tt group}
+{\tt ngens:}
+a positive integer
+{\tt naming\_convention:}
+one of {\tt prefix <string>}, {\tt letters <letter>}, or {\tt none}
+}
+\medskip
+
+At this point, the format depends on which kind of alphabet is being
+used.  Let us assume first that a group alphabet has been specified.
+Then the system file continues with the following entries:
+
+\medskip
+\vbox{\obeylines \parindent=1em
+{\tt numbering\_convention:}
+one of {\tt 1\_2}, {\tt 1\_-1}, or {\tt none}
+{\tt inverse\_convention:}
+one of {\tt case}, {\tt exponent}, or {\tt none}
+
+}
+\medskip
+
+\noindent An inverse convention (other than {\tt none}) and a
+numbering convention must be used if a naming convention is used.
+
+If one or more of the conventions are not used, then enough
+information must be specified to allow RKBP to understand the names of
+the generators and their inverses as well as the internal
+representations.  The best way to learn the details is to run RKBP and
+issue the {\tt input} command without a problem name.  In this case,
+RKBP prompts for the information it needs.
+
+With a monoid alphabet, the numbering and inverse conventions are not
+specified.  If no naming convention is used, then the keyword {\tt
+generators:} must appear followed by the names of the generators in
+order of their internal representation.  At this point the keyword
+{\tt ninv:} must be given followed by a nonnegative integer giving the
+number $k$ of generators known to represent units in the monoid $M$
+being defined.  If $k > 0$, there follows the keyword {\tt
+inverse\_pairs:} and $k$ pairs, each pair consisting of the external
+name of a generator and a word in {\tt names} format defining the
+inverse of that generator in $M$.
+
+From this point on the format of the system file is the same for
+monoid alphabets and group alphabets.  The weight data is specified by
+giving the keyword {\tt weight\_convention:} followed by {\tt constant}
+or {\tt none}.  If no weight convention is used, then the weights of
+the generators (and inverses in the case of a group alphabet) must be
+listed explicitly in the order of the internal representations.
+
+The level data is now described.  The keyword {\tt level\_convention:}
+is followed by {\tt constant}, {\tt basic\_wreath}, {\tt
+inverse\_pair\_wreath}, or {\tt none}.  If no convention is used, then
+the levels must be explicitly listed in the order of the internal
+representations.
+
+The last thing in the system file is the list of subsystem files.  The
+keyword {\tt nsub:} is followed by the number of subsystems.  Then
+comes the keyword {\tt subsystems:} and the list of the names of the
+subsystem files.
+
+Examples of system files are given in Sections 7.
+
+\bigskip
+\noindent 2.7  File names
+
+\nobreak
+
+For input to and output from RKBP, a rewriting system is given a name,
+referred to as its {\it problem name}.  The name of the system file is
+obtained by appending {\tt .sys} to the problem name.  Currently a
+system may have up to nine subsystems.  The default names of subsystem
+files are constructed by appending {\tt .sb1}, \dots, {\tt .sb9} to
+the problem name.  The default names of the associated rule files are
+derived from the problem name by appending {\tt .rl1}, \dots, {\tt
+.rl9}.  The defaults are always used on output.
+
+\bigskip
+\noindent 3. Basic operations
+
+\nobreak
+
+The Knuth-Bendix procedure divides its time between processing
+overlaps and rewriting the rules with respect to one another. This
+mutual reduction is really a special case of processing overlaps, but
+the approach used for mutual reduction is specially tailored for this
+task. Both of these operations produce new rules. When new rules are
+found, they are normally balanced in an effort to keep the left sides
+short.  At the user's request, certain heuristics can be used in an
+attempt to speed up the discovery of new rules.  Ultimately all of
+this activity depends on rewriting.
+
+
+\bigskip
+\noindent 3.1 Rewriting
+
+\nobreak
+
+A word can be rewritten only with respect to the subsystems currently
+in memory. Subword rules are always used, but the call to the
+rewriting routine must indicate whether prefix rules may be used. The
+call must also specify the maximum length beyond which the word is not
+allowed to grow. This bound is called the {\it buffer size}.  The
+buffer size is significant only when the rules may be
+length-increasing. If rewriting terminates because of the buffer size
+has been reached, the calling routine is warned that the word returned
+is not irreducible.
+
+\bigskip
+\noindent 3.2 The save list
+
+\nobreak
+New rules are saved in specially designated subsystems which
+collectively are referred to as the {\it save list}.  Rabin-Karp
+indexes are used in the save list since they are the most easily
+updated.  Periodically the save list is consolidated into a single
+subsystem with either an automaton or hybrid index so that overlaps
+involving the new rules may be formed.  In order to be added to the
+save list, a rule must be reduced and the lengths of its left and right
+sides must not exceed bounds specified by the user.  New rules which
+cannot be added to the save list are either discarded or placed in a
+subsystem of ``broken rules''.  (See Section 3.5.)
+
+\bigskip
+\noindent 3.3 Balancing
+
+\nobreak
+
+Suppose we have found a rule $Ax\to B$.  Here $x$ is a generator. We
+say the rule is {\it right balanced} if one of the following
+conditions is satisfied:
+
+\medskip
+{\parindent=20pt
+\item{(a)} The generator $x$ is not known to define an invertible
+element.
+\smallskip
+\item{(b)} The generator $x$ is known to define an invertible element.
+Moreover, if $X$ is the word defining the inverse of $[x]$ and $C$,
+$Y$, and $Z$ are words such that $A = CY$, $X = ZY$, and $Y$ is the
+longest common suffix of $A$ and $X$, then the word
+$U$ produced by rewriting $BZ$ is not less than $C$ in the reduction
+ordering.  (If the original rule is a subword rule, then prefix rules
+are not to be used in computing $U$.)\par}
+
+\medskip
+
+\noindent In (b) the word $Yx$ is the longest suffix of $Ax$ which
+``obviously'' defines an invertible element and $Z$ defines the
+inverse of that element.  If $U$ is less than $C$, then the rule $C\to
+U$ can be used to reduce $Ax$ and, in the presence of the other rules,
+is equivalent to $Ax\to B$ as a relation or, if it is a prefix rule,
+as a generator of a right congruence.  Thus $Ax\to B$ can be replaced
+by $C\to U$.
+
+The term {\it left balanced} is defined analogously, but only for
+subword rules. A rule is {\it balanced} if it is a right balanced
+prefix rule or a subword rule which is both right and left balanced.
+Whenever a new rule is not balanced, an attempt is made to replaced it
+by a balanced one.  The attempt may fail, since the rewriting steps
+involved may be aborted due to the length of a word becoming too big.
+The balancing is done using only the subsystems in memory at the time
+the rule is found.
+
+\bigskip
+\noindent 3.4 Overlaps
+
+\nobreak
+
+A call to the overlap routine specifies two subsystems, which may be
+the same. The first subsystem may contain either prefix or subword
+rules. The second subsytem must contain subword rules. Neither
+subsystem can have a Rabin-Karp index.  The overlap routine finds and
+processes overlaps $(A,B,C)$, where $AB$ is a left side in the first
+subsystem and $BC$ is a left side in the second subsystem.  Overlaps
+are located and processed as sketched in the procedure OVERLAP of
+Section 1.3.  If a new rule is found, an attempt is made to balance
+it.  If the rule cannot be added to the save list, the rule is
+discarded and a flag set indicating that the rewriting system may not
+be confluent.
+
+A single call to the overlap routine can take days or even weeks on a
+workstation.  One can get a feel for how many new rules will be
+produced by forming a few random overlaps using the {\tt kb\_random}
+command.
+
+\bigskip
+\noindent 3.5 Mutual reduction
+
+\nobreak
+
+Given a large system, perhaps made up of many subsystems, it is not an
+easy task to produce a reduced system which defines the same monoid
+and is such that words irreducible with respect to the new system are
+irreducible with respect to the original system. (Constructing such a
+reduced system is roughly analogous to processing a coincidence in a
+large coset table.)
+
+The mutual reduction process takes each subsystem ${\cal S}$ in turn.
+The left and right sides of each rule $\rho$ in ${\cal S}$ are
+rewritten using all rules except $\rho$ (all subword rules except
+$\rho$ if $\rho$ is a subword rule).  Let $\sigma$ be the result of
+this rewriting.  If $\sigma \ne \rho$, then $\rho$ is normally deleted
+from ${\cal S}$.  (See below.)  If the two sides of $\sigma$ are
+equal, nothing more needs to be done.  Otherwise, $\sigma$ is oriented
+correctly and an effort is made to balance $\sigma$ and add it to the
+save list.  Since ${\cal S}$ may be part of the save list, it is
+possible that $\sigma$ could be added to ${\cal S}$.  If this is done,
+the $\sigma$ is put at the end of ${\cal S}$, among the rules not yet
+processed.  If $\sigma$ cannot be added to the save list, it is added
+instead to a special subsystem of ``broken rules''.  (If $\sigma$ were
+discarded at this point, the remaining rules might not form a
+presentation for the original monoid or define the correct right
+congruence on that monoid.)  No index is used in the subsystem of
+broken rules and they are not used in rewriting.  However, they are
+included in the mutual reduction process.  If ${\cal S}$ contains
+broken rules, then $\rho$ is not deleted from ${\cal S}$ unless the
+two sides of $\sigma$ are equal or $\sigma$ is successfully added to
+the save list.
+
+If after all the subsystems have been considered it is found that new
+rules were produced, the process has to be repeated.
+
+\bigskip
+\noindent 3.6 Heuristics
+
+\nobreak
+
+Experience has shown that a confluent rewriting system can often be
+found more quickly if preference is given to forming overlaps with
+subword rules whose right sides are empty.  These are the rules which
+define inverses.  In RKBP these heuristics are applied to rules in the
+save list just before it is reduced.  By default, this is done only
+when the {\tt lenlex} ordering is being used.  When rules can be
+length-increasing, one has to worry about the possibility that the
+application of the heuristics alone will not terminate even though a
+finite, confluent rewriting system does exist.  It should be noted
+that no example of this phenomenon has yet been produced.
+
+\bigskip
+\noindent 3.7 Counting irreducible words
+
+It is very useful to have information about the number words of a
+given length which are irreducible with respect to the current system.
+If there is just one subsystem and the index structure for that system
+is an automaton, then standard techniques from the theory of formal
+languages make it possible to determine efficiently the exact number
+irreducible words of any reasonable length in space comparable to that
+used for the automaton.  It is also possible to decide whether or not
+the set of all irreducible words is infinite.
+
+However, if the current system has a number of subsystems and these
+subsystems have hybrid or Rabin-Karp indexes, then exact computations
+are more difficult.  The scheme currently implemented has the
+advantage that it gives useful results for any combination of
+subsystems and index structures.  However, it has the distinct
+disadvantage that the results are only estimates.  Practice suggests
+that the estimates are frequently quite good, but there is always the
+chance that they may be wildly off the mark.
+
+The technique suggested by Knuth is used to probe the tree of
+irreducible words.  A probe to length $m$ is carried out as follows:
+
+\medskip
+
+{\parindent = 2em \parskip = 0em \obeylines
+\ind Procedure PROBE($m$)
+\ind Begin
+\indb  $W$ := $\varepsilon$;
+\indb  $n_0$ := 1;
+\smallskip
+\indb  For i := 1 to m do
+\indc    If $n_{i-1} = 0$ then $n_i$ := 0
+\smallskip
+\indc    Else begin
+\indd      Let $S$ be the set of generators $x$ such that $Wx$ is irreducible;
+\indd      $n_i$ := $n_{i-1}|S|$;
+\smallskip
+\indd      If $S$ is not empty then begin
+\inde        Choose a random element $x$ from $S$;
+\inde        $W$ := $Wx$
+\indd      End
+\indc    End
+\ind End.}
+
+\medskip
+
+The expected value of $n_i$ is the number of irreducible words of
+length $i$.  Thus by making several probes and averaging the values of
+the $n_i$ obtained we get an estimate of the number of irreducible
+words.  (See the description of the commands {\tt probe} and {\tt
+probe\_subword}.)
+
+\bigskip
+\noindent 3.8 Power relations
+
+In studying Burnside groups of exponent $e$, it is convenient to be
+able to add a large number of subword rules of the form $W^e\to
+\varepsilon$ to the current rewriting system.  The command {\tt
+add\_powers} attempts to add all such rules with $W$ irreducible with
+respect to the current subword rules and with $|W|$ not exceeding a
+specified bound.  The number of such words $W$ can be very large.  To
+get a sense of whether new rules are likely to be found, the command
+{\tt add\_random\_powers} may be used.
+
+\bigskip
+\noindent 4.  Strategies
+
+\nobreak
+
+There are currently two Knuth-Bendix strategies implemented in RKBP.
+The most important is the {\it two-step strategy}.  A second, less
+efficient {\it basic strategy} is included primarily to give a means
+of checking the correctness of the implementation of the two-step
+strategy.  Both of these strategies assume that at the level of the
+command line interpreter the current system is reduced and contains at
+most one subword subsystem and at most one prefix subsystem.  For
+simplicity of exposition, this description will assume that only
+subword rules are involved.
+
+The two strategies take the same parameters: the maximum length of
+overlaps to be formed, the number of iterations to be carried out, and
+the maximum lengths for left and right sides of new rules to be saved.
+The buffer size must also have been set.
+
+In the basic strategy, a save list is initialized and overlaps formed
+among the left sides in the initial subsystem.  If in processing an
+overlap the program cannot produce a balanced, reduced rule with left
+and right sides of the appropriate lengths, then this overlap is
+abandoned and a flag is set indicating that the system may not be
+confluent.  Once all overlaps have been processed, if heuristics are
+being used, they are applied to the rules in the save list.  All rules
+are then mutually reduced and combined into a single subsystem.  This
+process is repeated for the specified number of iterations or until
+there is no change if the number of iterations is $-1$.
+
+The first iteration of the two-step strategy is very similar to that
+of the basic strategy.  However, only the rules in the save list are
+mutually reduced and then the save list is merged into a single
+subsystem separate from the original one.
+
+Succeeding iterations of the two-step strategy proceed as follows: A
+save list is initialized and the rules in the original system are
+reduced.  Then three separate calls to the overlap routine are made.
+In the first call, overlaps of rules in the first subsystem with those
+in the second subsystem are processed.  Then the roles of the two
+subsystems are reversed.  Finally overlaps between two rules in the
+second subsystem are considered.  If appropriate, heuristics are
+applied to the rules in the save list and the save list and the second
+subsystem are reduced.  Then the second subsystem is merged into the
+first subsystem and the save list merged into a new second subsystem.
+After the requested number of iterations, all subsystems are reduced
+and merged into a single subsystem.
+
+\bigskip
+\noindent 5.  Memory management
+
+\nobreak
+
+One of the secondary design goals of RKBP was to permit a study of the
+memory management support required by the Knuth-Bendix procedure for
+strings.  The assumption was that the Knuth-Bendix procedure requires
+less sophisticated memory management techniques than are necessary for
+many other algorithms of computational algebra.  RKBP uses {\tt
+malloc} and {\tt free} as its primary memory management tools.
+However, a small interface to {\tt malloc} and {\tt free} has been
+implemented.  This interface permits the program to keep its own
+statistics about the number and size of memory blocks requested.  The
+functions associated with the interface have names beginning with {\tt
+fx} and are located in the source file {\tt fxmem.C} or {\tt fxmem.cpp}.
+
+Subsystems have several large arrays which must support random access.
+These include the list of packed rules, the automata used with
+automaton and hybrid indexes, the list of rule origins (pointers to
+the beginning locations of the rules), and, for the Rabin-Karp
+indexes, the lists of signatures and hash tables.  Space for these
+arrays is allocated in moderately large blocks called ``chunks''.  For
+each array, a vector of pointers to chunks is maintained.  In this way
+an item in the array can be located with two indexing operations, one
+to find the chunk and one to reach the position within the chunk.  The
+sizes of chunks are powers of 2, so the two index values can be
+obtained from the initial index by shifting and masking.  A free list
+of chunks is maintained.  If no chunks are available on the free list,
+more are created using {\tt malloc}.
+
+It is anticipated that very few memory management services are needed
+inside the two innermost loops, the formation of overlaps between
+rules of two given subsystems and the rewriting needed to process the
+overlaps discovered.  Initial experiments indicate that this is indeed
+the case.
+
+The RKBP command {\tt memory} produces a summary of memory management
+activity since program startup.  The command {\tt report\_memory}
+turns on and off the reporting of individual memory management actions
+as they occur.
+
+It is important to note that the C++ constructors and destructors make
+direct calls to {\tt malloc} and {\tt free} which are outside the {\tt
+fxmem} facilities.  However, the sizes of the blocks requested by the
+constructors are quite small and the use of constructors within the
+innermost loops is very limited.
+
+\bigskip
+\noindent 6.  Commands
+
+\nobreak
+
+The user interface to RKBP is the tried and true (some would say old
+fashioned) command line.  At the prompt {\tt >:}, commands are
+entered.  Many commands take arguments.  In most cases, if the
+arguments are missing the program prompts for the arguments with a
+brief indication of their significance.
+
+If a command line begins with ``!'', the remainder of the line is
+passed to the system command processor using the C library function
+{\tt system}.
+
+Command lines beginning with ``\#'' are considered to be comments and
+are ignored.
+
+RKBP prompts for input when it is reading from the standard input.  It
+echoes input if it is prompting and echoing is turned on.  In certain
+cases, if an invalid input is detected, the program will ask for a
+correct value, but only if prompting is on and echoing is not.  In all
+other cases RKBP assumes there is no human present to respond and
+quits.
+
+An alphabetical listing of the RKBP commands follows.  The most
+important commands are {\tt bsize}, {\tt free}, {\tt help}, {\tt
+input}, {\tt kb}, {\tt output}, and {\tt restore}.
+
+\medskip
+\noindent {\tt abort\_factor <decimal number>}
+
+\nobreak
+
+Although not currently supported, the intent is to permit the user to
+say that if during an iteration of the basic or two-step strategy the
+total number of rules grows by more than a specified factor, the
+processing of overlaps is stopped and the rules consolidated into one
+subsystem of each type.
+
+\medskip
+\noindent {\tt add\_powers <exponent> <maxlen> <savell> <savelr>}
+
+\nobreak
+
+This command is useful primarily in the study of Burnside groups.  The
+save list is initialized and a backtrack search is performed to
+generate all subword-irreducible words of length up to {\tt maxlen}.
+For each of these words $W$, the word $W^e$ is reduced using the
+existing subword rules.  Here $e$ is the value of the argument {\tt
+exponent}.  If the result $P$ of the rewriting is not empty, then the
+rule $(P,\varepsilon)$ is balanced.  If the result is a reduced rule
+(which may not be the case if rules can be length-increasing) the
+lengths of whose left and right sides do not exceed {\tt savell} and
+{\tt savelr}, respectively, that rule is saved.  At the end, all
+subword rules are mutually reduced and the save list is appended to
+the first subword subsystem.
+
+\medskip
+\noindent {\tt add\_random\_powers <ntrials> <exponent> <maxlen>
+<savell> <savelr> <seed>}
+
+\nobreak
+
+This command is similar to {\tt add\_powers}.  However, instead of
+reducing all powers up to a given length, random powers are reduced.
+A trial consists of initializing a word $W$ to the empty word and then
+repeating the following steps as long as $|W|$ is less than {\tt
+maxlen}.  Let $S$ be the set of generators $x$ such that $Wx$ is
+irreducible.  If $S$ is empty, stop.  Otherwise choose an element $x$
+of $S$ at random, set $W = Wx$, and process the power $W^e$ as in {\tt
+add\_powers}.  The integer {\tt seed} is used to initialize the random
+number generator.
+
+\medskip
+\noindent {\tt bsize <positive integer>}
+
+\nobreak
+
+Set the size of the rewriting buffers.  The default size is 100.
+Warning!  Any attempt to reduce the size of the buffers below the
+length of an existing left or right side is likely to lead to
+problems.
+
+\medskip
+\noindent {\tt counts}
+
+\nobreak
+
+Gives a summary of rewriting and overlap activity.
+
+\medskip
+\noindent {\tt details <integer>}
+
+\nobreak
+
+Lists the number of rules in a subsystem by length of left side.  If
+the second argument is positive, the subsystem with that number is
+detailed.  If the argument is -1, then the details of all subsystems
+are given.
+
+\medskip
+\noindent {\tt dots}
+
+\nobreak
+
+When very long computations are underway, it is reassuring to see the
+program print ``dots'', either periods (during overlap formation), per
+cent signs (during the application of the heuristics), number signs
+(during the reduction of subsystems), or carets (during the processing
+of powers), indicating that things are still going properly.  This
+command turns dot printing on.  See {\tt nodots}.  The default is no
+dot printing.
+
+\medskip
+\noindent {\tt echo}
+
+\nobreak
+
+Turns on input echoing.  Useful when the commands are coming from a
+file rather than the keyboard.  See {\tt noecho}.  The default is no
+input echoing.
+
+\medskip
+\noindent {\tt exit}
+
+\nobreak
+
+Terminates the session.  All unsaved data is lost.
+
+\medskip
+\noindent {\tt free}
+
+\nobreak
+
+Clear the current system in preparation for reading in a new one.
+
+\medskip
+\noindent {\tt help} or {\tt ?}
+
+\nobreak
+
+Print a summary of the commands.
+
+\medskip
+\noindent {\tt heuristics}
+
+\nobreak
+
+Turns on the use of heuristics which favor overlaps with rules
+having empty right sides are to used.  The default is that the
+heuristics are used with the {\tt lenlex} ordering and are not used
+with any other orderings.  See {\tt noheuristics}.
+
+\medskip
+\noindent {\tt hybrid\_factor <decimal number>}
+
+\nobreak
+
+Enter the ``hybrid factor''.  When a hybrid index is requested, the
+amount of space used for the index automaton is roughly this factor
+times the amount of space used to store the rules.  Small values of
+the hybrid factor produce indexes which are similar to lexicographic
+indexes and large values produce indexes which are essentially
+automaton indexes.
+
+\medskip
+\noindent {\tt input <problem name>}
+
+\nobreak
+
+Read in a new problem.  No assumption is made about the nature of the
+input rules.  They need not be oriented correctly or reduced.  The
+monoid rules corresponding to the definitions of inverses are
+automatically added to the first subword rewriting system read in.
+Since rewriting is performed during the execution of this command, it
+may be necessary to set the buffer size prior to reading in the
+problem.  If a recoverable error is reported during the
+execution of this command, the command {\tt free} should be used
+immediately.  If the problem is guaranteed to be in the form produced
+by the {\tt output} command, the problem can be read in quicker using
+{\tt restore}.
+
+\medskip
+\noindent {\tt kb <maxlen> <niter> <llsave> <lrsave>}
+
+\nobreak
+
+Initiate a call to the current Knuth-Bendix strategy, either two-step
+or basic.  Form overlaps of length at most {\tt maxlen} and iterate
+the process {\tt niter} times.  If {\tt niter} is $-1$, then
+iterations continue until there is no change in the system.  Rules are
+saved in the save list only if the lengths of their left and right
+sides do not exceed {\tt llsave} and {\tt lrsave}, respectively.
+
+\medskip
+\noindent {\tt kb\_random <ntrials> <rule type> <maxlen> <savell>
+<savelr> <seed>}
+
+\nobreak
+
+Random overlaps are formed.  A save list is initialized and trials are
+performed.  In a trial, a random rule $(L,R)$ of the specified type is
+chosen and a word $C$ is initialized to the empty word.  While the
+length of $C$ is less than {\tt maxlen}, the following steps are
+executed:  Let $S$ be the set of generators $x$ such that $Cx$
+satisfies the auxiliary condition of the backtrack search for overlaps
+of Section 1.3.  If $S$ is empty, stop.  Otherwise, choose $x$
+randomly in $S$ and set $C = Cx$.  If $LC$ ends with the left side of
+a subword rule, process the associated overlap and stop.
+
+\medskip
+\noindent {\tt kb\_strategy <strategy>}
+
+\nobreak
+
+Set the Knuth-Bendix strategy to either {\tt two\_step} or {\tt
+basic}.
+
+\medskip
+\noindent {\tt log <maxlen> <file>}
+
+\nobreak
+
+Turns on logging of new rules.  Single iterations of the Knuth-Bendix
+procedure can take days or even weeks.  To be able to recover at least
+partially after a crash, new rules can be written to a log file as
+they are added to the save list.  Note, broken rules are not written
+to the log file.  A rules is written to the file only if the length of
+its left sides does not exceed {\tt maxlen}.  To minimize space
+requirements, rules are written using {\tt len\_6bit} format.  Since
+the same file is used to log both prefix and subword rules, the rule
+is preceded by ``P'' or ``S'' to signal its type.  If {\tt file}
+already exists, new rules are appended.  See {\tt nolog}.
+
+\medskip
+\noindent {\tt memory}
+
+\nobreak
+
+Give a report on memory usage since startup.
+
+\medskip
+\noindent {\tt nodots}
+
+\nobreak
+
+Turns off dot printing.  See {\tt dots}.
+
+\medskip
+\noindent {\tt noecho}
+
+\nobreak
+
+Turn off command echoing.  See {\tt echo}.
+
+\medskip
+\noindent {\tt noheuristics}
+
+\nobreak
+
+Turns of the use of heuristics.  See {\tt heuristics}.
+
+\medskip
+\noindent {\tt nolog}
+
+\nobreak
+
+Turns of logging of new rules.  See {\tt log}.
+
+\medskip
+\noindent {\tt output <problem>}
+
+\nobreak
+
+Write out the current system.  For each subsystem, the user is given
+the opportunity to change the external format for rules.  Typically
+one would use {\tt names} or {\tt len\_names} format initially and
+then switch to {\tt len\_6bit} to save space when the rewriting system
+starts to get large.
+
+\medskip
+\noindent {\tt print\_level <integer>}
+
+\nobreak
+
+The default print level is 0.  Higher values result in more
+information being printed during the operation of the program.  If the
+print level is at least 3, then each new rule is displayed as it is
+saved.
+
+\medskip
+\noindent {\tt probe <ntrials> <maxlen> <seed>}
+
+\nobreak
+
+Use the Knuth technique to estimate the number of irreducible words of
+length up to {\tt maxlen}.  The procedure makes {\tt ntrials}
+probes into the tree of irreducible words.  The integer {\tt seed}
+is used to initialize the random number generator.
+
+\medskip
+\noindent {\tt probe\_subword <ntrials> <maxlen> <seed>}
+
+\nobreak
+
+The same as {\tt probe} except that the prefix rules are ignored.
+Thus the results returned are estimates of the growth function for the
+monoid defined by the current subword rules.
+
+\medskip
+\noindent {\tt quit}
+
+\nobreak
+
+Same as {\tt exit}.
+
+\medskip
+\noindent {\tt report\_memory}
+
+\nobreak
+
+Report on memory management activity as it happens.  This produces a
+large amount of output!
+
+\medskip
+\noindent {\tt report\_rewriting}
+
+\nobreak
+
+Give the input word and the changes produced by the application of
+rules for each call to the rewriting routine.  This produces a huge
+amount of output!
+
+\medskip
+\noindent {\tt report\_timing}
+
+\nobreak
+
+After each command is executed, report the total cpu time used since
+startup.  The results may not be accurate for long-running commands.
+
+\medskip
+\noindent {\tt restore <problem name>}
+
+\nobreak
+
+Read in a problem assuming it is exactly as would have been produced
+by the {\tt output} command.  That is, rules are correctly oriented
+and reduced and the monoid relations corresponding to inverse
+definitions are present.  (See the {\tt input} command.)
+
+\medskip
+\noindent {\tt rewrite\_rules}
+
+\nobreak
+
+The user is prompted for the name of a file of rules and asked for the
+type and for the external format being used.  The user may also
+specify an output file if desired.  If no output file is requested,
+then the user is prompted for {\tt savell} and {\tt savelr} as with
+the command {\tt kb}.  Each rule in the input file is rewritten using
+the current rules.  If, after rewriting, both sides have become equal,
+the rule is discarded and the next rule read in.  If the sides are
+different, the rule is oriented and, if it is reduced, the rule is
+balanced.  If an output file was given, the revised rule is written to
+that file.  If there is no output file and the length conditions are
+met, then the rule is added to the save list.  After all rules have
+been read, if the save list was being used, all rules of the
+appropriate type are reduced and the save list is merged with the
+first subsystem of that type.
+
+\medskip
+\noindent {\tt rewrite\_words}
+
+\nobreak
+
+Individual words are rewritten using the current rewriting system.
+Words are taken either from a file or the standard input.  The user is
+prompted for the name of an input file.  If the response is ``none'',
+words are read from the standard input.  The user is also asked for
+the external format being used and whether only subword rules are to
+be used.  If input is being taken from a file, the user is asked for
+the name of an output file into which the rewritten words are to be
+placed.  When files are in use, words are read until the end of the
+input file is reached.  When the standard input is being used, an
+empty word signals the end of the input.
+
+\medskip
+\noindent {\tt rewriting\_strategy <strategy>}
+
+\nobreak
+
+Set the rewriting strategy to either {\tt from\_left} or {\tt
+global}.
+
+\medskip
+\noindent {\tt settings}
+
+\nobreak
+
+List the values of various parameters.
+
+\medskip
+\noindent {\tt summary}
+
+\nobreak
+
+Print out a summary of the current system and all its subsystems,
+including any subsystems of ``broken'' rules.  Information is given
+about the number of rules and about the lengths of their left and
+right sides.
+
+\bigskip
+\noindent 7. Examples
+
+\nobreak
+
+This section lists several sessions using RKBP.  The first example
+studies the group $\langle x,y|x^2 = y^3 = (xy)^3 = 1 \rangle$ using a
+monoid presentation and the {\tt lenlex} ordering.  The entire problem
+is entered at the prompting of the program.
+
+\bigskip
+{\tt \obeylines\obeyspaces \parindent=0em \parskip=0in \ttspace
+>: input
+
+Enter problem name (or "none" or "stop"):  none
+
+Enter word\_type (monoid or group):  monoid
+
+Enter ngens:  3
+Enter naming\_convention, one of the following:
+prefix <string>, letters <letter>, or none:  none
+
+Enter generator names in increasing order:
+x
+y
+Y
+
+Enter number of generators with inverses:  3
+Enter inverse pairs:
+x x
+y Y
+Y y
+
+Enter weight\_convention (constant or none):  constant
+
+Enter the level\_convention
+(constant, basic\_wreath, inverse\_pair\_wreath, or none):  constant
+
+Enter the number of subsystems:  1
+Enter name of subsystem file (or "none"):  none
+
+Enter rule\_type (prefix or subword):  subword
+
+Enter index\_type (automaton, rabin\_karp, hybrid, or none):  automaton
+
+Enter external format
+(names, len\_names, len\_numbers, or len\_6bit):  len\_names
+
+Is the rule file compressed (yes or no):  no
+
+Enter name of rule file (or "none"):  none
+
+Signal end of rules with a left side of length 0.
+2 yy 1 Y
+3 yxy 3 xYx
+0 @ 
+>: \#
+>: \# Because the input command was used, the rules defining the inverses
+>: \# were included automatically.  Let us save the input system.
+>: \#
+>: output
+Enter problem name for output (or "stop"):  input1
+Writing subsystem 1
+The current external format is len\_names
+Enter desired format:  len\_names
+>: \#
+>: \# The system is saved in the files input1.sys, input1.sb1, and
+>: \# input1.rl1.
+>: \#
+>: !ls input1.*
+input1.rl1
+input1.sb1
+input1.sys
+>: \#
+>: \# Let us invoke the Knuth-Bendix procedure.
+>: \#
+>: kb
+Enter maxlen (0 for prevlen+1):  10
+Enter niter (-1 for infinity):  -1
+Enter max saved left side (positive integer):  10
+Enter max saved right side (nonnegative integer):  10
+>: \#
+>: \# Now get a summary of what we have and save it.
+>: \#
+>: summary
+
+alphabet\_type:  monoid,  ngens:  3,   nbits:  2
+rewriting strategy:  from\_left
+Knuth-Bendix strategy:  two\_step
+There is 1 subsystem:
+
+rule\_type:  subword,  index\_type:  automaton
+nrules = 11
+llmin  = 2,  llmax = 4,  lltotal = 32
+lrmin  = 0,  lrmax = 3,  lrtotal = 20
+
+>: output output1
+Writing subsystem 1
+The current external format is len\_names
+Enter desired format:  len\_names
+>: \#
+>: \# Since overlaps of length 10 were permitted and all left sides have
+>: \# lengths at most 4, the system is confluent.  Let us list the final
+>: \# rules.
+>: \#
+>: !more output1.rl1
+2 xx 0 @
+4 xyxY 3 Yxy
+4 xYxy 3 yxY
+3 yxy 3 xYx
+4 yxYx 3 Yxy
+2 yy 1 Y
+2 yY 0 @
+4 Yxyx 3 yxY
+3 YxY 3 xyx
+2 Yy 0 @
+2 YY 1 y
+}
+
+\bigskip
+
+The next example constructs the free nilpotent group of class 2 on two
+generators.  Again a confluent rewriting system is easily constructed.
+
+\bigskip
+{\tt \obeylines\obeyspaces \parindent=0em \parskip=0in \ttspace
+\rightskip=-0.2in
+>: input
+
+Enter problem name (or "none" or "stop"):  none
+
+Enter word\_type (monoid or group):  group
+
+Enter ngens:  3
+Enter naming\_convention, one of the following:
+prefix <string>, letters <letter>, or none:  letters a
+
+Enter numbering\_convention (1\_2, 1\_-1, or none):  1\_-1
+
+Enter inverse\_convention (case, exponent, or none):  case
+
+Enter weight\_convention (constant or none):  constant
+
+Enter the level\_convention
+(constant, basic\_wreath, inverse\_pair\_wreath, or none):  inverse\_pair\_wreath
+
+Enter the number of subsystems:  1
+Enter name of subsystem file (or "none"):  none
+
+Enter rule\_type (prefix or subword):  subword
+
+Enter index\_type (automaton, rabin\_karp, hybrid, or none):  automaton
+
+Enter external format
+(names, len\_names, len\_numbers, or len\_6bit):  len\_names
+
+Is the rule file compressed (yes or no):  no
+
+Enter name of rule file (or "none"):  none
+
+Signal end of rules with a left side of length 0.
+2 ba 3 abc
+2 ca 2 ac
+2 cb 2 bc
+0 @ 
+>: kb
+Enter maxlen (0 for prevlen+1):  10
+Enter niter (-1 for infinity):  -1
+Enter max saved left side (positive integer):  10
+Enter max saved right side (nonnegative integer):  10
+>: summary
+
+alphabet\_type:  group,  ngens:  3,   nbits:  3
+rewriting strategy:  from\_left
+Knuth-Bendix strategy:  two\_step
+There is 1 subsystem:
+
+rule\_type:  subword,  index\_type:  automaton
+nrules = 18
+llmin  = 2,  llmax = 2,  lltotal = 36
+lrmin  = 0,  lrmax = 3,  lrtotal = 28
+
+>: \#
+>: \# The system is clearly confluent.
+>: \#
+>: output output2
+Writing subsystem 1
+The current external format is len\_names
+Enter desired format:  len\_names
+>: !more output2.rl1
+2 aA 0 @
+2 Aa 0 @
+2 ba 3 abc
+2 bA 3 AbC
+2 bB 0 @
+2 Ba 3 aBC
+2 BA 3 ABc
+2 Bb 0 @
+2 ca 2 ac
+2 cA 2 Ac
+2 cb 2 bc
+2 cB 2 Bc
+2 cC 0 @
+2 Ca 2 aC
+2 CA 2 AC
+2 Cb 2 bC
+2 CB 2 BC
+2 Cc 0 @
+}
+
+\bigskip
+
+The third example shows that the free nilpotent group of class 3 on
+two generators is defined by the commutators of weight 4 in one
+particular basic sequence of commutators.  The input is in files with
+the problem name {\tt fr2c3}.
+
+\bigskip
+
+{\tt \obeylines\obeyspaces \parindent=0em \parskip=0in \ttspace
+>: \#
+>: \# We start by listing the input files.
+>: \#
+>: !more fr2c3.sys
+system
+word\_type:  group
+ngens:  5
+naming\_convention:  prefix x
+numbering\_convention:  1\_-1
+inverse\_convention:  case
+weight\_convention:  constant
+level\_convention:  inverse\_pair\_wreath
+nsub:  1
+subsystems:  
+fr2c3.sb1
+>: !more fr2c3.sb1
+subsystem
+rule\_type:  subword
+index\_type:  automaton
+external:  len\_names
+compressed:  no
+rule\_file:  fr2c3.rl1
+>: !more fr2c3.rl1
+2 x1X1 0 @
+2 X1x1 0 @
+2 x2X2 0 @
+2 X2x2 0 @
+2 x3X3 0 @
+2 X3x3 0 @
+2 x4X4 0 @
+2 X4x4 0 @
+2 x5X5 0 @
+2 X5x5 0 @
+2 x2x1 3 x1x2x3
+2 x3x1 3 x1x3x4
+2 x3x2 3 x2x3x5
+2 x4x1 2 x1x4
+2 x4x2 2 x2x4
+2 x5x2 2 x2x5
+>: \#
+>: \# Rules 11 to 13 define x3 as a commutator of weight 2 and x4 and x5
+>: \# as commutators of weight 3.  The last three rules state that the
+>: \# commutators of weight 4 in this sequence are trivial.
+>: \#
+>: restore fr2c3
+>: bsize 1000
+>: kb 3 -1 2 10
+>: settings
+
+bsize         = 1000
+abort\_factor  =      2
+hybrid\_factor =      0.5
+Confluent to length 0
+
+>: summary
+
+alphabet\_type:  group,  ngens:  5,   nbits:  4
+rewriting strategy:  from\_left
+Knuth-Bendix strategy:  two\_step
+There is 1 subsystem:
+
+rule\_type:  subword,  index\_type:  automaton
+nrules = 50
+llmin  = 2,  llmax = 2,  lltotal = 100
+lrmin  = 0,  lrmax = 5,  lrtotal = 96
+
+>: \#
+>: \# The system is confluent at this point, but RKBP does not know it.
+>: \# To be sure, we allow longer rules.
+>: \#
+>: kb 10 -1 10 10
+>: settings
+
+bsize         = 1000
+abort\_factor  =      2
+hybrid\_factor =      0.5
+Confluent to length 10
+
+>: summary
+
+alphabet\_type:  group,  ngens:  5,   nbits:  4
+rewriting strategy:  from\_left
+Knuth-Bendix strategy:  two\_step
+There is 1 subsystem:
+
+rule\_type:  subword,  index\_type:  automaton
+nrules = 50
+llmin  = 2,  llmax = 2,  lltotal = 100
+lrmin  = 0,  lrmax = 5,  lrtotal = 96
+}
+
+\bigskip
+
+\noindent The system is easily seen to define a nilpotent group, which
+must be the free nilpotent group of class 3 on two generators.
+
+In the last example, we obtain a confluent rewriting system for the
+Burnside group B(3,3) using the {\tt lenlex} ordering.
+
+\bigskip
+
+{\tt \obeylines\obeyspaces \parindent=0em \parskip=0in \ttspace
+>: \#
+>: \# The problem free3 contains a rewriting system for the free group on
+>: \# {a,b,c} and defines the lenlex ordering.
+>: \#
+>: !more free3.sys
+system
+word\_type:  group
+ngens:  3
+naming\_convention:  letters a
+numbering\_convention:  1\_-1
+inverse\_convention:  case
+weight\_convention:  constant
+level\_convention:  constant
+nsub:  1
+subsystems:  
+free3.sb1
+>: !more free3.sb1
+subsystem
+rule\_type:  subword
+index\_type:  automaton
+external:  len\_names
+compressed:  no
+rule\_file:  free3.rl1
+>: !more free3.rl1
+2 aA 0 @
+2 Aa 0 @
+2 bB 0 @
+2 Bb 0 @
+2 cC 0 @
+2 Cc 0 @
+>: restore free3
+>: \#
+>: \# Let us watch a bit of what is going on during the computations which
+>: \# follow.
+>: \#
+>: print\_level 1
+>: \#
+>: \# Let us add rules which say that the cube of every word of length at
+>: \# most 4 is trivial.
+>: \#
+>: add\_powers
+Enter exponent:  3
+Enter maximum length of words:  4
+Enter max saved left side (positive integer):  10
+Enter max saved right side (nonnegative integer):  10
+The number of new rules is 89
+The number of failures is 0
+Reducing all subsystems of type 1
+>: \#
+>: \# Now let us try the Knuth-Bendix procedure with fairly short overlaps.
+>: \#
+>: kb 6 -1 10 10
+
+kb\_two\_step:  maxlen = 6, num\_iter = -1
+Forming overlaps of subsystem at 356576 with subsystem at 356576
+Applying heuristics to entire save list.
+Reducing the save list.
+Forming overlaps of subsystem at 356576 with subsystem at 370920
+Forming overlaps of subsystem at 370920 with subsystem at 356576
+Forming overlaps of subsystem at 370920 with subsystem at 370920
+Applying heuristics to entire save list.
+Reducing the save list.
+Forming overlaps of subsystem at 356576 with subsystem at 373944
+Forming overlaps of subsystem at 373944 with subsystem at 356576
+Forming overlaps of subsystem at 373944 with subsystem at 373944
+Applying heuristics to entire save list.
+Reducing the save list.
+Forming overlaps of subsystem at 356576 with subsystem at 373384
+Forming overlaps of subsystem at 373384 with subsystem at 356576
+Forming overlaps of subsystem at 373384 with subsystem at 373384
+>: \#
+>: \# The order of B(3,3) is 2187.  Let us estimate the number of words of
+>: \# length up to 20 which are irreducible with respect to the current
+>: \# rewriting system.
+>: \#
+>: probe
+Enter number of trials:  200
+Enter maximum length:  20
+Enter random seed:  557713
+   0             1      1             6      2            24
+   3         85.08      4        245.64      5        645.96
+   6       1310.04      7        2662.8      8       5158.56
+   9       10867.7     10       23152.3     11       45133.4
+  12       88861.4     13        166121     14        348752
+  15        725455     16   1.51793e+06     17   3.01493e+06
+  18   6.09212e+06     19   1.17659e+07     20   2.32453e+07
+
+
+The total is 4.70546e+07
+>: \#
+>: \# Clearly we don't have a confluent system for B(3,3) yet.  We
+>: \# must either add more cubes or run the Knuth-Bendix procedure
+>: \# harder.  Let us try the latter.
+>: \#
+>: kb 10 -1 12 12
+
+kb\_two\_step:  maxlen = 10, num\_iter = -1
+Forming overlaps of subsystem at 356576 with subsystem at 356576
+Applying heuristics to entire save list.
+Reducing the save list.
+Forming overlaps of subsystem at 356576 with subsystem at 370920
+Forming overlaps of subsystem at 370920 with subsystem at 356576
+Forming overlaps of subsystem at 370920 with subsystem at 370920
+Applying heuristics to entire save list.
+Reducing the save list.
+Forming overlaps of subsystem at 356576 with subsystem at 369296
+Forming overlaps of subsystem at 369296 with subsystem at 356576
+Forming overlaps of subsystem at 369296 with subsystem at 369296
+>: summary
+
+alphabet\_type:  group,  ngens:  3,   nbits:  3
+rewriting strategy:  from\_left
+Knuth-Bendix strategy:  two\_step
+There is 1 subsystem:
+
+rule\_type:  subword,  index\_type:  automaton
+nrules = 1809
+llmin  = 2,  llmax = 8,  lltotal = 11414
+lrmin  = 0,  lrmax = 8,  lrtotal = 10503
+
+>: probe
+Enter number of trials:  200
+Enter maximum length:  20
+Enter random seed:  413257
+   0             1      1             6      2            24
+   3         84.72      4        248.28      5        650.88
+   6        949.08      7        270.72      8         65.76
+   9            36     10         23.04     11             0
+  12             0     13             0     14             0
+  15             0     16             0     17             0
+  18             0     19             0     20             0
+
+
+The total is 2359.48
+>: \#
+>: \# Now it looks as if we have what we want.  To be sure of confluence,
+>: \# we must form overlaps of length up to 15.
+>: \#
+>: kb 15 -1 20 20
+
+kb\_two\_step:  maxlen = 15, num\_iter = -1
+Forming overlaps of subsystem at 356576 with subsystem at 356576
+>: summary
+
+alphabet\_type:  group,  ngens:  3,   nbits:  3
+rewriting strategy:  from\_left
+Knuth-Bendix strategy:  two\_step
+There is 1 subsystem:
+
+rule\_type:  subword,  index\_type:  automaton
+nrules = 1809
+llmin  = 2,  llmax = 8,  lltotal = 11414
+lrmin  = 0,  lrmax = 8,  lrtotal = 10503
+
+>: \#
+>: \# There was no change, so our system is confluent.  RKBP can not verify
+>: \# directly that our group has exponent 3.  We can try a few cubes of
+>: \# moderately long words.
+>: \#
+>: add\_random\_powers
+Enter number of trials:  20
+Enter exponent:  3
+Enter maximum length of words:  12
+Enter max saved left side (positive integer):  50
+Enter max saved right side (nonnegative integer):  50
+Enter random seed:  971532
+The number of new rules is 0
+The number of failures is 0
+>: \#
+>: \# The fact that all of these cubes were trivial and probe gave us a
+>: \# value for the total number of irreducible words which is quite close
+>: \# to the order of B(3,3) is very strong evidence that we really have
+>: \# B(3,3).
+>: \#
+}
+
+
+\bigskip
+\noindent 8. Future plans
+
+\nobreak
+
+Continuing development efforts are planned for RKBP.  The main
+focus will be to give the user much greater control over the execution
+of the Knuth-Bendix procedure.  The user should be able to issue
+instructions such as ``form overlaps between subsystems 3 and 5 and
+place any new rules discovered in subsystem 2.''  When memory is
+tight, the user should be able to decide that certain subsystems are
+to be written to external files and the space they occupy is to be
+made available for new rules.
+
+\bigskip
+\noindent 9. Changes by version
+
+\nobreak
+
+The first public release of RKBP was Version 1.20.
+
+In addition to fixing several bugs, Version 1.25 introduced broken
+rules, consolidated some of the source files, changed the operation of
+the commands {\tt dots}, {\tt heuristics}, and {\tt output}, and added
+the commands {\tt add\_powers}, {\tt add\_random\_powers}, {\tt
+kb\_random}, {\tt log}, {\tt nodots}, {\tt noheuristics}, {\tt nolog},
+{\tt rewrite\_rules}, and {\tt rewrite\_words}.  Script files of
+commands may produce different results than were obtained with Version
+1.20.
+
+\bigskip
+\centerline{References}
+\bigskip
+Sims, C. C. {\it Computation With Finitely Presented Groups.}
+Cambridge University Press 1993.
+
+\end

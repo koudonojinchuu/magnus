@@ -1,0 +1,46 @@
+@@ Parameters
+
+@@Parameters
+
+\ni Enumerators in Magnus have been designed to be as flexible as possible.
+This is accomplished by means of so-called paramaters, which allow the user to
+choose a variety of different ways to carry out the enumeration of various
+group-theoretic objects.  Each enumerator window  comes equipped with 
+a "Parameters" button. On selecting "Parameters" a "Paramaters Window" is
+provided so that the user can select whichever  parameters are most appropriate
+for the problem being investigated. During execution of an algorithm, some of
+the parameters initially set can be changed and some cannot be, i.e., once 
+the start button has been pressed, such parameters cannot be altered. If one 
+wants to change a parameter, one brings up the paramater window, changes the
+parameter and then presses the "Apply" button to implement these changes.
+If any of such changes are invalid, an  error message will appear at the 
+bottom of the parameters window. The user will not be allowed to leave the 
+parameters window until all changes are accepted by the system. These changes
+can be cancelled by simply pressing the Cancel button. 
+
+At present there are several types of parameters:
+
+@      * Integer@ParametersGeneral::Types of parameters: Integer@
+
+@      * Word@ParametersGeneral::Types of parameters: Word@
+
+@      * Radio Button@ParametersGeneral::Types of parameters: Radio Button@
+
+@@Types of parameters: Integer
+
+\ni Integer parameters can take on any non-negative integer in a specified 
+range. There are restrictions on such ranges. If the user inputs a range which
+is forbidden by the system, an error message will be triggered and the user 
+will need to adjust the range accordingly.
+
+@@Types of parameters: Word
+
+\ni Word parameters are subject only to the requirements laid down for
+words in general.
+
+@@Types of parameters: Radio Button
+
+\ni Radio buttons are provided to so that it is possible to choose different 
+paramters. Such radio buttons are divided into groups, separated by lines.
+The user has to click on a radio button to select it. Sometimes, the appearance
+of a parameters window will change as a result of new choices.

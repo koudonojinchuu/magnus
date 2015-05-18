@@ -1,0 +1,46 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		finitely presented group
+
+Objects highlighted:	group G 
+
+Name in the menu:	Is G nilpotent ?
+
+Problem type:		problem object
+
+Help file:		IsNilpotentProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+
+2. Enumerate normal closure of relators
+  
+3. Seek a rewriting system for G
+    
+4. Seek a ShortLex automatic structure for G
+
+   Links:
+
+	Click here to see a word acceptor.
+
+	Click here to the first difference machine.
+
+	Click here to the second difference machine.
+
+	Click here to the general multiplier.
+
+5. Compute lower central quotients for G
+
+6. Solve using lower central quotients of G

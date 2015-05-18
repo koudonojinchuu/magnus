@@ -1,0 +1,44 @@
+@@How this problem works
+
+@@FP
+
+
+
+@@ABELIAN
+
+@@NILPOTENT
+
+\ni We use the word problem in the containing group to check whether
+each of the generators of the subgroup is trivial. If this is the case,
+the subgroup is trivial; otherwise the subgroup is not trivial.
+
+\ni For a general discussion of finitely generated nilpotent groups, see
+@Nilpotent_groups@Nilpotent_groups::
+General discussion@
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

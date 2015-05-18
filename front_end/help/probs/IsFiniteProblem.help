@@ -1,0 +1,61 @@
+@@How this problem works
+
+@@FP
+
+\ni We check first to see if the abelianization of the given group G is
+finite. If it is, we determine if the given presentation is metric small
+cancellation. A metric small cancellation group is finite if and only it is
+finite cyclic. Thus we can determine if G is finite. We check next
+whether G  has an automatic structure. Since there is an algorithm
+which determines whether an automatic group is or is not finite, this suffices
+to determine whether G is finite. Finally we apply the procedure of Todd-Coxeter
+to try to determine whether G is finite.
+
+\ni For a general discussion of finitely presented groups, see
+@General discussion about finitely presented groups@General_fp_gps::General discussion@
+
+@@ABELIAN
+
+\ni The given group is decomposed into a direct product of cyclic
+groups. It is finite if there are no infinite cyclic summands
+and its order is the product of the finite cyclic factors.
+Otherwise its order is infinite.
+For a discussion of general finitely generated abelian groups,
+see @General discussion@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+\ni A nilpotent group is finite if and only its abelianization is finite.
+We invoke the finiteness algorithm for abelian groups to determine then
+whether the given group is finite.
+
+
+@@SMALL_CANCELLATION
+
+\ni A group G which has a metric small cancellation presentation is finite 
+if and only it is finite cyclic. So, in order to decide whether such a group
+is finite, we check first whether it is abelian. Since  metric small
+cancellation groups have solvable word problem, we need only determine whether
+all of the commutators whose entries are generators are trivial. We then 
+invoke the algorithm for deciding whether an abelian group is finite to
+determine whether or not G is finite.
+
+
+@@ONE_RELATOR
+
+\ni A one-relator group G is finite if and only if the given presentation
+of G with a single defining relation is presented on a single generator
+and the defining relator is a non-zero power of this generator. 
+
+
+
+
+
+
+
+
+
+
+
+
+

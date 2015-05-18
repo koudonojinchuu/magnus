@@ -1,0 +1,35 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		one relator group
+
+Objects highlighted:	word W, subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Does W represent an element of a Magnus subgroup H ?
+
+Problem type:		problem object
+
+Help file:		ExtendedWordProblem.help
+
+
+			     Fast checks:
+
+
+1. Check whether H is in fact a magnus subgroup and refuse to start
+   the computation if it is not.
+
+
+			     Algorithms:
+
+
+1. For the use of this problem

@@ -1,0 +1,58 @@
+#!/usr/local/bin/perl
+
+## Copyright (C) 1994 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: comments, which finds, at and below .,  all comments in source,
+##           header, and Makefiles containing registered @-type markers.
+##           It prints them in context along with the file relative pathname.
+##
+##           Currently registered initials: ep, jml, rn, sl, sr, stc
+##
+## Principal Author: Roger Needham
+##
+## Status: Useable.
+##
+## Revision History:
+##
+## Next implementation steps:
+##
+## * Allow more context than 3 lines.
+
+
+open( FIND, "/bin/find . -type f -print |")
+  || die "Unrecoverable error: couldn't run $find: $!\n";
+
+while ($name = <FIND>) {
+
+  if ( !($name =~ /(\.([Chc]|mk|texi?|in|tcl)$)|Makefile/) &&
+       !((-x $name) && (-T $name)) ) { next; }
+
+  $did_pathname = 0;
+  chop $name;
+  open(FILE, $name) || print "** Couldn't open $name\n";
+  $pred = "";
+  $context = 0;
+  $did_separator = 1;
+  while(<FILE>) {
+    if ( $context ) { print $_; }
+    else {
+      if ( !$did_separator ) {
+        $did_separator = 1;
+        print "\n";
+      }
+    }
+    if ( /@(ep|jml|rn|sl|sr|stc)/ ) {
+      $did_separator = 0;
+      if ( !$did_pathname ) {
+        $did_pathname = 1;
+        print "\n\n\n-------------------------------------\nin $name:\n\n";
+      }
+      if ( !$context ) { print "$pred$_"; }
+      $context = 1;
+    } else { $context = 0; }
+    $pred = $_;
+  }
+  close(FILE);
+}
+close(FIND);

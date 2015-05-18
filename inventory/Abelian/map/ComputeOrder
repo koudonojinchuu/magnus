@@ -1,0 +1,35 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	automorphism h
+
+Other objects present:  group A
+
+Name in the menu:	Compute the order of h
+
+Problem type:		problem object
+
+Help file:		AbelianOrderOfAuto.help
+
+
+			     Algorithms:
+
+
+1. Compute abelian invariants of A
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of A
+
+2. For the use of this problem
+

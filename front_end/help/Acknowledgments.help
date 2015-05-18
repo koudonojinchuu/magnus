@@ -1,0 +1,29 @@
+@@Acknowledgments
+
+The Magnus project has been generously supported by the United States
+National Science Foundation, grant number DMS-9103098.  In particular,
+we would like to acknowledge the help and advice of Ann Boyle, Michael
+Steuerwald  and Alvin I. Thaler, of the U.S. National Science
+Foundation.
+
+We would also like to acknowledge the generous, continuing  support 
+of the City College of the City University of New York. Finally, we
+would like to acknowledge the hospitality over many years and the 
+help of the Federal Institute of Technology, Zurich, the support 
+of the Swiss National Science Foundation, who made available to us 
+a full-time programmer for eighteen months and the help of Professor
+Urs Stammbach of ETH, the go between New York and Zurich, who made
+this collaboration possible.
+
+\ni Many people have contributed software to Magnus. In particular, we
+would like to mention the contributions of Derek Holt and Sarah Rees
+(Automatic groups, Knuth-Bendix), Charles Sims (Knuth-Bendix), 
+John Groves (Homology), Chuck Miller (algorithms involving free groups)
+ and David Epstein (Automatic groups). Their code has been used extensively
+in Magnus and we are extremely grateful to them for allowing us to use 
+their work here.
+
+
+
+
+

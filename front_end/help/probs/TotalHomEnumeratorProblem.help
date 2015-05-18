@@ -1,0 +1,20 @@
+@@How this problem works
+
+@@FP
+
+\ni Given two groups G and H. We totally enumerate 
+all maps from G to H by enumerating tuples of words 
+in H - { u_1 , ... , u_n }, where n is a number of 
+generators for G. 
+
+Then if the word problem is solvable in H we can check whether 
+the map x_i -> u_i, where x_i are generators for G can be extended 
+to homomorphism. If it can be extended then this map is the  
+homomorphism and we try to find the next one. Otherwise
+we take the next tuple and do the same with it and
+so on.
+
+\ni For a general discussion of finitely presented groups, see
+@General_finitely_presented_groups@General_fp_gps::General discussion@    
+
+ 

@@ -1,0 +1,60 @@
+0.
+You need subversion with ssl support (available on subversion.tigris.org) in order to download Magnus from sourceforge repository.
+Note: I could not install svn with ssl using Fink, so I advice to use a Fink-independent version listed on the Subversion download page.
+
+1.
+To compile Magnus you'll need XCode from connect.apple.com
+You don't need it to run precompiled version of Magnus
+
+2.
+(this step is needed to install X11, if you plan to use TclTkAqua, there is no need to install X11)
+For Mac OS 10.3 download X11User.pkg from
+http://wsidecar.apple.com/cgi-bin/nph-reg3rdpty1.pl/product=02232&cat=1&platform=osx&method=sa/X11User.dmg
+
+For 10.4 it is available on the installation DVD in extra software package.
+
+Install it, if you decided to use X11-tcl/tk
+
+3.
+At this point you can attempt item 7(compilation), on my computer make was not available at this point, so I had to install Fink
+Fink is a set of unix-style tools for Mac (like Cygwin for Windows),
+you can get it from:
+
+http://fink.sourceforge.net/download/index.php?phpLang=en
+
+note that different versions of Mac OS require different versions of Fink.
+
+4.
+FinkCommander - is a user friendly interface to Fink's package
+management, it is available as a separate binary in the Fink package or you can get a more recent version from
+
+http://prdownloads.sourceforge.net/finkcommander/FinkCommander_0.5.4.dmg.gz?download
+
+It does not have an installer, just copy FinkCommander from the
+package to /Applications (worked for me).
+
+5.
+After that run FinkCommander and install make.
+
+6.
+Either download and install TclTkAqua or use Fink to install X11-Tcl/Tk, in the latter case you need X11 mentioned above.
+
+7. (Compilation)
+The most recent version of Magnus can be obtained from the Subversion repository (using Subversion, can also be installed using FinkCommander, you need the one with SSL support):
+
+https://svn.sourceforge.net/svnroot/magnus/trunk/magnus
+
+then start X11 and from X11 terminal run
+> ./configure
+
+Here both Linux and BSD work for Mac OS
+path to tcl has to be /usr/bin/wish for TclTkAqua or /sw/bin/wish for X11-Tcl/Tk.
+For all other options defaults are ok.
+
+then
+> make
+> cd front_end
+> ./magnus
+
+have fun!
+

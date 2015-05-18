@@ -1,0 +1,13 @@
+@@How this problem works
+
+
+\ni The canonical decomposition of a subgroup can be obtained by
+first using the presentation of its overgroup to obtain a presentation
+of the subgroup. This allows us to find its canonical decomposition 
+by Gaussian elimination as usual.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+

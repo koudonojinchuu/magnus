@@ -1,0 +1,53 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		finitely presented group 
+
+Objects highlighted:	word W 
+
+Other objects present:	group G
+
+Name in the menu:	Is W of finite order in G ?
+
+Problem type:		problem object
+
+Help file:		OrderOfElt.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+  
+2. Compute abelian invariants of G
+
+3. Compute the nilpotent quotients for G
+
+4. Compute the problem, using nilpotent quotients for G
+
+5. Enumerate normal closure of relators of G
+  
+6. Seek a rewriting system for G
+    
+7. Seek a ShortLex automatic structure for G
+	
+   Links:
+	
+	Click here to see a word acceptor.
+
+	Click here to the first difference machine.
+
+	Click here to the second difference machine.
+
+	Click here to the general multiplier.
+
+//@db Algorithms 3 and 4 should be moved to the end of the list,
+//    so that the problem object looks similar to others PO's

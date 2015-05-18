@@ -1,0 +1,28 @@
+@@How this problem works
+
+
+
+@@FP
+
+
+@@ABELIAN
+
+\ni The given group is decomposed into a direct product of
+cyclic groups. The generators of the finite cyclic groups
+are a set of generators of its torsion subgroup.
+
+\ni For a discussion of general finitely generated abelian groups,
+see @General_abelian_groups@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR@@
+

@@ -1,0 +1,194 @@
+SIZE=3031
+data 'STR#' (136, "nodeErrs") {
+	$"002C 0E55 6E6B 6E6F 776E 2065 7272 6F72"            /* .,.Unknown error */
+	$"2E3A 4647 4C6E 6F64 653A 2020 6361 6E27"            /* .:FGLnode:  can' */
+	$"7420 6361 6C6C 2066 756E 6374 696F 6E20"            /* t call function  */
+	$"6265 6361 7573 6520 6675 6E63 2069 7320"            /* because func is  */
+	$"6E6F 7420 6465 6669 6E65 642E 0A6E 6F74"            /* not defined..not */
+	$"2069 6E20 7573 6556 4647 4C77 616C 6B4E"            /*  in useVFGLwalkN */
+	$"6F64 653A 3A77 616C 6B3A 2064 6F6E 2774"            /* ode::walk: don't */
+	$"206B 6E6F 7720 7768 6963 6820 474C 7661"            /*  know which GLva */
+	$"7220 746F 2077 616C 6B20 6265 6361 7573"            /* r to walk becaus */
+	$"6520 4647 4C6E 6F64 653A 3A76 6172 2069"            /* e FGLnode::var i */
+	$"7320 6E6F 7420 6465 6669 6E65 642E 8E43"            /* s not defined.ŽC */
+	$"616E 2774 2077 616C 6B20 7468 6973 2047"            /* an't walk this G */
+	$"4C76 6172 2062 6563 6175 7365 2061 6C6C"            /* Lvar because all */
+	$"206F 6620 6974 7320 7761 6C6B 2049 4420"            /*  of its walk ID  */
+	$"736C 6F74 7320 6172 6520 696E 2075 7365"            /* slots are in use */
+	$"2E20 2049 6E63 7265 6173 6520 4944 6163"            /* .  Increase IDac */
+	$"7469 7665 4D61 7820 6174 2047 4C76 6172"            /* tiveMax at GLvar */
+	$"2069 6E69 7469 616C 697A 6174 696F 6E20"            /*  initialization  */
+	$"7469 6D65 2074 6F20 6372 6561 7465 206D"            /* time to create m */
+	$"6F72 6520 4944 2073 6C6F 7473 2E44 4361"            /* ore ID slots.DCa */
+	$"6E27 7420 6361 6C6C 2072 6F75 7469 6E65"            /* n't call routine */
+	$"206F 7220 7265 7370 6F6E 6420 746F 206D"            /*  or respond to m */
+	$"6573 7361 6765 2062 6563 6175 7365 206D"            /* essage because m */
+	$"6169 6C50 6572 736F 6E20 756E 6B6E 6F77"            /* ailPerson unknow */
+	$"6E2E 3955 6E6B 6E6F 776E 2065 6E74 7279"            /* n.9Unknown entry */
+	$"506F 696E 7420 6D6F 6469 6669 6572 2064"            /* Point modifier d */
+	$"6574 6563 7465 6420 696E 2061 2043 474C"            /* etected in a CGL */
+	$"6E6F 6465 2072 6F75 7469 6E65 1170 726F"            /* node routine.pro */
+	$"6772 616D 6D69 6E67 2065 7272 6F72 6662"            /* gramming errorfb */
+	$"6164 206E 6F64 6554 7970 6549 6E64 6578"            /* ad nodeTypeIndex */
+	$"2065 6E63 6F75 7465 7265 6420 696E 0D61"            /*  encoutered inÂa */
+	$"6363 6573 734E 6F6E 5374 616E 6461 7264"            /* ccessNonStandard */
+	$"5761 6C6B 2829 2C20 6120 7465 6D70 6C61"            /* Walk(), a templa */
+	$"7465 2066 756E 6374 696F 6E20 6465 6669"            /* te function defi */
+	$"6E65 6420 696E 2066 696C 6520 474C 7061"            /* ned in file GLpa */
+	$"7463 682E 633B 6120 4647 4C77 616C 6B4E"            /* tch.c;a FGLwalkN */
+	$"6F64 6520 6D65 7468 6F64 2068 6173 2064"            /* ode method has d */
+	$"6574 6563 7465 6420 6120 636F 7272 7570"            /* etected a corrup */
+	$"7420 6564 6765 2072 6566 6572 656E 6365"            /* t edge reference */
+	$"2E3E 4647 4C77 616C 6B4E 6F64 653A 3A77"            /* .>FGLwalkNode::w */
+	$"616C 6B3A 2063 616E 6E6F 7420 7374 6172"            /* alk: cannot star */
+	$"7420 6120 7761 6C6B 2077 6974 6820 6964"            /* t a walk with id */
+	$"6561 6C20 6261 7365 2076 6572 7465 782E"            /* eal base vertex. */
+	$"3461 2046 474C 7761 6C6B 4E6F 6465 206D"            /* 4a FGLwalkNode m */
+	$"6574 686F 6420 6861 7320 6465 7465 6374"            /* ethod has detect */
+	$"6564 2061 2063 6F72 7275 7074 2077 616C"            /* ed a corrupt wal */
+	$"6B20 4944 2E3B 4673 7472 546F 474C 7661"            /* k ID.;FstrToGLva */
+	$"724E 6F64 653A 2063 6F72 7275 7074 2073"            /* rNode: corrupt s */
+	$"7472 696E 6720 6465 7465 6374 6564 2C20"            /* tring detected,  */
+	$"6361 6E6E 6F74 206D 616B 6520 776F 7264"            /* cannot make word */
+	$"2E35 4673 7472 546F 474C 7661 724E 6F64"            /* .5FstrToGLvarNod */
+	$"653A 2075 6E65 7870 6563 7465 6420 656E"            /* e: unexpected en */
+	$"6420 746F 206C 6973 7420 6F66 2072 656C"            /* d to list of rel */
+	$"6174 696F 6E73 2E42 4666 6F6C 644E 6F64"            /* ations.BFfoldNod */
+	$"653A 3A20 4966 6F6C 644E 6F64 653A 2069"            /* e:: IfoldNode: i */
+	$"6465 616C 2076 6572 7465 7820 6861 7320"            /* deal vertex has  */
+	$"6E6F 2072 6561 6C20 6564 6765 2077 6974"            /* no real edge wit */
+	$"6820 696E 6465 7820 312E 8646 666F 6C64"            /* h index 1.†Ffold */
+	$"4E6F 6465 3A3A 2063 616E 2774 2066 6F6C"            /* Node:: can't fol */
+	$"6420 7468 6973 2047 4C76 6172 2062 6563"            /* d this GLvar bec */
+	$"6175 7365 2069 7427 7320 6261 636B 7961"            /* ause it's backya */
+	$"7264 2069 736E 2774 2062 6967 2065 6E6F"            /* rd isn't big eno */
+	$"7567 6820 746F 2073 7570 706F 7274 2074"            /* ugh to support t */
+	$"6865 2072 6571 7569 7265 6420 7363 7261"            /* he required scra */
+	$"7463 682D 7061 6420 6F66 2073 697A 656F"            /* tch-pad of sizeo */
+	$"6628 426F 6F6C 6561 6E29 2062 7974 6573"            /* f(Boolean) bytes */
+	$"2E55 4673 7472 546F 474C 7661 724E 6F64"            /* .UFstrToGLvarNod */
+	$"653A 3A20 6361 6E27 7420 6C69 6E6B 206C"            /* e:: can't link l */
+	$"6173 7420 776F 7264 2074 6F20 726F 6F74"            /* ast word to root */
+	$"2062 6563 6175 7365 2065 4672 6F6D 5072"            /*  because eFromPr */
+	$"6576 696F 7573 4C69 6E65 206E 6F74 2064"            /* eviousLine not d */
+	$"6566 696E 6564 2E5A 6261 636B 7961 7264"            /* efined.Zbackyard */
+	$"2069 736E 2774 2062 6967 2065 6E6F 7567"            /*  isn't big enoug */
+	$"6820 746F 2073 7570 706F 7274 2074 6865"            /* h to support the */
+	$"2072 6571 7569 7265 6420 7363 7261 7463"            /*  required scratc */
+	$"682D 7061 6420 6F66 2073 697A 656F 6628"            /* h-pad of sizeof( */
+	$"6272 6561 6443 7275 6D62 2920 6279 7465"            /* breadCrumb) byte */
+	$"732E 1774 6869 7320 6D65 7373 6167 6520"            /* s..this message  */
+	$"6E6F 7420 696E 2075 7365 4246 636C 6F6E"            /* not in useBFclon */
+	$"654E 6F64 653A 2063 616E 2774 2063 6C6F"            /* eNode: can't clo */
+	$"6E65 2062 6563 6175 7365 2069 6465 616C"            /* ne because ideal */
+	$"2065 6E74 7279 2076 6572 7465 7820 6973"            /*  entry vertex is */
+	$"206E 6F6E 6578 6973 7465 6E74 2E40 4663"            /*  nonexistent.@Fc */
+	$"6C6F 6E65 4E6F 6465 3A20 6361 6E27 7420"            /* loneNode: can't  */
+	$"636C 6F6E 6520 6265 6361 7573 6520 6964"            /* clone because id */
+	$"6561 6C20 656E 7472 7920 6564 6765 2069"            /* eal entry edge i */
+	$"7320 6E6F 6E65 7869 7374 656E 742E 6E46"            /* s nonexistent.nF */
+	$"636C 6F6E 654E 6F64 653A 2063 616E 2774"            /* cloneNode: can't */
+	$"2063 6C6F 6E65 2062 6563 6175 7365 206F"            /*  clone because o */
+	$"6666 7365 7420 696E 746F 2062 6163 6B59"            /* ffset into backY */
+	$"6172 6420 646F 6573 6E27 7420 6C65 6176"            /* ard doesn't leav */
+	$"6520 656E 6F75 6768 2073 6372 6174 6368"            /* e enough scratch */
+	$"2061 7265 6120 6F66 2073 697A 656F 6628"            /*  area of sizeof( */
+	$"474C 7265 6629 2062 7974 6573 2E38 4663"            /* GLref) bytes.8Fc */
+	$"6C6F 6E65 4E6F 6465 3A3A 2063 6C6F 6E65"            /* loneNode:: clone */
+	$"496E 6974 3A20 6361 6E27 7420 636C 6F6E"            /* Init: can't clon */
+	$"6520 6120 474C 7661 7220 6F6E 746F 2069"            /* e a GLvar onto i */
+	$"7473 656C 662E 4B46 6772 6F77 4E6F 6465"            /* tself.KFgrowNode */
+	$"3A3A 2063 616E 2774 2067 726F 7720 6564"            /* :: can't grow ed */
+	$"6765 2062 6563 6175 7365 2047 4C76 6172"            /* ge because GLvar */
+	$"2069 7320 6E6F 7420 6C6F 6361 6C6C 7920"            /*  is not locally  */
+	$"696E 6A65 6374 6976 6520 6174 2072 6F6F"            /* injective at roo */
+	$"742E 3846 6772 6F77 4E6F 6465 3A3A 2047"            /* t.8FgrowNode:: G */
+	$"4C76 6172 2068 6173 206E 6F20 726F 6F74"            /* Lvar has no root */
+	$"2C20 6361 6E27 7420 7061 7373 2074 6F20"            /* , can't pass to  */
+	$"636C 6F6E 6520 6E6F 6465 2E37 4672 6564"            /* clone node.7Fred */
+	$"7563 6564 466F 6C64 4E6F 6465 3A3A 2073"            /* ucedFoldNode:: s */
+	$"6372 6174 6368 2061 7265 6120 6973 206E"            /* cratch area is n */
+	$"6F74 2073 6574 2075 7020 7072 6F70 6572"            /* ot set up proper */
+	$"6C79 2E25 4666 6F6C 644E 6F64 653A 3A20"            /* ly.%FfoldNode::  */
+	$"6174 5665 7274 6578 3A20 6261 6420 656E"            /* atVertex: bad en */
+	$"7472 7970 6F69 6E74 2E31 4667 726F 774E"            /* trypoint.1FgrowN */
+	$"6F64 653A 3A20 6361 6E27 7420 6964 656E"            /* ode:: can't iden */
+	$"7469 6679 2063 6C6F 6E65 2074 6F20 6D69"            /* tify clone to mi */
+	$"7373 696E 6720 6564 6765 2E3F 4654 5470"            /* ssing edge.?FTTp */
+	$"7265 734E 6F64 653A 2020 6361 6E27 7420"            /* resNode:  can't  */
+	$"6D61 6B65 2054 5470 7265 7320 6265 6361"            /* make TTpres beca */
+	$"7573 6520 6672 6565 2077 6F72 6420 6C69"            /* use free word li */
+	$"7374 2069 7320 656D 7074 7924 4654 5470"            /* st is empty$FTTp */
+	$"7265 734E 6F64 653A 206C 6F6F 7020 6465"            /* resNode: loop de */
+	$"7465 6374 6564 2069 6E20 7054 7265 652E"            /* tected in pTree. */
+	$"4246 5454 6472 6976 6572 4E6F 6465 3A20"            /* BFTTdriverNode:  */
+	$"4361 6E27 7420 6C6F 6164 2069 6E70 7574"            /* Can't load input */
+	$"5454 7072 6573 2062 6563 6175 7365 2069"            /* TTpres because i */
+	$"7473 2061 6C72 6561 6479 2064 6566 696E"            /* ts already defin */
+	$"6564 2E38 4654 5431 706E 6F64 653A 2020"            /* ed.8FTT1pnode:   */
+	$"4361 6E27 7420 7275 6E20 7375 626E 6F64"            /* Can't run subnod */
+	$"6520 6265 6361 7573 6520 6974 2069 7320"            /* e because it is  */
+	$"6E6F 7420 6465 6669 6E65 642E 5C46 704C"            /* not defined.\FpL */
+	$"6962 4E6F 6465 3A20 4361 6E27 7420 6669"            /* ibNode: Can't fi */
+	$"6E64 2063 6F6D 7061 7261 626C 6520 7072"            /* nd comparable pr */
+	$"6573 656E 7461 7469 6F73 6E20 6265 6361"            /* esentatiosn beca */
+	$"7573 6520 706F 696E 7465 7220 746F 2070"            /* use pointer to p */
+	$"5472 6565 206C 696E 6B6C 6973 7420 6973"            /* Tree linklist is */
+	$"206D 6973 7369 6E67 2E3F 6361 6E27 7420"            /*  missing.?can't  */
+	$"636F 6D70 6172 6520 7265 6C61 746F 7273"            /* compare relators */
+	$"2062 6563 6175 7365 2074 6865 7920 6172"            /*  because they ar */
+	$"6520 6E6F 7420 6F66 2074 6865 2073 616D"            /* e not of the sam */
+	$"6520 6C65 6E67 7468 2E51 4654 5431 6E6F"            /* e length.QFTT1no */
+	$"6465 3A20 6E65 7754 5470 7265 7320 7368"            /* de: newTTpres sh */
+	$"6F75 6C64 2062 6520 6465 6669 6E65 6420"            /* ould be defined  */
+	$"6174 2074 6869 7320 706F 696E 742E 2020"            /* at this point.   */
+	$"536F 6D65 7468 696E 6720 6261 6420 6861"            /* Something bad ha */
+	$"7320 6861 7070 656E 6564 2E52 4654 5431"            /* s happened.RFTT1 */
+	$"706E 6F64 653A 206E 6577 5454 7072 6573"            /* pnode: newTTpres */
+	$"2073 686F 756C 6420 6265 2064 6566 696E"            /*  should be defin */
+	$"6564 2061 7420 7468 6973 2070 6F69 6E74"            /* ed at this point */
+	$"2E20 2053 6F6D 6574 6869 6E67 2062 6164"            /* .  Something bad */
+	$"2068 6173 2068 6170 7065 6E65 642E 3E46"            /*  has happened.>F */
+	$"7265 6E75 6D62 6572 5072 6573 4E6F 6465"            /* renumberPresNode */
+	$"3A20 6361 6E27 7420 6275 696C 6420 7265"            /* : can't build re */
+	$"6E75 6D62 6572 6564 2067 6C6F 6261 6C20"            /* numbered global  */
+	$"7379 6D62 6F6C 2074 6162 6C65 2E9B 4654"            /* symbol table.›FT */
+	$"5432 6E6F 6465 3A20 7468 6520 5454 3220"            /* T2node: the TT2  */
+	$"6E6F 6465 2068 6173 2066 6169 6C65 642C"            /* node has failed, */
+	$"2062 7574 206E 6F20 7265 636F 7665 7279"            /*  but no recovery */
+	$"2068 6173 2062 6565 6E20 696D 706C 656D"            /*  has been implem */
+	$"656E 7465 642E 2020 5454 3220 7368 6F75"            /* ented.  TT2 shou */
+	$"6C64 206E 6F74 2066 6169 6C20 6265 6361"            /* ld not fail beca */
+	$"7573 6520 6974 2069 7320 6661 7374 2E20"            /* use it is fast.  */
+	$"2049 2064 6F6E 2774 206B 6E6F 7720 7265"            /*  I don't know re */
+	$"616C 6C79 2077 6861 7473 2067 6F69 6E67"            /* ally whats going */
+	$"206F 6E20 6865 7265 2E5D 4361 6E27 7420"            /*  on here.]Can't  */
+	$"636F 6E74 7374 7563 7420 4672 436C 6F6E"            /* contstuct FrClon */
+	$"654E 6F64 6520 6265 6361 7573 6520 7468"            /* eNode because th */
+	$"6520 7254 7265 6520 616E 6420 6974 7320"            /* e rTree and its  */
+	$"636C 6F6E 6520 6861 7665 2069 6E63 6F6E"            /* clone have incon */
+	$"7369 7374 656E 7420 6261 636B 7961 7264"            /* sistent backyard */
+	$"2073 697A 6573 2E37 756E 6578 7065 6374"            /*  sizes.7unexpect */
+	$"6564 2063 6F6E 6469 7469 6F6E 3A20 676C"            /* ed condition: gl */
+	$"6F62 616C 2075 5472 6565 206F 7220 6275"            /* obal uTree or bu */
+	$"6666 6572 2069 7320 6D69 7373 696E 676C"            /* ffer is missingl */
+	$"5468 6520 6765 6E65 7261 7469 6F6E 206F"            /* The generation o */
+	$"6620 7468 6520 4361 796C 6579 2067 7261"            /* f the Cayley gra */
+	$"7068 2068 6173 2070 7265 6D61 7475 7265"            /* ph has premature */
+	$"6C79 2074 696D 6564 206F 7574 2E20 2054"            /* ly timed out.  T */
+	$"5431 2077 696C 6C20 6265 2061 7474 656D"            /* T1 will be attem */
+	$"7074 6564 2061 6761 696E 2061 7420 6120"            /* pted again at a  */
+	$"6C61 7465 7220 6461 7465 2E0D 5054 6865"            /* later date.ÂPThe */
+	$"2054 5431 2063 6F6E 7365 7175 656E 6365"            /*  TT1 consequence */
+	$"2062 7566 6665 7220 7368 6F75 6C64 206E"            /*  buffer should n */
+	$"6F74 2065 7869 7374 2061 7420 7468 6973"            /* ot exist at this */
+	$"2070 6F69 6E74 2C20 706F 7373 6962 6C65"            /*  point, possible */
+	$"206D 656D 6F72 7920 6C65 616B 2E2C 6578"            /*  memory leak.,ex */
+	$"7465 726E 616C 5265 6620 6973 206E 6F74"            /* ternalRef is not */
+	$"2064 6566 696E 6564 2069 6E20 6261 7365"            /*  defined in base */
+	$"2062 6163 6B59 6172 642E 2C6E 6577 5072"            /*  backYard.,newPr */
+	$"6573 2073 686F 756C 6420 6E6F 7420 6265"            /* es should not be */
+	$"2064 6566 696E 6564 2061 7420 7468 6973"            /*  defined at this */
+	$"2070 6F69 6E74 2E"                                  /*  point. */
+};
+

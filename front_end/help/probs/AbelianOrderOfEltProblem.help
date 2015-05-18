@@ -1,0 +1,25 @@
+@@How this problem works
+@@FP
+
+@@ABELIAN
+
+\ni In order to compute the order of the element represented by
+a given word, we first compute its canonical decomposition. The
+order of the element can then be read off from this decomposition.
+
+\ni For a general discussion see 
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+

@@ -1,0 +1,34 @@
+%% This is AMSLaTeX source.
+%% This file is a wrapper for manual_incl.tex, which contains the
+%% actual source.
+
+\documentstyle[11pt]{report}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\input{include/manual_macros}
+
+\begin{document}
+
+	\begin{titlepage}
+
+		\vspace*{0.25\textheight}
+		\noindent{\Huge\bf Magnus Reference Manual}\\
+		\rule{\textwidth}{1.5mm}
+		\begin{flushright}
+			27 May, 1995
+		\end{flushright}
+		\vfill
+		\noindent{\Large The New York Group Theory Cooperative}\\
+		\rule{\textwidth}{0.75mm}
+		\vspace*{0.1\textheight}
+
+	\end{titlepage}
+
+	\tableofcontents
+
+	\setcounter{chapter}{2}
+	\input{include/manual_incl}
+
+\end{document}

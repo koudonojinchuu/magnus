@@ -1,0 +1,19 @@
+
+void tc_apply();
+void tc_assemble_edp();
+void tc_assemble_gens();
+void tc_check_index1();
+void tc_coinc();
+void tc_coinc_cols12();
+void tc_compact();
+void tc_ctrenumber();
+void tc_enum();
+void tc_norelator();
+void tc_print_ct();
+void tc_proc_ded();
+void tc_set_relators();
+void tc_subg_proc();
+void tc_text();
+void tc_time();
+void tc_translate();
+void tc_todd_coxeter();

@@ -1,0 +1,44 @@
+@@How this problem works
+
+@@FP
+
+
+
+@@ABELIAN
+
+@@NILPOTENT
+
+\ni We compute a presentation for the subgroup and then check to see
+if the abelianization of the subgroup is finite. If so, the subgroup
+is finite. If not, the subgroup is infinite.
+
+\ni For a general discussion of finitely generated nilpotent groups, see
+@Nilpotent_groups@Nilpotent_groups::
+General discussion@
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,747 @@
+%% This is AMSLaTeX source, included by manual_incl.tex.
+
+
+%%--------------------------------------------------------------------
+\section{The Back End}
+
+%%....................................................................
+\subsection{Introduction}
+
+
+The back end is comprised of C++ classes, and global functions which
+act on objects in these classes.
+
+We divide the classes into three conceptual types: user, utility, and
+private.
+
+\lskip
+User classes wrap pointers to object representations
+(\S\ref{obj_reps}). They are intended as high-level constructs with
+fixed interfaces and intuitive semantics.  As objects in such classes
+occupy only as much memory as a pointer, they can be efficiently
+copied and assigned.  The typical use of objects in a user class is
+through automatic variables and class data members. Only in
+extraordinary circumstances would one have a pointer to such an
+object; the object itself takes no more space, and construction,
+assignment, and destruction are handled automatically.
+
+\lskip
+Utility classes are those which do useful, general things, but which
+would not reasonably use wrapped object representations.  For example,
+a \code{Cell} class might have two data members: an object of a user
+class and a pointer to a \code{Cell}; this could be used for
+externally linked lists. To be reusable, utility class interfaces and
+semantics are fixed.
+
+\lskip
+Private classes are those which the implementer uses to hide data
+representations or perform other hidden tasks. As they are not
+intended to be reusable, their interfaces and functionality are
+subject to change without notice.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Object Representations}\label{obj_reps}
+
+In the section {\em Writing User Classes} of the {\em Project
+Guidelines} chapter we described a simple scheme for wrapping pointers
+to object representations using the classes
+\code{ObjectOf} and \code{RefCounter}. This scheme is a legacy. The
+diagram below describes a more general scheme which better supports
+inheritance. The class {\sf A} uses the old paradigm. The hierarchy of
+classes {\sf B}, {\sf C}, {\sf D} use the new one.
+
+\vspace{20pt}
+
+\epsfbox{ps/objects.ps}
+
+\vspace{20pt}
+
+
+
+
+%%....................................................................
+\subsection{General}
+
+The directory \file{magnus/back\_end/general} contains a number of user
+and utility classes of general interest.
+
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{AssociationsOf<Key,Val>}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{template <class Key, class Val> class AssociationsOf :\\
+public ObjectOf< AssociationsRep<Key,Val> >}\\
+is defined in \file{magnus/back\_end/general/include/Associations.h}.\\
+It implements simple association lists.
+
+
+\subsubheading{Special Notes}
+
+\noindent Class \code{Key} must have an \code{==} operator.\\
+Class \code{Val} must have an assignment operator.\\
+Both must have copy constructors and destructors.\\
+There must be an\\
+\code{ostream\& operator << ( ostream\&, const Type\& )}\\
+and a conversion of \code{Key} to \code{Type}.
+
+\noindent Note that if \code{Key} or \code{Val} is not a user class then
+\code{AssociationsOf<Key,Val>} will perform inefficient copying operations.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{AssociationsIterator<Key,Val>}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{template <class Key, class Val> class AssociationsIterator :\\
+public ObjectOf< AssociationsIteratorRep<Key,Val> >}\\
+is defined in \file{magnus/back\_end/general/include/Associations.h}.\\
+It is for iterating over an \code{AssociationsOf<Key,Val>}.
+
+
+\subsubheading{Special Notes}
+
+\begin{itemize}
+\item
+A copy constructor, assignment operator, and destructor are
+supplied by the compiler.
+
+\item
+Copying or assigning an iterator is guaranteed to produce an
+iterator which visits the (rest of the) same elements in the
+same order as the original.
+
+\item
+All iterators work the same way. See \S\ref{setiterator} for examples.
+\end{itemize}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Utility class \code{BlackBox}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{class BlackBox}
+is defined in \file{magnus/back\_end/general/include/BlackBox.h}.
+
+\noindent A \code{BlackBox} is a wrapper for an external binary
+which communicates exclusively through its standard I/O.
+The binary must accept some sort of `quit' command from its
+standard input.
+
+
+% \subsubheading{Special Notes}
+
+
+\subsubheading{Public Members}
+
+\defmember{Constructor}{BlackBox(const char* \var{command})}{
+Instantiate a \code{BlackBox} by supplying a sh command which invokes the binary.
+Remember to call \code{sanityCheck} afterwards, even with no arg, to see if
+everything is ok.
+}
+
+\defmethod{Bool sanityCheck(const char* \var{greeting} = NULL)}{
+\var{greeting} is a (possibly proper) prefix of the first line you expect the
+binary to write to \code{cout}. We might use regular expressions some day.
+This returns \code{TRUE} iff it finds \var{greeting} (if not \code{NULL}), and
+all other initialization was successful.
+}
+
+\defmethod{ostream\& toCommand( )}{
+Returns an \code{ostream} bound to the binary's standard input.
+}
+
+\defmethod{istream\& fromCommand( )}{
+Returns an \code{istream} bound to the binary's standard output.
+}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Utility class \code{Cell<T>}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{template<class T> class Cell}\\
+is defined in \file{magnus/back\_end/general/include/Cell.h}.
+
+\noindent A \code{Cell<T>} is the basic component of an
+externally linked list of \code{T}.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{Chars}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{class Chars : public ObjectOf<CharsRep>}\\
+is defined in \file{magnus/back\_end/general/include/Chars.h}.
+
+\noindent A \code{Chars} is a \code{char*} which knows its length,
+wrapped up as a user class.
+
+
+\subsubheading{Special Notes}
+
+\noindent Revision 1.2 badly needs an overhaul.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{ListOf<T>}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{template <class T> class ListOf : ObjectOf< ListRep<T> >}\\
+is defined in \file{magnus/back\_end/general/include/List.h}.
+
+\noindent A \code{ListOf<T>} is good for ordered sequences of \code{T}
+which change size or composition frequently, at the cost of O(n) access.
+
+
+
+\subsubheading{Special Notes}
+
+\noindent Class \code{T} must have
+
+\begin{enumerate}
+\item
+A copy constructor
+\item
+A destructor
+\item
+An assignment operator
+\item
+An \code{==} operator
+\end{enumerate}
+
+\noindent There must be an
+
+%@rn\begin{verbatim}
+\code{ostream\& operator << ( ostream\&, const Type\& )}
+%\end{verbatim}
+
+and a conversion of \code{T} to \code{Type}.
+
+\noindent Some \code{ListOf} methods can safely ignore bad indices,
+but they post a warning if \code{SAFETY > 0} on the assumption that
+the caller is probably bugged.
+
+\noindent A Copy constructor, assignment operator,
+and destructor are supplied by the compiler.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{ListIterator<ListType>}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{template <class ListType> class ListIterator :\\
+public ObjectOf< ListIteratorRep<ListType::ListElementType> >}\\
+is defined in \file{magnus/back\_end/general/include/List.h}.
+
+It is for iterating over lists.
+
+
+\subsubheading{Special Notes}
+
+\noindent A Copy constructor, assignment operator,
+and destructor are supplied by the compiler.
+
+\noindent Copying or assigning an iterator is guaranteed to produce an
+iterator which visits the (rest of the) same elements in the
+same order as the original.
+
+\noindent All iterators work the same way. See \S\ref{setiterator} for examples.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{RandomInt}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{class RandomInt : ObjectOf<RandomIntRep>}\\
+is defined in \file{magnus/back\_end/general/include/RandomInt.h}.
+
+
+\subsubheading{Special Notes}
+
+Likely to become obsolete.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Utility class \code{IStreamPoll}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{class IStreamPoll}\\
+is defined in \file{magnus/back\_end/general/include/IStreamPoll.h}.
+
+
+\subsubheading{Special Notes}
+
+To appear.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{SetOf<T>}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{template<class T> class SetOf : public ObjectOf< SetData<T> >}\\
+is defined in \file{magnus/back\_end/general/include/Set.h}.
+
+\noindent A \code{SetOf<T>} is good for an unordered collection of \code{T}.
+It features fast access and modification.
+
+
+\subsubheading{Special Notes}
+
+\noindent Class \code{T} must have
+
+\begin{enumerate}
+\item
+An assignment operator
+\item
+A copy constructor
+\item
+An \code{==} operator
+\item
+A destructor
+\item
+A method \code{int hash() const} which need not return positive \code{ints}
+\end{enumerate}
+
+\noindent A Copy constructor, assignment operator,
+and destructor are supplied by the compiler.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{SetIterator<T>}}\label{setiterator}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{template <class T> class SetIterator :\\
+public ObjectOf< SetIteratorData<T> >}\\
+is defined in \file{magnus/back\_end/general/include/Set.h}.
+
+It is for iterating over a set.
+
+
+\subsubheading{Special Notes}
+
+\noindent A Copy constructor, assignment operator,
+and destructor are supplied by the compiler.
+
+\noindent Examples of use:
+
+\begin{itemize}
+\item
+To iterate over the elements of a \code{SetOf<T> S}, just do:
+
+\begin{verbatim}
+  SetIterator<T> I(S);
+  while ( !I.done() ) {
+    /* Do something with I.value() */
+    I.next();
+  }
+\end{verbatim}
+
+\item
+You may assign one \code{SetIterator} to another, so the following works:
+
+\begin{verbatim}
+  SetIterator<T> I(S);
+  while( !I.done() ) {
+    SetIterator<T> J = I;
+    while( J.next() )
+      if ( I.value() == J.value() ) error("Set contains duplicates!");
+    I.next();
+  }
+  int count = 0;
+  I.reset();
+  while( !I.done() ) {
+    SetIterator<T> J(I);
+    do { if ( I.value() == J.value() ) ++count; } while( J.next() );
+    I.next();
+  }
+  if ( count != S.cardinality() ) error("I give up");
+\end{verbatim}
+
+\end{itemize}
+
+Since \code{I} was reset, the two excursions of \code{I} through \code{S}
+are guaranteed to produce the same sequence of elements. In any case, \code{J}
+is guaranteed to look at the rest of what \code{I} is.
+You may alter \code{S} during the iteration, but \code{I} uses the old copy
+of \code{S} (see \code{shrinkToIntersectionWith}). You may alter the object
+returned by \code{I.value()}, but this will not effect \code{S} or \code{I}.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{VectorOf<T>}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{template <class T> class VectorOf : public ObjectOf< VectorRep<T> >}\\
+is defined in \file{magnus/back\_end/general/include/Vector.h}.
+
+\noindent A \code{VectorOf<T>} is good for ordered sequences of \code{T}
+which change size infrequently, and for which O(1) access is desired.
+
+
+
+\subsubheading{Special Notes}
+
+\noindent Class \code{T} must have
+
+\begin{enumerate}
+\item
+A default constructor
+\item
+A copy constructor
+\item
+A destructor
+\item
+An assignment operator
+\item
+An \code{==} operator
+\end{enumerate}
+
+\noindent A Copy constructor, assignment operator,
+and destructor are supplied by the compiler.
+
+
+
+%%....................................................................
+\subsection{Group Elements}
+
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Introduction}
+
+Group elements are represented by objects in the \code{Elt} hierarchy.
+At present there is a pseudo-abstract user class \code{Elt}, and a
+concrete user subclass \code{Word}, for representing abstract words in
+formal generators.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{Elt}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{class Elt : public ObjectOf< EltRep >}\\
+is defined in \file{magnus/back\_end/Elt/include/Elt.h}.\\
+It is a pseudo-abstract class which can represent any group element.
+
+
+\subsubheading{Special Notes}
+
+\noindent A copy constructor, destructor, and assignment operator are
+supplied by the compiler.
+
+\noindent Since \code{Elt} is pseudo-abstract, there is no default
+constructor.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Utility class \code{Generator}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{class Generator}\\
+is defined in \file{magnus/back\_end/Elt/include/Generator.h}.\\
+
+Class \code{Word} uses \code{Generator} as an interface class.
+A \code{Generator} is an object which has a non-zero integral ordinal value,
+and a formal inverse.
+
+
+% \subsubheading{Special Notes}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{Word}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{class Word : public Elt}\\
+is defined in \file{magnus/back\_end/Elt/include/Word.h}.\\
+
+A \code{Word} may be used outside the context of any particular group,
+so the standard operations on words are provided.  However, several
+subclasses of \code{Group} use \code{Word} to represent their elements, so
+they also have methods for, e.g., multiplying \code{Word}s, which may
+also, e.g., freely reduce.
+
+
+% \subsubheading{Special Notes}
+
+
+%%....................................................................
+\subsection{Groups}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{FGGroup}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{class FGGroup : public Group}\\
+is defined in \file{magnus/back\_end/Group/include/FGGroup.h}.\\
+It is a pseudo-abstract class which can represent any
+finitely generated group.
+
+
+\subsubheading{Special Notes}
+
+\noindent Revision 1.2 is still in a state of flux.
+
+\noindent A copy constructor, destructor, and assignment operator are
+supplied by the compiler.
+
+\noindent Since \code{FGGroup} is pseudo-abstract, there is
+no default constructor.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{FPGroup}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{class FPGroup : public FGGroup}\\
+is defined in \file{magnus/back\_end/Group/include/FPGroup.h}.\\
+It is a concrete class which can represent any
+finitely presented group.
+
+
+\subsubheading{Special Notes}
+
+\noindent Revision 1.2 is still in a state of flux.
+
+\noindent A copy constructor, destructor, and assignment operator are
+supplied by the compiler.
+
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{FreeGroup}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{class FreeGroup : public FGGroup}\\
+is defined in \file{magnus/back\_end/Group/include/FreeGroup.h}.\\
+It is a concrete class which can represent any free group.
+
+
+\subsubheading{Special Notes}
+
+\noindent Revision 1.2 is still in a state of flux.
+
+\noindent A copy constructor, destructor, and assignment operator are
+supplied by the compiler.
+
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{User class \code{Group}}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{class Group : public ObjectOf< GroupRep >}\\
+is defined in \file{magnus/back\_end/Group/include/Group.h}.\\
+It is a pseudo-abstract class which can represent any group.
+
+
+\subsubheading{Special Notes}
+
+\noindent Revision 1.2 is still in a state of flux.
+
+\noindent A copy constructor, destructor, and assignment operator are
+supplied by the compiler.
+
+\noindent Since \code{Group} is pseudo-abstract, there is
+no default constructor.
+
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Utility class \code{PresentationParser}}\label{presentationparser}
+
+\subsubheading{What and Where}
+
+\noindent The class\\
+\code{class PresentationParser : public WordParser}\\
+is defined in \file{magnus/back\_end/Group/include/PresentationParser.h}.\\
+It provides facilities for reading a presentation from a stream.
+
+
+\subsubheading{Special Notes}
+
+\noindent Here is the presentation grammar:
+
+\begin{verbatim}
+Literals are delimited by ''.
+The symbols ., *, +, -, |, ?, [, ], (, and ) are part of regular expressions
+unless quoted.
+
+<whitespace>     ::= ' ' | '\t' | '\n' | '#'.*'\n'
+<index>          ::= 0 | [1-9]+[0-9]*
+<integer>        ::= <index> | -<index>
+<generator>      ::= [a-zA-Z]+<index>?
+<atom>           ::= '1' | <generator> | '('<word>')' |
+                     '['<word>','<word>(','<word>)*']'
+<term>           ::= <atom>('^'<atom>)* | <term>'^'<integer>
+<word>           ::= <term>('*'<term>)* | <term>(<whitespace><term>)*
+<relator>        ::= <word>('='<word>)?
+<generator list> ::= (<generator>(','<generator>)*)?
+<word list>      ::= <word>(','<word list>)?
+<relator list>   ::= <word>('='<word>)* |
+                     (<word>('='<word>)*(','<word>('='<word>)*)?)?
+<FPGroup>        ::= '<'<generator list>('|' | ';' | ':')<relator list>'>' |
+                     '<'<generator list>'>'
+
+- whitespace may occur anywhere except within lexemes.
+
+Semantic conventions:
+
+- x^y is y^-1 x y.
+- ^ is left-associative, so a^t^2 is (a^t)^2.
+- [x,y] is x^-1 y^-1 x y.
+- [x1, x2, ..., xn] is left-normed: [[x1,x2], x3, ..., xn].
+- Given the print name of a generator, the print name of its inverse
+  has each character changed to the opposite case.
+  Thus aB2^-1 is the same as Ab2.
+
+\end{verbatim}
+
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Utility class \code{TietzeTrekker}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{class TietzeTrekker}\\
+is defined in \file{magnus/back\_end/Group/include/TietzeTrekker.h}.\\
+
+A TietzeTrekker is a wrapper for a BlackBox which invokes
+Frank Rimlinger's TietzeTrek with a group presentation.
+
+
+\subsubheading{Special Notes}
+
+\noindent Revision 1.2 is still in a state of flux.
+
+\noindent Usage:
+
+Instantiate a TietzeTrekker within, e.g., a FPGroup
+method by
+
+\begin{verbatim}
+   TietzeTrekker( look() ) TT;
+\end{verbatim}
+
+Make sure that \code{TT.sanityCheck()} returns \code{TRUE}.
+There is now an asynchronous process associcated with \code{TT} which is
+continuously generating presentations, along with statements of
+certain facts (factoids) which can readily be deduced from certain
+presentations.
+Get the `next' presentation from \code{getPresentation()}.
+To be `notified' of any factoids, first call \code{getFactoid} (see comment
+thereon), then call \code{knownTo*}. If you don't like the answer, call
+\code{getFactoid} again, etc.
+
+
+\subsubheading{Public Members}
+
+\defmember{Constructor}{TietzeTrekker (const FPGroupRep\&)}{
+Fire up \code{TietzeTrek} with the given presentation.
+Passing a \code{FPGroupRep} instead of a \code{FPGroup}
+is a (temporary?) hack.
+}
+
+\defmethod{Bool sanityCheck( )}{
+Says whether this \code{TietzeTrekker}
+thinks its initialization was successful.
+}
+
+\defmethod{Bool getFactoid(Bool \code{queuePresentations}, long \code{giveUpLimit} = 100)}{
+The first argument says whether to save any presentations
+which are found before the next factoid. Saved ones are later returned
+by \code{getPresentation()}.
+The second argument specifies the number of lines to read from the
+\code{BlackBox} in search of a factoid before giving up and returning.
+The return value says whether a new factoid was discovered.
+}
+
+\lskip
+The following indicate what facts have been discovered so far by 0
+or more calls to \code{getFactoid} (\code{FALSE} means ``don't know (yet)''):
+\lskip
+
+\defmethod{Bool knownToBeTrivial( )}{
+}
+
+\defmethod{Bool knownToBeCyclic( )}{
+}
+
+\defmethod{Bool knownToHaveFreeFactor( )}{
+}
+
+\defmethod{Bool knownToBeFinite( )}{
+}
+
+\defmethod{Bool knownToBeFree( )}{
+}
+
+\defmethod{int getOrder( )}{
+Returns the order of the group in `standard' format: -1 == \code{DONTKNOW},
+0 == \code{INFINITE}, otherwise actual order. If the answer is -1, you can
+call \code{getFactoid} (again) for another throw of the dice.
+}
+
+\defmethod{int getRank( )}{
+Returns the rank of the group AFTER \code{knownToBeFree()} has returned
+\code{TRUE}.
+It is a fatal error if this is called when \code{!knownToBeFree()}.
+}
+
+\defmethod{FPGroup getPresentation( )}{
+Returns another presentation of the finitely presented group
+(representation) used to instantiate this \code{TietzeTrekker}, in the form
+of a \code{FPGroup}.
+}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Utility class \code{WordParser}}
+
+\subsubheading{What and Where}
+
+\noindent The class \code{class WordParser}\\
+is defined in \file{magnus/back\_end/Group/include/WordParser.h}.\\
+It provides facilities for reading words from a stream.
+
+
+\subsubheading{Special Notes}
+
+\noindent See \S\ref{presentationparser} for the word grammar.

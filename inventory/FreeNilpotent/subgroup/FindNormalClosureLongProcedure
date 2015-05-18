@@ -1,0 +1,35 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free nilpotent group 
+
+Objects highlighted:	subgroup H
+
+Other objects present:	group N
+
+Name in the menu:	Find the normal closure of H in N (long procedure)
+			// @am Probably this sentence needs improvement
+
+Problem type:		problem object
+
+Help file:		SGOfNGnormalClosureProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+
+   Links:
+
+	Click here to view the generators of H1
+	// @am H1 - name of the normal closure subgroup, built by 
+	// the algorithm

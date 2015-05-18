@@ -1,0 +1,8 @@
+@@FREE
+
+\ni This algorithm depends on the algorithm which determines whether a
+conjugate of a given element lies in a given subgroup. One applies this
+algorithm to all of the generators of the first subgroup to see if a
+conjugate of each of the generators lies in the second subgroup and if
+so, whether a single element conjugates all of the generators of the
+first subgroup into the second.

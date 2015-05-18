@@ -1,0 +1,64 @@
+.TH kbeqn2 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBkbeqn2 \-
+produce a finite set of Knuth-Bendix  equations  and
+word reduction finite state automaton.
+
+\fBThis is an extension of kbeqn.  Please see seperate manual entry for
+kbeqn.\fR
+
+
+.SH \fISyntax
+.IP "" 15
+\fBkbeqn2\fR [-t \fItidyint\fR] [-h \fImaxeqns maxstates maxtime\fR] [-lex] [-rec] [-o] [\fIgroupname\fR]
+
+
+
+
+.SH \fIOptions
+.IP -lex 15
+Use \fILexicographical ordering\fR
+
+This is the original ordering used in kbeqn.
+The ordering is lexicographic, with longer words having
+higher order than shorter words.
+This is the default ordering used.
+
+.IP -rec
+Use \fIRecursive Path ordering\fR
+
+Ordering based on that described in "Confluent String
+Rewriting" (Mathias Jantzen), Defn 1.2.14, page 24.
+
+.IP "Other Options"
+
+As described in the \fIkbeqn\fR manual entry.
+
+.SH \fINew Capabilities
+
+The shuffling procedure has been altered slightly to take into
+consideration orderings which may replace a shorter segment by
+a longer one.
+
+If the program is interrupted (^C), it will output and stop after the
+next tidying-up operation.  For some systems, this may take a long time
+to occur (or may never occur).  If another interrupt is made any time
+after the first, the program will stop and output the rewritng system
+so far devised.
+
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+
+.SH \fIAuthor
+
+This is basically a hack of Derek's code (from
+.I kbeqn
+) with Jamie's
+modifications!  The code is pretty awful, but I can't be blamed
+for this one as I cut and pasted other people's.
+
+Jamie P. Curmi (17/8/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

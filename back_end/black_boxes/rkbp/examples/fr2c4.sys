@@ -1,0 +1,11 @@
+system
+word_type:  group
+ngens:  8
+naming_convention:  prefix x
+numbering_convention:  1_-1
+inverse_convention:  case
+weight_convention:  constant
+level_convention:  inverse_pair_wreath
+nsub:  1
+subsystems:  
+fr2c4.sb1

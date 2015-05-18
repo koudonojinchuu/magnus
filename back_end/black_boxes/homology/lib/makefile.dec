@@ -1,0 +1,45 @@
+# makefile for homology library
+# This version produces a ucode library "libhom.b", which can be linked
+# with full optimisation.  "libhom_s.b" is the statistical version of the
+# library (usually used for debugging).  It may not be required.
+#
+# If you wish to only create the standard library (and not the statistics
+# library), then run "make libhom.b".  To create both, run "make".
+#
+# Jamie P. Curmi, October 1994.
+
+SHELL=/bin/sh
+LIB = libhom.b
+CFLAGS = -O3 -j
+LIBOBJ = 2dimbdry.u grpinput.u rewrite.u matrix.u ndimbdry.u
+
+STATS_LIB = libhom_s.b
+STATS_LIBOBJ = 2dimbdry.u grpinput.u rewrite.u matrix.u ndimbdry_s.u
+
+all: ${LIB} ${STATS_LIB} clean
+
+$(LIB): $(LIBOBJ)
+	ar cr $(LIB) $(LIBOBJ)
+	ranlib $(LIB)
+2dimbdry.u:	2dimbdry.c 2dimbdry.h homcommon.h homlib.h
+	${CC} $(CFLAGS) 2dimbdry.c 
+ndimbdry.u:	ndimbdry.c ndimbdry.h homcommon.h homlib.h
+	${CC} $(CFLAGS) ndimbdry.c 
+grpinput.u:	grpinput.c grpinput.h homcommon.h homlib.h
+	${CC} $(CFLAGS) grpinput.c 
+rewrite.u:	rewrite.c rewrite.h homcommon.h homlib.h
+	${CC} $(CFLAGS) rewrite.c 
+matrix.u:	matrix.c matrix.h homcommon.h homlib.h
+	${CC} $(CFLAGS) matrix.c 
+
+$(STATS_LIB): $(STATS_LIBOBJ)
+	ar cr $(STATS_LIB) $(STATS_LIBOBJ)
+	ranlib $(STATS_LIB)
+
+ndimbdry_s.u:	ndimbdry.c ndimbdry.h homcommon.h homlib.h
+	/bin/cp ndimbdry.c ndimbdry_s.c
+	${CC} -D_STATS $(CFLAGS) ndimbdry_s.c 
+	/bin/rm -f ndimbdry_s.c
+
+clean:
+	rm -f *.u

@@ -1,0 +1,32 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	subgroup H, word W
+
+Other objects present:	group G
+
+Name in the menu:	Determine whether W lies in H
+
+Problem type:		problem object
+
+Help file:		SGOfNGWordContainProblem.help
+
+
+			     Algorithms:
+
+
+1. Compute a basis of the free preimage of H
+
+2. For the use of this problem
+
+

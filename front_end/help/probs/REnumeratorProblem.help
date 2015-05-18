@@ -1,0 +1,70 @@
+@@How this problem works
+
+@@Free
+
+@@SMALL_CANCELLATION
+
+\ni We provide here three kinds of relator enumerators. The first of these
+is a "total enumerator", listing all relators. The other enumerators are all
+random. At present we have only implemented normal and uniform random enumerators.
+These  enumerators make use of either random number generators with a normal 
+distribution or random number generators with a uniform distribution.
+
+\ni Parameters (@see How to work with parameters?@ParametersGeneral::Parameters@)
+
+\ni Number of words. This is an @integer@ParametersGeneral::Types of 
+parameters: Integer@ parameter. It represents the total number of relators to 
+be enumerated. After the initial list of relators is produced, execution of  the 
+enumerator is suspended. This parameter can be changed; so when the problem is 
+suspended, it can be increased. Then, on restarting the enumerator, more relators 
+will be generated. 
+
+ 
+\ni Max. length of conjugates. This is an @integer@ParametersGeneral::Types of parameters: Integer@ parameter, the maximum length of the conjugating elements involved in the 
+enumeration.
+
+@@ONE_RELATOR
+
+\ni We provide here three kinds of relator enumerators. The first of these
+is a "total enumerator", listing all relators. The other enumerators are all
+random. At present we have only implemented normal and uniform random enumerators.
+These  enumerators make use of either random number generators with a normal 
+distribution or random number generators with a uniform distribution.
+
+\ni Parameters (@see How to work with parameters?@ParametersGeneral::Parameters@)
+
+\ni Number of words. This is an @integer@ParametersGeneral::Types of 
+parameters: Integer@ parameter. It represents the total number of relators to 
+be enumerated. After the initial list of relators is produced, execution of  the 
+enumerator is suspended. This parameter can be changed; so when the problem is 
+suspended, it can be increased. Then, on restarting the enumerator, more relators 
+will be generated. 
+
+ 
+\ni Max. length of conjugates. This is an @integer@ParametersGeneral::Types of parameters: Integer@ parameter, the maximum length of the conjugating elements involved in the 
+enumeration.
+
+
+@@FP
+
+\ni We provide here three kinds of relator enumerators. The first of these
+is a "total enumerator", listing all relators. The other enumerators are all
+random. At present we have only implemented normal and uniform random enumerators.
+These  enumerators make use of either random number generators with a normal 
+distribution or random number generators with a uniform distribution.
+
+\ni Parameters (@see How to work with parameters?@ParametersGeneral::Parameters@)
+
+\ni Number of words. This is an @integer@ParametersGeneral::Types of 
+parameters: Integer@ parameter. It represents the total number of relators to 
+be enumerated. After the initial list of relators is produced, execution of  the 
+enumerator is suspended. This parameter can be changed; so when the problem is 
+suspended, it can be increased. Then, on restarting the enumerator, more relators 
+will be generated. 
+
+ 
+\ni Max. length of conjugates. This is an @integer@ParametersGeneral::Types of parameters: Integer@ parameter, the maximum length of the conjugating elements involved in the 
+enumeration.
+
+
+

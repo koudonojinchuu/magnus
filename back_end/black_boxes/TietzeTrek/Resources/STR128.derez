@@ -1,0 +1,9 @@
+SIZE=70
+data 'STR#' (128, "Common") {
+	$"0007 0871 7569 7474 696E 6707 636C 6F73"            /* ...quitting.clos */
+	$"696E 6705 556E 646F 2005 5265 646F 2008"            /* ing.Undo .Redo . */
+	$"556E 7469 746C 6564 0E53 686F 7720 436C"            /* Untitled.Show Cl */
+	$"6970 626F 6172 640E 4869 6465 2043 6C69"            /* ipboard.Hide Cli */
+	$"7062 6F61 7264"                                     /* pboard */
+};
+

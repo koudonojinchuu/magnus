@@ -1,0 +1,11 @@
+@@How this problem works
+
+\ni In order to see if one subgroup is contained in another, we check 
+to see if all of the generators of the first subgroup are contained
+in the second. If so, then the first subgroup is contained in the
+second; otherwise not.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+

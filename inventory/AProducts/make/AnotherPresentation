@@ -1,0 +1,45 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		amalgamated product of free groups
+
+Objects highlighted:	group G
+
+Name in the menu:	Another Presentation of G
+
+Problem type:		problem object
+
+Help file:		TTProblem.help
+
+
+			Fast checks:
+
+
+1. If there is a free generator in the presentation of the group
+   result is a message:
+     "The current version of the Tietze Trasformation Package does"
+     "not allow us to have a free generator in a group presentation."
+
+2. If the length of the presentation is greater than 254 then
+   result is a message:
+	"The current version of the Tietze Trasformation Package does"
+	" not allow us to have an input line longer than 254 characters."
+
+
+			Algorithms:
+
+
+1. For the use of this problem
+
+   Links:
+
+	Click here to see other presentations for G.
+

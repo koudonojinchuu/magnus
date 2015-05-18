@@ -1,0 +1,11 @@
+FrontEnd --> BackEnd :  -2 0 A1 < a,b;a=B >
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -1 2 0 A1
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -2 24 0
+debug point 6-1
+debug point 6-4
+debug point 6-3
+debug point 6-2
+debug point 5-1
+FrontEnd --> BackEnd :  -1 0

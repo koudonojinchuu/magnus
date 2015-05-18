@@ -1,0 +1,121 @@
+
+@@ALGORITHMS FOR FREE GROUPS
+
+
+@Freely reduce a word@General_free_groups::Freely reduce a word@
+
+@Compute the inverse of a word@General_free_groups::Compute the inverse of a word@
+
+@Compute the product of two words@General_free_groups::Compute the product of two words@
+
+@Compute the i-th initial segment of a word@General_free_groups::Find the i-th initial segment of a word@
+
+@Compute the i-th terminal segment of a word@General_free_groups::Find the i-th terminal segment of a word@
+
+@Find the n-th element of the given free group.@General_free_groups::Find the n-th element of the given free group@
+
+@The word problem@General_free_groups::The word problem@
+
+@Equality of two words@General_free_groups::Equality of two words@
+
+@The conjugacy problem@General_free_groups::The conjugacy problem@
+
+@The power problem@General_free_groups::The power problem@ 
+
+@The maximal root of an element@General_free_groups::
+The maximal root of an element@
+
+@Element in the commutator subgroup?@General_free_groups::
+Element in the commutator subgroup?@
+
+@Is an element a commutator?@General_free_groups::Is an element a commutator?@
+
+@Rewrite an element as a product of commutators@General_free_groups::
+Rewrite an element as a product of commutators@
+
+@Rewrite an element as a product of squares@General_free_groups::
+Rewrite an element as a product of squares@
+
+@Enumeration of basic commutators@General_free_groups::
+Enumeration of basic commutators@
+
+@Computing a Nielsen basis@General_free_groups::Computing a Nielsen basis@
+
+@Subgroup membership problem@General_free_groups::
+Subgroup membership problem@
+
+@Power of an element in a subgroup?@General_free_groups::Power of an element in a subgroup?@
+
+@@Conjugate of an element in a subgroup?@General_free_groups::
+Conjugate of an element in a subgroup?@
+
+@Subgroup containment problem@General_free_groups::
+Subgroup containment problem@
+
+@Subgroup equality problem@General_free_groups::Subgroup equality problem@
+
+@Subgroup conjugacy problem@General_free_groups::Subgroup conjugacy problem@
+
+@Index of a subgroup@General_free_groups::Index of a subgroup@
+
+@Compute a virtual free complement of a subgroup@General_free_groups::
+Compute a virtual free complement of a subgroup@
+
+@Are given elements generators?@General_free_groups::Are given elements generators?@
+
+@Extension to a basis@General_free_groups::Extension to a basis@
+
+@The automorphic conjugacy problem@General_free_groups::The automorphic conjugacy problem
+
+@Is an element part of a basis?@General_free_groups::Is an element part of a basis?@
+
+@Nielsen transformations of sets into bases@General_free_groups::
+Nielsen transformations of sets into bases@
+
+@Schreier representative of an element@General_free_groups::Schreier representative
+of an element@
+
+@Is a subgroup normal?@General_free_groups::Is a subgroup normal?@
+
+@Is a subgroup malnormal?@General_free_groups::Is a subgroup malnormal?@
+
+@Compute the normalizer of a subgroup@General_free_groups::
+Compute the normalizer of a subgroup@
+
+@Join of two subgroups@General_free_groups::Join of two subgroups@
+
+@Intersection of two subgroups@General_free_groups::Intersection of two subgroups@
+
+
+@Is a subgroup a free factor?@General_free_groups::Is a subgroup a free factor?@
+
+@Is one subgroup an automorphic image of another?@General_free_groups::
+Is one subgroup an automorphic image of another?@
+
+@Is a homomorphism injective?@General_free_groups::Is a homomorphism injective?@
+
+@Is an endomorphism  surjective?@General_free_groups::
+Is an endomorphism  surjective?@
+
+@Is an endomorphism an automorphism?@General_free_groups::
+Is an endomorphism an automorphism?@
+
+@Is a homomorphism an isomorphism?@General_free_groups::
+Is a homomorphism an isomorphism?@
+
+@Compute the product of two automorphisms@General_free_groups::
+Compute the product of two automorphisms@
+
+@Is an automorphism  an IA-automorphism?@General_free_groups::Is an automorphism  an IA-automorphism?
+
+@Is an automorphism  inner?@General_free_groups::Is an automorphism  inner?
+
+@Order of an automorphism@General_free_groups::Order of an automorphism@
+
+@Inverse of an automorphism@General_free_groups::Inverse of an automorphism@
+
+@Enumerate automorphisms of a free group@General_free_groups::
+Enumerate automorphisms of a free group@
+
+@Solving quadratic equations over free groups@General_free_groups::
+Solving quadratic equations over free groups@

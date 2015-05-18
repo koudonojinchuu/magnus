@@ -1,0 +1,9 @@
+@@How this problem works
+
+\ni The isolator of the  given subgroup is the pre-image of the torsion
+subgroup of the factor group of the given group by the subgroup. The torsion
+subgroup is computed using an existing algorithm.
+
+\ni For a general discussion see 
+@General_abelian_groups@General_abelian_groups::General discussion@
+

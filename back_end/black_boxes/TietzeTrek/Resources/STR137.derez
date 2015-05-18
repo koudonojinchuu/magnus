@@ -1,0 +1,8 @@
+SIZE=62
+data 'STR#' (137, "GLErr") {
+	$"0002 1455 6E6B 6E6F 776E 2065 7272 6F72"            /* ...Unknown error */
+	$"2069 6E64 6578 2E26 5374 7269 6E67 2048"            /*  index.&String H */
+	$"616E 646C 6520 6F76 6572 666C 6F77 2069"            /* andle overflow i */
+	$"6E20 7374 6174 6963 2070 616E 652E"                 /* n static pane. */
+};
+

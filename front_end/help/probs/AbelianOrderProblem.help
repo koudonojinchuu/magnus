@@ -1,0 +1,26 @@
+@@How this problem works
+
+@@ABELIAN
+
+\ni The given group is decomposed into a direct product of finitely
+many infinite cyclic groups aand finitely many finite cyclic groups. 
+Its  order is infinite if there is at least one  infinite cyclic
+factor; otherwise it is finite and its order is the product of the 
+orders of the finite cyclic factors in the decomposition.
+
+\ni For a discussion of general finitely generated abelian groups,
+see @General_abelian_groups@General_abelian_groups::General discussion@
+
+
+
+
+
+
+
+
+
+
+
+
+
+

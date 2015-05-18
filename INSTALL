@@ -1,0 +1,104 @@
+
+ INSTALLING MAGNUS
+ =================
+
+ This is the Magnus install guide as of 08/06/2005:
+
+ See README file for what you can do or visit our web site:
+         
+         http://www.grouptheory.org
+
+ or
+	 http://www.sourceforge.net/projects/magnus
+         
+ for more information.
+
+ PREREQUISITES
+ -------------
+
+ In order to compile MAGNUS:
+     - gcc distributions with Fedora Core 1, 2, or 3 and FreeBSD 4.11 (with 
+       gcc 3.3+), have been successfully tested. A previous version working
+       with gcc 2.95.3 is also available. 
+	
+       Note that MAGNUS running on Fedora Core 3 is problematic,
+       though it can be built on it.
+
+     - Tcl/Tk 8.x (see http://tcl.sourceforge.net/). 
+       Please do consider upgrading to at least Tcl/Tk 8.3.3.
+
+     - GNU make 3.71 or higher. Earlier/other version of make MAY NOT WORK.
+  
+     - 64 MB of swap space and 150 MB of disk space for compilation
+       of magnus
+
+
+ INSTALLATION STEPS
+ -------------------
+
+ To compile  MAGNUS:
+
+   1) Let magnus_xx_xx_xx  be the MAGNUS' archive name.
+
+      Unpack MAGNUS archive:
+          $ tar xvfz magnus_xx_xx_xx.tgz 
+      It should create a directory with the source code. Below $magnus will
+      refer to this directory.
+
+   2) Run $magnus/Configure script. The script will ask for
+      verification that the current directory is correct, and then ask for 
+      the path to the tcl executable "wish". (You should verify the path of 
+      your wish executable by typing the command, "which wish", and then 
+      answer with the path that the "which wish" command gave you.) 
+
+   3) Change to the $magnus directory. Type:
+         $ make 
+      To compile the package. This can take about 20 minutes on a Pentium III
+       machine.
+      There is nothing to worry about when make complains of missing
+      .d files; it generates them itself.
+
+   4) To invoke magnus type:
+         $ $magnus/front_end/magnus.
+
+   5) If you want to save space run 
+         $ $magnus/make realclean
+      If you want to keep source files do 
+         $ $magnus/make mostlyclean
+
+ If you installing precompiled version:
+
+    1) Let magnus_xx_xx_xx  be the MAGNUS' archive name.
+
+      Unpack MAGNUS archive:
+          $ tar xvfz magnus_xx_xx_xx.tgz 
+      It should create a directory with the source code. Below $magnus will
+      refer to this directory.
+
+   2) Run $magnus/Configure script. The script will ask for
+      verification that the current directory is correct, and then ask for 
+      the path to the tcl executable "wish". (You should verify the path of 
+      your wish executable by typing the command, "which wish", and then 
+      answer with the path that the "which wish" command gave you.) 
+
+   3) To invoke magnus type:
+         $ $magnus/front_end/magnus.
+
+ NOTE:
+
+ If you later change the location of $magnus directory, you need not recompile, 
+ but you must run $magnus/Configure again.
+
+ Message 
+
+         comment@rio.sci.ccny.cuny.edu 
+
+ for help with any of this.
+
+ Please send any comments, complaints or suggestions to:
+
+         comment@rio.sci.ccny.cuny.edu .
+
+ If you find any bugs in magnus, please send them to: 
+         
+         bug@rio.sci.ccny.cuny.edu

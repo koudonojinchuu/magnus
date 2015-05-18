@@ -1,0 +1,556 @@
+%% This is AMSLaTeX source, included by manual_incl.tex.
+
+
+%%--------------------------------------------------------------------
+\section{The Front End}
+
+%%....................................................................
+\subsection{Messages}\label{FEMessages}
+
+\newcommand{\msg}[2]{
+\vspace{10pt}
+\verb/#1/ {\em #2}
+\vspace{10pt}
+}
+
+\newcommand{\marg}[1]{{\em #1\/}}
+
+
+The \FE\ and \SM\ exchange messages. The syntax and semantics of the
+messages which the \FE\ can accept are fixed; they are described in
+this section.
+
+In contrast, the \FE\ knows as little as possible about the messages it
+sends to the \SM. Rather, the \FE\ is supplied by the \SM\ with {\em
+message templates} for each kind of message it will need to
+send. These templates contain {\em formal parameters} which the \FE\
+replaces, at the time the message is sent, with {\em actual
+parameters}. The syntax and semantics of formal parameters are also
+fixed, and are described below along with each message type.
+
+A message from the \SM\ to the \FE\ is an ASCII string containing no
+non-printable characters, newlines, linefeeds, or tabs. It consists of
+a {\em message name} followed by an ordered sequence of zero or more
+arguments. A message name matches {\tt '[a-zA-Z][a-zA-Z\_]*\_'}. Each
+argument is preceded by at least one space. The argument syntax is
+described with each message, below.
+
+The following sections describe each message that the \FE\ can accept,
+grouped by function.  Because of the semantic interconnections between
+the various messages, the sections are not in the temporal order in
+which the messages are sent.
+
+Except where noted, the arguments of messages to the \FE\ are keyword
+arguments. For example, suppose the message named {\tt foo\_} takes
+two arguments: an integer and a constant string. The syntax is
+specified like:
+
+\msg{foo\_}{theInt theString}
+
+In this case \marg{theInt} and \marg{theString} are keyword
+identifiers, so the actual message could be, for example:
+
+{\tt foo\_ theInt 7 theString \{Hello world\}}
+
+{\tt foo\_ theString \{Hello world\} theInt \{7\}}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Checking in an Object}\label{checking_in}
+
+The \SM\ can pass a message which tells the \FE\ to create an image in
+the workspace of an object which exists in the \SM. The message has
+the form
+
+\msg{create\_}{objectID typeID iconID name dependencies properties viewStructure
+definition}
+
+An \marg{objectID} is a unique positive integer assigned to the object
+by the \SM. It is the only definitive reference to the object shared
+by the \FE\ and \SM.
+
+A \marg{typeID} is a positive integer assigned to the object by the
+\SM. It is used to identify what actions may be taken on a set of objects.
+
+An \marg{iconID} is one of the symbols: {\tt group}, {\tt subgroup},
+{\tt elt}, {\tt map}, {\tt enumerator}, {\tt problem}.
+
+A \marg{name} is the text which is to be displayed beneath the icon in
+the workspace. It must be delimited by {\tt\{\}} if it contains
+whitespace.
+
+The \marg{dependencies} is a list of the form
+{\tt\{}\marg{objectID}{\tt *\}}. In this case \marg{objectID} is not a
+keyword identifier.
+
+The \marg{properties} is a list of the form {\tt\{\{}\marg{key}
+\marg{datum}{\tt\}+\}}, where \marg{key} and \marg{datum} are strings
+matching {\tt '[a-zA-Z0-9(), ]+'}.  By convention, all spaces are
+stripped out by the \FE.  The \marg{key-datum} pairs are stored by the
+\FE\ on behalf of the \SM\ for later use. The purpose is to allow the
+\SM\ to endow the \FE\ with certain knowledge (about objects, in this
+case), which the \FE\ can use as directed without knowing anything
+about it.  See \S\ref{hottext} for how to use this stored information.
+
+A \marg{viewStructure} has the form: {\tt\{}\marg{viewBuilder}
+\marg{viewParameters}{\tt\}}.  A \marg{viewBuilder} is the name of a
+predefined view window builder (\S\ref{predefined_views}). The
+\marg{viewParameters} are the parameters expected by the
+\marg{viewBuilder}. The \marg{viewBuilder} may be {\tt\{\}} if no view
+is defined.
+
+The \marg{definition} is supplied only when the \marg{name} is the
+empty string, and the object is not a problem object. This is the case
+when a new object is constructed by the \SM\ in response to an end
+user query.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{{\sf Hot} text}\label{hottext}
+
+The \FE\ accepts the message
+
+\msg{define\_}{key datum}
+
+\noindent
+which tells it to associate \marg{datum} with \marg{key} in the same
+sense as the \marg{properties} argument of the {\tt create\_}
+message. The syntax and semantics are the same.
+
+Many of the messages in the following sections may contain substrings
+which we call {\em{\sf Hot} text}. This means that the substring may
+contain substrings of the form {\tt [\_value\_ }\marg{key}{\tt]}, which
+evaluate to the datum most recently associated with the \marg{key} in
+a \marg{properties} argument of a {\tt create\_} message, or a {\tt
+define\_} message, or the value {\tt 0} if there is no such
+association. {\sf Hot} text may also contain substrings
+{\tt[\_name\_ }\marg{expr}{\tt]}, where \marg{expr} evaluates to an
+\marg{objectID}. This evaluates to the end user supplied name of the
+object.
+
+{\sf Hot} text may not contain characters {\tt[]} except as above,
+{\tt""} except as outer delimiters, or {\tt\$\{\}$\backslash$} except
+as part of variable references or delimiters, discussed below.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Menu Definitions}\label{menu_defn}
+
+This section describes the messages accepted by the \FE\ for defining
+workspace menus. We need a number of preliminaries first.
+
+Given a selection in the workspace, the front end provides the end
+user with a (possibly hierarchical) menu of actions which are
+appropriate to that selection.
+
+A given action has a {\em signature}, which is a bag of \marg{typeIDs}
+$\{t_1,\dots t_n\}$. Let the bag of the \marg{typeIDs} of the selected
+objects be $\{t'_1,\dots t'_n\}$. The action cannot be appropriate to
+the selection unless there is a permutation $\sigma\in S_n$ such that
+$t_{i}=t'_{\sigma(i)}$ for $1\le i\le n$.
+
+In addition, the action may not be appropriate unless some condition
+on the selected objects is met. The information needed to check these
+conditions was stored in the \FE\ by the \SM\ via the
+\marg{properties} argument of the {\tt create\_} message for each
+object.
+
+If an action is appropriate, the \FE\ must post a menu item for it,
+and send a corresponding message to the \SM\ if that item is
+chosen. The text of the menu item will need to refer to various of the
+selected objects by \marg{name}, and the message will refer to them by
+\marg{objectID}. Now suppose the signature of the action is
+$\{t_1,\dots t_n\}$, and that the selected objects can be indexed
+$\{O_1,\dots O_n\}$ so that the \marg{typeID} of $O_i$ is $t_i$. We
+may consider an index $1\le i\le n$ to be a formal parameter of the
+action, and $O_i$ to be the corresponding actual parameter.
+
+The \SM\ may refer to the \marg{name} of the $i$th actual parameter in
+{\sf Hot} text with the symbol {\tt \$\{name}$i${\tt\}}. It may refer
+to the \marg{objectID} with the symbol {\tt \$\{OID}$i${\tt\}}.
+
+At last, we have the syntax of a menu definition message:
+
+\msg{menu\_defn\_}{menu signature itemGroups}
+
+A \marg{menu} is one of the symbols {\tt checkin}, {\tt tools}. It
+indicates under which toplevel workspace menu the given menu items are
+to be posted.
+
+A \marg{signature} has the form {\tt\{}\marg{typeID}{\tt*\}}. The
+\marg{typeID}s are sorted in increasing order. In this case
+\marg{typeID} is not a keyword identifier.
+
+An \marg{itemGroups} has the form {\tt\{}\marg{itemGroup}{\tt+\}}.
+ There are no keyword arguments at this level or below.
+
+An \marg{itemGroup} has the form {\tt\{}\marg{condition}
+{\tt\{}\marg{item}{\tt+\}\}}.
+
+A \marg{condition} is any string which can be accepted by the {\tt
+Tcl} procedure {\tt expr}. It is {\sf Hot} text. It may contain
+substrings ``{\tt\$\{OID}$i${\tt\}}''. Note that {\tt expr} accepts
+the operators {\tt \&\&}, {\tt ||}, {\tt !}, {\tt ==}, {\tt !=}, which
+have the same meaning and precedence as in {\tt C}. It allows
+parentheses. It represents true and false by {\tt 1} and {\tt 0}.
+
+An \marg{item} has one the forms
+\marg{realItem}, {\tt s}, or
+{\tt\{c} \marg{itemText} {\tt\{}\marg{realItem}{\tt+\}\}}.
+The {\tt s} \marg{item} is a menu item separator, and the {\tt\{c...\}}
+\marg{item} is a cascaded menu.
+
+A \marg{realItem} has the form
+{\tt\{}\marg{itemText} \marg{action} \marg{message}{\tt\}}.
+
+An \marg{itemText} is {\sf Hot} text, delimited by {\tt\{\}}'s, and may
+contain substrings ``{\tt \$\{name}$i${\tt\}}''. Example:\break
+{\tt\{Is \$\{name1\} trivial in [\_name\_ [\_value\_ parent(\$\{OID1\})]]?\}}.
+
+An \marg{action} is the name of one of a number of predefined
+procedures (documented in \S\ref{predefined_procedures}) which is to
+be called before the \marg{message} is sent to the \SM. Such
+procedures usually have the side-effect of defining new variables
+which can be referenced in the \marg{message} body. The \marg{action}
+may be {\tt\{\}}.
+
+A \marg{message} is {\sf Hot} text delimited by {\tt\{\}}'s, and may
+contain substrings ``{\tt \$\{OID}$i${\tt\}}'' and any other variable
+references which are valid as a result of the \marg{action}. If the
+\marg{message} is empty, i.e. {\tt\{\}}, the menu item is posted but
+disabled.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Global Message Templates}\label{global_defns}
+
+The \FE\ responds to a number of events by sending essentially the
+same message to the \SM. The \SM\ may initialize templates for these
+messsages at startup with the following messages to the \FE. The
+\marg{message} is always delimited by {\tt\{\}} if it contains
+whitespace:
+
+\msg{init\_quit\_msg\_}{message}
+
+The \marg{message} is to be sent to the \SM\ when the end user wishes
+to quit. The front end does not exit until it gets the
+{\tt confirm\_quit\_} message, described below.
+
+\msg{init\_view\_req\_msg\_}{message}
+
+The \marg{message} is to be sent to the \SM\ when the end user
+requests a view on a subproblem (see \S\ref{predefined_views}).  It is
+{\sf Hot} text, and may contain the references {\tt\$\{viewID\}} to
+the enclosing view, and {\tt\$\{probViewID\}} to the subproblem for
+which the view was requested.
+
+\msg{init\_arc\_msg\_}{message}
+
+The \marg{message} is to be sent to the \SM\ when the ARCs given to
+any subproblem may have been changed by the end user.  It can only be
+sent when the enclosing problem is in a suspended state, or has not
+been started yet. It is {\sf Hot} text, and may contain the references
+{\tt\$\{probViewID\}}, {\tt\$\{ARCSlotID\}}, {\tt\$\{value\}}.
+
+\msg{init\_start\_msg\_}{message}
+
+The \marg{message} is to be sent to the \SM\ when the end user starts
+a problem.  It is {\sf Hot} text, and may contain the reference
+{\tt\$\{viewID\}} to the \marg{viewID} of the problem.
+
+\msg{init\_suspend\_msg\_}{message}
+
+The \marg{message} is to be sent to the \SM\ when the end user
+suspends a problem.  It is {\sf Hot} text, and may contain the reference
+{\tt\$\{viewID\}} to the \marg{viewID} of the problem.
+
+\msg{init\_resume\_msg\_}{message}
+
+The \marg{message} is to be sent to the \SM\ when the end user resumes
+a problem.  It is {\sf Hot} text, and may contain the reference
+{\tt\$\{viewID\}} to the \marg{viewID} of the problem.
+
+\msg{init\_terminate\_msg\_}{message}
+
+The \marg{message} is to be sent to the \SM\ when the end user terminates
+a problem.  It is {\sf Hot} text, and may contain the reference
+{\tt\$\{viewID\}} to the \marg{viewID} of the problem.
+
+\msg{init\_delete\_msg\_}{message}
+
+The \marg{message} is the prefix of the message to be sent to the \SM\
+when the end user deletes one or more objects. The \FE\ appends the
+\marg{objectID}s of the objects to be deleted, separated by
+spaces. The object list is closed under dependency.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{General Messages}\label{general_msgs}
+
+The \FE\ accepts the following general-purpose messages:
+
+\msg{fatal\_error\_}{message}
+
+A fatal error, described in the \marg{message}, has been detected by
+the \SM.
+
+\msg{confirm\_quit\_}{}
+
+This tells the \FE\ that the \SM\ has completed its shutdown, so
+the \FE\ may now exit.
+
+\msg{confirm\_start\_}{viewID}
+
+This tells the \FE\ that the \SM\ has started the problem with
+\marg{viewID}.
+
+\msg{confirm\_suspend\_}{viewID}
+
+This tells the \FE\ that the \SM\ has suspended the problem with
+\marg{viewID}. The \FE\ may get this message even when the end user
+has not suspended the problem, e.g., when all of the ARCs for the
+problem have been used up.
+
+\msg{confirm\_resume\_}{viewID}
+
+This tells the \FE\ that the \SM\ has resumed the problem with
+\marg{viewID}.
+
+\msg{terminate\_problem\_}{viewID}
+
+This tells the \FE\ to put the problem in a state similar to
+suspended, except that it cannot be resumed. This message is sent when
+the problem has finished its work.
+
+\msg{confirm\_delete\_}{{\tt\{}objectID{\tt+\}}}
+
+This tells the \FE\ that the \SM\ has deleted the objects with the
+given \marg{objectID}s. In this case \marg{objectID} is not a keyword
+argument.
+
+\msg{arc\_update\_}{viewID ARCSlotID value}
+
+This tells the \FE\ that the ARC value of \marg{ARCSlotID} in
+\marg{viewID} has changed to \marg{value}. These messages are
+correctly interpreted whether the view is open or not, and are quietly
+ignored when there is no view at all with \marg{viewID} (as happens,
+e.g., when a purely internal active object sends an ARC update).
+
+\msg{syntax\_error\_in\_defn\_}{name errMesg}
+
+This tells the \FE\ that a previous attempt to check in an object with
+name \marg{name} failed due to a syntax error in the definition of the
+object. The error message is in \marg{errMesg}. The \FE\ is
+responsible for reposting the same kind of dialog, with the same
+entries as when the dialog was last confirmed, along with the error
+message. If the new dialog is confirmed, with any or all entries
+possibly different, the \FE\ must use the same message template as in
+the previous check in request.
+
+The \marg{errMesg} has the form {\tt\{$n$ \{{\em descr}\}\}}, where
+$n$ is the index of the problem, and {\em descr} says what is wrong.
+
+
+\msg{post\_to\_log\_}{viewID text level}
+
+This tells the \FE\ to append the {\sf Hot} \marg{text} at the end of
+the log of \marg{viewID}. When \marg{level} has value $1$, the
+\marg{text} is posted to both the view log and the session log; when
+\marg{level} is $2$, only the former.
+
+\msg{type\_name\_}{name prefix typeID}
+
+This is an experimental message, sent at startup, via which the \SM\
+associates human readable text, the \marg{name}, with a \marg{typeID}.
+The \marg{prefix} is the preferred default name prefix for an object
+of the given type. Currently, the arguments are not keyword arguments.
+
+
+%%....................................................................
+\subsection{Predefined Procedures}\label{predefined_procedures}
+
+The \FE\ provides a number of procedures which can be used as
+\marg{action} arguments in menu definitions (\S\ref{menu_defn}). If
+procedure {\tt\_foo\_} takes arguments {\tt bar$_1$}, $\ldots$, {\tt
+bar$_n$}, then the \marg{action} must be written
+
+{\tt\{\_foo\_ bar$_1$...bar$_n$\}}.
+
+The arguments are {\em not} keyword arguments. Each of these
+procedures has the side-effect that when they exit, they have defined
+certain variables for use as substrings in the corresponding
+\marg{message} argument of the \marg{realItem} in the menu
+definition. The names of the variables are listed with each procedure.
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Definition Dialogs}
+
+The procedures {\tt\_defineFPGroup\_}~\marg{title},
+{\tt\_defineSubgroup\_}~\marg{title}, {\tt\_defineMap\_}~\marg{title},
+and {\tt\_defineWord\_}~\marg{title} each bring up a dialog in which
+the end user can define the named kind of object. The {\sf Hot} text
+\marg{title}, delimited by {\tt\{\}}, says what is being asked
+for. Note that, e.g., {\tt\_defineFPGroup\_} could be used for several
+group types. The variables defined by each upon exit are
+$\backslash${\tt\$\{name\}} and $\backslash${\tt\$\{defn\}}.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Parameter Dialogs}
+
+The procedure {\tt\_defineInt\_}~\marg{title}~\marg{low}~\marg{high}
+is for prompting the user for an integer parameter to an action such
+as `Compute a power of...'. The {\sf Hot} text \marg{title}, delimited
+by {\tt\{\}}, says what the integer is for. The arguments \marg{low},
+\marg{high} give inclusive bounds on acceptable integers; either or
+both may be {\tt\{\}} if there is no bound.  This defines the variable
+$\backslash${\tt\$\{n\}} upon exit.
+
+
+%%....................................................................
+\subsection{Predefined Views}\label{predefined_views}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{The Problem View}
+
+The \FE\ provides a procedure named {\tt problemView} for use as a
+\marg{viewBuilder} in a \marg{viewStructure} argument to the {\tt
+create\_} command (\S\ref{checking_in}). The \marg{viewParameters} it
+expects has the form:
+
+{\tt\{}\marg{viewID} \marg{viewTitle} \marg{viewBanner} \marg{totalARCs}
+\marg{subproblems}{\tt\}}
+
+The \marg{viewID} is a positive integer which is the definitive
+reference shared by the \FE\ and \SM\ to the problem view, but parts
+of the view are independently addressable via other id numbers.
+
+The \marg{viewTitle} is {\sf Hot} text, delimited by {\tt\{\}}, which
+titles the problem.
+
+The \marg{viewBanner} is {\sf Hot} text, delimited by {\tt\{\}}, which
+describes the problem. The view sizes its banner to display all of
+\marg{viewBanner} by counting newlines.
+
+The \marg{totalARCs} has the form {\tt\{}\marg{ARCSlotID}
+\marg{value}{\tt\}}, where \marg{ARCSlotID} is a positive integer
+which uniquely references a slot for the total number of ARCs consumed
+by the problem, and \marg{value} is its initial value. At present, the
+\marg{ARCSlotID} may as well be the \marg{objectID} of the problem; as
+there are no facilities in the \SM\ (that I can see) for sending ARC
+updates to this \marg{ARCSlotID}, the \FE\ computes the new value when
+it gets other ARC updates.
+
+The \marg{subproblems} has the form {\tt\{\{}\marg{probViewID}
+\marg{name} \marg{state} \marg{ARCSlotID} \marg{value}{\tt\}+\}},
+where \marg{probViewID} is a positive integer which uniquely
+references the subproblem, \marg{name} is {\sf Hot} text which
+describes the subproblem, \marg{state} is {\tt 1} or {\tt 0} to
+indicate enabled or disabled, \marg{ARCSlotID} is a positive integer
+which uniquely references the slot for the ARCs allocated to the
+subproblem, and \marg{value} is the initial ARC value.
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{The Object View}
+
+The \FE\ provides a procedure named {\tt objectView} for use as a
+\marg{viewBuilder} in a \marg{viewStructure} argument to the {\tt
+create\_} command (\S\ref{checking_in}). The \marg{viewParameters} it
+expects has the form:
+
+{\tt\{}\marg{viewID} \marg{heritage}{\tt\}}
+
+The \marg{viewID} is a positive integer which is the definitive
+reference shared by the \FE\ and \SM\ to the object view.
+
+The \marg{heritage} is {\sf Hot} text which describes what the object
+is, and where it came from. Evaluation of \marg{heritage} is delayed
+until the view is (re)displayed, to allow for possible name changes.
+Thus the \marg{heritage} of a new word could be
+
+{\tt\{A word in the generators of [\_name\_ 29]\}}
+
+
+
+
+%%....................................................................
+\subsection{Geometry Management}
+
+In almost all of the examples in Ousterhout's book, widget paths are
+cluttered by the demands of the packer. For example, in order to
+ensure that a button is drawn correctly in a window, you might make an
+enclosing frame which serves no purpose other than to manage the
+geometry of the button. Thus:
+
+\begin{verbatim}
+  frame .d9.frame6
+  button .d9.frame6.ok -text OK; button .d9.frame6.cancel -text Cancel
+  pack .d9.frame6.ok .d9.frame6.cancel -side left
+  pack .d9.frame6 -side top
+\end{verbatim}
+
+It is certainly tedious to build all of these frames and pack the
+widgets into them `by hand'. But much worse is the fact that sometimes
+you can not avoid hard-wiring a widget path in a procedure other than
+the one which made the widget; the procedure might not even be in the
+same file.  This means that whenever you change the geometry of a
+window, you must track down all references to its widgets and change
+them too.
+
+But there is a simple solution. Every widget except {\tt .} has a {\em
+parent}, and, if it is packed, a {\em master} which manages its
+geometry. These need not be the same. Above, {\tt .d9.frame6} is both
+the parent and master of {\tt ok}, but we can make {\tt .d9} the
+parent of {\tt ok} instead, and pack {\tt .d9.ok} in {\tt .d9.frame6}.
+That way, all (or at least the `exported') widgets have a canonical
+path, while allowing transparent changes to their masters. The above
+example becomes:
+
+\begin{verbatim}
+  frame .d9.frame6
+  button .d9.ok -text OK; button .d9.cancel -text Cancel
+  pack .d9.ok .d9.cancel -side left -in .d9.frame6
+  pack .d9.frame6 -side top
+\end{verbatim}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{{\tt proc framer}}
+
+The {\tt proc framer} in {\tt general.tcl} relieves some of the tedium
+of creating frames and packing widgets into them, though you still
+have to think about how to arrange frames to get the effect you want.
+The above example becomes
+
+\begin{verbatim}
+  button .d9.ok -text OK; button .d9.cancel -text Cancel
+  framer .d9 .d9 top {
+    left {} {} {
+      ok {} cancel {}
+    }
+  }
+\end{verbatim}
+
+Look in, e.g., {\tt options.tcl} for more elaborate examples.
+
+The first argument to {\tt framer}, {\tt parent}, is the parent of all
+widgets which are to be packed. It saves having to re-type it for
+every widget. The second argument is the highest level master of all
+widgets packed by {\tt framer}, and of all frames it creates and
+packs. It may as well be {\tt parent}. The third argument gives the
+initial {\tt -side} argument to {\tt pack}.  What follows is a list of
+2- and 4-tuples.
+
+The 2-tuples are widget names followed by a list of arguments to {\tt
+pack}, possibly {\tt\{\}}. These widgets must have parent {\tt
+parent}.
+
+The 4-tuples specify frames which may contain slave frames and
+widgets. They consist of a {\tt -side} option for the slaves, a list
+of {\tt frame} options, a list of {\tt pack} options for the frame,
+and a further list of widgets and frame specifications.
+
+As {\tt framer} creates the specified frames, it gives them the names
+{\tt f1}, {\tt f2}, etc., and makes {\tt parent} their parent.

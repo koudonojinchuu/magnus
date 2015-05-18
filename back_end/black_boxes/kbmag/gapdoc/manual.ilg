@@ -1,0 +1,38 @@
+This is makeindex, portable version 2.12 [26-May-1993].
+Scanning input file manual.idx...
+!! Input index error (file = manual.idx, line = 1):
+   -- Missing arguments -- need two (premature LFD).
+!! Input index error (file = manual.idx, line = 2):
+   -- Missing arguments -- need two (premature LFD).
+.
+!! Input index error (file = manual.idx, line = 5):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 10):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 19):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 24):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 27):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 31):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 35):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 40):
+   -- Missing arguments -- need two (premature LFD).
+
+!! Input index error (file = manual.idx, line = 47):
+   -- Missing arguments -- need two (premature LFD).
+done (38 entries accepted, 11 rejected).
+Sorting entries....done (209 comparisons).
+Generating output file manual.ind....done (70 lines written, 0 warnings).
+Output written in manual.ind.
+Transcript written in manual.ilg.

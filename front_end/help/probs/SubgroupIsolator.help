@@ -1,0 +1,31 @@
+@@How this problem works
+@@FP
+
+@@ABELIAN
+
+\ni The isolator of a subgroup is the pre-image of the torsion subgroup
+of the factor group of the containing group by the subgroup. This torsion
+subgroup is computed followed by its pre-image.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+@@How this problem works
+
+There is no documentation for this problem yet.
+@@How this problem works
+
+There is no documentation for this problem yet.

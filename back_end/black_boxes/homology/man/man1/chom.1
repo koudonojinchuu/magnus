@@ -1,0 +1,90 @@
+.TH chom 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBchom \-
+Creates a script for use in \fImagma\fR to calculate Homology of a group
+for mappings from different dimensions.
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBchom\fR [\fI-v\fR] \fIstart end inputfile\fR [\fIoutputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP -v 15
+(Optional) Enters verbose mode.  Extra information is included in the output
+file including the number of critical tuples and the invariants of the matrices
+in each dimension.
+.IP start 15
+the starting dimension (> 1) whose matrix we will produce for use in \fImagma\fR.
+.IP end 15
+the end dimension (>= start) whose matrix we will produce.
+.IP inputfile
+the groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.
+
+.IP outputfile
+file for output.  If no file name is given \fIStandard Output\fR is used.
+
+
+
+.SH \fIUsage
+
+Given a group and its complete rewriting system including finite state automata (the inputfile),
+creates a script for use in \fImagma\fR to calculate Homology of the group
+for mappings from different dimensions. The algorithm creates each matrix for calculating
+Homology dimension n, by calculating boundaries for critical n\-tuples, and
+forming a matrix from these calculations.
+
+Once the outputfile has been created, it is a simple task to run \fImagma\fR
+with this file.  See the \fIexample\fR below for details.
+
+The boundary
+calculation algorithms used are based on those given by J. R. J. Groves
+"Rewriting Systems and Homolgy of Groups" in his research report from
+The University of Melbourne, Department of Mathematics, 1990 and original
+algorithms by J.R.J.Groves 1993-1994.
+
+
+.SH \fIExample
+
+Suppose we have a groups rewriting system in a file "grpA.kbeqn".  We are
+interested in homology for the mappings from dimension 3 to 2 and 4 to 3,
+and we'd like the output in verbose mode.
+We run
+\fBchom\fR as follows:
+
+        chom -v 2 4 grpA.kbeqn output
+
+The resulting file "output" contains matrices for dimensions 1, 2, 3 and 4,
+along with other information in a format ready for use with \fImagma\fR.
+\fImagma\fR should give as output homology calculations for dimensions 2,
+3 and 4.
+
+We can now run \fImagma\fR, and type:
+
+		load output;
+
+For an example of the resulting output, see \fIcalchom\fR.
+
+
+.SH \fIBugs
+If a rewriting system is not complete, the program may crash.  This is
+because certain tests are \fInot\fR performed to reduce execution time.
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+\fIchom_stats(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (6/10/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

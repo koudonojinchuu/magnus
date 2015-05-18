@@ -1,0 +1,15 @@
+system
+word_type:  monoid
+ngens:  3
+naming_convention:  none
+generators:  x y Y
+ninv:  3
+inverse_pairs:
+  x  x
+  y  Y
+  Y  y
+weight_convention:  constant
+level_convention:  constant
+nsub:  1
+subsystems:
+   g2378.sb1

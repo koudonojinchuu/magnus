@@ -1,0 +1,30 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		finitely presented group 
+
+Objects highlighted:	word W, subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Find the Schreier representative of W modulo H
+
+Problem type:		problem object
+
+Help file:		WordRepresentativeProblem.help
+
+
+			     Algorithms:
+
+
+1. Enumerate cosets of G
+  
+2. Find a representative of W

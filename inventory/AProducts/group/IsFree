@@ -1,0 +1,34 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		amalgamated product of free groups
+
+Objects highlighted:	group G
+
+Name in the menu:	Is G free ?
+
+Problem type:		problem object
+
+Help file:		APofFreeFreeness.help
+
+
+			Fast checks:
+
+1. If the amalgamated subgroup is cyclic and the canonic decomosition
+   of G abelianized is computed
+	result is fast.
+
+
+			Algorithms:
+
+
+1. For use of this problem
+

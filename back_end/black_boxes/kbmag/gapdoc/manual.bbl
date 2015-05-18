@@ -1,0 +1,30 @@
+\begin{thebibliography}{}
+
+\bibitem {EHR91}
+D.F.\ Holt, D.B.A.\ Epstein and S.\ Rees,
+``The use of Knuth-Bendix
+methods to solve the word problem in automatic groups'',
+{\it J.\ Symbolic\ Computation} {\bf 12} (1991), 397-414.
+
+\bibitem {ECHLPT92}
+D.B.A.\ Epstein, J.W.\ Cannon, D.F.\ Holt, S.\ Levy,
+M.S.\ Paterson and W.P.\ Thurston,
+``{\it Word Processing and Group Theory}'',
+Jones and Bartlett, 1992.
+
+\bibitem {Holt94}
+Derek\ F.\ Holt, ``The Warwick Automatic Groups Software'',
+To appear in Proceedings of DIMACS Conference on Computational Group Theory,
+Rutgers, March 1994.
+
+\bibitem {LeC86}
+P.\ LeChenadec,
+``{\it Canonical Forms in Finitely Presented Algebras}'',
+London Pitman and New York, Wiley, 1986.
+
+\bibitem {Sims94}
+Charles\ C.\ Sims,
+``{\it Computation with Finitely Presented Groups}'',
+Cambridge, 1994.
+
+\end{thebibliography}

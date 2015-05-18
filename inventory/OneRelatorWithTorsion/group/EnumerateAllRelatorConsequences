@@ -1,0 +1,30 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		one-relator group with torsion
+
+Objects highlighted:	group G 
+
+Name in the menu:	Enumerate all relator's consequences of G
+
+Problem type:		problem object
+
+Help file:		ConsequencesEnumerator.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+
+  Links:
+
+	1. Click here to see all consequences of the relator of G.

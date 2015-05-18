@@ -1,0 +1,10 @@
+@@How this problem works
+
+@@FP
+
+@@FREE
+
+\ni  To enumerate the automorphisms of finite order in a free group, we use the general
+automorphism enumerator and then enumerate only the ones which are of finite order
+(see  @Random automorphisms enumerator@probs/AutoEnumeratorProblem::FREE@).
+

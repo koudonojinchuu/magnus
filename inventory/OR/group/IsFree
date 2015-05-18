@@ -1,0 +1,26 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		one relator group
+
+Objects highlighted:	group G 
+
+Name in the menu:	Is G free ?
+
+Problem type:		problem object
+
+Help file:		ORIsFreeProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem

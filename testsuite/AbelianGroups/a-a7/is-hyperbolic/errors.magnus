@@ -1,0 +1,10 @@
+FrontEnd --> BackEnd :  -2 0 A1 < a,a^7 ;  >
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -1 2 0 A1
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -2 28 0
+FrontEnd --> BackEnd :  -1 2 2 hyperbolic
+getLine() obtains : hyperbolic
+FrontEnd --> BackEnd :  2 1 1 50
+FrontEnd --> BackEnd :  2 2
+FrontEnd --> BackEnd :  -1 0

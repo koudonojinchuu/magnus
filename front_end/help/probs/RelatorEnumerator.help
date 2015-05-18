@@ -1,0 +1,34 @@
+
+@@How this problem works
+
+@@FP
+
+\ni Given a set of generators of a subgroup of a finitely preented  group, we
+enumerate the words in the generators and check to see which of these belong to 
+successive approximations of the normal closure of the defining relators, 
+thereby producing successively better and better approximations to a 
+system of defining relators for the subgroup. The fineness of these approximations
+is controlled by choosing how many relators are to be enumerated; a parameter is
+provided for this purpose.
+
+
+@@ONE_RELATOR
+
+\ni Given a set of generators of a subgroup of a one-relator group, we
+enumerate the words in the generators and use the solution of the word
+problem in a one-relator group to decide if these words are trivial
+in the given group, i.e., are relators. This produces better and better 
+approximations to a system of defining relations for the subgroup.
+The fineness of these approximations is controlled by choosing how many 
+relators are to be enumerated; a parameter is provided for this purpose.
+
+
+@@Find relators for a subgroup of a one-relator group
+
+\ni Given a set of generators of a subgroup of a one-relator group, we
+enumerate the words in the generators and use the solution of the word
+problem in a one-relator group to decide if these words are trivial
+in the given group, i.e., are relators. This produces better and better 
+approximations to a system of defining relations for the subgroup.
+The fineness of these approximations is controlled by choosing how many 
+relators are to be enumerated; a parameter is provided for this purpose.

@@ -1,0 +1,33 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		finitely presented group
+
+Objects highlighted:	group G 
+
+Name in the menu:	Find a permutation representation of G 
+                        when G is finite
+
+Problem type:		problem object
+
+Help file:		PermutationRepProblem.help
+
+
+			     Algorithms:
+
+
+1. Enumerate cosets G  //@db: wording  
+  
+   Links:
+
+	Click here to see permutation representation of G.
+
+//@db need to add:  Compute the torsion-free rank of the abelianization of G

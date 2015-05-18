@@ -1,0 +1,13 @@
+@@About Magnus
+
+\ni Magnus has been designed to carry out computations and do experiments
+with infinite groups. These infinite groups come, in the main,
+equipped with finite presentations. As such, it has long been
+recognized that no overall algorithmic approach to most of the
+problems and questions that arise, is possible. In many specific
+instances, however, it is still possible to obtain either explicit
+answers to a given question or at least some evidence as to whether a
+given conjecture is true or false. Magnus has been designed with such
+objectives in mind. A detailed description of the underlying
+philosophy and the computations that Magnus can effect, is contained
+in the @on-line manual@root::The Magnus Manual@.

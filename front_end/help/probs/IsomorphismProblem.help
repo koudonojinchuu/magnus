@@ -1,0 +1,23 @@
+@@How this problem works
+
+@@FP
+
+\ni We compute the low central series for both groups
+
+G_0 < G_1 < G_2 < ...
+
+and 
+
+H_0 < H_1 < H_2 < ...
+
+Then we find LCS quotients i.e. the i-th quotients are
+G_i+1 / G_i and H_i+1 / H_i. These groups are abelian,
+so we can check them on isomorphism 
+( see for details 
+@Isomorphism for abelian groups@probs/AbelianIsomProblem::ABELIAN@ 
+). If i-th quotients aren't isomorphic then the given groups
+aren't isomorphic, but if all quotients are isomorphic the
+algorithm can't give an exact answer.
+
+\ni For a general discussion of finitely presented groups, see
+@General_finitely_presented_groups@General_fp_gps::General discussion@    

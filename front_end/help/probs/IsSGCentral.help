@@ -1,0 +1,45 @@
+@@How this problem works
+
+@@FP
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup with the generators of the gtoup, are trivial ( see @The word problem@probs/WordProblem::FP@)
+
+
+@@NILPOTENT
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup with the generators of the group, are trivial ( see @The word problem@probs/WordProblem::NILPOTENT@)
+
+@@AP_FREE
+
+\ni The only central subgroup of an amalgamated product of free groups arises
+when the amalagamated product is that in which the  factors are cyclic and 
+the subgroup is contained in the amalgamation. We simply check whether this
+is the case. If it is not, the subgroup is not central.
+
+@@AP_FREE_CYCLIC
+
+\ni See @amalgamated products of free groups@IsSGCentral::AP_FREE@
+
+
+@@SMALL_CANCELLATION
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup and the generators of the group are trivial ( see @The word problem@probs/WordProblem::SMALL_CANCELLATION@)
+
+
+@@ONE-RELATOR
+
+\ni If the one-relator group has more than two generators, then it is
+centerless. So we simply invoke the word problem for the given one-relator
+group to check whether the generators of the subgroup are trivial in order
+to decide if it is in the center.  If the one-relator group has two generators,
+We invoke the word problem for the given group and try to determine
+whether or not all of the commutators involving the generators of the 
+given subgroup and the group itself are trivial ( see @The word problem@probs/WordProblem::ONE-RELATOR@)
+
+

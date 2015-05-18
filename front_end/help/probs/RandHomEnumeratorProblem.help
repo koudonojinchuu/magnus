@@ -1,0 +1,32 @@
+@@How this problem works
+
+@@FP
+
+\ni Given two groups G and H. We get the random 
+tuple of words in H - { u_1 , ... , u_n }, where n 
+is a number of generators for G. 
+The tuples are obtained using a random
+number generator with a normal probability distribution. 
+Both the length of all u_i and the number of homomorphisms 
+enumerated can be controlled by the parameters provided.
+
+\ni Parameters (@see How to work with parameters@ParametersGeneral::Parameters@).
+
+\ni The homomorphism enumerator can be controlled by means of two parameters.
+
+\ni 1. Total number of homomorphism. This is an @integer@ParametersGeneral::Types of parameters: Integer@ parameter. It represents the total number of homomorphisms to be enumerated. After the initial list of homomorphisms is produced, execution of the enumerator is suspended. This parameter can be changed; so after the problem is suspended, it can be increased. Then, on restarting the enumerator, more homomorphisms will be generated. 
+
+\ni 2. Average length of words in tuple. This is an @integer@ParametersGeneral::Types of parameters: Integer@ parameter. 
+This "average" is actually the "statistical average" laid down for one of the random number generators used in building the homomorphism enumerator.
+
+Then if the word problem is solvable in H we can check whether 
+the map x_i -> u_i, where x_i are generators for G can be extended 
+to homomorphism. If it can be extended then this map is the random 
+homomorphism and we try to find the next one. Otherwise
+we take the next random tuple and do the same with it and
+so on.
+
+\ni For a general discussion of finitely presented groups, see
+@General_finitely_presented_groups@General_fp_gps::General discussion@    
+
+ 

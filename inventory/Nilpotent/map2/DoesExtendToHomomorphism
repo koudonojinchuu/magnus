@@ -1,0 +1,43 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	map M 
+
+Other objects present:	domain - group G1, range - group G2
+
+Name in the menu:	Does M extend to a homomorphism ?
+
+Problem type:		problem object
+
+Help file:		ExtendToHomProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+  
+2. Compute abelian invariants of G2
+  
+3. Compute a basis of G2
+
+4. Solve using basis of G2
+
+5. Compute lower central quotients for G2
+  
+6. Solve using lower central quotients of G2
+  
+  
+
+
+

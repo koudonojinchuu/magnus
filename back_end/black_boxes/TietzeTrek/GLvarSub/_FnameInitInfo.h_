@@ -1,0 +1,18 @@
+/*******************
+
+Written by Frank Rimlinger, Jan 1993
+*******************/
+
+#ifndef Frank_FnameInitInfo
+#define Frank_FnameInitInfo
+
+#include "FGLvarInitInfo.h"
+
+class FnameInitInfo: public FGLvarInitInfo{
+public:
+
+	FnameInitInfo(void);
+};
+#endif
+
+

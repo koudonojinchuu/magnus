@@ -1,0 +1,69 @@
+#include "crossTrainer.h"
+#include "FGLvar.h"
+#include "GLfunctions.h"
+#include "Fname.h"
+#include "FGLink.h"
+#include "FnameInitInfo.h"
+
+
+
+// standard methods for Fname
+	
+void Fname::PutI(void){
+	+*this;
+	xPutI((Ptr)&iD);
+	-*this;
+}
+void Fname::cPutI(void){
+	+*this;
+	xcPutI((Ptr)&iD);
+	-*this;
+}
+void Fname::jPutI(void){
+	+*this;
+	xjPutI((Ptr)&iD);
+	-*this;
+}
+void Fname::GetI(void){
+	+*this;
+	xGetI((Ptr)&iD);
+	-*this;
+}
+void Fname::cGetI(void){
+	+*this;
+	xcGetI((Ptr)&iD);
+	-*this;
+}
+void Fname::jGetI(void){
+	+*this;
+	xjGetI((Ptr)&iD);
+	-*this;
+}
+void Fname::Put(void){ 
+	+*this;
+	xPut((Ptr)&D);
+	-*this;
+}
+void Fname::cPut(void){
+	+*this; 
+	xcPut((Ptr)&D);
+	-*this;
+}
+void Fname::Get(void){ 
+	+*this;
+	xGet((Ptr)&D);
+	-*this;
+}
+void Fname::cGet(void){
+	+*this; 
+	xcGet((Ptr)&D);
+	-*this;
+}
+
+// default constructor.  You probably will want something
+// more elaborate to initialize Fname members
+
+Fname::Fname(FGLink *aGLink,FnameInitInfo *info)
+	:FGLvar(aGLink,info){}
+
+// definitions for programmer defined function members

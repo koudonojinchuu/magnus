@@ -1,0 +1,84 @@
+@@How this problem works
+
+\ni In order to compute the p-height of an element, we compute
+its primary decomposition. If the element is of finite order
+prime to p, its p-height is infinite. Otherwise, its p-height
+can be read off from is primary decomposition. It is enough to
+note that if a is an element of either infinite order or of p-power
+order, then the p-height of a^n is the largest power of p dividing 
+n, whenever a^n is not equal to 1.
+
+\ni For a general discussion see 
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

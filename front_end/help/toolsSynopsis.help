@@ -1,0 +1,150 @@
+@@Synopsis of Tools
+
+The following describes every kind of computation or query you can
+initiate about the objects you have
+@selected@aboutWorkspace::Selecting Objects in the Workspace@, with
+the Tools menu.
+
+You must select the minimum number of objects which can make sense.
+For example, it would be perfectly sensible to select a word and its
+group, if you want to know whether the word is trivial. But in fact it
+can make sense to select just the word, since its group is known to
+the system. So select just the word.
+
+When you have selected a single group which is abelian (as checked
+in), you may
+
+\ni* Compute its invariants.
+
+When you have selected a single group which is free (as checked
+in), you may
+
+\ni* Enumerate random automorphisms of it.
+
+\ni* Enumerate random finite order automorphisms of it.
+
+When you have selected a single group which is nilpotent (as checked
+in), you may
+
+\ni* Compute its nilpotent structure (that is, compute the internal
+data needed to carry out computations with it).
+
+\ni* Compute its center.
+
+When you have selected a single group which is not free, abelian, or
+nilpotent (as checked in), you may
+
+\ni* Compute an integral homology group.
+
+\ni* Try to determine its order.
+
+\ni* Compute the invariants of its abelianization.
+
+\ni* Ask whether the given presentation is small cancellation.
+
+\ni* Look for a ShortLex automatic structure.
+
+\ni* Look for a (preferably confluent) rewriting system.
+
+
+When you have selected a single word, you may:
+
+\ni* Ask whether it is trivial.
+
+\ni* Freely reduce it.
+
+\ni* Compute its formal inverse.
+
+When it is a word in a free group (as checked in), you may:
+
+\ni* Ask whether the word is a commutator.
+
+
+When you have selected a subgroup H of a free group F (as checked in),
+you may:
+
+\ni* Ask whether H is normal.
+
+\ni* Ask what the index of H in F is.
+
+\ni* Compute a Nielsen basis for H.
+
+\ni* Compute the normaliser of H.
+
+\ni* Compute a finite index subgroup K of F, with H as a free factor
+of K.
+
+When you have selected a subgroup H of a group G, you may:
+
+\ni* Enumerate relators of H. This will currently refuse to do
+anything until the system has a fast solution of the word problem for
+G, but it will help you look for one.
+
+
+When you have selected a map m from the generators of a group G to
+itself, you may:
+
+\ni* Compute a power of m.
+
+When G is a free group (as checked in), you may:
+
+\ni* Ask whether m defines an automorphism of G.
+
+\ni* Ask whether m defines an inner automorphism of G.
+
+When m is also known to the system to define an automorphism, you may:
+
+\ni* Compute the inverse of m.
+
+\ni* Compute the free-by-cyclic extension of G by m. This new group
+has a fast solution of the word problem.
+
+
+When you have selected subgroups H, K of a free group F (as checked
+in), you may:
+
+\ni* Ask whether H contains K, K contains H.
+
+\ni* Ask whether H contains a conjugate of K, K contains a conjugate of H.
+
+\ni* Compute the join of H and K.
+
+\ni* Compute the intersection of H and K.
+
+
+When you have selected a subgroup H of a free group F (as checked in)
+and a word w in the generators of F, you may:
+
+\ni* Ask whether w represents an element of H.
+
+\ni* Ask whether a power of w represents an element of H.
+
+\ni* Ask whether a conjugate of w represents an element of H.
+
+\ni* Compute a right Schreier representative of w modulo H.
+
+
+When you have selected an equation in a free group (as checked in),
+you may:
+
+\ni* Enumerate solutions of the equation. When the equation is easy
+enough, this will find `all' solutions; see ??
+
+
+When you have selected words u and v in a group G, you may:
+
+\ni* Ask whether u = v in G.
+
+\ni* Compute the formal products u * v, v * u.
+
+
+When you have selected maps p, q with compatible domain and range, you
+may:
+
+\ni* Compute the compositions p( q(.) ), q( p(.) ).
+
+
+When you have selected map m from the generators of a group G, and a
+word w in generators of G, you may:
+
+\ni* Compute the image of w under m.

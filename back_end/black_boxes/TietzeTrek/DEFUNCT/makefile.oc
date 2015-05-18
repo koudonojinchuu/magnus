@@ -1,0 +1,57 @@
+### this is a GNU make file
+### it will only execute properly under gmake
+
+### COPY THIS FILE INTO YOUR WORKING DIRECTORY AND NAME IT makefile
+### fill in the variables appropriately
+
+# set some variables like paths, compiler names, ...
+include C-C++variables 
+
+### user definable variables
+# supported C++ compilers: attc++, sunc++, g++, saberc++(default is sunc++)
+#CXX     = g++
+
+# !!!!!!!!!!!!!!!!!!!!!! OBJECTCENTER VERSION !!!!!!!!!!!!!!!!
+CXX  = saberc++
+ 
+ 
+# supportet C compilers: cc, gcc  (default is cc)
+CC       = gcc
+
+# linking of object files will be done with the compiler that
+# was used to produce the object file of the main program
+
+# list the library names (no -l, space between names)
+LIBS     =    
+
+# list the names of the binaries (space between names)
+BINARIES =  TietzeTrek
+
+# define static rules for %.c:%.o, $(BINARIES): %.o
+# rules: all clean install depend
+# default is make usage
+include C-C++rules.and.dependencies
+
+# list the dependencies for the binaries 
+# (the dependency of a binary on its own object can be omitted)
+# example  histo: bin.o counter.o
+ 
+
+OBJ1 = Fclasses/FArray.o Fclasses/FCluster.o Fclasses/FCollection.o  Fclasses/FfreeWord.o Fclasses/FList.o Fclasses/FObject.o Fclasses/FResources.o Fclasses/FStringArray.o Fclasses/FtoolBox.o Fclasses/text_functions.o
+
+OBJ2 = GLink/FBlockManager.o GLink/FcleanUpNode.o GLink/FcloneNode.o GLink/FdebugNode.o GLink/FfoldNode.o GLink/FfoldStepper.o GLink/FGLink.o GLink/FGLnode.o GLink/FGLrecycleStack.o GLink/FGLstack.o GLink/FGLstepper.o GLink/FGLwalkNode.o GLink/FgrowNode.o GLink/FrandomRef.o GLink/FreducedFoldNode.o GLink/FreducedVertexFolder.o GLink/FvertexFolder.o GLink/GLfunctions.o 
+
+
+OBJ3 = GLinkGLvar/FGLvar.o GLinkGLvar/FGLvarHigh.o GLinkGLvar/FGLvarInitInfo.o GLinkGLvar/FGLvarInterface.o GLinkGLvar/FGLvarLow.o
+
+OBJ4 = GLvarSub/FCayley.o GLvarSub/FCayleyInitInfo.o GLvarSub/FgTree.o GLvarSub/FgTreeInitInfo.o GLvarSub/FmapTree.o GLvarSub/FmapTreeInitInfo.o GLvarSub/FpLib.o GLvarSub/FpLibInitInfo.o GLvarSub/FpTree.o GLvarSub/FpTreeInitInfo.o GLvarSub/FrTree.o GLvarSub/FrTreeInitInfo.o GLvarSub/FuTree.o GLvarSub/FuTreeInitInfo.o
+
+
+OBJ5 = pres/FCayleyCloneNode.o pres/FfreeList.o pres/FgTreeNode.o pres/FpLibNode.o pres/FpresCompareNode.o pres/FpresText.o pres/FrCloneNode.o pres/FrenumberPresNode.o pres/FrTreeNode.o pres/FstrToWordNode.o pres/FTTpres.o pres/FTTpresNode.o pres/FuNode.o pres/FwordsToGLvarNode.o pres/sortingFunctions.o
+
+OBJ6 = TTdriverDebug/debugMemory.o TTdriverDebug/debugTT.o TTdriverDebug/FTietzeDoc.o TTdriverDebug/FTietzeNode.o TTdriverDebug/FTTdriverNode.o  TTdriverDebug/operators.o TTdriverDebug/TietzeGlobals.o TTdriverDebug/TietzeTrek.o
+
+OBJ7 = TTnodesRsrc/FTT1node.o TTnodesRsrc/FTT1pnode.o TTnodesRsrc/FTT1pSubnode.o TTnodesRsrc/FTT2node.o TTnodesRsrc/FTT2pnode.o TTnodesRsrc/FTTnode.o
+  
+TietzeTrek: $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4) $(OBJ5) $(OBJ6) $(OBJ7)
+

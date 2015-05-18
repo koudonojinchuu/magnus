@@ -1,0 +1,757 @@
+Word difference machine has 9 states.
+Max weight of a word difference is 2
+KB rules are confluent.
+Word difference machine has 9 states.
+Substring closed word difference machine has 9 states.
+Trying to build word acceptor.
+Word acceptor has 13 states before minimization,
+and 5 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult return yes.
+Automaticity is now implied by confluence. But we'll check axioms.
+Axioms check
+Group < a, b ; b a b^-1 a^-1 > is proved weighted lex automatic
+with weights <1,1,1,1> and order <1,-1,2,-2>
+Minimized word acceptor, with 5 states:-
+WA_min := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "identifiers",
+                size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+               ),
+          states := rec(
+                type := "simple",
+                size := 5
+               ),
+           flags := ["DFA","minimized"],
+         initial := [1],
+       accepting := [1..5],
+           table := rec(
+      numTransitions := 12,
+              format := "dense deterministic",
+         transitions := [[2,3,4,5],
+                         [2,0,4,5],
+                         [0,3,4,5],
+                         [0,0,4,0],
+                         [0,0,0,5]
+                   ]
+               )
+);
+General multiplier:-
+GM := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "product",
+                size := 24,
+               arity := 2,
+             padding := _,
+                base := rec(
+                    type := "identifiers",
+                    size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+                   )
+               ),
+          states := rec(
+                type := "labeled",
+                size := 17,
+                labels := rec(
+                      type := "identifiers",
+                      size := 5,
+                      format := "dense",
+                      names := [a,a^-1,b,b^-1,_]
+               ),
+          format := "sparse",
+     setToLabels := [
+	[1,5],
+	[2,5],
+	[5,2],
+	[6,5],
+	[9,1],
+	[12,5],
+	[13,4],
+	[16,5],
+	[17,3]
+              ]
+               ),
+           flags := ["DFA"],
+         initial := [1],
+       accepting := [],
+           table := rec(
+      numTransitions := 68,
+              format := "sparse",
+         transitions := [[[1,2],[3,3],[4,4],[5,5],[7,6],[8,7],
+                          [9,8],[10,9],[11,10],[12,11],[13,12],[15,13],[16,14],
+                          [17,15],[19,16],[20,17],[21,9],[22,5],[23,17],[24,13]],
+                         [[1,2],[3,3],[4,4],[5,5],[11,10],[13,12],
+                          [15,13],[16,14],[19,16],[20,17],[21,9],[23,17],[24,13]],
+                         [[13,3],[15,5]],
+                         [[19,4],[20,5]],
+                         [],
+                         [[7,6],[8,7],[9,8],[10,9],[12,11],[13,12],
+                          [15,13],[17,15],[19,16],[20,17],[22,5],[23,17],[24,13]],
+                         [[13,7],[15,9]],
+                         [[19,8],[20,9]],
+                         [],
+                         [[13,10],[23,9]],
+                         [[13,11],[23,5]],
+                         [[13,12],[15,13],[23,17]],
+                         [],
+                         [[19,14],[24,9]],
+                         [[19,15],[24,5]],
+                         [[19,16],[20,17],[24,13]],
+                         []
+               ]
+               )
+);
+Word difference machine has 17 states.
+Max weight of a word difference is 4
+Word difference machine has 17 states.
+Substring closed word difference machine has 73 states.
+Trying to build word acceptor.
+Word acceptor has 69 states before minimization,
+and 15 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult returns no. Looping.
+Word difference machine has 21 states.
+Max weight of a word difference is 4
+Pass no. 2 though loop.
+Word difference machine has 21 states.
+Building new state, numbered 100 while dealing with  state 53
+New word difference has length 1
+Substring closed word difference machine has 133 states.
+Trying to build word acceptor.
+Word acceptor has 81 states before minimization,
+and 15 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult returns no. Looping.
+Word difference machine has 21 states.
+Max weight of a word difference is 4
+Pass no. 3 though loop.
+Word difference machine has 21 states.
+Building new state, numbered 100 while dealing with  state 53
+New word difference has length 1
+Substring closed word difference machine has 133 states.
+Trying to build word acceptor.
+Word acceptor has 79 states before minimization,
+and 15 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult return yes.
+Axioms check
+Group < a, b ; b a b a^-1 b^-1 a^-1 > is proved weighted lex automatic
+with weights <1,1,1,1> and order <1,-1,2,-2>
+Minimized word acceptor, with 15 states:-
+WA_min := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "identifiers",
+                size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+               ),
+          states := rec(
+                type := "simple",
+                size := 15
+               ),
+           flags := ["DFA","minimized"],
+         initial := [1],
+       accepting := [1..15],
+           table := rec(
+      numTransitions := 32,
+              format := "dense deterministic",
+         transitions := [[2,3,4,5],
+                         [2,0,4,5],
+                         [0,3,4,5],
+                         [6,7,4,0],
+                         [8,9,0,5],
+                         [10,0,0,0],
+                         [0,7,4,0],
+                         [8,0,0,5],
+                         [0,11,0,0],
+                         [10,0,12,0],
+                         [0,11,0,13],
+                         [0,0,14,0],
+                         [0,0,0,15],
+                         [6,0,14,0],
+                         [0,9,0,15]
+                   ]
+               )
+);
+General multiplier:-
+GM := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "product",
+                size := 24,
+               arity := 2,
+             padding := _,
+                base := rec(
+                    type := "identifiers",
+                    size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+                   )
+               ),
+          states := rec(
+                type := "labeled",
+                size := 71,
+                labels := rec(
+                      type := "identifiers",
+                      size := 5,
+                      format := "dense",
+                      names := [a,a^-1,b,b^-1,_]
+               ),
+          format := "sparse",
+     setToLabels := [
+	[1,5],
+	[2,5],
+	[5,2],
+	[6,5],
+	[9,1],
+	[12,5],
+	[13,4],
+	[16,5],
+	[17,3],
+	[33,5],
+	[34,5],
+	[42,5],
+	[44,5],
+	[52,5],
+	[55,5],
+	[65,5],
+	[69,5],
+	[70,5],
+	[71,5]
+              ]
+               ),
+           flags := ["DFA"],
+         initial := [1],
+       accepting := [],
+           table := rec(
+      numTransitions := 232,
+              format := "sparse",
+         transitions := [[[1,2],[3,3],[4,4],[5,5],[7,6],[8,7],
+                          [9,8],[10,9],[11,10],[12,11],[13,12],[15,13],[16,14],
+                          [17,15],[19,16],[20,17],[21,9],[22,5],[23,17],[24,13]],
+                         [[1,2],[3,3],[4,4],[5,5],[11,10],[13,12],
+                          [15,13],[16,14],[19,16],[20,17],[21,9],[23,17],[24,13]],
+                         [[11,18],[13,19]],
+                         [[11,20],[14,21],[17,22]],
+                         [],
+                         [[7,6],[8,7],[9,8],[10,9],[12,11],[13,12],
+                          [15,13],[17,15],[19,16],[20,17],[22,5],[23,17],[24,13]],
+                         [[11,23],[17,24],[18,25]],
+                         [[17,26],[19,27]],
+                         [],
+                         [[3,28],[13,29]],
+                         [[3,30],[9,31],[14,32]],
+                         [[1,33],[5,5],[7,34],[8,35],[10,9],[12,36],
+                          [13,12],[15,13],[21,9],[22,5],[23,17]],
+                         [],
+                         [[3,37],[9,38],[18,39]],
+                         [[9,40],[19,41]],
+                         [[1,42],[4,43],[5,5],[7,44],[10,9],[16,45],
+                          [19,16],[20,17],[21,9],[22,5],[24,13]],
+                         [],
+                         [[1,46],[5,13]],
+                         [[1,18],[3,19]],
+                         [[10,13],[11,20],[14,21]],
+                         [[6,20],[9,21]],
+                         [[7,47],[10,13],[17,22]],
+                         [[1,48],[5,17],[11,23]],
+                         [[5,17],[17,24],[18,25]],
+                         [[2,24],[3,25]],
+                         [[7,49],[10,17]],
+                         [[7,26],[9,27]],
+                         [[1,50],[21,17]],
+                         [[1,28],[11,29]],
+                         [[1,51],[3,30],[21,13]],
+                         [[9,31],[14,32],[21,13]],
+                         [[6,31],[11,32]],
+                         [[1,52],[5,5],[21,9]],
+                         [[7,34],[8,35],[10,9],[12,36],[13,12],[15,13],
+                          [22,5],[23,17]],
+                         [[11,23]],
+                         [[3,30]],
+                         [[3,37],[18,39],[22,17]],
+                         [[7,53],[9,38],[22,17]],
+                         [[2,37],[17,39]],
+                         [[7,54],[22,13]],
+                         [[7,40],[17,41]],
+                         [[1,42],[4,43],[5,5],[16,45],[19,16],[20,17],
+                          [21,9],[24,13]],
+                         [[17,22]],
+                         [[7,55],[10,9],[22,5]],
+                         [[9,38]],
+                         [[1,56],[3,57]],
+                         [[9,58]],
+                         [[3,59]],
+                         [[7,60],[9,61]],
+                         [[1,62],[11,63]],
+                         [[11,64]],
+                         [[1,52],[5,5],[13,65],[15,13],[21,9],[23,17]],
+                         [[17,66]],
+                         [[7,67],[17,68]],
+                         [[7,55],[10,9],[19,69],[20,17],[22,5],[24,13]],
+                         [[11,56],[13,57]],
+                         [[13,3],[15,5]],
+                         [[9,58],[19,43],[20,5]],
+                         [[3,59],[13,35],[15,9]],
+                         [[17,60],[19,61]],
+                         [[19,8],[20,9]],
+                         [[3,62],[13,63]],
+                         [[13,10],[23,9]],
+                         [[11,64],[13,36],[23,5]],
+                         [[13,70],[15,13],[23,17]],
+                         [[17,66],[19,45],[24,9]],
+                         [[9,67],[19,68]],
+                         [[19,15],[24,5]],
+                         [[19,71],[20,17],[24,13]],
+                         [[1,33],[5,5],[13,70],[15,13],[21,9],[23,17]],
+                         [[7,44],[10,9],[19,71],[20,17],[22,5],[24,13]]
+               ]
+               )
+);
+Word difference machine has 17 states.
+Max weight of a word difference is 6
+Word difference machine has 17 states.
+Substring closed word difference machine has 73 states.
+Trying to build word acceptor.
+Word acceptor has 69 states before minimization,
+and 15 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult returns no. Looping.
+Word difference machine has 21 states.
+Max weight of a word difference is 8
+Pass no. 2 though loop.
+Word difference machine has 21 states.
+Building new state, numbered 100 while dealing with  state 53
+New word difference has length 1
+Substring closed word difference machine has 133 states.
+Trying to build word acceptor.
+Word acceptor has 81 states before minimization,
+and 15 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult returns no. Looping.
+Word difference machine has 21 states.
+Max weight of a word difference is 8
+Pass no. 3 though loop.
+Word difference machine has 21 states.
+Building new state, numbered 100 while dealing with  state 53
+New word difference has length 1
+Substring closed word difference machine has 133 states.
+Trying to build word acceptor.
+Word acceptor has 79 states before minimization,
+and 15 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult return yes.
+Axioms check
+Group < a, b ; a b a b^-1 a^-1 b^-1 > is proved weighted lex automatic
+with weights <1,2,1,2> and order <1,-1,2,-2>
+Minimized word acceptor, with 15 states:-
+WA_min := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "identifiers",
+                size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+               ),
+          states := rec(
+                type := "simple",
+                size := 15
+               ),
+           flags := ["DFA","minimized"],
+         initial := [1],
+       accepting := [1..15],
+           table := rec(
+      numTransitions := 32,
+              format := "dense deterministic",
+         transitions := [[2,3,4,5],
+                         [2,0,4,5],
+                         [0,3,4,5],
+                         [6,7,4,0],
+                         [8,9,0,5],
+                         [10,0,0,0],
+                         [0,7,4,0],
+                         [8,0,0,5],
+                         [0,11,0,0],
+                         [10,0,12,0],
+                         [0,11,0,13],
+                         [0,0,14,0],
+                         [0,0,0,15],
+                         [6,0,14,0],
+                         [0,9,0,15]
+                   ]
+               )
+);
+General multiplier:-
+GM := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "product",
+                size := 24,
+               arity := 2,
+             padding := _,
+                base := rec(
+                    type := "identifiers",
+                    size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+                   )
+               ),
+          states := rec(
+                type := "labeled",
+                size := 71,
+                labels := rec(
+                      type := "identifiers",
+                      size := 5,
+                      format := "dense",
+                      names := [a,a^-1,b,b^-1,_]
+               ),
+          format := "sparse",
+     setToLabels := [
+	[1,5],
+	[2,5],
+	[5,2],
+	[6,5],
+	[9,1],
+	[12,5],
+	[13,4],
+	[16,5],
+	[17,3],
+	[33,5],
+	[34,5],
+	[42,5],
+	[44,5],
+	[52,5],
+	[55,5],
+	[65,5],
+	[69,5],
+	[70,5],
+	[71,5]
+              ]
+               ),
+           flags := ["DFA"],
+         initial := [1],
+       accepting := [],
+           table := rec(
+      numTransitions := 232,
+              format := "sparse",
+         transitions := [[[1,2],[3,3],[4,4],[5,5],[7,6],[8,7],
+                          [9,8],[10,9],[11,10],[12,11],[13,12],[15,13],[16,14],
+                          [17,15],[19,16],[20,17],[21,9],[22,5],[23,17],[24,13]],
+                         [[1,2],[3,3],[4,4],[5,5],[11,10],[13,12],
+                          [15,13],[16,14],[19,16],[20,17],[21,9],[23,17],[24,13]],
+                         [[11,18],[13,19]],
+                         [[11,20],[14,21],[17,22]],
+                         [],
+                         [[7,6],[8,7],[9,8],[10,9],[12,11],[13,12],
+                          [15,13],[17,15],[19,16],[20,17],[22,5],[23,17],[24,13]],
+                         [[11,23],[17,24],[18,25]],
+                         [[17,26],[19,27]],
+                         [],
+                         [[3,28],[13,29]],
+                         [[3,30],[9,31],[14,32]],
+                         [[1,33],[5,5],[7,34],[8,35],[10,9],[12,36],
+                          [13,12],[15,13],[21,9],[22,5],[23,17]],
+                         [],
+                         [[3,37],[9,38],[18,39]],
+                         [[9,40],[19,41]],
+                         [[1,42],[4,43],[5,5],[7,44],[10,9],[16,45],
+                          [19,16],[20,17],[21,9],[22,5],[24,13]],
+                         [],
+                         [[1,46],[5,13]],
+                         [[1,18],[3,19]],
+                         [[10,13],[11,20],[14,21]],
+                         [[6,20],[9,21]],
+                         [[7,47],[10,13],[17,22]],
+                         [[1,48],[5,17],[11,23]],
+                         [[5,17],[17,24],[18,25]],
+                         [[2,24],[3,25]],
+                         [[7,49],[10,17]],
+                         [[7,26],[9,27]],
+                         [[1,50],[21,17]],
+                         [[1,28],[11,29]],
+                         [[1,51],[3,30],[21,13]],
+                         [[9,31],[14,32],[21,13]],
+                         [[6,31],[11,32]],
+                         [[1,52],[5,5],[21,9]],
+                         [[7,34],[8,35],[10,9],[12,36],[13,12],[15,13],
+                          [22,5],[23,17]],
+                         [[11,23]],
+                         [[3,30]],
+                         [[3,37],[18,39],[22,17]],
+                         [[7,53],[9,38],[22,17]],
+                         [[2,37],[17,39]],
+                         [[7,54],[22,13]],
+                         [[7,40],[17,41]],
+                         [[1,42],[4,43],[5,5],[16,45],[19,16],[20,17],
+                          [21,9],[24,13]],
+                         [[17,22]],
+                         [[7,55],[10,9],[22,5]],
+                         [[9,38]],
+                         [[1,56],[3,57]],
+                         [[9,58]],
+                         [[3,59]],
+                         [[7,60],[9,61]],
+                         [[1,62],[11,63]],
+                         [[11,64]],
+                         [[1,52],[5,5],[13,65],[15,13],[21,9],[23,17]],
+                         [[17,66]],
+                         [[7,67],[17,68]],
+                         [[7,55],[10,9],[19,69],[20,17],[22,5],[24,13]],
+                         [[11,56],[13,57]],
+                         [[13,3],[15,5]],
+                         [[9,58],[19,43],[20,5]],
+                         [[3,59],[13,35],[15,9]],
+                         [[17,60],[19,61]],
+                         [[19,8],[20,9]],
+                         [[3,62],[13,63]],
+                         [[13,10],[23,9]],
+                         [[11,64],[13,36],[23,5]],
+                         [[13,70],[15,13],[23,17]],
+                         [[17,66],[19,45],[24,9]],
+                         [[9,67],[19,68]],
+                         [[19,15],[24,5]],
+                         [[19,71],[20,17],[24,13]],
+                         [[1,33],[5,5],[13,70],[15,13],[21,9],[23,17]],
+                         [[7,44],[10,9],[19,71],[20,17],[22,5],[24,13]]
+               ]
+               )
+);
+Word difference machine has 20 states.
+Max weight of a word difference is 10
+Word difference machine has 20 states.
+Building new state, numbered 100 while dealing with  state 73
+New word difference has length 1
+Substring closed word difference machine has 110 states.
+Trying to build word acceptor.
+Building new state, numbered 100 while finding targets of state 94
+Word acceptor has 106 states before minimization,
+and 26 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult returns no. Looping.
+Word difference machine has 22 states.
+Max weight of a word difference is 10
+Pass no. 2 though loop.
+Word difference machine has 22 states.
+Building new state, numbered 100 while dealing with  state 60
+New word difference has length 2
+Substring closed word difference machine has 140 states.
+Trying to build word acceptor.
+Building new state, numbered 100 while finding targets of state 93
+Word acceptor has 107 states before minimization,
+and 26 afterwards.
+Trying to build multipliers.
+Trying to check multipliers.
+gpcheckmult return yes.
+Axioms check
+Group < a, b ; a b a b a b a b a b a b,b^3,a^2 > is proved weighted lex automatic
+with weights <2,2,2,1> and order <1,-1,2,-2>
+Minimized word acceptor, with 26 states:-
+WA_min := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "identifiers",
+                size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+               ),
+          states := rec(
+                type := "simple",
+                size := 26
+               ),
+           flags := ["DFA","minimized"],
+         initial := [1],
+       accepting := [1..26],
+           table := rec(
+      numTransitions := 38,
+              format := "dense deterministic",
+         transitions := [[2,0,3,4],
+                         [0,0,5,6],
+                         [7,0,0,0],
+                         [8,0,0,0],
+                         [9,0,0,0],
+                         [10,0,0,0],
+                         [0,0,11,6],
+                         [0,0,11,12],
+                         [0,0,13,6],
+                         [0,0,11,14],
+                         [15,0,0,0],
+                         [16,0,0,0],
+                         [17,0,0,0],
+                         [18,0,0,0],
+                         [0,0,19,6],
+                         [0,0,20,21],
+                         [0,0,0,22],
+                         [0,0,23,19],
+                         [0,0,0,0],
+                         [24,0,0,0],
+                         [19,0,0,0],
+                         [25,0,0,0],
+                         [26,0,0,0],
+                         [0,0,19,12],
+                         [0,0,13,14],
+                         [0,0,19,14]
+                   ]
+               )
+);
+General multiplier:-
+GM := rec(
+           isFSA := true,
+        alphabet := rec(
+                type := "product",
+                size := 24,
+               arity := 2,
+             padding := _,
+                base := rec(
+                    type := "identifiers",
+                    size := 4,
+                  format := "dense",
+                   names := [a,a^-1,b,b^-1]
+                   )
+               ),
+          states := rec(
+                type := "labeled",
+                size := 67,
+                labels := rec(
+                      type := "identifiers",
+                      size := 5,
+                      format := "dense",
+                      names := [a,a^-1,b,b^-1,_]
+               ),
+          format := "sparse",
+     setToLabels := [
+	[1,5],
+	[2,5],
+	[5,1],
+	[7,5],
+	[8,3],
+	[9,4],
+	[11,4],
+	[12,5],
+	[13,3],
+	[14,5],
+	[15,5],
+	[19,5],
+	[23,5],
+	[24,5],
+	[25,5],
+	[29,5],
+	[33,5],
+	[34,5],
+	[35,5],
+	[39,5],
+	[43,5],
+	[44,5],
+	[45,5],
+	[52,5],
+	[59,5],
+	[60,5],
+	[61,5],
+	[62,5],
+	[65,5],
+	[66,5],
+	[67,5]
+              ]
+               ),
+           flags := ["DFA"],
+         initial := [1],
+       accepting := [],
+           table := rec(
+      numTransitions := 188,
+              format := "sparse",
+         transitions := [[[1,2],[3,3],[4,4],[5,5],[11,6],[13,7],
+                          [14,8],[15,9],[16,10],[18,11],[19,12],[20,13],[21,5],
+                          [23,13],[24,9]],
+                         [[13,14],[14,8],[15,9],[18,11],[19,15],[20,13],
+                          [23,13],[24,9]],
+                         [[16,16]],
+                         [[11,17]],
+                         [],
+                         [[4,18]],
+                         [[1,19],[5,5],[21,5]],
+                         [[1,20]],
+                         [],
+                         [[3,21]],
+                         [[1,22]],
+                         [[1,23],[5,5],[21,5]],
+                         [],
+                         [[1,24],[5,5],[21,5]],
+                         [[1,25],[5,5],[21,5]],
+                         [[3,26]],
+                         [[4,27]],
+                         [[11,28]],
+                         [[13,29],[14,8],[15,9],[18,11],[19,15],[20,13],
+                          [23,13],[24,9]],
+                         [[18,30]],
+                         [[16,31]],
+                         [[14,32]],
+                         [[13,29],[14,8],[15,9],[18,11],[19,33],[20,13],
+                          [23,13],[24,9]],
+                         [[13,34],[14,8],[15,9],[18,11],[19,15],[20,13],
+                          [23,13],[24,9]],
+                         [[13,29],[14,8],[15,9],[18,11],[19,35],[20,13],
+                          [23,13],[24,9]],
+                         [[16,36]],
+                         [[11,37]],
+                         [[4,38]],
+                         [[1,39],[5,5],[21,5]],
+                         [[1,40]],
+                         [[3,41]],
+                         [[1,42]],
+                         [[1,43],[5,5],[21,5]],
+                         [[1,44],[5,5],[21,5]],
+                         [[1,45],[5,5],[21,5]],
+                         [[3,46],[4,47]],
+                         [[3,48],[4,49]],
+                         [[11,50],[16,51]],
+                         [[13,52],[14,13],[15,9],[18,9],[19,15],[20,13],
+                          [23,13],[24,9]],
+                         [[18,53],[19,54]],
+                         [[11,55],[16,56]],
+                         [[14,57],[19,58]],
+                         [[13,59],[14,13],[15,9],[18,9],[19,60],[20,13],
+                          [23,13],[24,9]],
+                         [[19,61],[20,13],[24,9]],
+                         [[13,62],[14,13],[15,9],[18,9],[19,52],[20,13],
+                          [23,13],[24,9]],
+                         [[20,5]],
+                         [[11,16]],
+                         [[16,17]],
+                         [[16,9],[21,13]],
+                         [[24,5]],
+                         [[3,18]],
+                         [],
+                         [[5,46]],
+                         [[1,63]],
+                         [[4,21]],
+                         [[4,13],[5,9]],
+                         [[21,50]],
+                         [[1,64]],
+                         [[1,65],[5,5],[21,5]],
+                         [[1,52],[5,5],[21,5]],
+                         [[1,66],[5,5],[21,5]],
+                         [[1,67],[5,5],[21,5]],
+                         [[13,30]],
+                         [[13,32]],
+                         [[13,52],[14,13],[15,9],[18,9],[19,33],[20,13],
+                          [23,13],[24,9]],
+                         [[13,34],[14,8],[15,9],[18,11],[19,35],[20,13],
+                          [23,13],[24,9]],
+                         [[13,52],[14,13],[15,9],[18,9],[19,35],[20,13],
+                          [23,13],[24,9]]
+               ]
+               )
+);

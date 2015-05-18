@@ -1,0 +1,143 @@
+@@FP
+
+\ni There is no general and effective method for solving the conjugacy 
+problem for all finitely presented groups. However, given a specific 
+finite presentation of a finitely presented group, it may be possible
+to determine whether a given pair u,v of words, represent conjugate 
+elements. Since the group may well hve an unsolvable conjugacy problem 
+itself, there is no overall approach to this problem even for a specific 
+pair of words. Our approach here is as follows.
+
+\ni First we check to see if u and v are not conjugate in the abelianisation
+of G and then in some nilpotent quotients of G.
+
+\ni Next we check to see if G is actually a one-relator group with
+torsion or whether the given presentation is a small cancellation
+presentation. In both instances we use the known solutions of the conjugacy
+problem in these two classes, i.e., an algorithm that is essentially
+due to Dehn. 
+
+\ni Then we try to find a finite rewriting system for G and/or an automatic
+structure for G, which enables us to solve the word problem. We then start 
+enumerating all of the conjugates of u by the elements of G and check to see
+if any of these coincide with v. In the event that G is a one-relator group,
+we use the same approach.
+
+\ni If we know nothing about the word problem for G, we begin to enumerate all
+of the relators of G, all of the conjugates of w^-1 u w and check to see if
+w^-1 u w v^-1 is one of the relators that has been enumerated.
+
+\ni For a general discussion of finitely presented groups, see
+@General discussion of finitely presented groups@General_fp_gps::General discussion@
+
+@@ABELIAN
+
+For a discussion of general finitely generated abelian groups,
+see @General discussion@General_abelian_groups::general discussion@
+
+@@NILPOTENT
+
+\ni In order to solve the conjugacy problem for finitely generated nilpotent
+we use an algorithm that is due to Norman Blackburn. Since this algorithm
+is extremely time-consuming, we first check if the given words are not conjugate
+in various quotients of the given group. For a general discussion of nilpotent
+groups, see @General discussion@General_nilpotent_groups::General discussion@
+
+@@FREE
+
+\ni Two words are conjugate in a free group if and only a cyclic permutation of
+the cyclically reduced form of one of them coincides with the cyclically
+reduced form of the other.
+
+@@AP_FREE
+
+\ni The conjugacy problem for amalgamated products of free groups is, in general,
+undecidable. We use the general procedure dealing with finitely presented groups
+to attempt to decide if two words u and v in an amalgamated product of free groups 
+represent conjugate elements. In more detail, we proceed as follows.
+
+\ni First we check to see if u and v are not conjugate in the abelianisation
+of G and then in some nilpotent quotients of G.
+
+\ni Next we check to see if the accompanying  presentation is a small cancellation
+presentation, in which case we use the known solution of the conjugacy
+problem, i.e., an algorithm that is essentially due to Dehn. 
+
+\ni Since G has a solvable word problem, we start an enumerating all of the 
+conjugates of u by the elements of G and check to see if any of these coincide 
+with v. 
+
+\ni For a general discussion of amalgamated products, see
+@General discussion of amalgamated products@General_amalg_prods::General discussion@
+
+
+@@AP_FREE_CYCLIC
+
+\ni In the case of an amalgamated product of free groups with a cyclic subgroup
+amalgamated, the conjugacy problem was solved by S. Lipschutz. We use a variation
+of his algorithm here. 
+
+\ni For a general discussion of amalgamated products, see
+@General discussion of amalgamated products@General_amalg_prods::General discussion@
+
+@@SMALL_CANCELLATION
+
+\ni The conjugacy problem for metric small cancellation groups can be solved
+by means of an algorithm that goes back to Dehn. We use this algorithm here.
+
+\ni For a general discussion of metric small cancellation groups, see
+@General discussion of small cancellation groups@General_small_cancellation::General discussion@
+
+@@ONE_RELATOR
+
+\ni  It is at the present time, still unkonwn whether an arbitrary one-relator
+group has a solvable conjugacy problem. B.B. Newman proved that one relator
+groups with torsion have a solvable conjugacy problem, and we use his algorithm
+in the event that the given one-relator group has torsion. In the other situation,
+we use the fact that the group has a solvable word problem and follow part of the
+procedure adopted for solving the conjugacy problem for finitely presented groups.
+In a little more detail then, we proceed as follows.
+
+\ni First we check to see if the given pair of words u and v are not conjugate 
+in the abelianisation of G and then in some nilpotent quotients of G.
+
+\ni Next we check to see if the given  presentation is a small cancellation
+presentation, in which case we use the known solution of the conjugacy
+problem for such groups, i.e., an algorithm that is essentially due to Dehn. 
+
+\ni Since G has a solvable word problem, we start an enumerating all of the 
+conjugates of u by the elements of G and check to see if any of these coincide 
+with v. 
+
+\ni For a general discussion of one relator groups, see
+@General discussion of one-relator groupss@General_one-relator_groups::General discussion@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

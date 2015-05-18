@@ -1,0 +1,36 @@
+@@How this problem works
+
+@@FP
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the (c+1)-fold commutators involving the generators 
+of the given subgroup are trivial ( see 
+@The word problem@probs/WordProblem::FP@), where here c is the nilpotency
+class under consideration.
+
+
+@@NILPOTENT
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the (c+1)-commutators involving the generators of the 
+given subgroup are trivial ( see @The word problem@probs/WordProblem::NILPOTENT@), where here c is the nilpotency
+class under consideration.
+
+
+@@SMALL_CANCELLATION
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the (c+1)-fold commutators involving the 
+generators of the given subgroup are trivial ( see @The word problem@probs/WordProblem::SMALL_CANCELLATION@), where here c is the nilpotency
+class under consideration.
+
+
+@@ONE-RELATOR
+
+\ni We invoke the word problem for the given group and try to determine
+whether or not all of the (c+1)-fold commutators involving the generators 
+of the given subgroup are trivial ( see @The word problem@probs/WordProblem::ONE-RELATOR@), where here c is the nilpotency
+class under consideration.
+
+
+

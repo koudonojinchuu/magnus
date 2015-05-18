@@ -1,0 +1,47 @@
+@@FP
+
+\ni There is no general and effective method for solving the triviality
+problem for all finitely presented groups. However, given a specific 
+finite presentation of a finitely presented group, it may be possible
+to determine whether the given group is trivial. We simply invoke the 
+procedure for deciding whether a given word in a finitely presented
+group is trivial and apply it to determine whether the generators of
+the given group are trivial (see @The word problem@probs/WordProblem::FP@).
+
+\ni For a general discussion of finitely presented groups, see
+@General finitely presented groups@General_finitely_presented_groups::
+General discussion@
+
+@@ABELIAN
+
+\ni The given group is decomposed into a direct product of cyclic groups.
+It is trivial if this decomposition consists only of a single cyclic
+group whose order is 1.
+
+\ni For a discussion of general finitely generated abelian groups,
+see @General discussion@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+\ni  A nilpotent group is trivial if and only if its abelianization is
+trivial. Since we can decide whether a finitely generated abelian group 
+is trivial, this means that we can decide whether a finitely generated 
+nilpotent group is trivial (cf. @Is a finitely generated abelian group trivial?@probs/IsTrivialProblem::ABELIAN@).
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+
+
+
+
+
+
+
+
+
+
+

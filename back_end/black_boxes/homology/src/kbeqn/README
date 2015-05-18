@@ -1,0 +1,7 @@
+kbeqn and cfsa
+==============
+
+These programs rely on Derek Holt's libraries.  You will need his automata
+project libraries to use them.  Read the makefile for more details.
+
+Jamie (3/11/94)

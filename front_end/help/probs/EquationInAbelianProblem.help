@@ -1,0 +1,10 @@
+@@How this problem works
+
+@@ABELIAN
+
+\ni The equation can be treated as the system consisting of one 
+equation, so we can use general method for solving systems over
+abelian groups (see @Equations in abelian groups
+@probs/EquationsInAbelianProblem::ABELIAN@).
+
+\ni See also @General_abelian_groups@General_abelian_groups::General discussion@ for a general discussion of abelian groups.

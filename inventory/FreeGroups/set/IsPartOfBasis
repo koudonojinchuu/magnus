@@ -1,0 +1,32 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free group
+
+Objects highlighted:	set S of words
+
+Other objects present:	group F
+
+Name in the menu:	Is S part of basis of F ?
+
+Problem type:		problem object
+
+Help file:		FreeGeneralIsPartOfBasisProblem.help
+
+
+			Algorithms:
+
+
+1. For the use of this problem
+
+   Links:
+
+	Click here to obtain details of the computation.

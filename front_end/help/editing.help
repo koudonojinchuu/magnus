@@ -1,0 +1,86 @@
+@@Editing Text in Magnus
+
+Many windows in Magnus have text in them which you can edit. Position
+the cursor in the appropriate place, click with the left mouse button
+and begin typing. If nothing happens, the text is read-only (like this
+text).
+
+For tasks such as cut-copy-paste, you can use any combination of the
+three methods below:
+
+1. @Just the mouse@Editing with the Mouse@
+
+2. @Macintosh-style Edit menus@Macintosh-style Editing@
+
+3. @Emacs key chords@Emacs Bindings@
+
+  
+@@Editing with the Mouse
+
+You can only copy and paste with the mouse.  First select the text
+that you want to copy with the left mouse button, either by dragging
+it across the desired text or by double or triple clicking. Then click
+the left mouse button at the point where you want to paste the
+selected text and click the middle button to do the pasting.
+
+
+@@Macintosh-style Editing
+
+Windows with text in them have an Edit menu. The Cut, Copy, and
+Clear items refer to the selected text, regardless of what window it
+is in. The Paste item pastes the text most recently Cut or Copied (or
+the top of the kill-ring if you use emacs) where the insertion caret
+is. Thus you can use the Edit menu in one window to copy text from a
+second window, and paste it into a third, if you like.
+
+Beware that selecting text with the mouse does not copy it.
+
+
+@@Emacs Bindings
+
+There are a small number of emacs bindings currently supported. As of
+11/95, they do not work in read-only text. They are:
+
+  C-f       go forward one character
+
+  C-b       go back one character
+
+  C-a       go to the beginning of the line
+
+  C-e       go to the end of the line
+
+  C-p       go to the previous line
+
+  C-n       go to the next line
+
+  M-v       go up a page
+
+  C-v       go down a page
+
+  M-<       go to the beginning of the text
+
+  M->       go to the end of the text
+
+  M-f       go forward one word
+
+  M-b       go back one word
+
+  C-g       clear mark and selection
+
+  C-space   set mark
+
+  C-k       delete to end of line
+
+  C-d       delete next character
+
+  M-Delete  backspace until space
+
+  C-w       cut
+
+  M-w       copy
+
+  C-y       paste
+
+They apply to whatever text has the insertion caret in it, but the
+kill-ring (which can have only one thing in it, for now) is the same
+for all windows.

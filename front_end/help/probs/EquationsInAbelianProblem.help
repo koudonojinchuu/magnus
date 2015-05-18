@@ -1,0 +1,32 @@
+@@How this problem works
+
+@@ABELIAN
+
+\ni Every system of equations over abelian group can be presented as 
+follows:
+
+        a_1_1 x_1 + ... a_1_n x_n = b_1
+        
+        :
+    
+        a_k_1 x_1 + ... a_k_n x_n = b_k
+
+\ni where a_i_j are integers and b_l are elements in the abelian group.
+Then using Gauss transformations we obtain the canonical system:
+
+        a'_1 y_1 = b'_1
+    
+        :
+        
+        a'_s y_s = b'_s
+
+\ni This system is solvable iff the given one is, but it's trivially
+to find solutions for it - we just check b'_i to have a'_i-power
+root. The canonical system is solvable iff all b'_i have such roots.
+All these roots generate the set of solutions.
+
+\ni Finally performing on this set Gauss operations that are inverse 
+to those that we used to obtain the canonical system we get 
+solutions for the initial system.   
+
+\ni See also @General_abelian_groups@General_abelian_groups::General discussion@ for a general discussion of abelian groups.

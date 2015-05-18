@@ -1,0 +1,21 @@
+#ifndef Frank_FrankNode
+#define Frank_FrankNode
+
+#include "FGLwalkNode.h"
+Fclass FAlgorithm;
+
+class FrankNode: public FGLwalkNode{
+public:
+	FAlgorithm *itsAlg;
+	long rank;
+	FrankNode(FAlgorithm *anAlg);
+	static Boolean atVertex(FGLnode *n, FGLvar *v);
+	static Boolean atMaximalEdge(FGLnode *n, FGLvar *v);
+	static Boolean atBasisEdge(FGLnode *n, FGLvar *v);
+	
+	virtual void auRevoir(void);
+	virtual void goodbyeKiss(void);
+};
+
+#endif
+

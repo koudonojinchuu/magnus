@@ -1,0 +1,52 @@
+.TH reduce 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBreduce \-
+Given a rewriting system, rewrites a word, reducing it to Normal Form.
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBreduce\fR [\fIinputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP inputfile
+the groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.  If no file name is given \fIStandard Input\fR is used.
+
+
+
+
+.SH \fIUsage
+
+Given a group and its complete rewriting system including finite state automata (the inputfile),
+reduce will ask you for a word to be rewritten.  The word should be entered
+with a space between generators, followed by a return.
+
+The output shows the initial word, followed by the reduce word.
+
+
+
+.SH \fIExample
+
+Resulting output from a run may look something like
+
+        The initial word: dcba
+
+        The reduced word: abcddef
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (17/8/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

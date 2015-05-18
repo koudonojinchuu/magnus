@@ -1,0 +1,16 @@
+#ifndef Frank_FnameNode
+#define Frank_FnameNode
+
+#include "FGLwalkNode.h"
+
+class FnameNode: public FGLwalkNode{
+public:
+
+	FnameNode(FGLnode *aSupervisor, FGLvar *v);
+	~FnameNode(void);
+	virtual Boolean vertex(void);
+	virtual Boolean maximalEdge(void);
+	virtual Boolean basisEdge(void);
+};
+
+#endif

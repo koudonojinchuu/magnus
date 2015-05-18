@@ -1,0 +1,42 @@
+@@Feedback
+
+\ni We would like to find out what you think about Magnus. In particular
+if you have any suggestions about this software, please e-mail them
+to:
+
+comment@zebra.sci.ccny.cuny.edu
+
+\ni We would also like to hear from you about any problems or difficulties
+that you encounter when using Magnus. Magnus keeps a transcript of
+your entire session in a file called Magnus_Transcript<number>; the
+session log is in a file SessionLog<number>. Both files are located in
+the ~/.magnus directory. If you get an incorrect result from Magnus,
+or if it crashes please e-mail the corresponding transcript and log
+files to:
+
+\ni bug@zebra.sci.ccny.cuny.edu
+
+\ni In addition, if you can, include a brief description of what went wrong. 
+This will enable us to recreate what went wrong and then to fix it.
+
+\ni The numbers at the end of the files Magnus_Transcript<number> and
+SessionLog<number> are not necessarily in the same order as that in
+which the files were created, since Magnus reuses the numbers. In
+order to see which files are the most recent, type:
+
+/bin/ls -lrt Magnus_Transcript[0-9]*
+
+/bin/ls -lrt SessionLog[0-9]*
+
+\ni This should print the latest file last. If this doesn't work, simply
+type:
+
+/bin/ls -lrt
+
+\ni and then ask your system administrator for help about things like 
+wildcards and `noglob'.
+
+\ni Magnus keeps only 10 files of each kind. If you want to keep some of
+the files, copy them to from ~/.magnus to another directory.
+
+

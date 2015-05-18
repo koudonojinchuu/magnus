@@ -1,0 +1,48 @@
+% kbmag.tex
+% 1
+\indexentry{KBMAG}{5}
+\indexentry{kbmag}{5}
+% 2
+\indexentry{Creating a rewriting system}{6}
+\indexentry{rewriting systems!creating}{6}
+\indexentry{FpGroupToRWS!}{6}
+% 2
+\indexentry{Elementary functions on rewriting systems}{7}
+\indexentry{rewriting systems!elementary functions}{7}
+\indexentry{IsRWS!}{7}
+\indexentry{IsConfluentRWS!}{7}
+\indexentry{IsAvailableNormalForm!}{7}
+\indexentry{IsAvailableReductionRWS!}{7}
+\indexentry{ResetRWS!}{7}
+\indexentry{AddOriginalEqnsRWS!}{7}
+% 2
+\indexentry{Setting the ordering}{8}
+\indexentry{rewriting systems!setting the ordering}{8}
+\indexentry{SetOrderingRWS!}{8}
+\indexentry{ReorderGeneratorsRWS!}{8}
+% 2
+\indexentry{Control parameters}{8}
+\indexentry{rewriting systems!control parameters}{8}
+% 2
+\indexentry{The Knuth-Bendix program}{10}
+\indexentry{Knuth-Bendix}{10}
+\indexentry{KB!}{10}
+% 2
+\indexentry{The automatic groups program}{10}
+\indexentry{automatic groups program}{10}
+\indexentry{Automata!}{10}
+% 2
+\indexentry{Word reduction}{11}
+\indexentry{word reduction}{11}
+\indexentry{IsReducedWordRWS!}{11}
+\indexentry{ReduceWordRWS!}{11}
+% 2
+\indexentry{Counting and enumerating irreducible words}{11}
+\indexentry{counting and enumerating irreducible words}{11}
+\indexentry{SizeRWS!}{11}
+\indexentry{EnumerateRWS!}{11}
+\indexentry{SortEnumerateRWS!}{12}
+\indexentry{SizeEnumerateRWS!}{12}
+% 2
+\indexentry{Rewriting System Examples}{12}
+\indexentry{rewriting systems!examples}{12}

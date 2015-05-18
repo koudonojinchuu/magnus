@@ -1,0 +1,45 @@
+@@How this problem works
+
+@@FP
+
+\ni Given two words u and v in a finitely presented group G, in order
+to determine whether or not u=v in G, we invoke the solution of the word
+problem for G (see  @The word problem@probs/WordProblem::FP@).
+
+@@ABELIAN
+
+\ni  Given two words u and v in an abelian group G, in order
+to determine whether or not u=v in G, we invoke the solution of the word
+problem for G (see  @The word problem@probs/WordProblem::ABELIAN@).
+
+@@NILPOTENT
+
+\ni  Given two words u and v in a nilpotent group G, in order
+to determine whether or not u=v in G, we invoke the solution of the word
+problem for G (see  @The word problem@probs/WordProblem::NILPOTENT@).
+
+@@FREE
+
+\ni  Given two words u and v in a free group G, in order
+to determine whether or not u=v in G, we invoke the solution of the word
+problem for G (see  @The word problem@probs/WordProblem::FREE@).
+
+@@AP_FREE
+
+\ni  Given two words u and v in an amalgamated product G of free groups, 
+in order to determine whether or not u=v in G, we invoke the solution of 
+the word problem for G (see  @The word problem@probs/WordProblem::AP_FREEE@).
+
+@@AP_FREE_CYCLIC
+
+\ni  Given two words u and v in an amalgamated product G of free groups, where 
+the amalgamated subgroups are cyclic, in order to determine whether or not u=v 
+in G, we invoke the solution of the word problem for G 
+(see  @The word problem@probs/WordProblem::FREE@).
+
+@@ONE-RELATOR
+
+\ni  Given two words u and v in a one-relator group G, in order
+to determine whether or not u=v in G, we invoke the solution of the word
+problem for G (see  @The word problem@probs/WordProblem::ONE-RELATOR@).
+

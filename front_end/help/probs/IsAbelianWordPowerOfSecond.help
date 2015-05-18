@@ -1,0 +1,31 @@
+@@How this problem works
+@@FP
+
+@@ABELIAN
+
+\ni In order to see if an element is a power of a second word, we
+find their canonical decompositions. These elements must have
+the same cyclic factors occurring in their decompositions and there
+must be an integer m such that the m-th power of the first word is
+the second. If such an integer exists, this can be discerned from
+the respective decompositions.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+@@How this problem works
+
+There is no documentation for this problem yet.

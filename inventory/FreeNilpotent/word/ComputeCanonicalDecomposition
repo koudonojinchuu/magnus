@@ -1,0 +1,31 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free nilpotent group 
+
+Objects highlighted:	word W 
+
+Other objects present:	group N
+
+Name in the menu:	Compute the canonical decomposition of W
+
+Problem type:		problem object
+
+Help file:		NGdecomposeWordProblem.help
+
+
+			     Algorithms:
+
+
+1. Decompose W
+
+
+

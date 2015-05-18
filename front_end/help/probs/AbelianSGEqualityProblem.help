@@ -1,0 +1,11 @@
+@@How this problem works
+
+\ni In order to see if two subgroups are equal we check to see if
+the first is contained in the second and then whether the second
+subgroup is contained in the first, using an existing algorithm.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+

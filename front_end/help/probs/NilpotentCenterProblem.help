@@ -1,0 +1,43 @@
+@@How this problem works
+
+@@FP
+
+
+
+@@ABELIAN
+
+@@NILPOTENT
+
+\ni We compute the centralisers of each if the  generators of a given
+nilpotent group and then compute their intersection.
+
+\ni For a general discussion of finitely generated nilpotent groups, see
+@Nilpotent_groups@Nilpotent_groups::
+General discussion@
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

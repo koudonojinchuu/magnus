@@ -1,0 +1,173 @@
+#!/usr/local/bin/perl
+
+## Copyright (C) 1994 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: renamer, a recursive identifier and file name renamer.
+##
+## Principal Author: Roger Needham
+##
+## Status: in progress
+##
+## Revision History:
+##
+## Next implementation steps:
+##
+
+# This script reads a list of identifier `rewrite rules' from a file
+# given on the command line. The file must consist of lines of the form
+# 
+# <old name><whitespace><new name>
+#
+# Except that blank lines and those which *begin* with '#' are ignored.
+# 
+# This checks that no old name matches any new name, to prevent a
+# probably unintended cascade of changes. It also checks the validity of
+# all names as C++ identifiers.
+# 
+# This uses the `rewrite system' to change the names of all indicated
+# identifiers, in *all* text files at and below the current directory
+# which do not match $pattern. A substring of a line in a file which
+# matches <old name> is changed iff the preceding and following
+# characters in the line are not in [a-zA-Z0-9_].
+# 
+# Unless overidden with the --nofiles option, every file name with an
+# <old name> as a prefix, followed by a '.', is also changed.
+
+
+$pattern = "(~|%|#.*#|,v|a\\.out|\\.(BAK|log|ps|dvi|aux|toc|a|d|o))$";
+$time = time;
+$temp_name = "/tmp/RENAMER$time";
+
+
+
+while ( $#ARGV != -1 ) {
+  $_ = shift;
+  if ( /^--nofiles$/ ) {
+    $nofiles = 1;
+  }
+  elsif ( /^-h$/ || /^--help$/ ) {
+    print "\nRead the source.\n";
+    exit;
+  }
+  elsif ( /^-v$/ || /^--version$/ ) {
+    print "\nrenamer version 1.1\n";
+    exit;
+  }
+  else {
+    $rule_file = $_;
+    last;
+  }
+}
+
+
+if ( !$rule_file ) {
+  print "\n** You must specify a rewrite rule file\n";
+  exit 1;
+}
+if ( !(-e $rule_file) ) {
+  print "\n** I can't find the rewrite rule file:\n   $rule_file\n";
+  exit 1;
+}
+if ( !open(RULE_FILE, $rule_file) ) {
+  print "\n** I can't open the rewrite rule file:\n   $rule_file\n";
+  exit 1;
+}
+
+print "\nReading and checking integrity of rule file...\n";
+
+while ( <RULE_FILE> ) {
+  if ( /^#/ || /^$/ ) { next; }
+  if ( !m:([a-zA-Z0-9_]+)\s+([a-zA-Z0-9_]+): ) {
+    print "Fatal error: bad line in rule file:\n$_\n";
+    exit 1;
+  }
+  $old_name = $1;
+  $new_name = $2;
+  if ( $rules{$old_name} ) {
+    print "Fatal error: duplicate rule LHS: $old_name\n";
+    exit 1;
+  }
+  $rules{$old_name} = $new_name;
+}
+close(RULE_FILE);
+
+while ( ($old, $new) = each %rules ) {
+  if ( $rules{$new} ) {
+    print "Fatal error: $new occurs as both an old and new name\n";
+    exit 1;
+  }
+}
+
+print "Getting list of all files at and below . ...\n";
+
+if ( !open(FIND, "find . -type f ! -type l -print |") ) {
+  print "Fatal error: couldn't do find . -type f ! -type l -print\n";
+  exit 1;
+}
+
+while ( <FIND> ) {
+  chop;
+  if ( !/$pattern/o && (-T $_) ) {
+    push(@filenames, $_);
+  }
+}
+close(FIND);
+
+print "Changing files...\n";
+$file_count = 0;
+
+foreach $file_name (@filenames) {
+
+  $changed_p = 0;
+  $new_name = $file_name;
+
+  if ( !$nofiles ) {
+    while ( ($old, $new) = each %rules ) {
+      if ( $file_name =~ m:^(.*/)$old(\.[^/]+)$: ) {
+        $new_name = $1.$new.$2;
+        $changed_p = 1;
+        last;
+      }
+    }
+  }
+
+  if ( -e $temp_name ) { system "rm -f $temp_name"; }
+
+  open(TEMP, ">$temp_name")
+    || die("Fatal error: couldn't open: $temp_name\n");
+
+  open(FILE, $file_name)
+    || die("Fatal error: couldn't open: $file_name\n");
+
+  while ( $line = <FILE> ) {
+    while ( ($old, $new) = each %rules ) {
+      if ( $line =~ s:^$old([^a-zA-Z0-9_]):$new$1: ) {
+        $changed_p = 1;
+      }
+      if ( $line =~ s:([^a-zA-Z0-9_])$old$:$1$new: ) {
+        $changed_p = 1;
+      }
+      if ( $line =~ s:([^a-zA-Z0-9_])$old([^a-zA-Z0-9_]):$1$new$2:g ) {
+        $changed_p = 1;
+      }
+    }
+    print(TEMP $line);
+  }
+
+  close(FILE);
+  close(TEMP);
+
+  if ( $changed_p ) {
+    system "mv -f $temp_name $new_name";
+    if ( $new_name ne $file_name ) {
+      system "rm -f $file_name";
+      print "- renamed $file_name\n  to $new_name\n";
+    }
+    ++$file_count;
+  }
+}
+
+if ( -e $temp_name ) { system "rm -f $temp_name"; }
+
+print "\nChanged $file_count files.\n\n";

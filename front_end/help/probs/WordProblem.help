@@ -1,0 +1,92 @@
+@@FP
+
+\ni There is no general and effective method for solving the word
+problem for all finitely presented groups. However, given a specific 
+finite presentation of a finitely presented group, it may be possible
+to determine whether a given word w  represents the identity.  Our 
+approach here is as follows.
+
+\ni First we check to see if w is trivial in the abelianisation
+of G and, if not,  then in some nilpotent quotients of G as well as
+some other quotients of G in which the word problem is solvable.
+
+\ni Next we check to see if G is actually a one-relator group 
+or whether the given presentation is a small cancellation presentation. 
+In both instances we use the known solutions of the word problem in
+in these two classes. The one for one-relator groups is due to Magnus
+and for metric small cancellation groups, the algorithm is that of Dehn.
+
+\ni Then we try to find a finite rewriting system for G and/or an automatic
+structure for G, which also enables us to solve the word problem.
+
+\ni Finally we use the crudest method of all. We begin to enumerate all
+of the relators of G and check to see if the given word w is among them.
+
+\ni For a general discussion of finitely presented groups, see
+@General discussion of finitely presented groups@General_fp_gps::General discussion@
+
+
+@@ABELIAN
+
+\ni In order to see if a word is trivial we compute its canonical 
+decomposition. 
+
+\ni For a general discussion about finitely generated abelian groups,
+see @General discussion@General_abelian_groups::General discussion@.
+
+@@NILPOTENT
+
+\ni In order to decide if a word in a given nilpotent group is trivial, we
+first carry out a number of preliminary checks. In particular, we check 
+whether the word is non-trivial in a number of homomorphic images of the
+given group, such as its abelianization and other nilpotent quotients.
+If these tests fail, we compute a Mal'cev basis for the relation subgroup 
+(i.e., the normal closure in the ambient free nilpotent group of the given
+defining relators) and then determine whether the given word represents 
+an element in this relation subgroup.
+
+@@FREE_NILPOTENT
+
+\ni In order to decide if a word is trivial in a free nilpotent group, we
+decompose it into its canonical form, i.e., into a product of powers
+of basic commutators, where the basic commutators occur in the correct
+order (@see the relevant discussion@General_free_nilpotent::General discussion@).
+
+@@FREE
+
+\ni In order to see if a word in a free group represents the identity, we simply
+compute its reduced form.
+
+@@AP_FREE
+
+\ni In order to see if a word in an amalgamated product is trivial, we attempt to find
+a reduced form for it, i.e., we try to represent it either as a single element of
+one of the factors or else as a product of elements coming out of different factors.
+In the cse where the factors are free, this is possible and we compute a representation
+of the word as a product of coset representatives of the amalgamated subgroups in their
+respective factors. The word represents a non-trivial element if and only the above
+form for it is non-trivial.
+
+@@AP_FREE_CYCLIC
+
+\ni We use a sharpened version of the solution of the word problem for amalgamated
+products of free groups (see @WordProblem@AP_FREE@)
+
+@@SMALL_CANCELLATION
+
+\ni The word problem for groups with presentations satisfying a sufficiently
+stringent small cancellation condition can be solved by Dehn's algorithm
+(see @Dehn's algorithm@../General_small_cancellation::General discussion@).
+
+
+
+
+
+
+
+
+
+
+
+
+

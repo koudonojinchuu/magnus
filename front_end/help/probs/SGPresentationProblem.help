@@ -1,0 +1,13 @@
+@@How this problem works
+
+@@FP
+
+\ni Given a set of generators of a subgroup of a finitely presented group,
+we compute a presentation for this subgroup. There are two ways for solving
+this problem. In the first one - the approximation method - we find a full
+preimage for the subgroup in ambient free group by constructing of the 
+successive approximations. This procedure stops if the subgroup is of finite
+index. Then we construct the set of defining relators and after the elementary
+Tietze transformations we get a subgroup presentation. The second method 
+uses the Todd-Coxeter procedure (see @The Schreier transversal@probs/SchreierTransversal::FP@) to find Shreier transversal and then invokes standard 
+Reidemeister-Schreier rewriting process. 

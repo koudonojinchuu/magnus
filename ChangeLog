@@ -1,0 +1,1391 @@
+20050801 njz back_end/general/include/RandomNumbers.h updated
+	* RM1 and RM2 removed, use M1 and M2 instead
+20050801 njz back_end/general/src/RandomNumbers.C updated
+	* RM1 and RM2 removed, use M1 and M2 instead
+20050801 njz back_end/SessionManager/src/Property.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/SMApps/src/IsWordAPE.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/SessionManager/include/ComputationManager.h updated
+	* 'class SMFPGroup' added to avoid the error 'error: ISO C++ forbids declaration of ¡ÆXXX¡Ç with no type'
+20050801 njz back_end/SessionManager/include/ARCer.h updated
+	* 'class ComputationManager' added to avoid the error 'error: ISO C++ forbids declaration of ¡ÆXXX¡Ç with no type'
+20050801 njz back_end/Enumerators/src/SMListIterator.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/general/src/Set.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/Matrix/src/RandomMatrix.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/Matrix/src/MatrixComputations.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/Matrix/src/GaussTransformation.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/Polynomial/src/RingParser.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/MilpotentGroup/src/MalcevSet.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/SubGroup/src/SGofFreeGroup.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/AProducts/src/ShortenByRelators2.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/AProducts/src/OneRelatorGroupWithTorsion.C updated
+	* 'template <>' added in front of several functions
+20050801 njz back_end/Equations/src/QEquSolutions.C updated
+	* 'template <>' added in front of several functions
+20050730 njz back_end/general/include/DArray.h
+	* constructor MatrixRow() and operator method <<(...) added to help avoid 'new array' problem
+20050730 njz back_end/general/src/DArray.C
+	* things like "theArray = new MatrixRow<R>[height](width);" replaced by two steps: new first, then initialize
+20050730 njz Makefile updated
+	* -fpermissive removed
+20050624 njz Configure updated
+	* generating back_end/black_boxes/TietzeTrek/Makefile from template added
+20050624 njz back_end/black_boxes/TietzeTrek/Makefile.in added
+	* %OS% defined for conditional compilation
+20050624 njz back_end/general/src/BlackBox.C
+	* conditional declaration in advance for gcc-2.95.x based on GCC_VERSION
+20050624 njz back_end/NilpotentGroup/src/MalcevSet.C
+	* conditional declaration in advance for gcc-2.95.x based on GCC_VERSION
+20050624 njz back_end/AProducts/src/ShortenByRelators2.C
+	* conditional declaration in advance for gcc-2.95.x based on GCC_VERSION
+20050624 njz back_end/AProducts/src/OneRelatorGroupWithTorsion.C
+	* conditional declaration in advance for gcc-2.95.x based on GCC_VERSION
+20050623 njz back_end/black_boxes/TietzeTrek/Fclasses/Ftime.h updated
+	* conditional declaration for BSD
+20050623 njz back_end/SessionManager/test/src/magnus.C updated
+	* "extern "C" int ioctl(int, int, void*);" removed for BSD"
+20050623 njz back_end/global/global.h updated
+	* "config.h" included
+20050623 njz back_end/Genetic/src/TwoCommSolver.C updated
+	* conditionally include <values.h> for BSD
+20050623 njz back_end/Genetic/src/GAIsPartOfBasis.C updated
+	* conditionally include <values.h> for BSD
+20050623 njz back_end/Genetic/src/ACGA.C updated
+	* conditionally include <values.h> for BSD
+20050623 njz back_end/Genetic/include/ACConfig.h updated
+	* conditionally include <values.h> for BSD
+20050623 njz back_end/GAP/src/PermutationParser.C updated
+	* conditionally include <values.h> for BSD
+	* "config.h" included
+20050623 njz back_end/global/global.h updated
+	* "config.h" included
+	* defined 'INT_MAX' for BSD
+20050623 njz back_end/libg++/include/std.h updated
+	* conditionally include <_G_config.h> for BSD
+20050623 njz back_end/Genetic/src/GWAP.C updated
+	* conditionally include <values.h> for BSD
+20050623 njz back_end/Genetic/src/GAEquationSolver.C updated
+	* conditionally include <values.h> for BSD
+20050621 njz back_end/general/include/Timer.h updated
+	* "extern "C" int gettimeofday(void*, void*);" -> ".. struct timeval *, struct timezone *"
+20050621 njz back_end/libg++/src/String.c updated
+	* 'int' -> 'std::_Ios_Iostate' -> 'ios::iostate'
+20050505 njz Makefile '-fpermissive' added
+20050505 tpd back_end/black_boxes/rkbp/Makefile add cflags
+20050505 tpd back_end/black_boxes/orwp/Makefile add cflags
+20050505 tpd back_end/black_boxes/TietzeTrek/Compile.mk add cflags
+20050505 tpd back_end/black_boxes/TietzeTrek/Makefile add cflags
+20050505 tpd back_end/global/compile.mk add cflags
+20050505 tpd back_end/Makefile add cflags
+20050505 tpd Makefile re-enable the cflags for gcc-3.4 and above
+20050503 njz front_end/magnus.in updated
+	* version number and release time updated
+20050503 njz README, INSTALL, and INSTRUCT updated
+	* reflecting successful tests on Fefora Core 1-3 platforms
+20050502 njz back_end/SessionManager/src/Property.C updated
+	* function declarations modified
+20050122 njz back_end/SessionManager/src/ObjectSmith.C updated
+	* '(type*)' -> 'type*'
+20050502 njz back_end/SMApps/include/fastProblems.h updated
+	* 'class' in front of 'ostream' removed
+20050502 njz back_end/Enumerator/include/SMListIterator.h updated
+	* private constructor of 'WriteEnumeratorElement' redefined as public
+20050502 njz back_end/SessionManager/include/FEData.h updated
+	* private constructor of 'Text' redefined as public
+20050502 njz back_end/general/src/Associations.C updated
+	* 'AssociationsRep<Key,Val>::CellType*' replaced by 'Cell <Association<Key,Val>>*'
+20050502 njz back_end/Matrix/src/Matrix.C updated
+	* 'this->' added in front of various variables and function calls
+20050122 njz back_end/Polynomial/src/RingParser.C updated
+	* '(type*)' -> 'type*'
+	* 'this->' added in front of various variables and function invocations
+20050122 njz back_end/Polynomial/src/PBTree.C updated
+	* '(type*)' -> 'type*'
+20050502 njz back_end/NilpotentGroup/src/SGOfFNGRep.C updated
+	* 'class' in front of 'ostream' removed
+20050502 njz back_end/NilpotentGroup/src/MalcevSet.C updated
+	* function declarations removed
+20050502 njz back_end/Subgroup/src/DoubleCosetGraph.C update
+	* '(type*)' -> 'type*'
+20050502 njz back_end/general/include/RandomNumber.h updated
+	* declaration of 'log()' and 'sqrt()' replaced by '#include <cmath>'
+20050502 njz back_end/GAP/include/Permutation.h update
+	* 'struct GAPPermission' moved from private to public and earlier declaration removed
+20050502 njz back_end/Group/src/AbelianEquations.C update
+	* '(type*)' -> 'type*'
+20050502 njz back_end/Group/src/AbelianGroupRep.C update
+	* '(type*)' -> 'type*'
+20050502 njz back_end/Group/src/Homology.C update
+	* '(type*)' -> 'type*'
+20050502 njz back_end/Group/src/FPGroupRep.C update
+	* '(type*)' -> 'type*'
+20050502 njz back_end/Todd-Coxeter/src/CosetEnumerator.C update
+	* '(type*)' -> 'type*'
+20050502 njz back_end/Matrix/include/Matrix.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+20050502 njz back_end/general/include/BTree.h updated
+	* '(type*)' -> 'type*'
+20050502 njz back_end/AProducts/src/ShortenByRelators2.C updated
+	* function declarations removed
+20050502 njz back_end/AProducts/src/OneRelatorGroupWithTorsion.C updated
+	* function declarations removed
+20050502 njz back_end/Equations/src/QEquSolutions.C updated
+	* various declarations modified
+20050502 njz back_end/general/include/Associations.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+	* 'AssociationsRep<Key,Val>::CellType* current;' redefined
+20050502 njz back_end/general/include/QuickAssociation.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+	* local variable 'search' redefined
+20050502 njz back_end/general/include/QueuePtr.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+	* '(T*)' -> 'T*'
+20050502 njz back_end/general/include/Queue.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+20050502 njz back_end/general/include/DArray.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+20050502 njz back_end/general/include/Vector.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+20050502 njz back_end/general/include/Set.h updated
+	* 'this->' added in front of 'look()', 'change()', and 'enhance()'
+20050502 njz back_end/SessionManager/src/Menu.C updated
+	* debug code removed
+20050428 njz back_end/general/src/Chars.C updated
+	* CharsRep::getLine() revised to correctly locate the starting of a string
+20050428 njz back_end/SessionManager/src/SMEnumerator.C updated
+	* 'ios::openmode' added to force type transformation
+	* type transformation to 'long' added
+20050427 njz back_end/Genetic/src/GAIsPartOfBasis.C updated
+	* 'ostream o;' -> 'ofstream o(best_out_name);' -> 'ostrstream o;'
+20050427 njz back_end/Packages/src/PackagesData.C updated
+	* use of 'iostream' avoided by using 'stringstream'
+20050427 njz back_end/general/src/Chars.C updated
+	* 'int' -> 'std::_Ios_Iostate' -> 'ios::iostate'
+20050427 njz back_end/SessionManager/src/RandomDefinitionsGenerator.C updated
+	* 'std::' added in front of 'strstream'
+20050427 njz back_end/SessionManager/src/ObjectFactory.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SessionManager/src/Property.C updated
+	* 'std::' added in front of 'ostrstream'
+	* explicit type transformation of 'file.tellp()'
+20050427 njz back_end/SessionManager/src/DatabaseManager.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SessionManager/src/ACRer.C updated
+	* 'ios::nocreate' removed -TODO
+20050427 njz back_end/SessionManager/src/ViewContents.C updated
+	* 'std::' added in front of 'istrstream'
+20050427 njz back_end/SessionManager/src/SMList.C updated
+	* function argument renamed to avoid conflicting with local var 's'
+20050427 njz back_end/SessionManager/src/SessionManager.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SessionManager/src/Menu.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SessionManager/src/GIC.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SessionManager/src/MIC.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/ACE.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/include/IsWordAPE.h updated
+	* 'pairSG_bool' moved from private to public
+20050427 njz back_end/SMApps/src/SubgroupContainmentProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/SubgroupProblems.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/AreEltsEqual.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/IsEltCentral.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/IsNilpotentProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/ExtendToHomProblem.C updated
+	* string across multiple lines reformated
+20050427 njz back_end/SMApps/src/AbelianProblems.C updated
+	* default values of function arguments removed
+20050427 njz back_end/SMApps/src/OneRelatorProblems.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/IsAbelianProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/IsFiniteProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/IsTrivialProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/menuDefns.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/WordProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/SMApps/src/TTProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050427 njz back_end/Packages/src/PackagesSMApps.C updated
+	* 'std::' added in front of 'strstream'
+20050425 njz back_end/Packages/src/PackagesData.C updated
+	* 'std::' added in front of 'strstream'
+	* use of 'iostream' avoided by using 'istrstream' and 'ostrstream'
+20050425 njz back_end/Packages/src/PackagesObject.C updated
+	* 'std::' added in front of 'strstream'
+20050425 njz back_end/SMApps/include/fastProblems.h updated
+	* 'std::' added in front of 'ostream'
+20050425 njz back_end/SessionManager/include/OutMessages.h updated
+	* 'std::' added in front of 'ostrstream'
+20050425 njz back_end/SessionManager/include/SMList.h updated
+	* 'std::' added in front of 'ostrstream'
+20050425 njz back_end/Enumerators/src/SMListIterator.C updated
+	* 'std::' added in front of 'istrstream'
+20050425 njz back_end/SessionManager/src/SMEnumerator.C updated
+	* 'std::' added in front of 'ostrstream'
+20050425 njz back_end/SessionManager/src/FEData.C updated
+	* 'std::' added in front of 'ostrstream'
+20050425 njz back_end/SessionManager/src/ViewContents.C updated
+	* 'std::' added in front of 'ostrstream'
+20050425 njz back_end/general/src/Chars.C updated
+ 	* blocks involving 'ipfx' commented out
+	* 'int' -> 'std::_Ios_Iostate'
+20050425 njz back_end/Polynomial/src/Polynomial.C updated
+	* 'std::' added in front of 'istrstream'
+	* default values of function arguments removed
+20050425 njz back_end/NilpotentGroup/src/SGOfFNGRep.C updated
+	* 'std::' added in front of 'ostream'
+20050425 njz back_end/NilpotentGroup/src/NilpotentGroup.C updated
+	* conditional expressions as arguments for constructors avoided -TODO
+20050421 njz back_end/NilpotentGroup/src/NilpotentCollector.C updated
+	* default values of function arguments removed
+20050421 njz back_end/NilpotentGroup/src/BasicCommutators.C updated
+	* default values of function arguments removed
+20050421 njz back_end/Genetic/src/GACPforORGSolver.C updated
+	* default values of function arguments removed
+20050421 njz back_end/Genetic/src/TwoCommSolver.C updated
+	* 'std::' added
+	* default values of function arguments removed
+	* string across multiple lines reformated
+20050421 njz back_end/Genetic/src/GAIsPartOfBasis.C updated
+	* 'ostream o;' -> 'ofstream o(best_out_name);'
+20050421 njz back_end/Genetic/src/ACConfig.C updated
+	* 'std::' added in front of 'istrstream'
+20050421 njz back_end/Genetic/src/GAEquationSolver.C updated
+	* default value of function arguments removed
+20050421 njz back_end/Genetic/src/Config.C updated
+	* 'std::' added in front of 'istrstream'
+20050421 njz back_end/Subgroup/src/SGofFreeGroup.C updated
+	* ambiguous invocation of function. -TODO
+20050421 njz back_end/KB/src/KBmagPackage.C updated
+	* 'std::' added in front of 'istrstream'
+20050421 njz back_end/Group/src/AbelianEquations.C updated
+	* default value for function arguments removed
+20050421 njz back_end/Group/src/AbelianGroupRep.C updated
+	* string divided into 2 lines corrected
+20050421 njz back_end/Group/src/ORWordProblem.C updated
+	* 'std::' added in front of 'ostrstream'
+20050421 njz back_end/Group/src/Homology.C updated
+	* 'std::' added in front of 'ostrstream'
+20050421 njz back_end/Todd-Coxeter/src/HavasTC.C updated
+	* '#include <strstream.h>' deleted
+20050421 njz back_end/KB/include/WordOrderRep.h updated
+	* string divided into 2 lines corrected
+20050421 njz back_end/global/global.h updated
+	* '#include <strstream.h>' -> '#include <sstream>'
+	* '#include <strstream>' added
+20050421 njz back_end/libg++/src/Rational.C updated
+	* block involving 'ipfx' commented out	
+20050421 njz back_end/libg++/src/Integer.C updated
+	* abs(int) enforced by explicit type transformation
+	* block involving 'opfx' and 'ipfx0' commented out	
+20050421 njz back_end/libg++/src/String.C updated
+	* blocks involving 'ipfx' commented out
+20050421 njz Makefile updated
+	* CC defined to be g++
+	* DEFINE
+20050122 tpd back_end/black_boxes/homology/bin/calchom added
+20050122 tpd back_end/black_boxes/kbmag/bin/autgroup added
+20050122 tpd instruct.rev added
+20050122 tpd INSTRUCT added
+20050122 tpd corrected-main.c added
+20050122 tpd zips/gcc-2.95.3.tar.gz added
+20050122 tpd inventory/FreeGroups/group/RandomlyEnumerateAutomorphismsOfFiniteOrder updated
+20050122 tpd inventory/FreeGroups/group/RandomlyEnumerateAutomorphisms updated
+20050122 tpd inventory/Abelian/word/GenerateDirectSummand updated
+20050122 tpd experiments/src/H.Neumann_conjecture2.C updated
+20050122 tpd bin/report updated
+20050122 tpd bin/renamer updated
+20050122 tpd bin/rdo updated
+20050122 tpd bin/rci updated
+20050122 tpd bin/extract updated
+20050122 tpd bin/concat updated
+20050122 tpd bin/comments updated
+20050122 tpd bin/comment_ratios updated
+20050122 tpd back_end/SessionManager/src/BaseProperties.C updated
+20050122 tpd back_end/SessionManager/src/ARCer.C updated
+20050122 tpd back_end/SMApps/src/GeneticProblems.C updated
+20050122 tpd back_end/SMApps/include/GeneticProblems.h updated
+20050122 tpd back_end/Genetic/src/GACPforORGSolver.C updated
+20050122 tpd back_end/Genetic/include/GACPforORGSolver.h updated
+20050122 tpd aConfigure updated
+20050122 tpd inventory/OneRelatorWithTorsion/word_word/ComputeProduct updated
+20050122 tpd inventory/OneRelatorWithTorsion/word_word/AreConjugate updated
+20050122 tpd inventory/OneRelatorWithTorsion/word_subgroup/DoesRepresentElementOfMagnusSubgroup updated
+20050122 tpd inventory/OneRelatorWithTorsion/word_homomorphism/ComputeImage updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/IsTrivial updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/IsOfFiniteOrder updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/FreelyReduce updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/FindIthTerminalSegmentInFreelyReducedForm updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/FindIthInitialSegmentInFreelyreducedForm updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/CyclicallyReduce updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/ComputeInverseInFreelyReducedForm updated
+20050122 tpd inventory/OneRelatorWithTorsion/word/ComputeCentralizer updated
+20050122 tpd inventory/OneRelatorWithTorsion/subgroup_homomorphism/ComputeImage updated
+20050122 tpd inventory/OneRelatorWithTorsion/map/ExtendToHomomorphism updated
+20050122 tpd inventory/OneRelatorWithTorsion/make/Quotient updated
+20050122 tpd inventory/OneRelatorWithTorsion/make/NilpotentQuotient updated
+20050122 tpd inventory/OneRelatorWithTorsion/make/AnotherPresentation updated
+20050122 tpd inventory/OneRelatorWithTorsion/make/AbelianQuotient updated
+20050122 tpd inventory/OneRelatorWithTorsion/homomorphism_homomorphism/FormComposition updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/IsFree updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/IsAbelian updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/FindShortLexAutomaticStructure updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/FindHNNPresentation updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/FindFiniteRewritingSystem updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/EnumerateAllRelatorConsequences updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/ComputeIntegralHomology updated
+20050122 tpd inventory/OneRelatorWithTorsion/group/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/OR/word_word/ConjugacyProblem updated
+20050122 tpd inventory/OR/word_word/ComputeProduct updated
+20050122 tpd inventory/OR/word_subgroup/RepresentElementOfMagnusSubgroup updated
+20050122 tpd inventory/OR/word/IsTrivial updated
+20050122 tpd inventory/OR/word/FreelyReduce updated
+20050122 tpd inventory/OR/word/FindTerminalSegment updated
+20050122 tpd inventory/OR/word/FindInitialSegment updated
+20050122 tpd inventory/OR/word/CyclicallyReduce updated
+20050122 tpd inventory/OR/word/ComputeInverse updated
+20050122 tpd inventory/OR/subgroup/IsMagnusSubgroup updated
+20050122 tpd inventory/OR/subgroup/EnumerateRelators updated
+20050122 tpd inventory/OR/subgroup/ComputePresentation updated
+20050122 tpd inventory/OR/group/IsMetricSmallCancellation updated
+20050122 tpd inventory/OR/group/IsFree updated
+20050122 tpd inventory/OR/group/IsAbelian updated
+20050122 tpd inventory/OR/group/FindShortLexAutomaticStructure updated
+20050122 tpd inventory/OR/group/FindHNNPresentation updated
+20050122 tpd inventory/OR/group/FindFiniteRewritingSystem updated
+20050122 tpd inventory/OR/group/EnumerateRelatorConsequences updated
+20050122 tpd inventory/OR/group/ComputeIntegralHomology updated
+20050122 tpd inventory/OR/group/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/Nilpotent/word_word/EqualityProblem updated
+20050122 tpd inventory/Nilpotent/word_word/ComputeProduct updated
+20050122 tpd inventory/Nilpotent/word_subgroup/DetermineWhetherLiesInSubgroup updated
+20050122 tpd inventory/Nilpotent/word_subgroup/DecomposeInTermsOfBasis updated
+20050122 tpd inventory/Nilpotent/word/IsTrivial updated
+20050122 tpd inventory/Nilpotent/word/IsInCommutatorSubgroup updated
+20050122 tpd inventory/Nilpotent/word/IsCentral updated
+20050122 tpd inventory/Nilpotent/word/FreelyReduce updated
+20050122 tpd inventory/Nilpotent/word/FindInWichTermLCSLies updated
+20050122 tpd inventory/Nilpotent/word/CyclicallyReduce updated
+20050122 tpd inventory/Nilpotent/word/ComputeOrder updated
+20050122 tpd inventory/Nilpotent/word/ComputeInverse updated
+20050122 tpd inventory/Nilpotent/word/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/Nilpotent/subgroup_subgroup/EqualityProblem updated
+20050122 tpd inventory/Nilpotent/subgroup_subgroup/ContainmentProblem updated
+20050122 tpd inventory/Nilpotent/subgroup_subgroup/ComputeJoin updated
+20050122 tpd inventory/Nilpotent/subgroup/IsTrivial updated
+20050122 tpd inventory/Nilpotent/subgroup/IsNormal updated
+20050122 tpd inventory/Nilpotent/subgroup/IsCentral updated
+20050122 tpd inventory/Nilpotent/subgroup/IsAbelian updated
+20050122 tpd inventory/Nilpotent/subgroup/FindPresentation updated
+20050122 tpd inventory/Nilpotent/subgroup/FindNormalClosure updated
+20050122 tpd inventory/Nilpotent/subgroup/ComputeIndex updated
+20050122 tpd inventory/Nilpotent/subgroup/ComputeHirschNumber updated
+20050122 tpd inventory/Nilpotent/subgroup/ComputeClass updated
+20050122 tpd inventory/Nilpotent/subgroup/ComputeBasis updated
+20050122 tpd inventory/Nilpotent/map2/IsEpimorphism updated
+20050122 tpd inventory/Nilpotent/map2/DoesExtendToHomomorphism updated
+20050122 tpd inventory/Nilpotent/map/IsEpimorphism updated
+20050122 tpd inventory/Nilpotent/map/IsAutomorphism updated
+20050122 tpd inventory/Nilpotent/map/IsAutoIAAutomorphism updated
+20050122 tpd inventory/Nilpotent/map/DoesExtendToHomomorphism updated
+20050122 tpd inventory/Nilpotent/group/IsTrivial updated
+20050122 tpd inventory/Nilpotent/group/IsFreeNilpotent updated
+20050122 tpd inventory/Nilpotent/group/IsFinite updated
+20050122 tpd inventory/Nilpotent/group/IsAbelian updated
+20050122 tpd inventory/Nilpotent/group/HirschNumber updated
+20050122 tpd inventory/Nilpotent/group/FindPolycyclicPresentation updated
+20050122 tpd inventory/Nilpotent/group/FindLCSTerm updated
+20050122 tpd inventory/Nilpotent/group/ComputeOrder updated
+20050122 tpd inventory/Nilpotent/group/ComputeLowerCentralFactors updated
+20050122 tpd inventory/Nilpotent/group/ComputeClass updated
+20050122 tpd inventory/Nilpotent/group/ComputeBasis updated
+20050122 tpd inventory/Nilpotent/group/AbelianCanonicalDecomposition updated
+20050122 tpd inventory/MSC/word_word/ConjugacyProblem updated
+20050122 tpd inventory/MSC/word_word/ComputeProduct updated
+20050122 tpd inventory/MSC/word/IsTrivial updated
+20050122 tpd inventory/MSC/word/FreelyReduce updated
+20050122 tpd inventory/MSC/word/FindTerminalSegment updated
+20050122 tpd inventory/MSC/word/FindInitialSegment updated
+20050122 tpd inventory/MSC/word/CyclicallyReduce updated
+20050122 tpd inventory/MSC/word/ComputeInverse updated
+20050122 tpd inventory/MSC/subgroup/IsTrivial updated
+20050122 tpd inventory/MSC/subgroup/IsAbelian updated
+20050122 tpd inventory/MSC/subgroup/EnumerateRelators updated
+20050122 tpd inventory/MSC/subgroup/ComputePresentation updated
+20050122 tpd inventory/MSC/group/IsTrivial updated
+20050122 tpd inventory/MSC/group/IsFinite updated
+20050122 tpd inventory/MSC/group/IsAbelian updated
+20050122 tpd inventory/MSC/group/FindShortLexAutomaticStructure updated
+20050122 tpd inventory/MSC/group/FindFiniteRewritingSystem updated
+20050122 tpd inventory/MSC/group/ComputeOrder updated
+20050122 tpd inventory/MSC/group/ComputeIntegralHomology updated
+20050122 tpd inventory/MSC/group/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/HNNExtensions/word_word/IsProperPowerOfSecond updated
+20050122 tpd inventory/HNNExtensions/word_word/IsEqual updated
+20050122 tpd inventory/HNNExtensions/word_word/ComputeProduct updated
+20050122 tpd inventory/HNNExtensions/word_word/AreConjugate updated
+20050122 tpd inventory/HNNExtensions/word/IsTrivial updated
+20050122 tpd inventory/HNNExtensions/word/IsProperPower updated
+20050122 tpd inventory/HNNExtensions/word/FreelyReduce updated
+20050122 tpd inventory/HNNExtensions/word/FindIthTerminalSegmentInFreelyReducedForm updated
+20050122 tpd inventory/HNNExtensions/word/FindIthInitialSegmentInFreelyreducedForm updated
+20050122 tpd inventory/HNNExtensions/word/CyclicallyReduce updated
+20050122 tpd inventory/HNNExtensions/word/ComputeReducedForm updated
+20050122 tpd inventory/HNNExtensions/word/ComputeNormalForm updated
+20050122 tpd inventory/HNNExtensions/word/ComputeMaximalRoot updated
+20050122 tpd inventory/HNNExtensions/word/ComputeInverseInFreelyReducedForm updated
+20050122 tpd inventory/HNNExtensions/word/ComputeCyclicNormalForm updated
+20050122 tpd inventory/HNNExtensions/subgroup_homomorphism/ComputeImage updated
+20050122 tpd inventory/HNNExtensions/subgroup/IsTrivial updated
+20050122 tpd inventory/HNNExtensions/subgroup/IsAbelian updated
+20050122 tpd inventory/HNNExtensions/map/ExtendToHomomorphism updated
+20050122 tpd inventory/HNNExtensions/make/Quotient updated
+20050122 tpd inventory/HNNExtensions/make/NilpotentQuotient updated
+20050122 tpd inventory/HNNExtensions/make/AnotherPresentation updated
+20050122 tpd inventory/HNNExtensions/make/AbelianQuotient updated
+20050122 tpd inventory/HNNExtensions/homomorphism_homomorphism/FormComposition updated
+20050122 tpd inventory/HNNExtensions/group/IsFree updated
+20050122 tpd inventory/HNNExtensions/group/IsAbelian updated
+20050122 tpd inventory/HNNExtensions/group/FindShortLexAutomaticStructure updated
+20050122 tpd inventory/HNNExtensions/group/FindFiniteRewritingSystem updated
+20050122 tpd inventory/HNNExtensions/group/ComputeIntegralHomology updated
+20050122 tpd inventory/HNNExtensions/group/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/FreeNilpotent/word_word/EqualityProblem updated
+20050122 tpd inventory/FreeNilpotent/word_word/ComputeProduct updated
+20050122 tpd inventory/FreeNilpotent/word_subgroup/DetermineWhetherLiesInSubgroup updated
+20050122 tpd inventory/FreeNilpotent/word_subgroup/DecomposeInTermsOfBasis updated
+20050122 tpd inventory/FreeNilpotent/word/IsTrivial updated
+20050122 tpd inventory/FreeNilpotent/word/IsProperPower updated
+20050122 tpd inventory/FreeNilpotent/word/IsInCommutatorSubgroup updated
+20050122 tpd inventory/FreeNilpotent/word/IsCentral updated
+20050122 tpd inventory/FreeNilpotent/word/FreelyReduce updated
+20050122 tpd inventory/FreeNilpotent/word/FindInWichTermLCSLies updated
+20050122 tpd inventory/FreeNilpotent/word/CyclicallyReduce updated
+20050122 tpd inventory/FreeNilpotent/word/ComputeMaximalRoot updated
+20050122 tpd inventory/FreeNilpotent/word/ComputeInverse updated
+20050122 tpd inventory/FreeNilpotent/word/ComputeCentralizer updated
+20050122 tpd inventory/FreeNilpotent/word/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/FreeNilpotent/subgroup_subgroup/EqualityProblem updated
+20050122 tpd inventory/FreeNilpotent/subgroup_subgroup/ContainmentProblem updated
+20050122 tpd inventory/FreeNilpotent/subgroup_subgroup/ComputeJoin updated
+20050122 tpd inventory/FreeNilpotent/subgroup/IsNormal updated
+20050122 tpd inventory/FreeNilpotent/subgroup/IsCentral updated
+20050122 tpd inventory/FreeNilpotent/subgroup/FindPresentation updated
+20050122 tpd inventory/FreeNilpotent/subgroup/FindNormalClosureLongProcedure updated
+20050122 tpd inventory/FreeNilpotent/subgroup/FindNormalClosure updated
+20050122 tpd inventory/FreeNilpotent/subgroup/ComputeIndex updated
+20050122 tpd inventory/FreeNilpotent/subgroup/ComputeHirschNumber updated
+20050122 tpd inventory/FreeNilpotent/subgroup/ComputeBasis updated
+20050122 tpd inventory/FreeNilpotent/map2/IsEpimorphism updated
+20050122 tpd inventory/FreeNilpotent/map2/DoesExtendToHomomorphism updated
+20050122 tpd inventory/FreeNilpotent/map/IsEpimorphism updated
+20050122 tpd inventory/FreeNilpotent/map/IsAutomorphism updated
+20050122 tpd inventory/FreeNilpotent/map/IsAutoIAAutomorphism updated
+20050122 tpd inventory/FreeNilpotent/map/FindInverse updated
+20050122 tpd inventory/FreeNilpotent/map/DoesExtendToHomomorphism updated
+20050122 tpd inventory/FreeNilpotent/group/HirschNumber updated
+20050122 tpd inventory/FreeNilpotent/group/FindLCSTerm updated
+20050122 tpd inventory/FreeNilpotent/group/ComputePresentation updated
+20050122 tpd inventory/FreeNilpotent/group/ComputeBasis updated
+20050122 tpd inventory/FreeGroups/word_word/IsEqual updated
+20050122 tpd inventory/FreeGroups/word_word/ComputeProduct updated
+20050122 tpd inventory/FreeGroups/word_word/AreConjugate updated
+20050122 tpd inventory/FreeGroups/word_subgroup/FindCanonicalDecompositionInNielsenBasis updated
+20050122 tpd inventory/FreeGroups/word_subgroup/DoesRepresentElement updated
+20050122 tpd inventory/FreeGroups/word_subgroup/DoesPowerRepresentElement updated
+20050122 tpd inventory/FreeGroups/word_subgroup/DoesConjugateRepresentElement updated
+20050122 tpd inventory/FreeGroups/word_subgroup/ComputeRightSchreierRepresentative updated
+20050122 tpd inventory/FreeGroups/word_homomorphism/ComputeImage updated
+20050122 tpd inventory/FreeGroups/word/IsTrivial updated
+20050122 tpd inventory/FreeGroups/word/IsProperPower updated
+20050122 tpd inventory/FreeGroups/word/IsPartOfBasis updated
+20050122 tpd inventory/FreeGroups/word/IsInCommutatorSubgroup updated
+20050122 tpd inventory/FreeGroups/word/IsCommutator updated
+20050122 tpd inventory/FreeGroups/word/FreelyReduce updated
+20050122 tpd inventory/FreeGroups/word/FindIthTerminalSegmentInFreelyReducedForm updated
+20050122 tpd inventory/FreeGroups/word/FindIthInitialSegmentInFreelyreducedForm updated
+20050122 tpd inventory/FreeGroups/word/CyclicallyReduce updated
+20050122 tpd inventory/FreeGroups/word/ComputeMaximalRoot updated
+20050122 tpd inventory/FreeGroups/word/ComputeInverseInFreelyReducedForm updated
+20050122 tpd inventory/FreeGroups/word/ComputeCentralizer updated
+20050122 tpd inventory/FreeGroups/tuple/FindWhiteheadReduction updated
+20050122 tpd inventory/FreeGroups/subgroup_homomorphism/ComputeImage updated
+20050122 tpd inventory/FreeGroups/subgroup/WhatIndex updated
+20050122 tpd inventory/FreeGroups/subgroup/IsTrivial updated
+20050122 tpd inventory/FreeGroups/subgroup/IsNormal updated
+20050122 tpd inventory/FreeGroups/subgroup/IsMalnormal updated
+20050122 tpd inventory/FreeGroups/subgroup/ComputeRank updated
+20050122 tpd inventory/FreeGroups/subgroup/ComputeNormaliser updated
+20050122 tpd inventory/FreeGroups/subgroup/ComputeNielsenBasis updated
+20050122 tpd inventory/FreeGroups/subgroup/ComputeFiniteIndexSubgroupAsFreeFactor updated
+20050122 tpd inventory/FreeGroups/set/IsPartOfBasis updated
+20050122 tpd inventory/FreeGroups/quadratic_equation/SolveEquation updated
+20050122 tpd inventory/FreeGroups/quadratic_equation/FindSurfaceForm updated
+20050122 tpd inventory/FreeGroups/quadratic_equation/FindBasicSolutions updated
+20050122 tpd inventory/FreeGroups/map/ExtendToHomomorphism updated
+20050122 tpd inventory/FreeGroups/make/Quotient updated
+20050122 tpd inventory/FreeGroups/make/NilpotentQuotient updated
+20050122 tpd inventory/FreeGroups/make/AnotherPresentation updated
+20050122 tpd inventory/FreeGroups/make/AmalgamatedProduct updated
+20050122 tpd inventory/FreeGroups/make/AbelianQuotient updated
+20050122 tpd inventory/FreeGroups/homomorphism_homomorphism/FormComposition updated
+20050122 tpd inventory/FreeGroups/homomorphism/IsOfFiniteOrder updated
+20050122 tpd inventory/FreeGroups/homomorphism/IsMonomorphism updated
+20050122 tpd inventory/FreeGroups/homomorphism/IsInnerAutomorphism updated
+20050122 tpd inventory/FreeGroups/homomorphism/IsIAAutomorphism updated
+20050122 tpd inventory/FreeGroups/homomorphism/IsEpimorphism updated
+20050122 tpd inventory/FreeGroups/homomorphism/IsAutomorphism updated
+20050122 tpd inventory/FreeGroups/homomorphism/FindWhiteheadDecomposition updated
+20050122 tpd inventory/FreeGroups/homomorphism/ComputeInverse updated
+20050122 tpd inventory/FreeGroups/group/Rupdated
+20050122 tpd inventory/FreeGroups/group/Rupdated
+20050122 tpd inventory/FreeGroups/group/IsAutomatic updated
+20050122 tpd inventory/FreeGroups/group/FindNthElement updated
+20050122 tpd inventory/FreeGroups/equation/FindSolution updated
+20050122 tpd inventory/FP/word_word/EqualityProblem updated
+20050122 tpd inventory/FP/word_word/ConjugacyProblem updated
+20050122 tpd inventory/FP/word_word/ComputeProduct updated
+20050122 tpd inventory/FP/word_subgroup/FindSchreierRepresentative updated
+20050122 tpd inventory/FP/word_map/ComputeImage updated
+20050122 tpd inventory/FP/word/IsTrivial updated
+20050122 tpd inventory/FP/word/IsOfFiniteOrder updated
+20050122 tpd inventory/FP/word/IsCentral updated
+20050122 tpd inventory/FP/word/FreelyReduce updated
+20050122 tpd inventory/FP/word/FindTerminalSegment updated
+20050122 tpd inventory/FP/word/FindSchreierRepresentative updated
+20050122 tpd inventory/FP/word/FindInitialSegment updated
+20050122 tpd inventory/FP/word/CyclicallyReduce updated
+20050122 tpd inventory/FP/word/ComputeInverse updated
+20050122 tpd inventory/FP/subgroup_map/ComputeImage updated
+20050122 tpd inventory/FP/subgroup/IsTrivial updated
+20050122 tpd inventory/FP/subgroup/IsNilpotent updated
+20050122 tpd inventory/FP/subgroup/IsCentral updated
+20050122 tpd inventory/FP/subgroup/IsAbelian updated
+20050122 tpd inventory/FP/subgroup/FindPermutationRepresentation updated
+20050122 tpd inventory/FP/subgroup/EnumerateRelators updated
+20050122 tpd inventory/FP/subgroup/ComputeSchreierTransversal updated
+20050122 tpd inventory/FP/subgroup/ComputePresentation updated
+20050122 tpd inventory/FP/subgroup/ComputeIndex updated
+20050122 tpd inventory/FP/map/DoesExtendToHomomorphism updated
+20050122 tpd inventory/FP/group/IsTrivial updated
+20050122 tpd inventory/FP/group/IsNilpotent updated
+20050122 tpd inventory/FP/group/IsMetricSmallCancellation updated
+20050122 tpd inventory/FP/group/IsFinite updated
+20050122 tpd inventory/FP/group/IsAbelian updated
+20050122 tpd inventory/FP/group/FindShortLexAutomaticStructure updated
+20050122 tpd inventory/FP/group/FindPermutationRepresentation updated
+20050122 tpd inventory/FP/group/FindFiniteRewritingSystem updated
+20050122 tpd inventory/FP/group/ComputeSchreierRepresentatives updated
+20050122 tpd inventory/FP/group/ComputeOrder updated
+20050122 tpd inventory/FP/group/ComputeIntegralHomology updated
+20050122 tpd inventory/FP/group/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/Abelian/word_word/ProductInAbelianForm updated
+20050122 tpd inventory/Abelian/word_word/IsPower updated
+20050122 tpd inventory/Abelian/word_word/IsEqual updated
+20050122 tpd inventory/Abelian/word_subgroup/PowerIn updated
+20050122 tpd inventory/Abelian/word_subgroup/IsInSubgroup updated
+20050122 tpd inventory/Abelian/word/Reduce updated
+20050122 tpd inventory/Abelian/word/PrimaryDecomposition updated
+20050122 tpd inventory/Abelian/word/IsTrivial updated
+20050122 tpd inventory/Abelian/word/IsSubgroupGeneratedPure updated
+20050122 tpd inventory/Abelian/word/IsProperPower updated
+20050122 tpd inventory/Abelian/word/FindInverse updated
+20050122 tpd inventory/Abelian/word/ComputePHeight updated
+20050122 tpd inventory/Abelian/word/ComputeOrder updated
+20050122 tpd inventory/Abelian/word/ComputeMaximalRoot updated
+20050122 tpd inventory/Abelian/word/CanonicalDecomposition updated
+20050122 tpd inventory/Abelian/subgroup_subgroup/Isomorphic updated
+20050122 tpd inventory/Abelian/subgroup_subgroup/Equal updated
+20050122 tpd inventory/Abelian/subgroup_subgroup/DoesContain updated
+20050122 tpd inventory/Abelian/subgroup_subgroup/ComputeJoin updated
+20050122 tpd inventory/Abelian/subgroup/VirtualFreeComplement updated
+20050122 tpd inventory/Abelian/subgroup/IsTrivial updated
+20050122 tpd inventory/Abelian/subgroup/IsSubgroupEqualGroup updated
+20050122 tpd inventory/Abelian/subgroup/IsPure updated
+20050122 tpd inventory/Abelian/subgroup/IsIsolated updated
+20050122 tpd inventory/Abelian/subgroup/ComputeTorsionFreeRank updated
+20050122 tpd inventory/Abelian/subgroup/ComputePrimaryDecomposition updated
+20050122 tpd inventory/Abelian/subgroup/ComputeOrderTorsionSubgroup updated
+20050122 tpd inventory/Abelian/subgroup/ComputeOrder updated
+20050122 tpd inventory/Abelian/subgroup/ComputeIsolator updated
+20050122 tpd inventory/Abelian/subgroup/ComputeIndex updated
+20050122 tpd inventory/Abelian/subgroup/CanonicalDecomposition updated
+20050122 tpd inventory/Abelian/map2/IsMonomorphism updated
+20050122 tpd inventory/Abelian/map2/IsIsomorphism updated
+20050122 tpd inventory/Abelian/map2/IsEpimorphism updated
+20050122 tpd inventory/Abelian/map2/DoesExtendToHomomorphism updated
+20050122 tpd inventory/Abelian/map/IsMonomorphism updated
+20050122 tpd inventory/Abelian/map/IsEpimorphism updated
+20050122 tpd inventory/Abelian/map/IsAutomorphism updated
+20050122 tpd inventory/Abelian/map/DoesExtendToHomomorphism updated
+20050122 tpd inventory/Abelian/map/ComputeOrder updated
+20050122 tpd inventory/Abelian/map/ComputeInverse updated
+20050122 tpd inventory/Abelian/group/IsTrivial updated
+20050122 tpd inventory/Abelian/group/IsFreeAbelian updated
+20050122 tpd inventory/Abelian/group/IsFinite updated
+20050122 tpd inventory/Abelian/group/ComputeTorsionSubgroup updated
+20050122 tpd inventory/Abelian/group/ComputeTorsionFreeRank updated
+20050122 tpd inventory/Abelian/group/ComputePrimaryDecomposition updated
+20050122 tpd inventory/Abelian/group/ComputeOrderTorsionSubgroup updated
+20050122 tpd inventory/Abelian/group/ComputeOrder updated
+20050122 tpd inventory/Abelian/group/ComputeCanonicalDecomposition updated
+20050122 tpd inventory/AProducts/word_word/IsProperPowerOfSecond updated
+20050122 tpd inventory/AProducts/word_word/IsEqual updated
+20050122 tpd inventory/AProducts/word_word/ComputeProduct updated
+20050122 tpd inventory/AProducts/word_word/AreConjugate updated
+20050122 tpd inventory/AProducts/word_homomorphism/ComputeImage updated
+20050122 tpd inventory/AProducts/word/IsTrivial updated
+20050122 tpd inventory/AProducts/word/IsProperPower updated
+20050122 tpd inventory/AProducts/word/FreelyReduce updated
+20050122 tpd inventory/AProducts/word/FindIthTerminalSegmentInFreelyReducedForm updated
+20050122 tpd inventory/AProducts/word/FindIthInitialSegmentInFreelyreducedForm updated
+20050122 tpd inventory/AProducts/word/CyclicallyReduce updated
+20050122 tpd inventory/AProducts/word/ComputeReducedForm updated
+20050122 tpd inventory/AProducts/word/ComputeNormalForm updated
+20050122 tpd inventory/AProducts/word/ComputeMaximalRoot updated
+20050122 tpd inventory/AProducts/word/ComputeInverseInFreelyReducedForm updated
+20050122 tpd inventory/AProducts/word/ComputeCyclicNormalForm updated
+20050122 tpd inventory/AProducts/word/ComputeCentralizer updated
+20050122 tpd inventory/AProducts/subgroup_homomorphism/ComputeImage updated
+20050122 tpd inventory/AProducts/subgroup/IsTrivial updated
+20050122 tpd inventory/AProducts/subgroup/IsAbelian updated
+20050122 tpd inventory/AProducts/subgroup/EnumerateRelators updated
+20050122 tpd inventory/AProducts/map/ExtendToHomomorphism updated
+20050122 tpd inventory/AProducts/make/Quotient updated
+20050122 tpd inventory/AProducts/make/NilpotentQuotient updated
+20050122 tpd inventory/AProducts/make/AnotherPresentation updated
+20050122 tpd inventory/AProducts/make/AbelianQuotient updated
+20050122 tpd inventory/AProducts/homomorphism_homomorphism/FormComposition updated
+20050122 tpd inventory/AProducts/group/IsPerfect updated
+20050122 tpd inventory/AProducts/group/IsMetricSmallCancellation updated
+20050122 tpd inventory/AProducts/group/IsHyperbolic updated
+20050122 tpd inventory/AProducts/group/IsFree updated
+20050122 tpd inventory/AProducts/group/FindShortLexAutomaticStructure updated
+20050122 tpd inventory/AProducts/group/FindFiniteRewritingSystem updated
+20050122 tpd inventory/AProducts/group/ComputeIntegralHomology updated
+20050122 tpd inventory/AProducts/group/ComputeCanonicalDecomposition updated
+20050122 tpd front_end/workspace.tcl updated
+20050122 tpd front_end/views.tcl updated
+20050122 tpd front_end/updateMenus.tcl updated
+20050122 tpd front_end/tcltk-fixes.tcl updated
+20050122 tpd front_end/options.tcl updated
+20050122 tpd front_end/nodeGraph.tcl updated
+20050122 tpd front_end/messages.tcl updated
+20050122 tpd front_end/magnus.in updated
+20050122 tpd front_end/magnus updated
+20050122 tpd front_end/helpStrings.tcl updated
+20050122 tpd front_end/help.tcl updated
+20050122 tpd front_end/greeting.tcl updated
+20050122 tpd front_end/global.tcl updated
+20050122 tpd front_end/general.tcl updated
+20050122 tpd front_end/fileDialogs.tcl updated
+20050122 tpd front_end/editing.tcl updated
+20050122 tpd front_end/dialogs.tcl updated
+20050122 tpd experiments/src/H.Neumann_conjecture.C updated
+20050122 tpd front_end/dialog.tcl updated
+20050122 tpd back_end/libg++/Makefile updated
+20050122 tpd back_end/global/global.mk updated
+20050122 tpd back_end/global/global.h updated
+20050122 tpd back_end/global/error.h updated
+20050122 tpd back_end/global/config.h.in updated
+20050122 tpd back_end/global/config.h updated
+20050122 tpd back_end/global/compile.mk updated
+20050122 tpd back_end/global/Trichotomy.h updated
+20050122 tpd back_end/global/RefCounter.h updated
+20050122 tpd back_end/global/PureRep.h updated
+20050122 tpd back_end/global/ObjectOf.h updated
+20050122 tpd back_end/global/IPC.h updated
+20050122 tpd back_end/global/GenericObject.h updated
+20050122 tpd back_end/global/ExtendedIPC.h updated
+20050122 tpd back_end/global/DerivedObjectOf.h updated
+20050122 tpd back_end/global/BaseObjectOf.h updated
+20050122 tpd back_end/general/test/test-Vector.C updated
+20050122 tpd back_end/general/test/test-Stack.C updated
+20050122 tpd back_end/general/test/test-Set.C updated
+20050122 tpd back_end/general/test/test-List.C updated
+20050122 tpd back_end/general/test/test-DList.C updated
+20050122 tpd back_end/general/test/test-Associations.C updated
+20050122 tpd back_end/general/test/debug-Type.C updated
+20050122 tpd back_end/general/test/debug-Set.C updated
+20050122 tpd back_end/general/test/debug-BTree.C updated
+20050122 tpd back_end/general/test/debug-Array.C updated
+20050122 tpd back_end/general/src/WordParser.C updated
+20050122 tpd back_end/general/src/Vector.C updated
+20050122 tpd back_end/general/src/Type.C updated
+20050122 tpd back_end/general/src/Trichotomy.C updated
+20050122 tpd back_end/general/src/Stack.C updated
+20050122 tpd back_end/general/src/Set.C updated
+20050122 tpd back_end/general/src/RandomNumbers.C updated
+20050122 tpd back_end/general/src/MagnusHome.C updated
+20050122 tpd back_end/general/src/LogWatcher.C updated
+20050122 tpd back_end/general/src/List.C updated
+20050122 tpd back_end/general/src/GenericObject.C updated
+20050122 tpd back_end/general/src/DList.C updated
+20050122 tpd back_end/general/src/Chars.C updated
+20050122 tpd back_end/general/src/BlackBox.C updated
+20050122 tpd back_end/general/src/BTree.C updated
+20050122 tpd back_end/general/src/Associations.C updated
+20050122 tpd back_end/general/src/Array.C updated
+20050122 tpd back_end/general/include/conversions.h updated
+20050122 tpd back_end/general/include/WordParser.h updated
+20050122 tpd back_end/general/include/Vector.h updated
+20050122 tpd back_end/general/include/Type.h updated
+20050122 tpd back_end/general/include/Timer.h updated
+20050122 tpd back_end/general/include/Stack.h updated
+20050122 tpd back_end/general/include/Set.h updated
+20050122 tpd back_end/general/include/RandomNumbers.h updated
+20050122 tpd back_end/general/include/QuickAssociations.h updated
+20050122 tpd back_end/general/include/MagnusHome.h updated
+20050122 tpd back_end/general/include/LogWatcher.h updated
+20050122 tpd back_end/general/include/List.h updated
+20050122 tpd back_end/general/include/Int2.h updated
+20050122 tpd back_end/general/include/IStreamPoll.h updated
+20050122 tpd back_end/general/include/File.h updated
+20050122 tpd back_end/general/include/DList.h updated
+20050122 tpd back_end/general/include/DCell.h updated
+20050122 tpd back_end/general/include/Chars.h updated
+20050122 tpd back_end/general/include/Cell.h updated
+20050122 tpd back_end/general/include/BlackBox.h updated
+20050122 tpd back_end/general/include/BTree.h updated
+20050122 tpd back_end/general/include/Associations.h updated
+20050122 tpd back_end/general/Makefile updated
+20050122 tpd back_end/experiments/test/primitive.C updated
+20050122 tpd back_end/experiments/test/ortest.C updated
+20050122 tpd back_end/experiments/test/abelianOrder.C updated
+20050122 tpd back_end/experiments/test/HNConjecture.C updated
+20050122 tpd back_end/experiments/Makefile updated
+20050122 tpd back_end/canonical/Makefile updated
+20050122 tpd back_end/black_boxes/tc5/main.c updated
+20050122 tpd back_end/black_boxes/rkbp/Makefile updated
+20050122 tpd back_end/black_boxes/orwp/orwp.C updated
+20050122 tpd back_end/black_boxes/orwp/Makefile updated
+20050122 tpd back_end/black_boxes/kbmag/gapdoc/manual.tex updated
+20050122 tpd back_end/black_boxes/homology/Makefile updated
+20050122 tpd back_end/black_boxes/TietzeTrek/Makefile updated
+20050122 tpd back_end/black_boxes/TietzeTrek/Compile.mk updated
+20050122 tpd back_end/black_boxes/Makefile updated
+20050122 tpd back_end/Todd-Coxeter/include/CosetEnumerator.h updated
+20050122 tpd back_end/Todd-Coxeter/Makefile updated
+20050122 tpd back_end/Subgroup/test/debug-Subgroup.C updated
+20050122 tpd back_end/Subgroup/test/debug-GraphConjugacyProblem.C updated
+20050122 tpd back_end/Subgroup/test/debug-DoubleCosetGraph.C updated
+20050122 tpd back_end/Subgroup/test/debug-Decompose.C updated
+20050122 tpd back_end/Subgroup/src/TurnerProperSubgroupEnumerator.C updated
+20050122 tpd back_end/Subgroup/src/SubgroupGraphRep.C updated
+20050122 tpd back_end/Subgroup/src/SGofFreeGroup.C updated
+20050122 tpd back_end/Subgroup/src/PresentationsOfSubgroup.C updated
+20050122 tpd back_end/Subgroup/src/GraphConjugacyProblem.C updated
+20050122 tpd back_end/Subgroup/src/DoubleCosetGraph.C updated
+20050122 tpd back_end/Subgroup/include/TurnerProperSubgroupEnumerator.h updated
+20050122 tpd back_end/Subgroup/src/DecomposeInSubgroup.C updated	
+20050122 tpd back_end/Subgroup/include/SubgroupGraphRep.h updated
+20050122 tpd back_end/Subgroup/include/SubgroupGraph.h updated
+20050122 tpd back_end/Subgroup/include/SGofFreeGroup.h updated
+20050122 tpd back_end/Subgroup/include/PresentationsOfSubgroup.h updated
+20050122 tpd back_end/Subgroup/include/GraphConjugacyProblem.h updated
+20050122 tpd back_end/Subgroup/include/DoubleCosetGraph.h updated
+20050122 tpd back_end/Subgroup/include/DecomposeInSubgroup.h updated
+20050122 tpd back_end/Subgroup/Makefile,v updated
+20050122 tpd back_end/Subgroup/Makefile updated
+20050122 tpd back_end/SessionManager/test/magnus.C updated
+20050122 tpd back_end/SessionManager/src/viewStructure.C updated
+20050122 tpd back_end/SessionManager/src/hacks.C updated
+20050122 tpd back_end/SessionManager/src/ViewContents.C updated
+20050122 tpd back_end/SessionManager/src/TheObjects.C updated
+20050122 tpd back_end/SessionManager/src/Supervisor.C updated
+20050122 tpd back_end/SessionManager/src/SessionManager.C updated
+20050122 tpd back_end/SessionManager/src/SMWord.C updated
+20050122 tpd back_end/SessionManager/src/SMVectorOfWords.C updated
+20050122 tpd back_end/SessionManager/src/SMSubgroup.C updated
+20050122 tpd back_end/SessionManager/src/SMSetOfWords.C updated
+20050122 tpd back_end/SessionManager/src/SMPermutation.C updated
+20050122 tpd back_end/SessionManager/src/SMObject.C updated
+20050122 tpd back_end/SessionManager/src/SMMap.C updated
+20050122 tpd back_end/SessionManager/src/SMFPGroup.C updated
+20050122 tpd back_end/SessionManager/src/SMEquation.C updated
+20050122 tpd back_end/SessionManager/src/SMEqSystem.C updated
+20050122 tpd back_end/SessionManager/src/SM1.C updated
+20050122 tpd back_end/SessionManager/src/ResourceManager.C updated
+20050122 tpd back_end/SessionManager/src/Property.C updated
+20050122 tpd back_end/SessionManager/src/OutMessages.C updated
+20050122 tpd back_end/SessionManager/src/ObjectSmith.C updated
+20050122 tpd back_end/SessionManager/src/ObjectFactory.C updated
+20050122 tpd back_end/SessionManager/src/Menu.C updated
+20050122 tpd back_end/SessionManager/src/MIC.C updated
+20050122 tpd back_end/SessionManager/src/GIC.C updated
+20050122 tpd back_end/SessionManager/src/GCM.C updated
+20050122 tpd back_end/SessionManager/src/FEData.C updated
+20050122 tpd back_end/SessionManager/src/DatabaseManager.C updated
+20050122 tpd back_end/SessionManager/src/ComputationManager.C updated
+20050122 tpd back_end/SessionManager/src/BaseProperties.C updated
+20050122 tpd back_end/SessionManager/src/ARCer.C updated
+20050122 tpd back_end/SessionManager/include/viewStructure.h updated
+20050122 tpd back_end/SessionManager/include/viewStructure.h updated
+20050122 tpd back_end/SessionManager/include/ViewContents.h updated
+20050122 tpd back_end/SessionManager/include/TheObjects.h updated
+20050122 tpd back_end/SessionManager/include/Supervisor.h updated
+20050122 tpd back_end/SessionManager/include/SessionManager.h updated
+20050122 tpd back_end/SessionManager/include/SMWord.h updated
+20050122 tpd back_end/SessionManager/include/SMVectorOfWords.h updated
+20050122 tpd back_end/SessionManager/include/SMSubgroup.h updated
+20050122 tpd back_end/SessionManager/include/SMPermutation.h updated
+20050122 tpd back_end/SessionManager/include/SMObject.h updated
+20050122 tpd back_end/SessionManager/include/SMMap.h updated
+20050122 tpd back_end/SessionManager/include/SMList.h updated
+20050122 tpd back_end/SessionManager/include/SMHomomorphism.h updated
+20050122 tpd back_end/SessionManager/include/SMFPGroup.h updated
+20050122 tpd back_end/SessionManager/include/SMEquation.h updated
+20050122 tpd back_end/SessionManager/include/SMEqSystem.h updated
+20050122 tpd back_end/SessionManager/include/SMEnumerator.h updated
+20050122 tpd back_end/SessionManager/include/ResourceManager.h updated
+20050122 tpd back_end/SessionManager/include/Property.h updated
+20050122 tpd back_end/SessionManager/include/OutMessages.h updated
+20050122 tpd back_end/SessionManager/include/ObjectSmith.h updated
+20050122 tpd back_end/SessionManager/include/ObjectFactory.h updated
+20050122 tpd back_end/SessionManager/include/OID.h updated
+20050122 tpd back_end/SessionManager/include/Menu.h updated
+20050122 tpd back_end/SessionManager/include/MIC.h updated
+20050122 tpd back_end/SessionManager/include/InformationCenter.h updated
+20050122 tpd back_end/SessionManager/include/GIC.h updated
+20050122 tpd back_end/SessionManager/include/GCM.h updated
+20050122 tpd back_end/SessionManager/include/FEData.h updated
+20050122 tpd back_end/SessionManager/include/DatabaseManager.h updated
+20050122 tpd back_end/SessionManager/include/ComputationManager.h updated
+20050122 tpd back_end/SessionManager/include/BaseProperties.h updated
+20050122 tpd back_end/SessionManager/include/AlgebraicObject.h updated
+20050122 tpd back_end/SessionManager/include/ARCer.h updated
+20050122 tpd back_end/SessionManager/include/ARCSlotID.h updated
+20050122 tpd back_end/SessionManager/include/ARC.h updated
+20050122 tpd back_end/SessionManager/Makefile updated
+20050122 tpd back_end/SMApps/src/menuDefns.C updated
+20050122 tpd back_end/SMApps/src/fastProblems.C updated
+20050122 tpd back_end/SMApps/src/WordProblem.C updated
+20050122 tpd back_end/SMApps/src/TTProblem.C updated
+20050122 tpd back_end/SMApps/src/SubgroupContainmentProblem.C updated
+20050122 tpd back_end/SMApps/src/SetOfWordsChecker.C updated
+20050122 tpd back_end/SMApps/src/SMMagnusBreakdown.C updated
+20050122 tpd back_end/SMApps/src/SGNilpotentQuotients.C updated
+20050122 tpd back_end/SMApps/src/SA.C updated
+20050122 tpd back_end/SMApps/src/Rewrites.C updated
+20050122 tpd back_end/SMApps/src/RankOfSubgroup.C updated
+20050122 tpd back_end/SMApps/src/RankOfElt.C updated
+20050122 tpd back_end/SMApps/src/QuadEquationSolver.C updated
+20050122 tpd back_end/SMApps/src/OrderProblem.C updated
+20050122 tpd back_end/SMApps/src/OrderOfElt.C updated
+20050122 tpd back_end/SMApps/src/OneRelatorProblems.C updated
+20050122 tpd back_end/SMApps/src/NormalClosure.C updated
+20050122 tpd back_end/SMApps/src/NilpotentQuotients.C updated
+20050122 tpd back_end/SMApps/src/NilpotentProblems.C updated
+20050122 tpd back_end/SMApps/src/KernelPresentation.C updated
+20050122 tpd back_end/SMApps/src/KBModule.C updated
+20050122 tpd back_end/SMApps/src/IsWordAPE.C updated
+20050122 tpd back_end/SMApps/src/IsTrivialProblem.C updated
+20050122 tpd back_end/SMApps/src/IsNilpotentProblem.C updated
+20050122 tpd back_end/SMApps/src/IsFreeProblem.C updated
+20050122 tpd back_end/SMApps/src/IsFiniteProblem.C updated
+20050122 tpd back_end/SMApps/src/IsEltCentral.C updated
+20050122 tpd back_end/SMApps/src/IsAbelianProblem.C updated
+20050122 tpd back_end/SMApps/src/HomologyProblem.C updated
+20050122 tpd back_end/SMApps/src/HNNProblems.C updated
+20050122 tpd back_end/SMApps/src/GeneticProblems.C oblems.C updated
+20050122 tpd back_end/SMApps/src/GAWordProblemForORGroup.C updated
+20050122 tpd back_end/SMApps/src/GAEquations.C updated
+20050122 tpd back_end/SMApps/src/GAConjProblemForORGroup.C updated
+20050122 tpd back_end/SMApps/src/FreeIsPartOfBasisProblem.C updated
+20050122 tpd back_end/SMApps/src/FNWP.C updated
+20050122 tpd back_end/SMApps/src/ExtendToHomProblem.C updated
+20050122 tpd back_end/SMApps/src/EquationsInFPProblem.C updated
+20050122 tpd back_end/SMApps/src/ConjugacyProblem.C updated
+20050122 tpd back_end/SMApps/src/CommutatorsChecker.C updated
+20050122 tpd back_end/SMApps/src/AreEltsEqual.C updated
+20050122 tpd back_end/SMApps/src/AbelianProblems.C updated
+20050122 tpd back_end/SMApps/src/AbelianInvariants.C updated
+20050122 tpd back_end/SMApps/src/AGModule.C updated
+20050122 tpd back_end/SMApps/src/ACE.C updated
+20050122 tpd back_end/SMApps/include/WordProblem.h updated
+20050122 tpd back_end/SMApps/include/TTProblem.h updated
+20050122 tpd back_end/SMApps/include/SubgroupContainmentProblem.h updated
+20050122 tpd back_end/SMApps/include/SetOfWordsChecker.h updated
+20050122 tpd back_end/SMApps/include/SMMagnusBreakdown.h updated
+20050122 tpd back_end/SMApps/include/SGNilpotentQuotients.h updated
+20050122 tpd back_end/SMApps/include/Rewrites.h updated
+20050122 tpd back_end/SMApps/include/RankOfSubgroup.h updated
+20050122 tpd back_end/SMApps/include/RankOfElt.h updated
+20050122 tpd back_end/SMApps/include/QuadEquationSolver.h updated
+20050122 tpd back_end/SMApps/include/OrderProblem.h updated
+20050122 tpd back_end/SMApps/include/OrderOfElt.h updated
+20050122 tpd back_end/SMApps/include/OneRelatorProblems.h updated
+20050122 tpd back_end/SMApps/include/NormalClosure.h updated
+20050122 tpd back_end/SMApps/include/NilpotentQuotients.h updated
+20050122 tpd back_end/SMApps/include/NilpotentProblems.h updated
+20050122 tpd back_end/SMApps/include/KernelPresentation.h updated
+20050122 tpd back_end/SMApps/include/KBModule.h updated
+20050122 tpd back_end/SMApps/include/IsWordAPE.h updated
+20050122 tpd back_end/SMApps/include/IsTrivialProblem.h updated
+20050122 tpd back_end/SMApps/include/IsNilpotentProblem.h updated
+20050122 tpd back_end/SMApps/include/IsFreeProblem.h updated
+20050122 tpd back_end/SMApps/include/IsEltCentral.h updated
+20050122 tpd back_end/SMApps/include/IsAbelianProblem.h updated
+20050122 tpd back_end/SMApps/include/HomologyProblem.h updated
+20050122 tpd back_end/SMApps/include/HNNProblems.h updated
+20050122 tpd back_end/SMApps/include/GeneticProblems.h oblems.h updated
+20050122 tpd back_end/SMApps/include/GAWordProblemForORGroup.h updated
+20050122 tpd back_end/SMApps/include/GAEquations.h updated
+20050122 tpd back_end/SMApps/include/GAConjProblemForORGroup.h updated
+20050122 tpd back_end/SMApps/include/FNWP.h updated
+20050122 tpd back_end/SMApps/include/ExtendToHomProblem.h updated
+20050122 tpd back_end/SMApps/include/EquationsInFPProblem.h updated
+20050122 tpd back_end/SMApps/include/ConjugacyProblem.h updated
+20050122 tpd back_end/SMApps/include/CommutatorsChecker.h updated
+20050122 tpd back_end/SMApps/include/CommutatorIterator.h updated
+20050122 tpd back_end/SMApps/include/AreEltsEqual.h updated
+20050122 tpd back_end/SMApps/include/AbelianProblems.h updated
+20050122 tpd back_end/SMApps/include/AbelianInvariants.h updated
+20050122 tpd back_end/SMApps/include/AGModule.h updated
+20050122 tpd back_end/SMApps/Makefile updated
+20050122 tpd back_end/Polynomial/test/debug-Polynomial.C updated
+20050122 tpd back_end/Polynomial/src/RingParser.C updated
+20050122 tpd back_end/Polynomial/src/Polynomial.C updated
+20050122 tpd back_end/Polynomial/src/PBTree.C updated
+20050122 tpd back_end/Polynomial/include/RingParser.h updated
+20050122 tpd back_end/Polynomial/include/Polynomial.h updated
+20050122 tpd back_end/Polynomial/include/PBTree.h updated
+20050122 tpd back_end/Polynomial/Makefile updated
+20050122 tpd back_end/NilpotentGroup/Makefile updated
+20050122 tpd back_end/Matrix/test/proba.C updated
+20050122 tpd back_end/Matrix/test/debug-RationalMatrix.C updated
+20050122 tpd back_end/Matrix/test/debug-RationalGT.C updated
+20050122 tpd back_end/Matrix/test/debug-RandomMatrix.C updated
+20050122 tpd back_end/Matrix/test/debug-Polynomial.C updated
+20050122 tpd back_end/Matrix/test/debug-Matrix.C updated
+20050122 tpd back_end/Matrix/test/debug-HomomorphismBuilder.C updated
+20050122 tpd back_end/Matrix/test/debug-GaussTransformation.C updated
+20050122 tpd back_end/Matrix/test/debug-BTree.C updated
+20050122 tpd back_end/Matrix/src/RingParser.C updated
+20050122 tpd back_end/Matrix/src/RandomMatrix.C updated
+20050122 tpd back_end/Matrix/src/Matrix.C updated
+20050122 tpd back_end/Matrix/src/HomomorphismBuilder.C updated
+20050122 tpd back_end/Matrix/src/GaussTransformation.C updated
+20050122 tpd back_end/Matrix/include/RingParser.h updated
+20050122 tpd back_end/Matrix/include/RandomMatrix.h updated
+20050122 tpd back_end/Matrix/include/Matrix.h updated
+20050122 tpd back_end/Matrix/include/HomomorphismBuilder.h updated
+20050122 tpd back_end/Matrix/include/GaussTransformation.h updated
+20050122 tpd back_end/Matrix/Makefile updated
+20050122 tpd back_end/Map/test/debug-MapEnum.C updated
+20050122 tpd back_end/Map/test/debug-Map.C updated
+20050122 tpd back_end/Map/src/MapParser.C updated
+20050122 tpd back_end/Map/src/MapEnum.C updated
+20050122 tpd back_end/Map/src/Map.C updated
+20050122 tpd back_end/Map/include/MapParser.h updated
+20050122 tpd back_end/Map/include/MapEnum.h updated
+20050122 tpd back_end/Map/include/Map.h updated
+20050122 tpd back_end/Map/Makefile updated
+20050122 tpd back_end/Makefile updated
+20050122 tpd back_end/KB/test/test-wordAcceptor.C updated
+20050122 tpd back_end/KB/test/test-weightedSL.C updated
+20050122 tpd back_end/KB/test/test-weightedLex.C updated
+20050122 tpd back_end/KB/test/test-rewrite.C updated
+20050122 tpd back_end/KB/test/test-finiteness.C updated
+20050122 tpd back_end/KB/test/test-RKBP.C updated
+20050122 tpd back_end/KB/test/test-KBmag.C updated
+20050122 tpd back_end/KB/test/test-KBM.C updated
+20050122 tpd back_end/KB/test/test-GenMult.C updated
+20050122 tpd back_end/KB/test/test-Diff.C updated
+20050122 tpd back_end/KB/src/RKBPackage.C updated
+20050122 tpd back_end/KB/src/KBmagPackage.C updated
+20050122 tpd back_end/KB/src/KBMachineRep.C updated
+20050122 tpd back_end/KB/src/GenMultRep.C updated
+20050122 tpd back_end/KB/src/DiffMachineRep.C updated
+20050122 tpd back_end/KB/include/WordOrderRep.h updated
+20050122 tpd back_end/KB/include/WordOrder.h updated
+20050122 tpd back_end/KB/include/RKBPackage.h updated
+20050122 tpd back_end/KB/include/KBmagPackage.h updated
+20050122 tpd back_end/KB/include/KBMachineRep.h updated
+20050122 tpd back_end/KB/include/KBMachine.h updated
+20050122 tpd back_end/KB/include/GenMultRep.h updated
+20050122 tpd back_end/KB/include/GenMult.h updated
+20050122 tpd back_end/KB/include/DiffMachineRep.h updated
+20050122 tpd back_end/KB/include/DiffMachine.h updated
+20050122 tpd back_end/KB/include/DiffHistoryRep.h updated
+20050122 tpd back_end/KB/include/DiffHistory.h updated
+20050122 tpd back_end/KB/Makefile updated
+20050122 tpd back_end/Group/test/debug-MSCGroup.C updated
+20050122 tpd back_end/Group/test/debug-MSCGConjugacyProblem.C updated
+20050122 tpd back_end/Group/src/TietzeTrekker.C updated
+20050122 tpd back_end/Group/src/TTP.C updated
+20050122 tpd back_end/Group/src/SymmetricRelators.C updated
+20050122 tpd back_end/Group/src/SmithNormalForm.C updated
+20050122 tpd back_end/Group/src/ShortenByRelators.C updated
+20050122 tpd back_end/Group/src/RipsConstruction.C updated
+20050122 tpd back_end/Group/src/RandomPrimitiveElement.C updated
+20050122 tpd back_end/Group/src/RandomAutomorphism.C updated
+20050122 tpd back_end/Group/src/PresentationParser.C updated
+20050122 tpd back_end/Group/src/PowerSeriesWP.C updated
+20050122 tpd back_end/Group/src/ORWordProblem.C updated
+20050122 tpd back_end/Group/src/MSCGConjugacyProblem.C updated
+20050122 tpd back_end/Group/src/Homology.C updated
+20050122 tpd back_end/Group/src/GroupRep.C updated
+20050122 tpd back_end/Group/src/GroupFastChecks.C updated
+20050122 tpd back_end/Group/src/Group.C updated
+20050122 tpd back_end/Group/src/GeneralWhitehead.C updated
+20050122 tpd back_end/Group/src/FreeGroupRep.C updated
+20050122 tpd back_end/Group/src/FreeGroup.C updated
+20050122 tpd back_end/Group/src/FreeByCyclic.C updated
+20050122 tpd back_end/Group/src/FPGroupRep.C updated
+20050122 tpd back_end/Group/src/FPGroup.C updated
+20050122 tpd back_end/Group/src/FGGroupRep.C updated
+20050122 tpd back_end/Group/src/FGGroup.C updated
+20050122 tpd back_end/Group/src/EquationParser.C updated
+20050122 tpd back_end/Group/src/EqSystemParser.C updated
+20050122 tpd back_end/Group/src/AbelianInfinitenessProblem.C updated
+20050122 tpd back_end/Group/src/AbelianEquations.C updated
+20050122 tpd back_end/Group/include/TietzeTrekker.h updated
+20050122 tpd back_end/Group/include/TTP.h updated
+20050122 tpd back_end/Group/include/SymmetricRelators.h updated
+20050122 tpd back_end/Group/include/SmithNormalForm.h updated
+20050122 tpd back_end/Group/include/ShortenByRelators.h updated
+20050122 tpd back_end/Group/include/RipsConstruction.h updated
+20050122 tpd back_end/Group/include/RandomPrimitiveElement.h updated
+20050122 tpd back_end/Group/include/RandomAutomorphism.h updated
+20050122 tpd back_end/Group/include/PresentationParser.h updated
+20050122 tpd back_end/Group/include/PowerSeriesWP.h updated
+20050122 tpd back_end/Group/include/ORWordProblem.h updated
+20050122 tpd back_end/Group/include/MSCGroup.h updated
+20050122 tpd back_end/Group/include/MSCGConjugacyProblem.h updated
+20050122 tpd back_end/Group/include/Homology.h updated
+20050122 tpd back_end/Group/include/GroupRep.h updated
+20050122 tpd back_end/Group/include/GroupFastChecks.h updated
+20050122 tpd back_end/Group/include/Group.h updated
+20050122 tpd back_end/Group/include/GeneralWhitehead.h updated
+20050122 tpd back_end/Group/include/FreeGroupRep.h updated
+20050122 tpd back_end/Group/include/FreeGroup.h updated
+20050122 tpd back_end/Group/include/FreeByCyclic.h updated
+20050122 tpd back_end/Group/include/FPGroupRep.h updated
+20050122 tpd back_end/Group/include/FPGroup.h updated
+20050122 tpd back_end/Group/include/FGGroupRep.h updated
+20050122 tpd back_end/Group/include/FGGroup.h updated
+20050122 tpd back_end/Group/include/EquationParser.h updated
+20050122 tpd back_end/Group/include/EqSystemParser.h updated
+20050122 tpd back_end/Group/include/AbelianInfinitenessProblem.h updated
+20050122 tpd back_end/Group/include/AbelianGroupRep.h updated
+20050122 tpd back_end/Group/include/AbelianGroup.h updated
+20050122 tpd back_end/Group/include/AbelianEquations.h updated
+20050122 tpd back_end/Group/Makefile updated
+20050122 tpd back_end/Genetic/test/wp2.C updated
+20050122 tpd back_end/Genetic/test/wp.C updated
+20050122 tpd back_end/Genetic/test/eqs.C updated
+20050122 tpd back_end/Genetic/test/eq2.C updated
+20050122 tpd back_end/Genetic/test/eq.C updated
+20050122 tpd back_end/Genetic/test/HNC2.C updated
+20050122 tpd back_end/Genetic/test/HNC.C updated
+20050122 tpd back_end/Genetic/src/TwoCommSolver.C updated
+20050122 tpd back_end/Genetic/src/GAWord.C updated
+20050122 tpd back_end/Genetic/src/GAWP.C updated
+20050122 tpd back_end/Genetic/src/GASubgroup.C updated
+20050122 tpd back_end/Genetic/src/GAEquationSolver.C updated
+20050122 tpd back_end/Genetic/src/GACPforORGSolver.C orORGSolver.C updated
+20050122 tpd back_end/Genetic/src/Config.C updated
+20050122 tpd back_end/Genetic/include/TwoCommSolver.h updated
+20050122 tpd back_end/Genetic/include/GAWord.h updated
+20050122 tpd back_end/Genetic/include/GAWP.h updated
+20050122 tpd back_end/Genetic/include/GASubgroup.h updated
+20050122 tpd back_end/Genetic/include/GAEquationSolver.h updated
+20050122 tpd back_end/Genetic/include/GACPforORGSolver.h orORGSolver.h updated
+20050122 tpd back_end/Genetic/include/Config.h updated
+20050122 tpd back_end/Genetic/Makefile updated
+20050122 tpd back_end/GAP/test/debug-Permutation.C updated
+20050122 tpd back_end/GAP/test/debug-PermParser.C updated
+20050122 tpd back_end/GAP/src/PermutationParser.C updated
+20050122 tpd back_end/GAP/src/Permutation.C updated
+20050122 tpd back_end/GAP/src/GAPManager.C updated
+20050122 tpd back_end/GAP/src/GAP.C updated
+20050122 tpd back_end/GAP/include/PermutationParser.h updated
+20050122 tpd back_end/GAP/include/Permutation.h updated
+20050122 tpd back_end/GAP/include/GAPManager.h updated
+20050122 tpd back_end/GAP/include/GAP.h updated
+20050122 tpd back_end/GAP/Makefile updated
+20050122 tpd back_end/FSA/test/test-FSA.C updated
+20050122 tpd back_end/FSA/src/DFSARep.C updated
+20050122 tpd back_end/FSA/src/DFSAParser.C updated
+20050122 tpd back_end/FSA/include/StatePair.h updated
+20050122 tpd back_end/FSA/include/FSARep.h updated
+20050122 tpd back_end/FSA/include/FSA.h updated
+20050122 tpd back_end/FSA/include/DFSARep.h updated
+20050122 tpd back_end/FSA/include/DFSAParser.h updated
+20050122 tpd back_end/FSA/include/DFSA.h updated
+20050122 tpd back_end/FSA/Makefile updated
+20050122 tpd back_end/Equations/test/test-VectorPtr.C updated
+20050122 tpd back_end/Equations/test/debug-DGE.C updated
+20050122 tpd back_end/Equations/src/Queue.C updated
+20050122 tpd back_end/Equations/src/DGESolver.C updated
+20050122 tpd back_end/Equations/include/VertexInfo.h updated
+20050122 tpd back_end/Equations/include/VectorPtr.h updated
+20050122 tpd back_end/Equations/include/Queue.h updated
+20050122 tpd back_end/Equations/include/QEqnSolutions.h updated
+20050122 tpd back_end/Equations/include/DGESolver.h updated
+20050122 tpd back_end/Enumerators/src/SGREnumerator.C updated
+20050122 tpd back_end/Enumerators/src/HomEnumerators.C updated
+20050122 tpd back_end/Enumerators/include/HomEnumerators.h updated
+20050122 tpd back_end/Elt/test/test-Word.C updated
+20050122 tpd back_end/Elt/test/debug-Word.C updated
+20050122 tpd back_end/Elt/src/WordRep.C updated
+20050122 tpd back_end/Elt/src/Word.C updated
+20050122 tpd back_end/Elt/src/NormalRandomWord.C updated
+20050122 tpd back_end/Elt/src/EltRep.C updated
+20050122 tpd back_end/Elt/src/Elt.C updated
+20050122 tpd back_end/Elt/include/WordRep.h updated
+20050122 tpd back_end/Elt/include/WordData.h updated
+20050122 tpd back_end/Elt/include/Word.h updated
+20050122 tpd back_end/Elt/include/NormalRandomWord.h updated
+20050122 tpd back_end/Elt/include/Generator.h updated
+20050122 tpd back_end/Elt/include/EltRep.h updated
+20050122 tpd back_end/Elt/include/Elt.h updated	
+20050122 tpd back_end/Elt/include/AbelianWord.h updated
+20050122 tpd back_end/Elt/Makefile updated
+20050122 tpd back_end/Apps/src/PresentationProblems.C updated
+20050122 tpd back_end/Apps/include/PresentationProblems.h updated
+20050122 tpd back_end/Apps/Makefile updated
+20050122 tpd back_end/AProducts/src/maximalRoot.C updated
+20050122 tpd back_end/AProducts/src/SuperGen.C updated
+20050122 tpd back_end/AProducts/src/SubgroupOfOneRelatorGroup.C updated
+20050122 tpd back_end/AProducts/src/ShortenByRelators2.C updated
+20050122 tpd back_end/AProducts/src/Range.C updated
+20050122 tpd back_end/AProducts/src/OneRelatorGroupWithTorsion.C updated
+20050122 tpd back_end/AProducts/src/OneRelatorGroup.C updated
+20050122 tpd back_end/AProducts/src/ORProblems.C updated
+20050122 tpd back_end/AProducts/src/MagnusBreakdown.C updated
+20050122 tpd back_end/AProducts/src/HNNParser.C updated
+20050122 tpd back_end/AProducts/src/HNNExtension.C updated
+20050122 tpd back_end/AProducts/src/HNNExtOfORGroup.C updated
+20050122 tpd back_end/AProducts/src/HNNExtOfFreeGroup.C updated
+20050122 tpd back_end/AProducts/src/CONDITION.C updated
+20050122 tpd back_end/AProducts/src/AmalgamatedProductParser.C updated
+20050122 tpd back_end/AProducts/src/APwithOneRelatorRep.C updated
+20050122 tpd back_end/AProducts/src/APofFreeGroupsRep.C updated
+20050122 tpd back_end/AProducts/src/AP-fixups.C updated
+20050122 tpd back_end/AProducts/include/SuperGen.h updated
+20050122 tpd back_end/AProducts/include/SubgroupOfOneRelatorGroup.h updated
+20050122 tpd back_end/AProducts/include/ShortenByRelators2.h updated
+20050122 tpd back_end/AProducts/include/Range.h updated	
+20050122 tpd back_end/AProducts/include/OneRelatorGroupWithTorsion.h updated
+20050122 tpd back_end/AProducts/include/OneRelatorGroup.h updated
+20050122 tpd back_end/AProducts/include/ORProblems.h updated
+20050122 tpd back_end/AProducts/include/MagnusBreakdown.h updated
+20050122 tpd back_end/AProducts/include/HNNParser.h updated
+20050122 tpd back_end/AProducts/include/HNNExtension.h updated
+20050122 tpd back_end/AProducts/include/HNNExtOfORGroup.h updated
+20050122 tpd back_end/AProducts/include/HNNExtOfFreeGroup.h updated
+20050122 tpd back_end/AProducts/include/CONDITION.h updated
+20050122 tpd back_end/AProducts/include/AmalgamatedProductParser.h updated
+20050122 tpd back_end/AProducts/include/APwithOneRelatorRep.h updated
+20050122 tpd back_end/AProducts/include/APwithOneRelator.h updated
+20050122 tpd back_end/AProducts/include/APofFreeGroupsRep.h updated
+20050122 tpd back_end/AProducts/include/APofFreeGroups.h updated
+20050122 tpd back_end/AProducts/include/AP-fixups.h updated
+20050122 tpd back_end/AProducts/Makefile updated
+20050122 tpd Makefile merged with Chuck version
+Change Log 01/11/2002
+
+ =====================================================================
+         
+ Version 4.1.1 beta (01/11/2002) Major Changes:
+
+ - Database added. Now it is possible to store examples of groups and
+   their descriptions in the Database as well as save and rstore objects
+   in the Workspace.
+
+ - Package Mechanism. MAGNUS' Package Mechanism was developed to provide 
+   a simple and convenient way of integrating second party software into 
+   MAGNUS' graphical user interface. See doc/PackagesManual.ps for more
+   details.
+
+ - MAGNUS' menus were changed
+
+ - Random definitions when cheking in objects are available. 
+
+ - George Havas' version of Todd-Coxeter procedure is incorporated.
+
+ - Lots of new procedures for almost every type of groups are added.
+
+ - lots of bugs fixed.
+
+ =====================================================================
+
+ Version 3.2.1 pre-release(11/24/99) Major Changes:
+
+  - Source code is compliant with the recent version of C++ draft and
+ can be compiled by egcs-1.1.2 - the version of GNU compiler included
+ in Linux 6.0 and 6.1 disrtibutions.
+
+  -  Class templates implementation is simplified, so that it is easier
+ to compile Magnus under different platforms.
+
+  - New genetic algorithms for:
+        *  Whitehead reduction for tuples of words in a free group.
+        *  Andrews-Curtis reduction for tuples  of words in a free group.
+        *  Solving equations in a free group.
+
+  -  New version of Todd-Coxeter procedure.
+  -  New word problem sover for free nilpotent groups (using power series).
+  -  Lots of bugs fixed.
+
+ ======================================================================
+
+ Version 3.0.0 pre-release(10/14/98) Changes and Enhancements:
+
+
+ - Fixed bug in Subgroup List Algorithm.
+
+ =====================================================================
+
+ Version 2.9.8 pre-release(09/19/98) Changes and Enhancements:
+
+ - New algorithms for free groups:
+        * For group F and word W:
+
+ - Genetic algorithm for solving problem "Is word part of a basis?".
+
+ - Genetic algorithm for solving product of two commutators problem.
+
+ - For group F and a tuple T of words:
+        * Genetic algorithm to carry out Andrews-Curtis reduction.
+
+ - For group F, subgroup H and word W in H:
+        * Express an element of a subgroup in terms of the subgroup 
+          generators(details will be provided by a link to a file).
+
+ - New algorithms for one relator groups:
+        * For one relator group G and word W:
+        * Word problem(details will be provided by a link to a file).
+        * "Express word in conjugates of relators?".
+
+ - Dehn's algorithm for metric small cancellation groups:
+        *A link has been added to show details of the computation.
+
+ - For all but nilpotent and abelian groups, two new algorithms have been added :
+        * "Re-write word as a product of commutators".
+        * "Rewrite word as a product of squares".
+
+ - For a finitely presented group G and a subgroup H of finite index,
+   there is a new algorithm:
+        * "Rewrite W in terms of Schrier generators of H".
+
+ ======================================================================
+
+ Version 2.9.0 pre-release(04/18/98) Changes and Enhancements:
+
+ - New genetic algorithms for finitely presented groups:
+     For group G:
+        * Is G trivial?
+        * Is G abelian?
+
+     For words w, w1, w2:
+        * Is w central?
+        * Is w1 = w2?
+
+     For subgroup H:
+        * Is H trivial?
+        * Is H abelian?
+        * Is H central?
+
+     For map m:
+        * Does m extend to a homomorphism?
+
+ - Many reported bugs are now fixed.
+ - New kinds of objects  "Enumerators" and "Lists" were added:
+        * Word enumerator.
+        * Relator enumerator.
+        * Automorphisms enumerator for free groups.
+        * Relator enumerator for a subgroup.
+        * Make a list of words from an enumerator.
+
+ - Tools for lists:
+       * Find a word in a list.
+       * Extract all words from the defined  length range.
+
+ ==========================================================================
+
+ Version 2.8.4 pre-release(02/13/98) Changes and Enhancements:
+  
+ - Magnus menus now change dynamically to reflect the information found
+ about objects. For example, if a group is found to be abelian then the
+ menu for it will change, so that new "abelian" algorithms are
+ accessible.
+ - Existing genetic algorithms for finitely presented  groups (word problem,
+ triviality problem, "is a group abelian ?" problem) and for solving equations
+ in a free group were modified to show better performance.
+ - Many message misprints were corrected.
+ - New pages were added to the magnus manual. Many broken links were
+ fixed.
+ - The description of the format used for a finite state automaton is now
+ available.
+ - Magnus manual and workspace manual work on every supported system now.
+ - As of now, Linux 5.0 and Tcl/Tk 8.0 are fully supported. Magnus
+ compiles and runs cleanly.
+ - For now, "Is Finite" and "Order" problems for FP groups
+ are identical.  This  means that both use all related fast checks and
+ algorithms to solve the problem. This situation will change.
+ - One may now compute the conjugate of one word by another.
+ - One may now compute the length of a word in freely reduced form.
+ - One may now compute the commutator of two words.
+
+ =============================================================================
+
+ Version 2.8.0 pre-release(01/08/98) Changes and Enhancements:
+
+ - The genetic algorithm for solving the word problem in a finitely presented 
+ group has been optimized.
+ - Computational details for the Nielsen basis for a subgroup of a free group 
+ have been added.
+ - Some bugs have been fixed in the algorithm for solving quadratic equations 
+ over a free group.
+ - For one-relator groups found to have torsion, we have added the following 
+   algorithms:
+          * A word which is trivial in the given group is re-expressed as a 
+            product of conjugates of the defining relator (and its inverse).
+          * A word which represents an element of finite order is re-expressed 
+            as a conjugate of a power of r, where here r^n is the given defining 
+            relator.
+          * A process which enumerates all consequences of the given defining 
+            relator.
+
+ - A process which enumerates all of the relations that are satisfied by the 
+ given
+  generators of a finitely generated subgroup of a finitely presented roup.
+
+ ==============================================================================
+
+ Version 2.7.8 pre-release(12/04/97) Changes and Enhancements:
+
+ - Genetic algorithm for the word problem.
+ - Genetic algorithm for the triviality problem.
+ - Genetic algorithm for the abelian problem.
+ - Genetic algorithm for solving equations over a free group.
+ - Find a permutation representation of G on the cosets of H in G.
+ - Compute the Schreier representative of an element of G.
+ - Compute a Schreier transversal of H in G.
+ - Changed file viewer to eliminate delay in viewing large files in the User 
+ Interface.       
+

@@ -1,0 +1,169 @@
+@@SMALL_CANCELLATION
+
+\ni We enumerate words of a group using the "values" of a "generic"
+word. This generic word is a word in any arbitrarily chosen set of generators.
+The procedure used in enumerating words is to substitute words in the given
+generators of the given finitely presented group in the manner dictated by the choice 
+of parameters as described below.
+
+\ni Parameters (@see How to work with parameters@ParametersGeneral::Parameters@)
+
+\ni Number of words. This is an @integer@ParametersGeneral::Types of 
+parameters: Integer@ parameter. It represents the total number of relators to 
+be enumerated. After the initial list of relatorss are produced, execution of  the 
+enumerator is suspended. This parameter can be changed; so when the problem is 
+suspended, it can be increased. Then, on restarting the enumerator, more relators 
+will be produced. 
+
+
+\ni Enter generic word  for the enumeration. This is an arbitrarily chosen  @word@ParametersGeneral::Types of parameters: Word@ word in an arbitrarily chosen set of 
+generators. Two examples will help to explain this type of enumeration. If the user 
+chooses the generic  word x, then the output stemming from substitutions in the generic
+word will be the same as the input. If the user chooses the generic word [x,y], then 
+substitutions will produce all commutators of all of the selected words. The words
+that are substituted for the "variables" in the given generic word are themselves 
+subject to the choice of parameters that are involved in this type of enumeration 
+(see below).
+
+\ni Enumerate randomly and Enumerate total. There are two methods provided for the user:
+total enumeration, i.e., the eunumeration of all words for the variables in the
+generic word and random enumeration, i.e., substitution of randomly selected words in
+the generic word. This random procedure has two variations that the system provides 
+for.
+
+\ni The selection of words to be substituted for the variables in the generic word
+can be made either by means of a random generator with a normal distribution or 
+a random generator with a an uniform distribution. The user can choose which of these 
+random methods to invoke in the enumeration of the "values" of the generic word.
+ 
+\ni Max. length of words. This parameter @integer@ParametersGeneral::Types of parameters: Integer@ provides for a range of lengths of the randomly generated words.
+
+
+
+
+
+@@ONE_RELATOR
+
+\ni We enumerate words of a group using the "values" of a "generic"
+word. This generic word is a word in any arbitrarily chosen set of generators.
+The procedure used in enumerating words is to substitute words in the given
+generators of the given finitely presented group in the manner dictated by the choice 
+of parameters as described below.
+
+\ni Parameters (@see How to work with parameters@ParametersGeneral::Parameters@)
+
+\ni Number of words. This is an @integer@ParametersGeneral::Types of 
+parameters: Integer@ parameter. It represents the total number of relators to 
+be enumerated. After the initial list of relatorss are produced, execution of  the 
+enumerator is suspended. This parameter can be changed; so when the problem is 
+suspended, it can be increased. Then, on restarting the enumerator, more relators 
+will be produced. 
+
+
+\ni Enter generic word  for the enumeration. This is an arbitrarily chosen  @word@ParametersGeneral::Types of parameters: Word@ word in an arbitrarily chosen set of 
+generators. Two examples will help to explain this type of enumeration. If the user 
+chooses the generic  word x, then the output stemming from substitutions in the generic
+word will be the same as the input. If the user chooses the generic word [x,y], then 
+substitutions will produce all commutators of all of the selected words. The words
+that are substituted for the "variables" in the given generic word are themselves 
+subject to the choice of parameters that are involved in this type of enumeration 
+(see below).
+
+\ni Enumerate randomly and Enumerate total. There are two methods provided for the user:
+total enumeration, i.e., the eunumeration of all words for the variables in the
+generic word and random enumeration, i.e., substitution of randomly selected words in
+the generic word. This random procedure has two variations that the system provides 
+for.
+
+\ni The selection of words to be substituted for the variables in the generic word
+can be made either by means of a random generator with a normal distribution or 
+a random generator with a an uniform distribution. The user can choose which of these 
+random methods to invoke in the enumeration of the "values" of the generic word.
+ 
+\ni Max. length of words. This parameter @integer@ParametersGeneral::Types of parameters: Integer@ provides for a range of lengths of the randomly generated words.
+
+
+
+
+@@FP
+
+\ni We enumerate words of a group using the "values" of a "generic"
+word. This generic word is a word in any arbitrarily chosen set of generators.
+The procedure used in enumerating words is to substitute words in the given
+generators of the given finitely presented group in the manner dictated by the choice 
+of parameters as described below.
+
+\ni Parameters (@see How to work with parameters@ParametersGeneral::Parameters@)
+
+\ni Number of words. This is an @integer@ParametersGeneral::Types of 
+parameters: Integer@ parameter. It represents the total number of relators to 
+be enumerated. After the initial list of relatorss are produced, execution of  the 
+enumerator is suspended. This parameter can be changed; so when the problem is 
+suspended, it can be increased. Then, on restarting the enumerator, more relators 
+will be produced. 
+
+
+\ni Enter generic word  for the enumeration. This is an arbitrarily chosen  @word@ParametersGeneral::Types of parameters: Word@ word in an arbitrarily chosen set of 
+generators. Two examples will help to explain this type of enumeration. If the user 
+chooses the generic  word x, then the output stemming from substitutions in the generic
+word will be the same as the input. If the user chooses the generic word [x,y], then 
+substitutions will produce all commutators of all of the selected words. The words
+that are substituted for the "variables" in the given generic word are themselves 
+subject to the choice of parameters that are involved in this type of enumeration 
+(see below).
+
+\ni Enumerate randomly and Enumerate total. There are two methods provided for the user:
+total enumeration, i.e., the eunumeration of all words for the variables in the
+generic word and random enumeration, i.e., substitution of randomly selected words in
+the generic word. This random procedure has two variations that the system provides 
+for.
+
+\ni The selection of words to be substituted for the variables in the generic word
+can be made either by means of a random generator with a normal distribution or 
+a random generator with a an uniform distribution. The user can choose which of these 
+random methods to invoke in the enumeration of the "values" of the generic word.
+ 
+\ni Max. length of words. This parameter @integer@ParametersGeneral::Types of parameters: Integer@ provides for a range of lengths of the randomly generated words.
+
+
+
+@@FREE
+
+\ni We enumerate words of a free group using the "values" of a "generic"
+word. This generic word is a word in any arbitrarily chosen set of generators.
+The procedure used in enumerating words is to substitute words in the given
+generators of the given free group in the manner dictated by the choice 
+of parameters as described below.
+
+\ni Parameters (@see How to work with parameters@ParametersGeneral::Parameters@)
+
+\ni Number of words. This is an @integer@ParametersGeneral::Types of 
+parameters: Integer@ parameter. It represents the total number of relators to 
+be enumerated. After the initial list of relatorss are produced, execution of  the 
+enumerator is suspended. This parameter can be changed; so when the problem is 
+suspended, it can be increased. Then, on restarting the enumerator, more relators 
+will be produced. 
+
+
+\ni Enter generic word  for the enumeration. This is an arbitrarily chosen  @word@ParametersGeneral::Types of parameters: Word@ word in an arbitrarily chosen set of 
+generators. Two examples will help to explain this type of enumeration. If the user 
+chooses the generic  word x, then the output stemming from substitutions in the generic
+word will be the same as the input. If the user chooses the generic word [x,y], then 
+substitutions will produce all commutators of all of the selected words. The words
+that are substituted for the "variables" in the given generic word are themselves 
+subject to the choice of parameters that are involved in this type of enumeration 
+(see below).
+
+\ni Enumerate randomly and Enumerate total. There are two methods provided for the user:
+total enumeration, i.e., the eunumeration of all words for the variables in the
+generic word and random enumeration, i.e., substitution of randomly selected words in
+the generic word. This rando./mam procedure has two variations that the system provides 
+for.
+
+\ni The selection of words to be substituted for the variables in the generic word
+can be made either by means of a random generator with a normal distribution or 
+a random generator with a an uniform distribution. The user can choose which of these 
+random methods to invoke in the enumeration of the "values" of the generic word.
+ 
+\ni Max. length of words. This parameter @integer@ParametersGeneral::Types of parameters: Integer@ provides for a range of lengths of the randomly generated words.
+

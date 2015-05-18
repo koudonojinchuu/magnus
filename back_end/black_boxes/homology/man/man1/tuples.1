@@ -1,0 +1,64 @@
+.TH tuples 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBtuples \-
+List all critical n-tuples for a given group.
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBtuples\fR \fIn\fR [\fIinputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP n 15
+the n value (> 1).
+.IP inputfile
+the groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.  If no file name is given \fIStandard Input\fR is used.
+
+
+
+
+.SH \fIUsage
+
+Given a group and its complete rewriting system including finite state automata (the inputfile),
+lists all critical n-tuples.
+
+The output lists the number of critical n-tuples, followed by each tuple
+on a single line, in the form
+
+        string [rewriting_rule_position, rewriting_rule_length] ....
+
+Position is taken from 0 being left most.
+
+
+
+.SH \fIExample
+
+Resulting output from a run may look something like
+
+        Number of Critical 2-tuples = 6
+
+        aaa     [0,2] [1,2]
+        bbb     [0,2] [1,2]
+        bba     [0,2] [1,2]
+        bbca    [0,2] [1,3]
+        ccc     [0,2] [1,2]
+        ccb     [0,2] [1,2]
+
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (17/8/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

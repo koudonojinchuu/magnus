@@ -1,0 +1,23 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		one-relator group with torsion
+
+Objects highlighted:	homomorphism H1, homomorphism H2
+
+Other objects present:	group G
+
+Name in the menu:	Form the composition H1 H2
+			Form the composition H2 H1
+
+Problem type:		fast problem
+
+Help file:		none

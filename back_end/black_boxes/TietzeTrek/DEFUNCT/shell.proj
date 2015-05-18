@@ -1,0 +1,195 @@
+/* ObjectCenter Project File */
+/* Options for project */
+unsetopt ansi
+setopt auto_compile
+setopt auto_reload
+setopt auto_replace
+unsetopt batch_load
+unsetopt batch_run
+unsetopt cc_prog
+setopt ccargs               -g
+setopt primary_language     C++
+unsetopt cxx_prog
+setopt cxxargs              +d -g
+setopt demand_driven_level  3
+setopt cxx_suffixes         C c CC cc CXX cxx cpp H h HH hh HXX hxx hpp
+setopt c_suffixes           c h
+unsetopt show_inheritance
+setopt print_inherited
+setopt print_static
+setopt print_runtime_type
+setopt tmpl_instantiate_obj
+unsetopt tmpl_instantiate_flg
+unsetopt create_file
+unsetopt debug_child
+unsetopt echo
+setopt edit_jobs            5
+setopt edit_line            \033:%d\n
+setopt edit_line_file       :n +%d %s\n
+setopt editor               vi +%d %s
+setopt edit_query           \033:f\n0
+setopt edit_line_query      \033:f\n\033
+unsetopt edit_pause
+setopt edit_wakeup          \f
+unsetopt eight_bit
+setopt email_address        objectcenter-support@centerline.com
+unsetopt ignore_sharp_lines
+unsetopt instrument_all
+unsetopt instrument_byte
+setopt instrument_space     2
+setopt histchar             35
+setopt line_edit
+setopt line_meta
+setopt lint_load            2
+setopt lint_run             2
+setopt list_action
+unsetopt load_flags
+unsetopt long_not_int
+setopt old_make
+setopt make_args            -fmakefile.oc -Imakeincl
+setopt make_hfiles
+unsetopt make_offset
+setopt make_prog            newgmake
+setopt make_symbol          #
+setopt mem_config           1048676
+unsetopt mem_trace
+unsetopt page_cmds
+setopt page_list            25
+unsetopt page_load
+setopt path                 /home/users/frank/TietzeTrek/Fclasses /home/users/frank/TietzeTrek/GLink  /home/users/frank/TietzeTrek/GLinkGLvar  /home/users/frank/TietzeTrek/GLvarSub  /home/users/frank/TietzeTrek/pres  /home/users/frank/TietzeTrek/TTdriverDebug /home/users/frank/TietzeTrek/TTnodesRsrc
+setopt proto_path           . /home/apps/CenterLine/c++_1.1.0-r1.0/sun4-40/proto /home/apps/CenterLine/general/proto
+unsetopt preprocessor
+setopt program_name         a.out
+unsetopt print_custom
+setopt print_pointer
+setopt print_string         20
+unsetopt save_memory
+setopt sbrk_size            1048576
+setopt swap_uses_path
+setopt sys_load_cflags      -L/lib -L/usr/lib -L/usr/local/lib -I/usr/include -Dunix -Dsun -Dsparc
+setopt sys_load_cxxflags    +d -g -DDEBUG -L/home/apps/CenterLine/bin/../c++_1.1.0-r1.0/sun4-40/lib -L/lib -L/usr/lib -L/usr/local/lib -I/home/apps/CenterLine/bin/../c++_1.1.0-r1.0/sun4-40/include -I/usr/include -Dsun -DBSD -Dsparc -Dunix   -I/home/users/frank/TietzeTrek/Fclasses -I/home/users/frank/TietzeTrek/GLink  -I/home/users/frank/TietzeTrek/GLinkGLvar  -I/home/users/frank/TietzeTrek/GLvarSub -I/home/users/frank/TietzeTrek/pres  -I/home/users/frank/TietzeTrek/TTdriverDebug -I/home/users/frank/TietzeTrek/TTnodesRsrc
+setopt tab_stop             3
+unsetopt terse_suppress
+unsetopt terse_where
+unsetopt unset_value
+unsetopt win_fork_nodup
+unsetopt win_no_raise
+unsetopt win_message_list
+unsetopt win_project_list
+/* Suppressions for project */
+suppress 5 
+/* DEFAULT SUPPRESSION: Over/underflow unsigned <minus> */
+suppress 7 
+/* DEFAULT SUPPRESSION: Over/underflow unsigned <plus> */
+suppress 20 
+/* Pointer comparison */
+suppress 51 /usr/include/regexp.h 
+/* DEFAULT SUPPRESSION: Information lost <assignment> */
+suppress 52 
+/* DEFAULT SUPPRESSION: Information lost <float> */
+suppress 55 
+/* Information lost <conversion> */
+suppress 80 
+/* Returning bad pointer */
+suppress 97 in xfree 
+/* DEFAULT SUPPRESSION: Freeing memory */
+suppress 112 
+/* Memory retrieval */
+suppress 113 "/home/users/frank/TietzeTrek/Fclasses/FtoolBox.C":228 
+/* Unset value */
+suppress 113 
+/* Unset value */
+suppress 137 
+/* Bad Cast */
+suppress 157 on __builtin_va_alist 
+/* DEFAULT SUPPRESSION: Formal variable */
+suppress 427 
+/* Multi-char char constant */
+suppress 450 /usr/include/math.h 
+/* DEFAULT SUPPRESSION: Float constant overflow */
+suppress 465 /usr/include/ 
+/* DEFAULT SUPPRESSION: Nested comment */
+suppress 481 
+/* DEFAULT SUPPRESSION: Extra text in directive */
+suppress 500 on alloca 
+/* DEFAULT SUPPRESSION: Too few macro arguments */
+suppress 592 
+/* Statement not reached */
+suppress 594 
+/* Maybe no value returned */
+suppress 711 
+/* Result of expression not used */
+suppress 719 
+/* Result of expression not used. */
+suppress 768 
+/* Definition not used */
+suppress 1008 
+/* Initialized with another type */
+suppress 1073 /lib/libsuntool.a(sel_common.o) 
+/* DEFAULT SUPPRESSION: Text/data redefinition */
+suppress 1075 
+/* DEFAULT SUPPRESSION: `static' formerly `extern' */
+suppress 1076 
+/* DEFAULT SUPPRESSION: CenterLine function redefined */
+suppress 1102 
+/* DEFAULT SUPPRESSION: Non-ANSI field syntax */
+suppress 1103 
+/* DEFAULT SUPPRESSION: Result of ?: used as lvalue */
+suppress 1104 
+/* DEFAULT SUPPRESSION: Result of cast used as lvalue */
+suppress 1417 
+/* Currently not implemented */
+suppress 1591 
+/* Not implemented (ignored) */
+suppress 1595 
+/* Member hides virtual member */
+suppress 1681 
+/* Argument passed as <type> */
+
+/* Contents of project */
+load  /lib/libc.sa.1.6
+load  /lib/libc.so.1.6
+load  /home/apps/CenterLine/sparc-sunos4/lib/libC.sa.2.0
+load  /home/apps/CenterLine/sparc-sunos4/lib/libC.so.2.0
+load -CXX  Fclasses/FArray.o Fclasses/FCluster.o Fclasses/FCollection.C Fclasses/FList.o Fclasses/FObject.o Fclasses/FtoolBox.o GLink/FBlockManager.o GLink/FGLink.o GLink/FGLnode.o GLink/FGLrecycleStack.o GLink/FGLstack.o GLink/FGLstepper.o GLink/FGLwalkNode.o GLink/FcloneNode.o GLink/FdebugNode.o GLink/FfoldNode.o GLink/FfoldStepper.o GLink/FgrowNode.o GLink/FreducedVertexFolder.o GLink/FvertexFolder.o GLink/GLfunctions.o GLinkGLvar/FGLvar.o GLinkGLvar/FGLvarInitInfo.o GLinkGLvar/FGLvarInterface.o GLinkGLvar/FGLvarLow.o GLvarSub/FCayley.o GLvarSub/FCayleyInitInfo.o GLvarSub/FgTree.o GLvarSub/FgTreeInitInfo.o GLvarSub/FmapTree.o GLvarSub/FmapTreeInitInfo.o GLvarSub/FpLib.o GLvarSub/FpLibInitInfo.o GLvarSub/FpTree.o GLvarSub/FpTreeInitInfo.o
+load -CXX  GLvarSub/FrTree.o GLvarSub/FrTreeInitInfo.o GLvarSub/FuTree.o GLvarSub/FuTreeInitInfo.o TTdriverDebug/FTTdriverNode.C TTdriverDebug/debugTT.C TTdriverDebug/operators.C TTnodesRsrc/FTT1node.C TTnodesRsrc/FTT1pSubnode.C TTnodesRsrc/FTT1pnode.C TTnodesRsrc/FTT2node.C TTnodesRsrc/FTTnode.C TTnodesRsrc/FTT2pnode.C TTdriverDebug/TietzeTrek.o pres/FCayleyCloneNode.o pres/FTTpres.o pres/FTTpresNode.o pres/FfreeList.o pres/FgTreeNode.o pres/FpLibNode.o pres/FrCloneNode.o pres/FpresCompareNode.o pres/FrTreeNode.o pres/FrenumberPresNode.o pres/FstrToWordNode.C pres/FwordsToGLvarNode.o pres/sortingFunctions.o pres/FuNode.o GLink/FcleanUpNode.o GLink/FrandomRef.o GLink/FreducedFoldNode.o GLinkGLvar/FGLvarHigh.o Fclasses/FStringArray.o
+load -CXX  Fclasses/text_functions.C GLink/debugGLink.C TTdriverDebug/TietzeGlobals.C TTdriverDebug/FTietzeDoc.C TTdriverDebug/FTietzeNode.C pres/FpresText.o Fclasses/FfreeWord.o Fclasses/FResources.o
+link
+
+/* Instrumented files */
+
+
+/* Signals caught and ignored */
+catch HUP
+catch INT
+catch QUIT
+catch ILL
+catch TRAP
+catch IOT
+catch EMT
+catch FPE
+catch KILL
+catch BUS
+catch SEGV
+catch SYS
+catch PIPE
+catch TERM
+catch URG
+catch STOP
+catch TSTP
+catch TTIN
+catch TTOU
+catch IO
+catch XCPU
+catch XFSZ
+catch VTALRM
+catch PROF
+catch LOST
+catch USR1
+catch USR2
+ignore ALRM
+ignore CONT
+ignore CHLD
+ignore WINCH
+
+/* Status of project */

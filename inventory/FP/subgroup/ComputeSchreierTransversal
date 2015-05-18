@@ -1,0 +1,37 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		finitely presented group 
+
+Objects highlighted:	subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Compute a Schreier transversal of H in G
+
+Problem type:		problem object
+
+Help file:		SchreierTransversal.help  
+
+//@db We use the same help file for a group too. Do we want that ?
+
+
+			     Algorithms:
+
+
+1. Enumerate cosets H		//@db need to fix wording
+
+   Links:
+	
+	Click here to see Shreier transversal of H.  //@db to fix: Schreier
+
+
+

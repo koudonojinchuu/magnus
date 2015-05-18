@@ -1,0 +1,66 @@
+@@FP
+
+\ni The implementation of the method of determining whether a group has
+a finite rewriting system as well as that of Knuth-Bendix used here is 
+that of Charles Sims.
+
+\ni Every finite presentation can be re-expressed as a set of rules.
+The method of Knuth-Bendix takes the given rules and adds new ones
+to them. These rules allow one to successively reduce a given word
+to a word that cannot be reduced any further. If all reductions lead
+to the same word, then the set of rules that has been obtained so far
+is termed confluent and the given group is said to have a confluent
+rewriting system. On the other hand if two reductions lead to different 
+words, one adds an additional rule to the existing set, one which implies
+that the greater of these two words (in the lexicographic ordering) implies
+the smaller. If the process eventually terminates, i.e., all reductions
+of any given word lead to the same one, then we have arrived at a confluent
+rewriting system. For a detailed discussion of this topic, see the book
+by C.S. Sims entitled Computations in finitely presented groups.
+
+\ni For a general discussion of finitely presented groups, see
+@General finitely presented groups@General_fp_gps::General discussion@
+
+@@ABELIAN
+
+The given group is decomposed into a direct product of cyclic groups.
+It is trivial if this decomposition consists only of a single cyclic
+group whose order is 1.
+
+For a discussion of general finitely generated abelian groups,
+see @General discussion@General_abelian_groups::general discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+\ni For a discussion of Rewriting systems and Knuth-Bendix @see the following@probs/KBProblem::FP@.
+@@HNN_FREE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

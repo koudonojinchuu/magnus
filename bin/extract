@@ -1,0 +1,187 @@
+#!/usr/bin/perl
+
+## Copyright (C) 1995 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: extract
+##           This extracts all files necessary to have a bare minimum
+##           executable copy of magnus (without compiling) from your
+##           working directory.
+##
+## Principal Author: Roger Needham
+##
+## Status: in progress
+##
+## Revision History:
+##
+## Next implementation steps:
+##
+
+# Hard-wired parameters:
+
+$working_parent = "/usr/bormotov";
+$working_root = "$working_parent/magnus";
+$alpha_root = "$working_parent/admin/alpha";
+
+
+# Make the destination dir:
+
+@lt = localtime(time);
+$mm = substr("0".($lt[4]+1),-2);
+$dd = substr("0".$lt[3],-2);
+$yy = substr("0".$lt[5],-2);
+
+$dest_name = "magnus"."_".$mm."_".$dd."_".$yy;
+$dest_root = "$working_parent/$dest_name";
+
+if ( -e "$dest_root.gz" ) {
+  print "\n** $dest_root.gz already exists -- bailing.\n";
+  exit 1;
+}
+if ( -e $dest_root ) {
+  print "\n** $dest_root already exists -- bailing.\n";
+  exit 1;
+}
+
+system "mkdir $dest_root";
+
+
+# Strip and copy the back end executable:
+
+$be_exec = "back_end/SessionManager/test/bin/magnus";
+system "strip $working_root/$be_exec";
+&make_path("$dest_root/$be_exec");
+system "cp $working_root/$be_exec $dest_root/$be_exec";
+system "chmod ug+x $dest_root/$be_exec";
+
+#@db
+$tmpdir = "$dest_root/back_end/SessionManager/test/bin/tmp";
+system "mkdir $tmpdir";
+
+# Copy the black boxes. They should already be stripped:
+
+$rkbp = "back_end/black_boxes/rkbp/bin/rkbp";
+&make_path("$dest_root/$rkbp");
+system "cp $working_root/$rkbp $dest_root/$rkbp";
+system "chmod ug+x $dest_root/$rkbp";
+
+$kbmag = "back_end/black_boxes/kbmag/bin";
+&make_path("$dest_root/$kbmag/foo");
+system "cp $working_root/$kbmag/* $dest_root/$kbmag";
+system "chmod ug+x $dest_root/$kbmag/*";
+
+$homology = "back_end/black_boxes/homology/bin";
+&make_path("$dest_root/$homology/foo");
+system "cp $working_root/$homology/* $dest_root/$homology";
+system "chmod ug+x $dest_root/$homology/*";
+
+$orwp = "back_end/black_boxes/orwp/orwp";
+&make_path("$dest_root/$orwp");
+system "cp $working_root/$orwp $dest_root/$orwp";
+system "chmod ug+x $dest_root/$orwp";
+
+$tc = "back_end/black_boxes/tc5/tc";
+&make_path("$dest_root/$tc");
+system "cp $working_root/$tc $dest_root/$tc";
+system "chmod ug+x $dest_root/$tc";
+
+$ace = "back_end/black_boxes/ace/ace";
+&make_path("$dest_root/$ace");
+system "cp $working_root/$ace $dest_root/$ace";
+system "cp $working_root/back_end/black_boxes/ace/ace3001.ps \
+$dest_root/back_end/black_boxes/ace/";
+system "chmod ug+x $dest_root/$ace";
+
+$TietzeTrek = "back_end/black_boxes/TietzeTrek/TietzeTrek";
+&make_path("$dest_root/$TietzeTrek");
+system "cp $working_root/$TietzeTrek $dest_root/$TietzeTrek";
+system "chmod ug+x $dest_root/$TietzeTrek";
+
+# Copy the $TietzeTrek/Resources directory:
+
+system "cp -r $working_root/back_end/black_boxes/TietzeTrek/Resources $dest_root/back_end/black_boxes/TietzeTrek/";
+
+
+# Copy the entire front directory:
+
+system "cp -r $working_root/front_end $dest_root";
+
+
+# Remove unneeded stuff in front end:
+
+system "cd $dest_root/front_end; rm -rf magnus dmagnus dummySM RCS to_do *~ help/*~";
+
+# Put release date in magnus.in:
+
+#@rn system "$alpha_root/timestamp $dest_root/front_end/magnus.in";
+
+
+# @db Create directory for packages
+
+$pdir = "$dest_root/packages";
+system "mkdir $pdir";
+
+
+# Copy ancillary files:
+
+$copying = "doc/COPYING";
+&make_path("$dest_root/$copying");
+system "cp $working_root/$copying $dest_root/$copying";
+
+$copyright = "doc/COPYRIGHT";
+&make_path("$dest_root/$copyright");
+system "cp $working_root/$copyright $dest_root/$copyright";
+
+
+# Put special alpha release README in the root:
+
+system "cp $alpha_root/README $dest_root/README";
+
+
+# Put special alpha release Configure in the root:
+
+system "cp $working_root/aConfigure $dest_root/Configure";
+system "chmod ug+x $dest_root/Configure";
+
+
+# Tar the release:
+
+system "cd $dest_root/..; tar cf $dest_name.tar $dest_name";
+system "rm -rf $dest_root";
+$tar_size = -s "$dest_root.tar";
+print "tar file is $tar_size bytes\n";
+
+
+# gzip the release:
+
+system "gzip $dest_root.tar";
+system "chgrp magnus $dest_root.tar.gz";
+$rel_size = -s "$dest_root.tar.gz";
+print "release file is $rel_size bytes\n";
+
+
+print "\n\nThe alpha release is in $dest_root.tar.gz\n\n";
+
+
+
+## Subroutines:
+
+sub make_path {
+  local($path_name) = $_[0];
+  local($pos, $path);
+
+  # See whether any part of the pathname must be mkdir-ed.
+  # Check for files with path a proper prefix of $path_name!
+
+  $pos = 0;
+  while( ($pos = index($path_name, "/", $pos + 1)) >= 0 ) {
+    $path = substr($path_name, 0, $pos);
+    if ( -e $path ) {
+      if ( !( -d $path ) ) { return 0; }
+    } else {
+      system "mkdir $path";
+    }
+  }
+  1;
+}
+

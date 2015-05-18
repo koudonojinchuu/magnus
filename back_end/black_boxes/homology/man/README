@@ -1,0 +1,16 @@
+A NOTE ON MAN PAGES
+===================
+
+Because of a bug in the 'man' program on DECS, it is not possible to put
+the man pages in any directory.  They must go in the directory that all
+other man pages are placed.  If for some reason this is not possible, you
+will need to use the -P option on 'man' to tell 'man' where the pages
+can be found...for example:
+
+man -P /usr/local/public/man rank
+
+This bug may be fixed in more recent executables, so that one can make use
+of the MAN_PATH environment variable.  See your OS documentation for details.
+
+Jamie (4/11/94)
+

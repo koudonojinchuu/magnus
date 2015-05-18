@@ -1,0 +1,153 @@
+.TH calchom 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBcalchom \-
+Calculates homology for a given group for mappings from different dimensions
+by using \fIchom\fR (or \fIchom_stats\fR for statistical information) and
+running the resulting script through \fImagma\fR.
+
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBcalchom\fR [\fI-v\fR] [\fI-s\fR] \fIstart end inputfile\fR [\fIoutputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP -v 15
+(Optional) Enters verbose mode.  Extra information is included in the output
+file including the number of critical tuples and the invariants of the matrices
+in each dimension.
+.IP -s 15
+(Optional) Enters statistics mode.  Additional statistical information
+on the performance of the algorithms is appended to the output.
+.IP start 15
+the starting dimension (> 1)
+.IP end 15
+the end dimension (>= start)
+.IP inputfile
+the groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.
+
+.IP outputfile
+file for output.  If no file name is given \fIStandard Output\fR is used.
+
+
+
+.SH \fIUsage
+
+Given a group and its complete rewriting system including finite state automata (the inputfile),
+creates a script for use in \fImagma\fR to calculate Homology of the group
+for mappings from different dimensions. This is done by using \fIchom\fR, or
+\fIchom_stats\fR if statistical information is required).
+The resulting script is passed to \fImagma\fR, and the results are
+placed in the outputfile.
+
+This script makes use of two programs, \fIchom\fR (or \fIchom_stats\fR) and
+\fImagma\fR.  It should be
+run from the machine \fIchom\fR is installed on.  It can handle \fImagma\fR being
+on a remote machine provided you have an account on that remote machine.
+
+This script assumes you have both \fIchom\fR and \fImagma\fR on the same machine.
+If \fImagma\fR is on a different machine, you should set the environment
+variable MAGMA_MACHINE to the full name of the machine \fImagma\fR is on
+in your account.
+You must also place the full name of the machine running \fIchom\fR into your
+.I ".rhosts"
+file on the MAGMA_MACHINE
+
+The default locations of \fImagma\fR, \fIchom\fR and \fIchom_stats\fR are
+given below:
+
+MAGMA_DEF=/usr/local/bin/magma
+
+CHOM_DEF=/usr/local/public/bin/chom
+
+CHOM_STATS_DEF=/usr/local/public/bin/chom_stats
+
+If these are different for your system, they should be set in this script,
+or you
+should set the environment variables MAGMA, CHOM or CHOM_STATS to the
+correct paths in your account (including file name).
+
+
+.SH \fIExample
+
+Suppose we have a groups rewriting system in a file "s4.kbeqn".  We are
+interested in homology for the mappings from dimension 2 to 1 and 3 to 2,
+and we want the output in verbose mode.
+We run
+\fBcalchom\fR as follows:
+
+        calchom -v 2 3 s4.kbeqn output
+
+The resulting file "output" contains homology calculations for these given
+dimensions, resulting from a script passed to \fImagma\fR.
+
+
+The result may be something along the lines of:
+
+ Calchom: Start: Thursday 06 October 1994 (11:40:56)
+ Magma V1.00-2          Thu Oct  6 1994 11:45:38     [Seed = 563894685]
+ Homology Calculation Results
+
+ The group 's4.kbeqn' has the following generators:
+        a  a^-1  b  b^-1  c  c^-1
+
+ and the following rewriting rules:
+        aa > 1
+        bb > 1
+        cc > 1
+        a^-1 > a
+        b^-1 > b
+        c^-1 > c
+        ca > ac
+        bab > aba
+        cbc > bcb
+        cbac > bcba
+
+ Calculating Homology for dimension 2 :
+        The torsion-free rank is 0
+        The torsion invariants are [ 2 ]
+
+ Calculating Homology for dimension 3 :
+        The torsion-free rank is 0
+        The torsion invariants are [ 2, 12 ]
+
+ --------------------------------------------------
+ The number of critical tuples in each dimension:
+        Dimension 1 : 10
+        Dimension 2 : 18
+        Dimension 3 : 49
+
+ The invariants of the matrices in each dimension:
+        Dimension 1 : [ 2 ]
+        Dimension 2 : [ 2 ]
+        Dimension 3 : [ 2, 12 ]
+ --------------------------------------------------
+
+ Total time: 0.240 seconds
+ Calchom: End: Thursday 06 October 1994 (11:40:59)
+
+
+.SH \fIBugs
+If a rewriting system is not complete, the program may crash.  This is
+because certain tests are \fInot\fR performed in \fIchom\fR to reduce
+execution time.
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+\fIchom(1)\fR
+\fIchom_stats(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (6/10/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

@@ -1,0 +1,15 @@
+There are 2 source directories.
+
+homology
+========
+
+These are programs written for the Computational Tools for Homology of Groups
+project, making use of the Homology C Library (../lib).  You should ensure
+that the homology C library is made before attempting to make the files in
+this directory.
+
+kbeqn
+=====
+
+These are programs based on Derek Holt's kbeqn program.  As such, they require
+his libraries.  See the README in this directory for details.

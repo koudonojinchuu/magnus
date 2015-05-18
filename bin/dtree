@@ -1,0 +1,105 @@
+#!/usr/local/bin/perl
+
+# Principal Author: Roger Needham
+
+# Usage: dtree [ -d | -a ] [ -<integer> ] [ directory ]
+#
+# This prints the structure of the directory given on the command line,
+# or the current directory if none. Without the -a flag, it ignores
+# rcs, .o, .d, .a, backup, .log, .aux, and .toc files.
+#
+# -d : list only subdirectories
+# -a : list everything
+# -<integer> : descend to depth <integer>
+
+
+$depth = 666;
+while ( $ARGV[0] =~ /^-/ ) {
+  $_ = shift;
+  if ( /^-d$/ ) {
+    $dflag = 1;
+  }
+  elsif ( /^-a$/ ) {
+    $aflag = 1;
+  }
+  elsif ( /^-[1-9][0-9]*$/ ) {
+    $depth = substr($_, 1);
+  }
+  else {
+    &usage;
+  }
+}
+
+if ( $dflag && $aflag ) { &usage; }
+
+if ($#ARGV == 0) {
+  print "$ARGV[0]/";
+  if ( !chdir($ARGV[0]) ) {
+    die "** couldn't cd into $ARGV[0]\n\n";
+  }
+}
+else {
+  print "./";
+}
+
+&tree("|", $depth);
+print "\n\n";
+
+
+## Subroutines:
+
+sub tree {
+  local(@entries, $entry);
+  local($prefix) = $_[0];
+  local($depth) = $_[1] - 1;
+  local($last_was_file) = 0;
+
+  if ( $depth < 0 ) { return; }
+
+  opendir(DOT, ".");
+  if ( $aflag ) {
+    @entries = sort(grep(!/^\.\.?$/, readdir(DOT)));
+  }
+  else {
+    @entries =
+      sort(grep(!/^(\.\.?|(.*(,v|\.[oda]|[~%]))|#.*#|\.(BAK|log|aux|toc))$/,
+           readdir(DOT)));
+  }
+  closedir(DOT);
+
+  if ( $dflag ) { @entries = grep(-d, @entries); }
+
+  while ( $#entries > -1 ) {
+    $entry = shift(@entries);
+    if ( !$last_was_file || !( -f $entry ) ) {
+      print "\n$prefix";
+    }
+    if ( $#entries == -1 ) {
+      substr($prefix, -1, 1) = " ";
+    }
+    print "\n$prefix- $entry";
+    if ( -d $entry ) {
+      $last_was_file = 0;
+      print "/";
+      if ( chdir($entry) ) {
+        &tree("$prefix  |", $depth);
+        chdir("..");
+      }
+      else {
+        print "(couldn't cd into)";
+      }
+    }
+    else {
+      $last_was_file = 1;
+    }
+  }
+}
+
+
+sub usage {
+  print "\n\nUsage: dtree [ -d | -a ] [ -<integer> ] [ directory ]\n";
+  print "       -d list only subdirectories\n";
+  print "       -a list everything\n";
+  print "       -<integer> descend to depth <integer>\n\n";
+  exit;
+}

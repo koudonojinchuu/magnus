@@ -1,0 +1,37 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Find the normal closure of H in G
+
+Problem type:		problem object
+
+Help file:		SGOfNGnormalClosureProblem.help
+
+
+			     Algorithms:
+
+
+1. Compute a basis of H
+
+2. For the use of this problem
+
+   Links:
+
+	Click here to view the generators of H1
+	// @am H1 - name of the normal closure subgroup, built by 
+	// the algoritm
+

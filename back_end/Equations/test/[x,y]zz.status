@@ -1,0 +1,5 @@
+PROG=\[x,y\]zz
+grep " + " $PROG.testout >$PROG.sol 2>/dev/null
+grep " \* " $PROG.testout >$PROG.gen 2>/dev/null
+wc -l $PROG.sol | awk '{print "Basic solutions found: ", $1;}'
+wc -l $PROG.gen | awk '{print "RegStab generators found: ", $1;}'

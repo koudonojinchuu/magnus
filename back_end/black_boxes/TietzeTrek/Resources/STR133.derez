@@ -1,0 +1,52 @@
+SIZE=760
+data 'STR#' (133, "Dlg validation", purgeable) {
+	$"000A 3254 6869 7320 6973 2061 2072 6571"            /* ..2This is a req */
+	$"7569 7265 6420 6669 656C 6420 616E 6420"            /* uired field and  */
+	$"6361 6E6E 6F74 2062 6520 6C65 6674 2065"            /* cannot be left e */
+	$"6D70 7479 2E37 596F 7520 6361 6E6E 6F74"            /* mpty.7You cannot */
+	$"2065 6E74 6572 206D 6F72 6520 7468 616E"            /*  enter more than */
+	$"205E 3120 6368 6172 6163 7465 7273 2069"            /*  ^1 characters i */
+	$"6E20 7468 6973 2066 6965 6C64 2E1F 5468"            /* n this field..Th */
+	$"6973 2066 6965 6C64 2061 6363 6570 7473"            /* is field accepts */
+	$"206F 6E6C 7920 6E75 6D62 6572 7332 5468"            /*  only numbers2Th */
+	$"6973 2066 6965 6C64 2061 6363 6570 7473"            /* is field accepts */
+	$"206F 6E6C 7920 6E75 6D62 6572 7320 6265"            /*  only numbers be */
+	$"7477 6565 6E20 5E31 2061 6E64 205E 322E"            /* tween ^1 and ^2. */
+	$"8141 2077 6F72 6420 6361 6E20 6F6E 6C79"            /* ÅA word can only */
+	$"2063 6F6E 7461 696E 206C 6574 7465 7273"            /*  contain letters */
+	$"2C20 6E75 6D62 6572 732C 2073 7061 6365"            /* , numbers, space */
+	$"732C 2061 6E64 2074 6865 206D 696E 7573"            /* s, and the minus */
+	$"2073 6967 6E2E 2020 466F 7220 6C65 6E67"            /*  sign.  For leng */
+	$"7468 7920 776F 7264 732C 2065 6163 6820"            /* thy words, each  */
+	$"636F 6E74 696E 7561 7469 6F6E 206C 696E"            /* continuation lin */
+	$"6520 6265 6769 6E73 2077 6974 6820 6120"            /* e begins with a  */
+	$"7E2E 3545 7870 6F6E 656E 7473 206D 7573"            /* ~.5Exponents mus */
+	$"7420 6265 2061 7373 6F63 6961 7465 6420"            /* t be associated  */
+	$"7769 7468 2061 2070 7265 6365 6469 6E67"            /* with a preceding */
+	$"206C 6574 7465 722E 3441 206D 696E 7573"            /*  letter.4A minus */
+	$"2073 6967 6E20 6361 6E20 6F6E 6C79 2062"            /*  sign can only b */
+	$"6520 7573 6564 2074 6F20 6E65 6761 7465"            /* e used to negate */
+	$"2061 6E20 6578 706F 6E65 6E74 2E94 5468"            /*  an exponent.îTh */
+	$"6520 7469 6C64 652C 2022 7E22 2C20 6D61"            /* e tilde, "~", ma */
+	$"7920 6F6E 6C79 2061 7070 6561 7220 6174"            /* y only appear at */
+	$"2074 6865 2062 6567 696E 6E69 6E67 206F"            /*  the beginning o */
+	$"6620 7468 6520 6C69 6E65 2E20 2041 206C"            /* f the line.  A l */
+	$"696E 6520 7769 7468 2061 2074 696C 6465"            /* ine with a tilde */
+	$"2061 7420 7468 6520 6265 6769 6E6E 696E"            /*  at the beginnin */
+	$"6720 6973 2063 6F6E 7369 6465 7265 6420"            /* g is considered  */
+	$"746F 2062 6520 6120 7061 7274 206F 6620"            /* to be a part of  */
+	$"7468 6520 7072 6576 696F 7573 206C 696E"            /* the previous lin */
+	$"652E 7354 6869 7320 656E 7472 7920 6973"            /* e.sThis entry is */
+	$"2074 6F6F 206C 6F6E 672E 2020 506C 6561"            /*  too long.  Plea */
+	$"7365 2072 6577 7269 7465 2069 7420 6173"            /* se rewrite it as */
+	$"2074 776F 206F 7220 6D6F 7265 2073 6D61"            /*  two or more sma */
+	$"6C6C 6572 2065 6E74 7269 6573 2E20 2042"            /* ller entries.  B */
+	$"6567 696E 2065 6163 6820 636F 6E74 696E"            /* egin each contin */
+	$"7561 7469 6F6E 2065 6E74 7279 2077 6974"            /* uation entry wit */
+	$"6820 6120 7E2E 4145 6163 6820 6C65 7474"            /* h a ~.AEach lett */
+	$"6572 2069 6E20 7468 6520 776F 7264 206D"            /* er in the word m */
+	$"7573 7420 6170 7065 6172 2069 6E20 7468"            /* ust appear in th */
+	$"6520 204E 6965 6C73 656E 2042 6173 6973"            /* e  Nielsen Basis */
+	$"2077 696E 646F 772E"                                /*  window. */
+};
+

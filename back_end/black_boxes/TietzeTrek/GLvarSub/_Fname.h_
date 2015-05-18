@@ -1,0 +1,33 @@
+#ifndef Frank_Fname
+#define Frank_Fname
+#include "FGLvar.h"
+typedef struct {int declarations;} nameRealType;
+typedef struct {int declarations;} nameIdealType;
+
+Fclass FnameInitInfo;
+
+class Fname:public FGLvar{
+	public:
+	static nameRealType D;
+	static nameIdealType iD;
+	void PutI(void);
+	void cPutI(void);
+	void jPutI(void);
+	void GetI(void);
+	void cGetI(void);
+	void jGetI(void);
+	void Put(void);
+	void cPut(void);
+	void Get(void);
+	void cGet(void);
+	
+// Default constructor: you probably will add to this
+
+	Fname(FGLink *aGLink,FnameInitInfo *info);
+	
+// programmer defined methods for name
+
+};
+
+#endif
+

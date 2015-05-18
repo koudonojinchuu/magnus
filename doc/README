@@ -1,0 +1,38 @@
+MAGNUS PROJECT DOCUMENTATION        11/24/95
+
+
+DIRECTORY: magnus/doc/manual/
+
+      The project documentation.
+
+      You can TeX the whole thing with the command:
+
+      cd magnus/doc/manual; make magnus
+
+      or make the individual chapters with the make targets:
+
+      guidelines
+      manual
+
+      In the file magnus.tex, an \input directive for an appendix
+      of current problems, which you may want, is commented out.
+
+
+DIRECTORY: magnus/doc/plan/
+
+      The project development plan.
+
+      You can TeX the whole thing with the command:
+
+      cd magnus/doc/plan; make plan
+
+      or make the individual chapters with the make targets:
+
+      analysis
+      design
+      implementation
+
+
+DIRECTORY: magnus/doc/templates/
+
+      Blank templates of source and header files.

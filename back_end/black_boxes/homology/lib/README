@@ -1,0 +1,12 @@
+In order to make the Homology C Library, you should copy one of the two
+makefiles provided to 'makefile'.  The two makefiles are:
+
++ makefile.dec (specifically set up for the DECs cc compiler)
+
++ makefile.gen (a general makefile using gcc, that in most cases will not
+  require alterations)
+
+Once you have your 'makefile' you should run 'make'.  The library(s)
+produced reside in this directory.
+
+Jamie (4/11/94)

@@ -1,0 +1,21 @@
+SIZE=264
+data 'STR#' (131, "Exceptions", purgeable) {
+	$"0005 2A61 206D 6573 7361 6765 2077 6173"            /* ..*a message was */
+	$"2073 656E 7420 746F 2061 204E 554C 4C20"            /*  sent to a NULL  */
+	$"6F72 206F 6464 206F 626A 6563 743E 6120"            /* or odd object>a  */
+	$"6D65 7468 6F64 206C 6F6F 6B75 7020 6661"            /* method lookup fa */
+	$"696C 6564 2E20 436F 756C 6420 6265 2061"            /* iled. Could be a */
+	$"2062 6164 2063 6173 7420 6F72 2064 6973"            /*  bad cast or dis */
+	$"706F 7365 6420 6F62 6A65 6374 2B6E 6577"            /* posed object+new */
+	$"5F62 795F 6E61 6D65 2077 6173 2063 616C"            /* _by_name was cal */
+	$"6C65 6420 666F 7220 616E 2075 6E6B 6E6F"            /* led for an unkno */
+	$"776E 2063 6C61 7373 2274 6865 7265 2061"            /* wn class"there a */
+	$"7265 2074 6F6F 206D 616E 7920 7061 6765"            /* re too many page */
+	$"7320 746F 6F20 7072 696E 744C 7468 6572"            /* s too printLther */
+	$"6520 6973 2074 6F6F 206D 7563 6820 7465"            /* e is too much te */
+	$"7874 2074 6F20 6469 7370 6C61 792E 2043"            /* xt to display. C */
+	$"616E 2774 2064 6973 706C 6179 206D 6F72"            /* an't display mor */
+	$"6520 7468 616E 2033 322C 3030 3020 6368"            /* e than 32,000 ch */
+	$"6172 6163 7465 7273"                                /* aracters */
+};
+

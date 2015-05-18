@@ -1,0 +1,34 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group
+
+Objects highlighted:	group G 
+
+Name in the menu:	Compute the order of G
+
+Problem type:		problem object
+
+Help file:		OrderProblem.help
+
+
+			     Algorithms:
+
+
+1. Enumerate cosets G
+	// @am Must be "cosets of G"
+   
+2. Compute a basis of G
+
+
+  
+
+

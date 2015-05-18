@@ -1,0 +1,147 @@
+
+Enter a MSC group: 
+
+You entered MSC group : <  >
+order=1 isAbelian()= YES  isInfinite()= NO  isFinite()= YES  isFree()= YES 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a >
+order=0 isAbelian()= YES  isInfinite()= YES  isFinite()= NO  isFree()= YES 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a ; a ; 0 >
+order=1 isAbelian()= YES  isInfinite()= NO  isFinite()= YES  isFree()= YES 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a ; a^5 ; 0 >
+order=5 isAbelian()= YES  isInfinite()= NO  isFinite()= YES  isFree()= NO 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b ; a^5 ; 0 >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b ; a b^-1 ; 0 >
+order=0 isAbelian()= YES  isInfinite()= YES  isFinite()= NO  isFree()= YES 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b ; b^5,a ; 0 >
+order=5 isAbelian()= YES  isInfinite()= NO  isFinite()= YES  isFree()= NO 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b ; b,a ; 0 >
+order=1 isAbelian()= YES  isInfinite()= NO  isFinite()= YES  isFree()= YES 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b ; a b a b a b a b a b a b a b a b a b a b,b^10,a^10 ; 9 >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b ; a b^-1,a^2 ; 1 >
+order=-1 isAbelian()= DONTKNOW  isInfinite()= DONTKNOW  isFinite()= DONTKNOW  isFree()= DONTKNOW 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b, c ; b c^-1,a ; 0 >
+order=0 isAbelian()= YES  isInfinite()= YES  isFinite()= NO  isFree()= YES 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b, c ; a b c ; 0 >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b, c ; c^3,a b a b a b ; 0 >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < a, b, c ; a^2 b^2 c^2 b ; 6 >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+Repeat (y/n)? 
+Enter a MSC group: 
+
+You entered MSC group : < x, u1, u2, u3, v1, v2, v3, w1, w2, w3 ; x w1^2 w2^2 w3^2,x v1^2 v2^2 v3^2,x u1^2 u2^2 u3^2 ; 6 >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+Repeat (y/n)? G3=< x1, x2, x3 ; x1^9 ; 0 >
+add x2^9, G3=< x1, x2, x3 ; x2^9,x1^9 ; 0 >
+add x1 x2 x3 x1^-1 x2 x3^-2, G3=< x1, x2, x3 ; x1 x2 x3 x1^-1 x2 x3^-2,x2^9,x1^9 ; 6 >
+remove x2^9, G3=< x1, x2, x3 ; x1 x2 x3 x1^-1 x2 x3^-2,x1^9 ; 6 >
+remove x1 x2 x3 x1^-1 x2 x3^-2, G3=< x1, x2, x3 ; x1^9 ; 0 >
+set 
+Set of cardinality: 3
+{
+[ 1 2 3 -1 2 -3 -3 ]
+[ 2 2 2 2 2 2 2 2 2 ]
+[ 1 1 1 1 1 1 1 1 1 ]
+
+}
+: G3=< x1, x2, x3 ; x1 x2 x3 x1^-1 x2 x3^-2,x2^9,x1^9 ; 6 >
+given lambda=DONTKNOW, G=< x1, x2, x3 ; x1 x2 x3 x1^-1 x2 x3^-2,x2^9,x1^9 ; 6 >
+given lambda=6, G=< x1, x2, x3 ; x1 x2 x3 x1^-1 x2 x3^-2,x2^9,x1^9 ; 6 >
+given lambda=3, G=< x1, x2, x3 ; x1 x2 x3 x1^-1 x2 x3^-2,x2^9,x1^9 ; 6 >
+Free group of rank 1: < x1 >
+order=0 isAbelian()= YES  isInfinite()= YES  isFinite()= NO  isFree()= YES 
+
+A cyclic group of finite order: < x1 ; x1^5 ; 0 >
+order=5 isAbelian()= YES  isInfinite()= NO  isFinite()= YES  isFree()= NO 
+
+Free group of rank 2: < x1, x2 >
+order=0 isAbelian()= NO  isInfinite()= YES  isFinite()= NO  isFree()= DONTKNOW 
+
+MSCGroup(order=5): < x1, x2 ; x2,x1^5 ; 0 >
+order=5 isAbelian()= YES  isInfinite()= NO  isFinite()= YES  isFree()= NO 
+
+MSCGroup(order=0): < x1, x2 ; x2 ; 0 >
+order=0 isAbelian()= YES  isInfinite()= YES  isFinite()= NO  isFree()= YES 
+
+Enter a MSC represenatation, i.e. <a,b,c| a^7, b = c> : 
+
+You typed the MSC group: < a, b, c, d, e, f, g, h, i, j, k, l, m, n ; a c b e d g f,a b c d e f g h ; 6 >
+
+Type a word: 
+You typed: b c d e f g h c b e d g f
+wordProblem says  NO 
+
+type a second word (for conjugacy problem): 
+you typed: a^-2
+conjugacyProblem says  YES 
+Type a word: 
+You typed: b c d e f g h f^-1 g^-1 d^-1 e^-1 b^-1 c^-1
+wordProblem says  YES 
+
+type a second word (for conjugacy problem): 
+you typed: a b c d e f g h
+conjugacyProblem says  YES 
+Type a word: 1 {expected a generator, an integer, '(', or '['  here}

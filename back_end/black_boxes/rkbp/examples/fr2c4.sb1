@@ -1,0 +1,6 @@
+subsystem
+rule_type:  subword
+index_type:  automaton
+external:  len_names
+compressed:  no
+rule_file:  fr2c4.rl1

@@ -1,0 +1,20 @@
+1.Install Cygwin to compile Magnus
+
+2.Instal ActiveTcl
+
+3.Install Subversion, if you are going to use the subversion repository
+
+4.The most recent version of Magnus is on the Subversion repository
+http://svn.sourceforge.net/svnroot/magnus/trunk/magnus
+
+5.In cygwin console from magnus directory:
+> ./configure
+> make
+> cp front_end/magnus front_end/magnus.tcl
+
+For OS choose Linux, defaults for everything else
+
+6.Either add .../cygwin/bin/ to windows PATH variable or copy cygwin1.dll to magnus/front_end
+
+7.Then click on magnus.tcl from the Explorer.
+

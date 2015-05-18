@@ -1,0 +1,13 @@
+@@How this problem works
+
+
+\ni In order to compute the maximal root of an element, we first
+compute its primary decomposition. If the element is of finite
+order, then it does not have a maximal root. The maximal root of an
+element of the form a^m, where a is an element of infinite order,
+is a and if a is of p-power order, then a maximal p-power root of
+a^n, if a^n is not the identity element, is a^(n/p^j), where
+p^j is the biggest power of p dividing n. A maximal root of any given
+element of inite order can then be read off from its primary decomposition.
+
+\ni See also @General_abelian_groups@General_abelian_groups::General discussion@ for a general discussion of abelian groups.

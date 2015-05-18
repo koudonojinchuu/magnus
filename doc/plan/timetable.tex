@@ -1,0 +1,60 @@
+\documentstyle{article}
+
+
+\special{landscape}
+\textwidth27.7cm
+\oddsidemargin-1.5cm
+\evensidemargin-1.5cm
+\textheight19cm
+\topmargin-3.2cm
+
+\parindent0pt
+
+
+\pagestyle{plain}
+
+\newdimen\ww
+\newdimen\w
+\ww=1.5cm
+
+\newcommand{\task}[2]{\w=#1\ww\advance\w by-2pt\kern1pt\framebox[\w]{%
+\rule[-3pt]{0pt}{14pt}#2}\kern1pt}
+\newcommand{\ntask}[1]{\w=#1\ww\makebox[\w]{%
+\rule[-3pt]{0pt}{14pt}}}
+
+%% The task command takes two arguments: the number of weeks for the task,
+%% and the task description.
+
+\begin{document}
+
+\begin{center}\sc
+Magnus Task Chart
+\end{center}
+
+\vspace{1\ww}
+
+\ntask{1}\task{4}{February}\task{4}{March}\task{4}{April}\task{4}{May}
+
+\task{1}{GB}\task{16}{Controlling Instance; Documentation}
+
+\task{1}{RN}\task{3}{System Design}\task{13}{System Implementation}
+
+\task{1}{SC}\task{3}{System Design}\task{13}{System Implementation}
+
+\task{1}{AM}\task{6}{Pseudo-Code (free groups)}\task{6}{Pseudo-Code (nilpotent groups)}
+
+\task{1}{RK}\task{16}{General Support}
+
+\task{1}{SL}\task{8}{free groups}\task{8}{fireman}
+
+\task{1}{SR}\task{8}{automatic groups wrapper}\task{4}{Todd-Coxeter wrapper}\task{4}{low-index subgroups wrapper}
+
+\task{1}{DG}\task{10}{one relator groups}
+
+\task{1}{HS}\task{10}{one relator groups}
+
+\task{1}{GH}\task{9}{Todd-Coxeter, abelian groups}
+
+\task{1}{DB}\ntask{6}\task{10}{small cancellation groups}
+
+\end{document}

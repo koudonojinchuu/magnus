@@ -1,0 +1,10 @@
+gr:   a,b;
+rel:  a^2,b^3,a^-1 b^-1 a b;
+gen:  a;
+
+hard;
+time: -1;
+workspace: 1k;
+mess:25000;
+end; 
+

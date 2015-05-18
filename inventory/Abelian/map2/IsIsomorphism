@@ -1,0 +1,44 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	homomorphism h
+
+Other objects present:  group A
+
+Name in the menu:	Is h an isomorphism ?
+
+Problem type:		problem object
+
+Help file:		AbelianHomIsIso.help
+
+
+			     Algorithms:
+
+
+
+1. Compute abelian invariants of A1
+   
+   Links:
+
+	Click here to see the generators of the canonical decomposition of A1
+
+2. Compute abelian invariants of A2
+
+   Links:
+   
+        Click here to see the generators of the canonical decomposition of A2
+
+3. Compute is h a monomorphism
+
+4. Compute is h an epimorphism
+

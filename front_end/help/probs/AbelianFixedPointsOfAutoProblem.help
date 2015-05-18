@@ -1,0 +1,28 @@
+@@How this problem works
+
+@@ABELIAN
+
+The automorphism can be presented as 
+
+        a_i -> w_i = a_1^u_i_1 ... a_n^u_i_n , 
+
+where a_i are generators of the group and u_i_j are integers.
+The word v = a_1^x_1 ... a_n^x_n is a fixed point if the
+automorphism maps it to itself i.e. v -> v.
+So we substitute a_i in v by w_i and resulting word must
+equal to v. The problem can be reduced to finding solutions 
+for the system of equations
+
+        u_1_1 x_1 + ... + u_n_1 x_n = x_1
+        
+        :
+     
+        u_i_n x_1 + ... + u_n_n x_n = x_n
+
+From all solutions we take only basic ones and words
+a_1^x_1 ... a_n^x_n generate the subgroup of fixed points.
+
+\ni See also @General_abelian_groups@General_abelian_groups::General discussion@ for a general discussion of abelian groups.   
+  
+
+    

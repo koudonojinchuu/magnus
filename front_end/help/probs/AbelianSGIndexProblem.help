@@ -1,0 +1,12 @@
+@@How this problem works
+
+\ni The index of the given subgroup in the overgroup 
+is the order of the factor group of the overgroup by
+the subgroup. We use here the algorithm that computes
+the order of a given finitely generated abelian group.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+

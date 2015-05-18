@@ -1,0 +1,2 @@
+#!/bin/sh
+%WISH% -f $0.tcl

@@ -1,0 +1,70 @@
+\begin{theindex}
+
+  \item AddOriginalEqnsRKBMAGWS, 7
+  \item AutGroup, 10
+  \item automataic groups program, 10
+
+  \indexspace
+
+  \item Control parameters, 8
+  \item Counting and enumerating irreducible words, 11
+  \item counting and enumerating irreducible words, 11
+  \item Creating a rewriting system, 6
+
+  \indexspace
+
+  \item Elementary functions on rewriting systems, 7
+  \item EnumerateRWS, 11
+  \item Examples, 12
+
+  \indexspace
+
+  \item FpGroupToRWS, 6
+
+  \indexspace
+
+  \item IsAvailableNormalForm, 7
+  \item IsAvailableReductionRWS, 7
+  \item IsConfluentRWS, 7
+  \item IsReducedWordRWS, 11
+  \item IsRWS, 7
+
+  \indexspace
+
+  \item KB, 10
+  \item KBMAG, 5
+  \item kbmag, 5
+  \item knuth-bendix, 10
+
+  \indexspace
+
+  \item ReduceWordRWS, 11
+  \item ReorderGeneratorsRWS, 8
+  \item ResetRWS, 7
+  \item rewriting system
+    \subitem control parameters, 8
+    \subitem creating, 6
+    \subitem elementary functions, 7
+    \subitem setting the ordering, 8
+  \item rewriting systems, 6
+    \subitem examples, 12
+
+  \indexspace
+
+  \item SetOrderingRWS, 8
+  \item Setting the ordering, 8
+  \item SizeEnumerateRWS, 12
+  \item SizeRWS, 11
+  \item SortEnumerateRWS, 12
+
+  \indexspace
+
+  \item The automatic groups program, 10
+  \item The Knuth-Bendix program, 10
+
+  \indexspace
+
+  \item Word reduction, 11
+  \item word reduction, 11
+
+\end{theindex}

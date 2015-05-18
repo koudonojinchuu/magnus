@@ -1,0 +1,21 @@
+%% This is AMSLaTeX source.
+%% This file is a wrapper for analysis_incl.tex which contains
+%% the actual source. It is for TeXing the analysis chapter as
+%% a separate document.
+
+\documentstyle[11pt]{report}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\input{include/plan_macros}
+\input{include/epsf}
+\epsfverbosetrue
+
+\begin{document}
+
+	\tableofcontents
+
+	\input{include/analysis_incl}
+
+\end{document}

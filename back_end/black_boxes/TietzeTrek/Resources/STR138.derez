@@ -1,0 +1,7 @@
+SIZE=45
+data 'STR#' (138, "BtnTitles") {
+	$"0006 0B54 6965 747A 650D 5472 656B 0453"            /* ...TietzeÂTrek.S */
+	$"746F 7004 446F 6E65 0247 6F0A 4D61 6B65"            /* top.Done.Go.Make */
+	$"2043 6F76 6572 0653 6561 7263 68"                   /*  Cover.Search */
+};
+

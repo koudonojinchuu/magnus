@@ -1,0 +1,13 @@
+@@ How this problem works
+
+\ni A given map from the generators of one abelian group into
+another defines a homomorphism if and only if the images of
+the generators satisfy the defining relations of the source
+group. Whether this is the case is checked by using the solution
+of the word problem in the target group.
+
+\ni For a general discussion about morphisms see @General_abelian_groups::General discussion about morphisms@
+
+
+
+

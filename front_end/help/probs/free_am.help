@@ -1,0 +1,37 @@
+@@Decide if an amalgamated product is free
+
+\ni An amalgamated product G of two finitely presented groups A and B 
+with the finitely generated subgroup H of A amalgamated with the subgroup
+K of B is free if and only both A and B are free and the following
+procedure terminates in the manner described below.
+
+Here G={A*B;H=K}, A=<a_1,...,a_r>, B=<b_1,...,b_s>,
+H=gp(h_1,...,h_m), K=gp(k_1,...,k_m) and H is identified with K by
+setting h_i=k_i for each value of i. Then it follows from a theorem of
+Swarup that G is free if and only the following procedure terminates 
+in m steps.
+
+Put G_1=G, A_1=A, B_1=B, H_1=H and K_1=K. It is important, before starting
+out, to make sure that the generators given for H freely generate H. So we
+find a Nielsen basis for H and if the number of elements in the basis is
+m, we leave H alone. If the number of elements is less than m, we replace
+the generators of H by the new ones, express each of the new basis elements 
+v_j (j=1,...,p), as a word v_j(h_1,...,h_m) involving the old generators 
+h_1,...,h_m. We then replace the old generating set k_1,...,k_m for K by 
+the elements w_j=v_j(k_1,...,k_m) (j=1,...,p). The old isomorphism from
+H to K now translates into the isomorphism which sends v_j to w_j (j=1,
+...,p). Next we check to see if one of the generators of H_1 is part of a 
+basis for A_1. If not, we check if one of the generators of K_1 is part of 
+a basis for B_1. If not, G_1(=G) is not free. So one can assume, without 
+loss of generality, that h_1 is part of a basis for A_1. Choose a new basis 
+for A_1 which includes h_1, say h_1, c_2,...,c_r. Re-express each of 
+the other generators of H_1 in terms of the new basis for A_1 - use 
+again the letters h_1,...,h_m for these generators. Now put 
+A_2=<c_2,...,c_r>, H_2=gp(h_2,...,h_m), B_2=B_1, K_2=gp(k_2,...,k_m) 
+and G_2={A_2*B_2;H_2=K_2} and repeat the process. (G_2 is G again, 
+given by means of a slightly different decomposition.) Notice that 
+G_2 is again an amalgamated product of free groups, but now the 
+amalgamated subgroup has rank m-1, not m. So this procedure can be 
+continued. The final step involves G_m. In this case, G_m(=G) is 
+free if and only if either h_m is part of a basis for A_m or k_m 
+is part of a basis for B_m. 

@@ -1,0 +1,52 @@
+	The directory 'magnus/back_end/experiments' contains several
+examples of how one can apply magnus to perform experiments which
+sometimes are difficult or impossible to make running simple graphical
+interface. To compile any of the programs first make sure you are in
+the directory 'magnus/back_end/experiments', then type 'make
+<filename>', where <filename> is the name of the program you want to
+run. Then go to the directory 'test/bin' and run it. The names and
+brief descriptions of implemented programs are listed below. If you
+want to write a new program, you have to add it's name to the list of
+tests in the Makefile (look for the string "TESTS = ' in the
+Makefile). Then put your program into the 'test' directory, and run
+make as described above.
+
+	The list of experiments.
+
+ 
+1. abelianOrder	
+	 
+ Contents: this program computes orders of all abelian groups
+           satisfying the following pattern:
+ 
+      < a,b; a^2 b^3, a^3 b^2 >,
+      < a,b,c; a^2 b^3 c^4, a^3 b^4 c^2, a^4 b^2 c^3 >, etc.
+
+
+2. ortest 
+
+ Contents: 
+
+      The program finds the shortest trivial word in an one-relator
+      group. The algorithm is horrobly exponential, so if you give
+      it a group with more then two generators, don't expect results
+      in reasonable time.
+
+
+3. primitive 
+
+ Contents: 
+
+      The program counts the number of primitive elements in a free
+      group.
+
+
+4. HNConjecture
+
+ Contents: 
+   
+      An experiment which looks for a counter-example to the
+      Hanna Neumann conjecture: if A and B are finitely generated
+      subgroups of a free group of finite rank, and I is the
+      intersection of A and B, then rk(I)-1 <= (rk(A)-1)(rk(B)-1).
+

@@ -1,0 +1,48 @@
+@@How this problem works
+
+@@FP
+
+
+
+@@ABELIAN
+
+@@NILPOTENT
+
+\ni
+A nilpotent group is finite if and only if its abelianization is finite.
+In order to compute its order, we check first to see that it is finite.
+We then compute a presentation for its derived group. Inductively, we
+compute the order of the derived group. The order of the group is then
+the product of the order of its factor-derived group and the order of
+its derived group.
+
+\ni For a general discussion of finitely generated nilpotent groups, see
+@Nilpotent_groups@Nilpotent_groups::
+General discussion@
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

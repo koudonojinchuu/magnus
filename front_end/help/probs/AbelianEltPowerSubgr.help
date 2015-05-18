@@ -1,0 +1,10 @@
+@@How this problem works
+
+\ni In order to see if a power of an element lies in a subgroup,
+we add the generators of the subgroup to the relators of the containing
+group and check to see if the image of the element is of finite order
+in the resultant quotient group.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+

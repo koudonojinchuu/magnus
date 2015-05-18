@@ -1,0 +1,34 @@
+%@@How this problem works
+@@FP
+
+
+
+@@ABELIAN
+
+\ni The given subgroup coincides with the group if and only
+if the factor group of the overgroup by the subgroup is trivial.
+Here we simply use the algorithm for deciding whether an abelian
+group is trivial to solve this problem.
+
+\ni For a general discussion see
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+

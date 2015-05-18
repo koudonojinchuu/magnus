@@ -1,0 +1,135 @@
+#!/usr/local/bin/perl
+
+## Copyright (C) 1995 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: rci, a recursive wrapper for ci.
+##
+## Principal Author: Roger Needham
+##
+## Status: Useable.
+##
+## Revision History:
+##
+## Next implementation steps:
+##
+
+# File name patterns to reject:
+
+$reject_pattern = ".*(~|%|#.*#|,v|\\.(BAK|bak|log|ps|dvi|aux|toc|a|d|o|info.*|cp|fn|vr|tp|ky|pg))$";
+
+
+while ( $ARGV[0] =~ /^-/ ) {
+  $_ = shift;
+  if ( /^-i$/ ) {
+     $iflag = 1;
+  }
+  elsif ( /^-r$/ ) {
+     $rflag = 1;
+  }
+  elsif ( /^-c$/ ) {
+     $cflag = 1;
+  }
+  elsif ( /^-h$/ ) {
+     &help;
+     exit;
+  }
+  elsif ( /^-v$/ || /^--version$/ ) {
+    print "\nrci version 1.0\n";
+    exit;
+  }
+  else {
+    print "Unknown option: $_\n\n";
+    &help;
+    exit 1;
+  }
+}
+
+if ( @ARGV ) { $name_pattern = shift; }
+
+if ( $cflag && !$name_pattern ) {
+  print "\n-c option with no filename pattern means do nothing. Done.\n";
+  exit;
+}
+
+if ($rflag) {
+  open(FIND, "/usr/bin/ls |") || die "Couldn't run ls: $!\n";
+} else {
+  open(FIND, "/usr/bin/find . -type f -print |")
+    || die "Couldn't run find: $!\n";
+}
+
+while ( $filename = <FIND> ) {
+  chop $filename;
+  next if $filename =~ /$reject_pattern/o;
+  next unless -T $filename;
+  if ( $name_pattern ) {
+    if ( $cflag ) {
+      next if $filename =~ /$name_pattern/o;
+    } else {
+      next unless $filename =~ /$name_pattern/o;
+    }
+  }
+
+  push(@files, $filename);
+}
+close(FIND);
+
+
+foreach $filename (@files) {
+
+  $filename =~ m:^(.+)/([^/]+)$:;
+  $rcs_name = "$1/RCS/$2,v";
+  $rcs_dir = "$1/RCS";
+
+  if ( !$iflag && !(-e $rcs_name) ) {
+    next unless &y_or_n_p("\n ci -l $filename", "y");
+  }
+
+  if ( !(-e $rcs_dir) ) {
+    system "mkdir $rcs_dir";
+  }
+
+  if ( !$iflag ) {
+    print "\n$filename\n";
+  }
+  system "ci -l -q -M -m\"empty log message\" -t-\"\" $filename";
+}
+
+
+
+## Subroutines:
+
+
+sub y_or_n_p {
+  local($yn_prompt, $yn_default) = @_;
+  local($yn_reply);
+  print "$yn_prompt (y/n)";
+  if ( $yn_default ) {
+    print "[$yn_default]";
+  }
+  print "? ";
+  while ( 1 ) {
+    $yn_reply = <STDIN>;
+    chop $yn_reply;
+    if ( $yn_default && !$yn_reply ) { $yn_reply = $yn_default; }
+    if ( ($yn_reply ne "y") && ($yn_reply ne "n") ) {
+      print "\nPlease answer y or n: ";
+    } else {
+      return ($yn_reply eq "y");
+    }
+  }
+}
+
+
+sub help {
+  print "\n\nUsage: rci [ -cir ] [ <perl-style regexp> ]";
+  print "\n\nrci quietly checks in all text files at and below the current\n";
+  print "directory. The optional (perl-style) regexp is used to filter\n";
+  print "the files.\n";
+  print "\nThe command line options are:\n";
+  print " -c  Use the complement of the filename regexp\n";
+  print " -i  Disable prompting each time before ci of new file\n";
+  print " -r  Disable recursion\n";
+  print " -h  Print this message and quit\n\n";
+}

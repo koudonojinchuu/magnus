@@ -1,0 +1,113 @@
+
+  
+
+                  MAGNUS 
+
+     A graphically-oriented software system for 
+         computational group theory 
+
+
+ ================================================================
+
+ The MAGNUS  Computational Group Theory Package is an innovative
+ symbolic algebra package providing facilities for doing calculations
+ in and about infinite groups.  Almost all symbolic algebra systems
+ are oriented toward finite computations that are guaranteed to
+ produce answers, given enough time and resources.  By contrast,
+ MAGNUS is concerned with experiments and computations on infinite
+ groups which in some cases are known to terminate, while in others are
+ known to be generally recursively unsolvable.
+
+
+
+ Features
+ ------------
+
+ - A graphical object and method based user interface which  is easy 
+  and intuitive to use and naturally reflects the underlying  C++ 
+  classes;
+
+ - A kernel comprised of a ``session manager",  to communicate between
+  the user interface or front-end and the back-end where computations
+  are carried out, and ``computation managers" which direct the
+  computations which may involve several algorithms and ``information 
+  centers"  where information is stored;
+
+ - Facilities for performing several procedures in parallel and
+  allocating resources to each of several simultaneous algorithms
+  working on the same problem;
+
+ - Enumerators which generate sizable finite approximations to  both 
+  finite and infinite algebraic objects and make it possible  to carry 
+  out searches for answers  even when general algorithms may not exist;
+
+ - Innovative genetic algorithms;
+
+ - A package manager to ``plug in" more special purpose algorithms
+  written by others;
+
+
+ Use and Distribution
+ --------------------
+
+ Copyright (C) 1994-2005 The New York Group Theory Cooperative
+
+     This program is free software; you can redistribute it and/or 
+ modify it under the terms of the GNU General Public License (see 
+ doc/COPYING file) as published by the Free Software Foundation; 
+ either version 2 of the License, or (at your option) any later 
+ version.
+
+     This program is distributed in the hope that it will be useful, 
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ General Public License for more details.
+
+ Documentation and Other Resources
+ ---------------------------------
+
+ There is some documentation in the `doc' subdirectory of the
+ distribution. As usual, this could be vastly improved.
+
+ MAGNUS is available from
+
+   http://www.grouptheory.org
+
+ There are two contact e-mail addresses:
+ - for general comments and suggestions about Magnus send e-mail to: 
+      comment@rio.sci.ccny.cuny.edu 
+ - bug reports, with a brief description of the group being tested 
+ and the tool that was buggy, should be sent to: 
+      bug@rio.sci.ccny.cuny.edu 
+
+ Supported Platforms
+ -------------------
+
+ MAGNUS can be successfully compiled on Fedora Core 1, 2, and 3
+ platforms (gcc versions used are respectively 3.3.2, 3.3.3, and
+ 3.4.2/4.0.1). A previous version working with gcc 2.95.3 is also
+ available.
+
+ MAGNUS has as well been tested on the following platforms:
+
+       FreeBSD 4.11 (gmake and gcc 3.3.2)
+       Red Hat / SuSE Linux 2.2 (2.4) (Tcl/Tk 8.x)
+              - Should run on other comparable Linuxes as well
+
+       We have old binary releases for Solaris 2.5 and SunOs4.1.3 
+ available at http://www.grouptheory.org
+
+ Note that though MAGNUS can be built on Fedora Core 3, it cannot run
+ normally when blackbox programs are used. The reason behind this is
+ still unclear.
+
+ Installation
+ ------------
+
+ Installation is described in the file INSTALL in the this directory.
+
+ History
+ -------
+
+ There is a ChangeLog file which describes changes for each MAGNUS' 
+ release available in the same directory.

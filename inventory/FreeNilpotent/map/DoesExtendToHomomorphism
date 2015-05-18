@@ -1,0 +1,41 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free nilpotent group 
+
+Objects highlighted:	map M 
+
+Other objects present:	group N
+
+Name in the menu:	Does M extend to a homomorphism ?
+
+Problem type:		problem object
+
+Help file:		ExtendToHomProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+  
+2. Compute abelian invariants of N
+  
+3. Solve using basis of N
+
+4. Compute lower central quotients for N
+  
+5. Solve using lower central quotients of N
+  
+  
+
+
+

@@ -1,0 +1,12 @@
+@@How this problem works
+
+\ni In order to see if an element is a proper power, we compute
+a maximal root of the element. This comes equipped with a positive
+integer giving us the power of the maximal root that coincides with
+the given element. If that power is greater than 1, the element is
+a proper power, otherwise it is not.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+

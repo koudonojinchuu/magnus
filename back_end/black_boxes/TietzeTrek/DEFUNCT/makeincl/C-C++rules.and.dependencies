@@ -1,0 +1,121 @@
+### this is part of a Gnu make file
+### -> it will only execute properly under gmake
+###
+### Markus Stricker, Oct. 1992
+
+# this file is completely general (no editing needed)
+# there is no need to copy this file into your working directory
+# keep one copy in a directory ..../makeincludes
+
+#set the right PATH for libs and so on
+ifndef CC
+  CC = cc
+endif
+#next line added for SUIT, as are lines in C-CXXvariables!!!
+LDLIBS	=   
+CFLAGS = +d -g  $(patsubst %,-I%,$(CINCPATH)) $(patsubst %,-L%,$(CLIBPATH)) $(LDLIBS)
+
+ifndef CXX
+  CXX        = $(SUNCXX)
+  CXXINCPATH := $(SUNCXXINCPATH) $(CXXINCPATH) 
+  CXXLIBPATH := $(SUNCXXLIBPATH) $(CXXLIBPATH) 
+endif
+ifeq ($(CXX),saberc++)
+  CXX        = $(SABERC++)
+  CXXINCPATH := $(SABERC++INCPATH) $(CXXINCPATH) 
+  CXXLIBPATH := $(SABERC++LIBPATH) $(CXXLIBPATH) 
+endif
+
+ifeq ($(CXX),attc++)
+  CXX        = $(ATTCXX)
+  CXXINCPATH := $(ATTCXXINCPATH) $(CXXINCPATH) 
+  CXXLIBPATH := $(ATTCXXLIBPATH) $(CXXLIBPATH) 
+endif
+ifeq ($(CXX),g++)
+  CXXINCPATH := $(G++INCPATH) $(CXXINCPATH) 
+  CXXLIBPATH := $(G++LIBPATH) $(CXXLIBPATH) 
+endif
+ ifeq ($(CXX),gcc)
+  CXXINCPATH :=  $(CINCPATH)
+  CXXLIBPATH :=   $(CLIBPATH)
+endif
+
+CXXFLAGS = -g $(patsubst %,-I%,$(CXXINCPATH)) $(patsubst %,-L%,$(CXXLIBPATH))
+
+CXXSOURCES := $(strip $(wildcard *.C) $(wildcard *.cc))
+CSOURCES   := $(strip $(wildcard *.c))
+OBJECTS    := $(subst .C,.o,$(wildcard *.C)) \
+              $(subst .cc,.o,$(wildcard *.cc)) \
+              $(subst .c,.o,$(CSOURCES))
+# wildcard *.o does not work because they might not exist!!!
+ifdef CSOURCES
+possibleCbinaries = $(patsubst %.c,%,$(CSOURCES))
+BINARIESofCfiles  = $(strip $(foreach file,$(BINARIES), \
+                   $(findstring $(file), $(possibleCbinaries))))
+endif
+ifdef CXXSOURCES
+possibleCXXbinaries = $(patsubst %.C,%,$(CXXSOURCES))
+possibleCXXbinaries := $(patsubst %.cc,%,$(possibleCXXbinaries))
+BINARIESofCXXfiles  = $(strip $(foreach file,$(BINARIES), \
+                          $(findstring $(file),$(possibleCXXbinaries))))
+endif
+
+### all the phony rules (no file with such a name needs to exist)
+.PHONY : usage all clean install depend
+
+#if make is executed without arguments it will run a make usage
+usage:
+	@ echo 
+	@ echo "The following make commands are availiable:
+	@ echo 
+	@ echo make with one of the object files:
+	@ echo $(sort $(OBJECTS))
+	@ echo
+	@ echo make with one of the binary file:
+	@ echo $(sort $(BINARIES))
+	@ echo 
+	@ echo other commands: all, clean, depend, install, usage
+	@ echo
+
+all: $(BINARIESofCfiles) $(BINARIESofCXXfiles)
+
+install: clean all
+	mv $(BINARIES) $(BINDIR)
+
+clean:
+	@ echo removing all object and binary files
+	@-rm -f $(OBJECTS) $(BINARIES)
+
+depend:
+	@ echo removing the dependency file: $(dependencies_file)
+	@ -rm -f $(dependencies_file)
+	@ echo reconstructing the $(dependencies_file)
+ifneq "$(strip $(CXXSOURCES))" ""
+	@g++ $(patsubst %,-I%,$(CXXINCPATH)) -MM $(CXXSOURCES) >> $(dependencies_file)
+endif
+ifneq "$(strip $(CSOURCES))" ""
+	@gcc $(patsubst %,-I%,$(CINCPATH)) -MM $(CSOURCES)  >> $(dependencies_file)
+endif
+	@ echo done
+
+# for .C, .c and .cc there are appropriate default rules
+# they look like this: $(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $< -o $@
+
+# if these rules are before usage, then it becomes the default
+# static pattern rule for linking of objects
+# I commented out the next 4 lines -- Feb 7th 1993, Hamish
+
+#ifdef BINARIESofCfiles
+#$(BINARIESofCfiles) : % : %.o
+#	$(CC) $(CFLAGS) -o $@ $^ $(patsubst %,-l%,$(LIBS))
+#endif
+
+ifdef BINARIESofCXXfiles
+$(BINARIESofCXXfiles) : % : %.o
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(patsubst %,-l%,$(LIBS))
+endif
+
+###the $(dependencies_file) of the objects
+ifneq "$(findstring $(dependencies_file), $(shell ls))" ""
+  include $(dependencies_file)
+endif

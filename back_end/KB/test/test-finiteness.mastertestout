@@ -1,0 +1,29 @@
+Testing for finiteness.
+G = < a, b ; b a b^-1 a^-1 >
+Running RKBPackage with parameter 8
+Rewriting system has 8 rules.
+Group is proved infinite.
+Testing for finiteness.
+G = < a, b ; b^3,a^2,a^-1 b^-1 a b >
+Running RKBPackage with parameter 8
+Rewriting system has 8 rules.
+Group is proved finite of size 6
+Testing for finiteness.
+G = < a, b, c ; a b a b a b,c^2,b^2,a c a c,b c b c b c b c b c b c b c,a^2 >
+Running RKBPackage with parameter 28
+Rewriting system has 12 rules.
+Language is infinite, rewriting system is not confluent.
+Rewriting system has 12 rules.
+Language is infinite, rewriting system is not confluent.
+Rewriting system has 12 rules.
+Group is proved infinite.
+Testing for finiteness.
+G = < a, b ; b a b^2 a^-1 b a^-2 b a^-2,a b^2 a b a^2 b^-1 a b^-1 >
+Running RKBPackage with parameter 22
+Rewriting system has 19 rules.
+Group is proved finite of size 29
+Testing for finiteness.
+G = <  >
+Running RKBPackage with parameter 0
+Rewriting system has 0 rules.
+Group is proved finite of size 1

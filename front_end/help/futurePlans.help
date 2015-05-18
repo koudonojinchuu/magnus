@@ -1,0 +1,52 @@
+@@Future Plans for Magnus
+
+\ni Our primary concern is with the group-theoretic functionality of Magnus.
+We are planning on improving and enlarging the algorithms that we have
+for nilpotent groups, for amalgmated products and HNN extensions and
+those for solving equations over free groups. In particular, the back-end
+already contains the algorithm for finding the stabiliser of a quadratic
+word in a free group (in the full group of automorphisms of the ambient
+free group) and we are planning on putting this algorithm into the front
+end of Magnus. In addition, we will implement a Reidemeister-Schreier
+algorithm for not-necessarily finite index subgroups of finitely generated
+free groups. We are still wrestling with how to interpret and present massive
+amounts of data.
+
+\ni Our second concern is  with the way in which the end user interacts with
+Magnus. Here we have, in particular, a number of issues that we are
+concerned with.
+
+\ni* Saving a session. We do not anticipate saving the state of an
+ongoing computation, but we will provide for saving and restoring all
+information known about all group theoretic objects in a session.
+
+\ni* Many more computations are possible than are currently available,
+using what is already in Magnus.  For example, we could bring many more
+of the already existing computations to bear on the isomorphism problem.
+
+\ni* Several @problem views provide insufficient control. For example, 
+there is no way to specify the ordering to use for Knuth-Bendix. For 
+another, the system will enumerate random automorphisms of free groups, 
+but you can specify only one of the random parameters. Whatever solution 
+to this `interface problem' we decide on will have a large impact on
+programmer hours, so we are considering carefully what to do;
+suggestions are welcome.
+
+\ni* Enumerators print, e.g., words or maps in their log windows.
+These can be copied and pasted into definition dialogs. But as of now
+it is not possible to just click on them to make them into workspace
+objects. The general problem of workspace objects is a matter
+of extreme importance to us and is high on our list of priorities.
+
+\ni* We have compiled a database of interesting groups and interesting
+open problems. We have still to decide on a format for displaying
+these groups. The open problems are now a part of Magnus.
+
+
+
+
+
+
+
+
+

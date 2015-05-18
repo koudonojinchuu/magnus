@@ -1,0 +1,12 @@
+@@How this problem works
+
+
+\ni In order to see if two subgroups are isomorphic, we compute their 
+canonical decompositions. The subgroups are isomorphic if and only if
+they have the same canonical decompositions.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+

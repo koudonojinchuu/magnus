@@ -1,0 +1,6 @@
+subsystem
+rule_type:  subword
+index_type:  hybrid
+external:  len_names
+compressed:  no
+rule_file:  g2378.rul

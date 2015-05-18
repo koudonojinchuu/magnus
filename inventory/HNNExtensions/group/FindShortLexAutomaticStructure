@@ -1,0 +1,36 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		HNN-extension of free groups
+
+Objects highlighted:	group G 
+
+Name in the menu:	Find a ShortLex automatic structure for G
+
+Problem type:		problem object
+
+Help file:		AGProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+
+   Links:
+	
+	Click here to see a word acceptor.
+
+	Click here to the first difference machine.
+
+	Click here to the second difference machine.
+
+	Click here to the general multiplier.

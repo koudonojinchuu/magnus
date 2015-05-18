@@ -1,0 +1,39 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	word W 
+
+Other objects present:  group A
+
+Name in the menu:	Compute the p-height of W
+
+Problem type:		problem object
+
+Help file:		AbelianPHeightOfEltProblem.help
+
+
+			     Algorithms:
+
+1. Compute abelian invariants of A
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of 
+  
+
+2. Find the primary decomposition of A
+	
+   Links:
+
+        Click here to see the generators of the primary decomposition of A
+

@@ -1,0 +1,32 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Is H normal ?
+
+Problem type:		problem object
+
+Help file:		SGOfNGisNormalProblem.help
+
+
+			     Algorithms:
+
+
+1. Compute is normal
+  
+2. Compute a basis of the free preimage of
+// @am "preimage of H" - subgroup name is missing
+

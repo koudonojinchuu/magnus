@@ -1,0 +1,37 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	group A 
+
+Name in the menu:	Compute the canonical decomposition of A
+
+Problem type:		problem object
+
+Help file:		AbelInvariantsProb.help
+
+
+			     Fast checks:
+
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of A
+
+  
+

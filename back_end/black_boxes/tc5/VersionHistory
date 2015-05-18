@@ -1,0 +1,16 @@
+V4.0 	  New version.
+V4.01	  Fixed bug causing wrong index after deductions are discarded.
+V4.02   Internal representation of relators and subgroup generators 
+        changed: from triple to double in the y array.
+V4.03   After big collapse, discard deduction stack.
+V4.04	  Diagnostic function.
+V4.05   Options: PR RL SG DR DS SA RES CC SC TW CY OO RC SR NC 
+V4.06   AI AO options. C parser and C lexer, YACC is only used
+	      for parsing expressions in relators and subgroup generators. 
+
+V5.01   Mendelsohn strategy via WO fiddle (delete vadvise).
+
+PLANS
+V5.02   Introduce fast major collapse code.
+V5.03   Introduce = and / operators.
+V5.10   CODE REWRITE.

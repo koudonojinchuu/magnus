@@ -1,0 +1,33 @@
+@@How this problem works
+
+@@How this problem works
+
+@@FP
+
+
+@@ABELIAN
+
+\ni The given group is decomposed into a direct product of cyclic groups.
+The order of the torsion subgroup is the product of the orders
+of the finite cyclic groups in this decomposition.
+
+\ni For a discussion of general finitely generated abelian groups,
+see @General discussion@General_abelian_groups::general discussion@
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR@@
+
+
+
+
+
+

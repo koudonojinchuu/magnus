@@ -1,0 +1,32 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free nilpotent group
+
+Objects highlighted:	group N 
+
+Name in the menu:	Find a  presentation of N
+
+Problem type:		problem object
+
+Help file:		NGbuildPresentationProblem.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+
+   Links:
+
+	Click here to view the structure constants of N
+  
+

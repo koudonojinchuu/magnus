@@ -1,0 +1,68 @@
+.TH cmat 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBcmat \-
+Creates a matrix for calculating homology dimension n.
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBcmat\fR \fIn\fR [\fIinputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP n 15
+The dimension (> 1) whose matrix we will produce.
+.IP inputfile
+The groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.  If no file name is given \fIStandard Input\fR is used.
+
+
+
+.SH \fIUsage
+
+Given a group and its complete rewriting system including finite state automata (the inputfile),
+calculates boundaries for critical n\-tuples, and
+forms a matrix from these calculations.
+
+The boundary
+calculation algorithms used are based on those given by J. R. J. Groves
+"Rewriting Systems and Homolgy of Groups" in his research report from
+The University of Melbourne, Department of Mathematics, 1990 and original
+algorithms by J.R.J.Groves 1993-1994.
+
+
+.SH \fIExample
+
+Suppose we have a groups rewriting system in a file "grpA.kbeqn".  We are
+interested in obtaining the matric for dimension 3.
+We run
+\fBcmat\fR as follows:
+
+        cmat 3 grpA.kbeqn
+
+Output is to standard output - the result being, say:
+
+        Matrix: rows = 48, cols = 96
+
+Followed by the elements of the matrix.
+
+.SH \fIBugs
+If a rewriting system is not complete, the program may crash.  This is
+because certain tests are \fInot\fR performed to reduce execution time.
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+\fIchom(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (7/6/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

@@ -1,0 +1,41 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	word W 
+
+Name in the menu:	Compute the maximal root of W
+
+Other objects present:  group A
+
+Problem type:		problem object
+
+Help file:		AbelianMaximalRoot.help
+
+
+			     Algorithms:
+
+1. Compute abelian invariants of A
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of 
+  
+
+2. Find the primary decomposition of A
+	
+   Links:
+
+        Click here to see the generators of the primary decomposition of A
+
+3. Compute the maximal root
+

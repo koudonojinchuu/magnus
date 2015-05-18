@@ -1,0 +1,6 @@
+@@How this problem works
+
+@@ABELIAN
+
+\ni We need only check whether the images of the generators of the given group
+generate the group, which we can do on appealing to the @algorithm which determines whether elements of a group generate it@probs/AbelianIsSGEqualToTheGroup::ABELIAN@

@@ -1,0 +1,32 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	subgroup H
+
+Other objects present:	group G
+
+Name in the menu:	Compute the class of H
+
+Problem type:		problem object
+
+Help file:		SGOfNGcomputeNClassProblem.help
+
+
+			     Algorithms:
+
+
+1. Compute a basis of G
+
+2. Compute the class of H
+
+

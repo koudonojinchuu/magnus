@@ -1,0 +1,12 @@
+@@How this problem works
+
+\ni In order to see if an element is in a subgroup, we add the generators
+of the subgroup to the defining relations of the containing group and then
+check to see if the image of the given  element is trivial in the resultant 
+group.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+

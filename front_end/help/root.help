@@ -1,0 +1,181 @@
+@@The Magnus Manual
+
+1.  @What is Magnus?@aboutMagnus::About Magnus@
+
+2.  @How to use Magnus?@howToUse::Using Magnus@
+
+3.  @How to use this manual?@Using the Manual@
+
+4.  @How to write stand-alone programs using Magnus@readme::How to write stand-alone programs using Magnus@
+
+5.  @Algorithms for abelian groups@abelian_algorithms::ALGORITHMS 
+FOR ABELIAN GROUPS@
+
+6.  @Algorithms for finitely presented groups@fp_algs::ALGORITHMS 
+FOR FINITELY PRESENTED GROUPS@
+
+7.  @Algorithms for HNN-extensions@hnn-extensions_algs::ALGORITHMS FOR 
+HNN-EXTENSIONS@
+
+8.  @Algorithms for amalgamated products@amalg_prods_algs::ALGORITHMS FOR 
+AMALGAMATED PRODUCTS@
+
+9.  @Algorithms for free nilpotent groups@free_nilpotent_algs::ALGORITHMS 
+FOR FREE NILPOTENT GROUPS@
+
+10.  @Algorithms for finitely generated nilpotent groups@fg_nilpotent_algs::ALGORITHMS 
+FOR FINITELY GENERATED NILPOTENT GROUPS@
+
+11.  @Algorithms for free groups@free_algs::ALGORITHMS FOR FREE GROUPS@
+
+12.  @Algorithms for one-relator groups@one-relator_algs::ALGORITHMS FOR ONE-RELATOR GROUPS@
+
+13.  @Algorithms for small cancellation groups@small_cancellation_algs::ALGORITHMS FOR SMALL CANCELLATION GROUPS@
+
+
+
+
+
+
+
+@@What is Hypertext?
+
+\ni A hypertext document is one which can have the usual tree structure,
+i.e., chapters, sections, subsections, etc. The defining concept of
+hypertext, however, is that of a `link'. A link is a means of jumping 
+from one part of the document to another, in order to follow a chain of
+reasoning which is not reflected satisfactorily by a tree structure.
+
+\ni This manual uses the usual sort of links, which @look like
+this@Curious?@. The specially marked text lights up when you move the
+mouse over it. If it looks interesting, you can jump to the page to which
+it refers by clicking on it.
+
+\ni After following several links, you will likely be either bored or
+satisfied, and will want to go back to where you started. There are
+four ways to do this:
+
+1) The easiest is to press the `Go Back' button until you are back
+where you want to be.
+
+2) It may be faster to jump back by using the `Go' menu, which lists
+up to the last 10 (or so) pages you have looked at.
+
+3) Many pages have links in them, and one of these links may happen to
+point to your destination.
+
+4) The Magnus manual can display a directed graph of all pages you
+have visited, with arrows indicating how you got from one to another.
+See @How do I use this manual?@Using the Manual@, or just press the
+`Show Graph' button and try it out.
+
+
+
+@@Curious?
+
+\ni Couldn't resist clicking? What you just did is called `following a
+link'. You can get back to where you were by pressing the `Go Back'
+button. Or, you can follow @this link@What is Hypertext?@.
+
+
+@@Using the Manual
+
+\ni The Magnus manual is hypertextual. In order to access any of the items
+listed, simply move the cursor to the appropriate item, which is actually
+a link to a file,  and click on it. If you are not sure what hypertext is,
+click on  @this link@What is Hypertext?@ to see how this works and what 
+hypertext is.
+
+\ni As an experimental extension to hypertext, the manual can display a
+directed graph of all pages you have visited, with arrows indicating
+how you got from one to another. You can jump to another page by
+clicking on the corresponding node in the graph. As you move the mouse
+over a text link, the corresponding node, if visible, becomes
+hilighted.
+
+\ni The graph is currently drawn more or less at random. Also, when you
+hide the graph and show it again, it is redrawn differently. We
+welcome suggestions for a better way. For example, the whole manual
+has a `maximal subtree', namely, the usual chapter-section-subsection
+structure. We might draw this in any of the usual ways to draw trees
+neatly, and let cross-links fall where they may.
+
+\ni In any case, you can move nodes around in the usual way with the
+middle mouse button.
+
+\ni You can @customize this manual@Customizing the Manual@, too.
+
+
+@@Customizing the Manual
+
+\ni You can customize the Magnus manual to suit your tastes.
+
+\ni The manual is divided into `pages'. Pages are kept in a
+file which ends in `.help'. All such files are kept in the
+`magnus/front_end/help/' directory.
+
+\ni There are only two structural elements of a page:
+
+\ni The first is the title, which consists of the characters `\@\@' at the
+beginning of a line, followed by the text of the title (up to the end
+of the line).
+
+\ni The second is a link. Links have the form:
+
+\@text\@page specification\@
+
+where the `text' is just what should appear in the manual to represent
+the link, and the `page specification' is either local or global. A
+local page specification is just the (exact!) title of another page
+which is in the same file. A global one is preceded by a file name
+(without the `.help'), and the characters `::'. Look at the file
+`help/root.help' for examples.
+
+\ni As you add a new page, you need to make it accessible. Just find any
+existing pages which would naturally connect with your new one, and
+put links in them.
+
+\ni Some technical details:
+
+\ni Note that if you change the title of a page in any way, then any links
+to it will go bad. Checking for this is not so tough with unix
+utilities like grep, but we are also thinking of  providing an 
+`integrity checker' at some point in the future.
+
+\ni Sometimes you need to use the character `\@' in your page, without it
+accidentally starting a link specification. Use the escape sequence
+`\@'.
+
+\ni Spaces, tabs, and newlines are interpreted largely as in TeX. That is,
+you start a new paragraph by leaving a blank line (or several) after
+the previous paragraph. In even more detail, these regular expression
+substitutions are performed, in this order:
+
+`\t' -> ` '
+
+`\s\s+' -> ` '
+
+` *\n *( *\n *)+' -> `\t\t\s\s'
+
+` *\n *' -> ` '
+
+`\t' -> `\n'
+
+\ni(yes, a single `\n' is replaced by a ` ', so that a paragraph becomes
+one huge line. This is so that when the manual window is resized, the
+paragraph automatically re-wraps itself to look nice.)
+
+\ni Even with infinite care, something will go wrong. Here are some
+deliberately bad links to try, to see the result:
+
+@A malformed global link.@root:Using the Manual@
+
+@A global link to a non-existent file.@Non-Existent-File::Title@
+
+@A local link to a non-existent page.@Non Existent Page@
+
+
+
+
+
+

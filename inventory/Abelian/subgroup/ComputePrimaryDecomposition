@@ -1,0 +1,47 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	subgroup H 
+
+Other objects present:  group A
+
+Name in the menu:	Compute the primary decomposition for H
+
+Problem type:		problem object
+
+Help file:		AbelianSGPrimesDecomposition.help
+
+
+
+			     Algorithms:
+
+
+1. Compute abelian invariants of A
+
+      Links:
+
+          Click here to see the generators of the canonical decomposition of A1
+
+
+2. Compute abelian invariants of H
+
+      Links:
+  
+          Click here to see the generators of the canonical decomposition of H
+
+3. Find the primary decomposition of H
+
+      Links:
+
+	Click here to see the generators of the primary decomposition of H
+

@@ -1,0 +1,36 @@
+@@How this problem works
+
+@@FP
+
+@@ABELIAN
+\ni The given subgroup is decomposed into a direct product
+of cyclic groups. If there are no infinite cyclic factors
+in this decomposition, the subgroup is finite. Otherwise
+it is infinite.
+
+\ni For a general discussion see 
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+@@Compute the order of a subgroup
+
+\ni The given subgroup is decomposed into a direct product
+of cyclic groups. If there are no infinite cyclic factors
+in this decomposition, the subgroup is finite. Otherwise
+it is infinite.
+
+\ni For a general discussion see 
+@General abelian groups@General_abelian_groups::General discussion@
+
+
+@@NILPOTENT
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+

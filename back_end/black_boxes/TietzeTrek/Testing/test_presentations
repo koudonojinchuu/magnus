@@ -1,0 +1,46 @@
+/trivial group, a couple of seconds on SUN
+aba-1b-2
+bab-1a-2
+
+/ order 120, John does in 155 sec
+/ 36 seconds on the SUN
+abbab-1a-1b-1
+abab-1a-2b-1
+
+/trivial, 2 seconds on SUN
+ba-1b-2
+bab-1a-2
+
+/ trivial, 50 seconds on SUN
+cac-1a-2
+bcb-1c-2
+aba-1b-2
+
+/ trivial, a few seconds on SUN 
+abab-1a-1b-1
+a2b-3
+
+
+/ order 120, 54 seconds on SUN
+a3b-5
+a2b-1a-1b-1
+
+/ order 20, a couple of seconds on SUN
+a2b-5
+a2b-1a-1b-1a-1
+
+/ order 11*120, 7 minutes 58 seconds
+a2b-5
+a2b-1a-1b-1a-1b-1a-1
+
+/ finite fibonachi abelized is Z29, 18 seconds
+aba-1b-1
+bababbababbabbababbaba-1
+abbabbababbabab-1
+
+/ finite fibonachi, this runs out swap space
+/ at about 50,000 vertices 
+bababbababbabbababbaba-1
+abbabbababbabab-1
+
+

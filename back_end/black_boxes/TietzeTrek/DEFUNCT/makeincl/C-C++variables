@@ -1,0 +1,33 @@
+### this file sets some general variables that are used by all your make files
+
+# there is no need to copy this file into your working directory
+# keep one copy in a directory ..../makeincludes
+
+# change the following variables to what you want them to be
+CINCPATH = include
+
+#CLIBPATH = /usr/openwin/lib /home/apps/suit/lib
+
+CXXINCPATH =  Fclasses  GLink GLinkGLvar  GLvarSub  TTdriverDebug TTnodesRsrc  pres
+CXXLIBPATH = $(CLIBPATH)
+
+dependencies_file = Dependencies
+
+BINDIR = bin
+
+# don't change the following variables
+
+//SUNCXX        = /usr/lang/SC1.0/CC
+//SUNCXXINCPATH = /usr/lang/SC1.0/include/CC
+//SUNCXXLIBPATH = /usr/lang/SC1.0  /usr/local/lib
+
+SUNC++       = /usr/CC/CC
+SUNCXXINCPATH = /usr/CC/incl /usr/local/lib/g++-include
+SUNCXXLIBPATH = /usr/CC  /usr/local/lib
+
+SABERC++     = /home/apps/CenterLine/bin/CC
+SABERC++INCPATH=/home/apps/CenterLine/clc++/sparc-sunos4/incl
+SABERC++LIBPATH=/home/apps/CenterLine/sparc-sunos4/lib
+
+G++INCPATH    = /usr/local/lib/g++-include
+G++LIBPATH    = /usr/local/lib

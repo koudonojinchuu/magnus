@@ -1,0 +1,540 @@
+/* MODIFICATION
+** 4/7/94 add # to introduce a comments. 
+*/
+
+1. How to install standalone TC
+
+1.1 tc.tar.Z file
+	 Put tc.tar.Z file in your working directory. Use uncompress tc.tar.Z
+to get tarfile tc.tar.
+1.2 Extract files use
+		tar -xvf tc.tar
+   	Now the working directory contains the complete source of standalone TC. 
+1.3 To install standalone TC, use make tc tcin 
+"tc" is an executable standalone TC file that gets input from a file.
+"tcin" is an input file generator.
+
+2. Standalone TC user guide
+A complete input file for a coset enumeration could be:
+
+ENUMeration:a4
+GRoup generators:r,s;
+RELators:r2,s3,(rs)4;
+SUBGroup:h
+GENerators:;
+PARameters:
+         COMpact:0;
+         MAX Cosets (min,max,step):0;
+         CT factor:0;
+         RT factor:0;
+         TIme:0;
+         FIll factor (min,max,step):0;
+         NO. of relators in subgroup (min,max,step):0;
+         MEssages:0;
+         WOrkspace:200000;
+         DIagnostics:0;
+END
+
+In the above example, key characters in each line are shown by capital
+letters.  If a key is required its key characters should be present in
+capitals.  Then everything is ignored till a ":" which separates the
+key from the user's input.
+
+2.1 Enumeration name
+The key word "ENUM" introduces the following NAME as the name of 
+this enumeration. NAME is a string that must start with a letter or "(" 
+and be followed by letters, digits or "(", ")","*",",",";". 
+In above example: 
+	ENUMeration:a4
+"a4" is this enumeration name. 
+The default value is " ".
+
+2.2 Group generators
+   The key word "GR" introduces group generators. 
+A group generator may be represented by lowercase letters. In this case the
+group generators consist of one or more lowercase letters which are separated 
+by "," and end with ";". Subsequently capital letters may stand for the inverse 
+of lowercase letters, e.g., A for a^-1, B for b^-1, etc.
+In above example:
+	GRoup generators:r,s;
+there are two group generators "r" and "s".
+   Alternatively, a positive integer can be used as a count of the number of 
+generators, e.g.,
+	GRoup generators:5;
+indicates that there are five generators, designated 1,2,3,4,5.
+
+2.3 Group defining relators
+   The key word "REL" introduces group defining relators. The standalone 
+TC accepts various kinds of word representations. It accepts words in
+its generators, allowing * for multiplication, ^ for exponentiation and
+conjugation, and brackets for precedence specification. Round or square
+brackets may be used for commutation. In addition, if letter generators are 
+used, the multiplication * and the exponentiation ^ may be omitted, i.e.,
+"a3" is the same as "a^3", "ab" is the same as "a*b", and "[a,b]" is the
+same as "(a,b)".
+In above example:
+	RELators:r2,s3,(rs)3;
+There are three relators that are: rr, sss, rsrsrs.
+
+2.3.1 BNF of group relators and subgroup generators for letter generators
+
+relator definition ::= REL:<words>;
+subgroup generator definition ::= GEN:<words>;
+words ::= |<word>|<words>[,<word>]
+word  ::= <term>|<word>[[*]<term>]
+term  ::= <bterm>|<bterm>[[^]<integer>]|<bterm>^<bterm>
+bterm ::= <gen>|(<word>)|[<word>,<word>]|(<word>,<word>)
+integer ::= <digits>|-<digits>
+digits ::= <digit>|<digits>[<digit>]
+digit ::= 1|2|3|4|5|6|7|8|9|0
+gen   ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z  
+
+Note 1: words may be empty:
+		REL:;
+	   means there is no relators (i.e., the free group)
+		GEN:;
+	   means the trivial subgroup
+      2: bterm^-1 means the inverse of this bterm
+      3: [word1,word2] or (word1,word2) expands into 
+         word1^-1*word2^-1*word1*word2 
+      4. word1^word2 expands into word2^-1*word1*word2 
+
+2.4 Subgroup
+   The key word "SUBG" introduces the following NAME as the name of the
+subgroup.
+In above example:
+	SUBGroup:h
+"h" is the subgroup name.
+The subgroup name can not be longer than 50 characters.
+The default value of subgroup name is " ".
+
+2.5 Subgroup generators
+   The key word "GEN" introduces subgroup generators. The representation 
+of subgroup generators is the same as for group defining relators. 
+In above example:
+	GENerators:;
+means that this subgroup is trivial which is the default value.
+
+2.6 Parameters
+   There are various parameters which may be defined by users.
+The PARameter keyword is optional. Parameters are:
+
+2.6.1 Compaction 
+   The key word "COM" controls compaction of the coset table. The coset table 
+is compacted when a coset definition is required, there is no new coset 
+available, and provided the given percentage of coset table contains dead 
+cosets.
+For example:
+	COM:20;
+means compaction will occur only if 20% of the cosets are dead.
+The default value is "20". COM:0 means compact if any dead cosets
+exist at all.
+
+2.6.2 Max Cosets
+   The key word "MAX" defines the maximum number of active cosets the coset 
+table can have.
+	MAX:m1[,m2[,m3]];
+m1,m2 and m3 are positive integers, and m1<=m2.
+For example:
+	MAX:1000;
+It means that a maximum of 1000 cosets can be active at any instant 
+during the enumeration. On the other hand, the total number of cosets
+defined during the entire enumeration may considerably exceed 1000.
+   If you give two positive integers, 
+	MAX:m1,m2;
+standalone TC will loop through (m2-m1+1) enumerations in which Max Cosets 
+equals m1,m1+1,...,m2, sequentially.
+   If you give three positive integers,
+	MAX:m1,m2,m3;
+standalone TC will loop through (m2-m2+1)/m3 enumerations in which Max Cosets 
+equals m1,m1+m3,...,<=m2.
+The default value is "0", which means the maximum which will fit into the
+available memory.
+
+2.6.3 CT factor and RT factor
+
+  CT:n1[,n2[,n3]];
+n1,n2 and n3 are positive integers, and n1 should be no more than n2.
+   The key word "CT" specifies the CT-factor. Basically it specifies
+the maximum number of CT-method based coset definitions before switching
+to RT-method definitions (assuming RT-method definitions are enabled). 
+CT-method definitions basically fill rows of the coset table, subject to 
+preferred definition strategies.
+
+	RT:m1[,m2[,m3]];
+m1,m2 and m3 are positive integers, and m1 should be no more than m2.
+   The key word "RT" specifies the RT-factor. Basically it specifies
+the maximum number of rows to be applied to all of the relators using
+RT-method based coset definitions before switching to CT-method definitions 
+(assuming CT-method definitions are enabled). RT-method definitions basically 
+fill rows of the relator tables, subject to ensuring that each row
+is eventually filled.
+
+   These two parameters (CT and RT) cooperate together, and give various
+enumeration strategies, best described first by example. All of these
+cases describe what happens after the subgroup definition phase.
+
+For example:
+	CT:1000;
+	RT:10;
+This means that the enumeration will start by defining 1000 cosets 
+with CT-methods then ensure that the first 10 rows of the coset table 
+are complete using RT-methods, then define another 1000 cosets with CT-methods,
+then ensure that the next 10 rows of the coset table are complete using 
+RT-methods,....., until either the coset table is complete or no space remains.
+
+	CT:0;
+	RT:2000;
+This means that the enumeration will be a straight RT-method based. No
+CT-method definitions will be made. (Any nonzero for RT will suffice.)
+At this stage a CT-based lookahead is performed.  Then enumeration
+continues using RT-methods, except that a deduction queue is kept and
+lookahead is CT-based.
+
+	CT:100;	 
+	RT:0;
+This means that the enumeration will be a straight CT-method based. No
+RT-method definitions will be made after the subgroup definition phase. 
+(Any nonzero for CT will suffice.)
+
+	CT:0;
+	RT:0;
+This is the default strategy. The enumeration commences using RT-based
+methods, until completion or exhaustion of primary space (without any
+reuse of cosets). At this stage a CT-based lookahead is performed.
+Then enumeration continues using CT-methods. CT is reset to 1000 and
+RT to (500/total_relator_length).
+
+	CT:1000;
+	RT:-10;
+This means that the enumeration will start by defining 1000 cosets
+with CT-methods then ensure that the first 10 rows of the coset table
+are complete using RT-methods. After this it reverts to CT-methods
+for the rest of the enumeration. Thus "-" in the RT parameter specifies
+RT-method definitions at most once.
+
+The standalone TC can loop over these parameters too:
+	CT:1000,10000,1000;
+	RT:10,100,20;
+means do a sequence of enumerations with different pairs of CT and RT.
+In above definition the series of CT and RT pairs will be: 1000 10, 
+1000 20, ...,  1000 100, 2000 10, ..., 2000 100, 3000 10, ...., 10000 100. 
+
+
+2.6.4 Time 
+	TI:n;
+   The key word "TI:" specifies the maximum execution time in seconds.
+The default value is "0"  means no limit in time.
+
+2.6.5 Fill factor 
+   The key word "FI" specifies the fill factor, described in the ISSAC paper.
+	FI:n1[,n2[,n3]];
+Again you can loop over the fill factor. The default value is "0", which
+is converted in accord with the ISSAC paper to floor(5*(c+2)/4) (where there 
+are c columns in the coset table).
+
+2.6.6 Relators in subgroup 
+	NO:n1[,n2[,n3]];
+This specifies the number of relators to be included in the subgroup
+in an enumeration which is to start with CT-methods. The relators
+are taken in order. The standalone TC can loop over this parameter.
+The default value is "0", which means all relators. "-1" is used to
+specify no relators, otherwise the relator count is used.
+
+2.6.7 Diagnostics
+Diagnostic messages may be enable if the standalone TC is compiled
+with the diagnostic flag.
+	DI:[123456789];
+   The key word is "DI". The user can choose one or more numbers in the
+range 1..9 . Sample output lines follow the flags.
+1: CD ALIVE=   1000 MAX=   1000 TOTAL=   1000 KNR=      1 KNC=    337
+2: RD ALIVE=   2000 MAX=   2000 TOTAL=   2000 KNR=    154 KNC=    344
+3: RC ALIVE=   2072 MAX=   2074 TOTAL=   2074 KNR=    162 KNC=    344
+or CC ALIVE=   2660 MAX=   2661 TOTAL=   2661 KNR=      1 KNC=    911 
+4: CS ALIVE=   2074 MAX=   2074 TOTAL=   2074 KNR=    162 KNC=    344
+5: TL ALIVE=      5 MAX=  18424 TOTAL=  20000 KNR=      5 KNC=      1 
+6: AL ALIVE=      5 MAX=  18424 TOTAL=  20000 KNR=      5 KNC=      1
+7: **** RD 1*S=2 R [ss s] (this does not work with number generators)
+8: RD ALIVE=     10 MAX=     10 TOTAL=     10 KNR=      2 KNC=      1 HOLES=26%
+9: SG ALIVE=     21 MAX=     21 TOTAL=     21 KNR=      1 KNC=      1
+
+2.6.8 Message Level
+   The key word is "MESS".
+	MESS:n;
+"n" can be any integer except 1 and -1. Messages will be printed when 
+the number of active cosets increase or decrease by n cosets. 
+Negative numbers give more messages, for example:
+	Message level: -1000;
+In addition to outputting a message for every 1000 cosets, some 
+resource usage information is printed, for example:
+
+RD ALIVE=   2000 MAX=   2000 TOTAL=   2063 KNR=    183 KNC=      1
+et=0 ut=0.11 st=0.11 mrs=102 ars=133 rpf=0
+
+The first two letters tell the enumeration phases in which the message
+is printed out.
+RD  RT-method definition phase
+CD  CT-method definition phase
+SG  Subgroup phase
+LA  Lookahead phase
+TL  Table lookahead phase
+RC  Coincidence processing in RT-method phase
+CC  Coincidence processing in CT-method phase
+TC  Coincidence processing in table lookahead phase
+LC  Coincidence processing in normal lookahead phase
+NR  processing new relators 
+NS  processing new subgroup generators
+  et is the elapsed time of this run (in seconds).
+  ut is the user time used (in seconds).
+  st is the system time used (in seconds). 
+  mrs is the maximum resident set size (in  pages).
+  ars is the average resident set size (in  pages).
+  rpf is the page faults requiring physical I/O.
+
+The default value is "0".
+
+2.6.9 Workspace
+	WO:n[,r];
+   The key word "WO" specifies physical workspace in words.
+Thus:
+	WOrkspace:200000;
+specifies 200000 words.
+A previously available option is used to allow Mendelsohn style relator
+processing in the RT phase
+For example: 
+        Workspace:200000,r;
+the r makes all coset applications be done to all cyclic permutations
+of the (base) relator. It sometimes has a beneficial effect.
+
+"200000" is the default value.
+
+2.6.10 Sort
+   By default the standalone TC freely and cyclically reduces the relators,
+freely reduces subgroup generators, and sorts relators and subgroup generators
+in length increasing order. If you do not want this, you can switch off it by:
+	SORT:u;	
+(This is useful for forcing definitions to be made in a prespecified
+order, by introducing dummy subgroup generators.)
+WARNING: this area has bugs... don't use dummy relators here
+
+2.6.10 Continue
+   The key word "CONT" specifies a restart function, that is, the
+previous enumeration is to be continued. In principle, the user can change 
+any parts of an enumeration definition except the workspace, and
+continue on.  Usually users redefine parameters such as CT, RT, FIll factor, 
+ENUMeration name, SUBGroup name and MAX cosets, add new relators (RL), 
+add new subgroup generators (SG) etc, and resume the previous enumeration,
+built upon the existing coset table.
+
+2.6.11 Comments
+   A sharp sign (#) introduces a comment which ends at the end of 
+the line. Characters after # are ignored by tc.  A comment can  
+appear anywhere.
+
+2.6.12 End
+   The Key word "END" marks the end of an enumeration definition.
+When this key word is entered coset enumeration is commenced.
+
+2.7 Options
+
+   There are various options which can be used for pre-enumeration 
+processing or post-enumeration processing in the standalone TC. They are:
+
+2.7.1 Print Coset Table
+        PR:[-]n1[,n2[,n3]];
+   The key word is PR. This option prints out the coset table of
+the current enumeration.
+n1=0 prints all of the table.
+n1 > 0 prints the row of coset n1.
+n1 <= n2  prints out rows of coset n1 to coset n2 of the coset table.
+n1 <= n2 and n3 prints out rows of coset n1, n1+n3 ..., n2 of the coset table.
+"-" flag on nonzero n1 means print out the coset representatives as well.
+
+2.7.2 Add new relators
+   	RL:abc,cba;
+means add two new relators that are:
+	a*b*c   c*b*a
+
+2.7.3 Add new subgroup generators
+	SG:a, b2;
+means add two new subgroup generators:
+	a   b*b
+ 
+2.7.4 Delete relators
+	DR:[n1[,n2[,...]]];
+   DR is the key word. eg,
+	DR:1,3;	
+means delete the first and the third relators. 
+
+2.7.5 Delete subgroup generators
+	DS:[n1[,n2[,...]]];
+   DS is the key word. eg,
+	DS:2;
+means delete the second subgroup generator. 
+
+2.7.6 Save information of enumeration
+	SA
+will save the whole enumeration information into a file named after the 
+enumeration name plus a time suffix.
+
+For example, the enumeration name is t1 and the time is 13:30,
+the file name will be:
+	t1.13:30 
+In the case of SA, the subgroup name can not be longer than 40 characters.
+
+2.7.7 Restore an enumeration
+	RES:filename
+will recover the enumeration which is saved in the file filename.
+For example, recover the enumeration which is saved by above SA,
+	RES:t1.13:30
+
+2.7.8 Coset coincidence
+	CC:n;
+CC is the key word. This option prints out the coset representative of
+coset 'n' and adds it back into the subgroup and does the resulting 
+enumeration.
+ 
+2.7.9 Stabilizing cosets
+	SC:n;
+SC is the key word. This option prints out the stabilising cosets of 
+the subgroup.
+n > 0  print the first n stabilising cosets.
+n = 0  print all of the stabilising cosets plus their coset represetatives.
+n < 0  print the first n stabilising cosets plus their coset represetatives.
+ 
+2.7.10 Trace a word
+	TW:n,<word>;
+TW is the key word. This option traces 'word' through the coset table,
+starting at coset n if n > 0; when n < 0, trace the word with all 
+cosets and print which coset are not stabilized. (coset * word != coset)
+
+2.7.11 Permutation representation in cycles
+	CY
+CY is the key word. This option prints out the coset table in cycles
+
+2.7.12 Coset order option
+	OO:n;
+OO is the key word. This option finds a coset with order iabs(n) 
+mod the subgroup and print out its coset representative.
+if n < 0 all cosets of order iabs(n) are printed.
+if n == 0, print an ordered list of all orders found in the
+        coset table, mod the subgroup.
+
+2.7.13 Repeated coincidences
+	RC:[coset[,stop[,desire]]];
+RC is the key word. This option attempts to find nontrival subgroups
+with index a multiple of a desired index 'desire' by 
+repeatedly putting cosets coincident with coset 1 and observing 
+what happens. The first coset to be put coincident with coset 1
+is 'coset' and the previous coset to this coset is used if a
+favourable result doesn't occur and this process is repeated 
+until a favourable result occurs or else we reach coset 1 or 
+coset 'stop'.
+Note that at the end of this option the original coset table 
+will be current and if we wish to work in the coset table resulting
+from the final repeated coincidence with a suitable finite index then
+a CC option will have to be done using the last coset put coincidednt 
+with coset 1.
+'coset' 'stop' and 'desire' are integers.
+	RC:;
+is the default value and means that:
+coset = highest coset number in the coset table;
+stop  = 2;
+desire = any index;
+
+	RC:coset;
+means: stop  = 2; desire = any index;
+
+	RC:coset,stop;
+means:desire = any index;
+
+2.7.14 Print current enumeration status
+	SR
+The key word is SR. This option prints out the current subgroup 
+generators, group relators, index, maxcos and totcos.
+
+2.7.15 Test for normal closure
+	NC:[n];
+   The key word is NC. This option tests for normal closure. If 
+n is not 0, also try to construct the normal closure by adding a set
+of excluded conjugates to the subgroup.
+
+2.7.16 Alter the input file
+ 	AI:<filename>;
+   The key word is AI. This option closes the current input file
+and opens "filename" file as the input file. If the "filename"
+file couldn't be opened the input is then still read from the 
+current input file.
+
+Note: there is a special file ---stdin, for standard input, 
+connected to the keyboard. 
+
+	AI:s4;
+	...
+	AI:stdin;
+the first AI causes TC to stop reading the current input file 
+and start reading from s4; the second AI causes TC to close
+s4 and start reading from keyboard.
+
+2.7.17 Alter the output file
+  	AO:<filename>;
+   The key word is AO. This option closes the current output file
+and opens "filename" file as the output file. If the "filename"
+file couldn't be opened the output is then still put to the
+current output file.
+
+Note: there is a special file ---stdout, for standard output, 
+connected to the terminal.
+
+	AO:tem;
+	...
+	AO:stdout;
+the first AO causes TC to stop writing into the current output
+file and start writing into tem; the second AO causes TC
+to close tem and come back to terminal.  
+ 
+2.8 Interactive input file generator
+The program tcin will generate an input file suitable for the
+standalone TC. The input file is called tcintc.
+What you need to do is follow the menu and input data accordingly.
+
+2.9 Inheritance
+
+If you do not define some item, the standalone TC uses the one from
+the previous enumeration. Initially the standalone TC uses the 
+default value. There are two items which have no default values, they
+are "GRoup generators" and "RELators".
+
+3. Examples 
+
+ENUMeration:a4
+GRoup generators:r,s; # it has two generators.
+RELators:r^2, s ^ 3, ( rs) ^3;
+SUBGroup:h
+GENErators:;
+         COMpact:0;
+         MAX Cosets (min,max;step):0;
+         CT factor:0;
+         RT factor:0;
+         TIme:0;
+         FIll factor (min,max;step):0;
+         NO. of relators in subgroup (min,max;step):0;
+         MEssages:-2;
+         WOrkspace:200000;
+         DIagnostics:0;
+END
+   
+  The first enumeration is a4, its group relations are
+r^2,s^3,(rs)^3; use default CT and RT values, no execution time limit,
+print out a message every 2 cosets changed (increase or decrease).
+The # introduces a comment "it has two generators.".
+
+AO:out;
+ENUMeration:E1
+GRoup generators:3;
+RELators:-3*1*3*1^-2,-1*2*1*(-2)^2,-2*3*2*3^-2;
+SUBGroup:H
+GENErators:;
+End
+
+   

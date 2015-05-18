@@ -1,0 +1,58 @@
+Homology Project
+================
+
+These programs make use of the Homology C Library included in this
+distribution.
+
+The makefile
+============
+
+You may have to edit the makefile to suit your particular system.  The makefile
+is intially set up for use with full optimisation on the DEC cc compiler.
+To alter this, there are sections in the makefile that clearly show what
+things should be altered for other systems.  Read the comments in the
+makefile for details.
+
+Systems without a command line
+==============================
+
+The programs here are set up to use command line arguments in most cases.
+This is a problem on some systems (such as the Macintosh) which do not have
+a command line.  In these cases users can compile the source files to
+produce executables that will prompt and take information from standard
+input.
+
+There are 2 ways this can be done.
+
+1) The makefile provided includes a macro that will compile the programs
+to not use a command line interface.  This Macro is NO_CMD_LINE.  If
+your compiler system supports make files, you should edit the makefile
+and remove the comment '#' from the line:
+
+#NO_CMD_LINE = -DNO_CMD_LINE
+
+then run make.
+
+2) If your system does not support makefiles, then you must edit each source
+file and remove the C-style comments (/*...*/) from the line:
+
+/*#define NO_CMD_LINE */
+
+then compile the programs according to your system.
+
+Other things to Note:
+=====================
+
+The program 'calchom' is a csh script that will typically run under UNIX.
+As such, it does not provide for non-command-line environments.
+
+The programs 'calchom', 'chom' and 'chom_stats' use another program called
+'magma'.  This program may at this point only be available under UNIX.
+
+chom_stats may not compile on some systems that do not implement "difftime"
+in the time library (header "time.h") (although this is an ANSI C standard
+function).  If this is the case you may have to remove all references to
+chom_stats in the makefile and run make again, or edit the source for
+chom_stats.
+
+Jamie (3/11/94)

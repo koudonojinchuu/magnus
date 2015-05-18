@@ -1,0 +1,14 @@
+@@How this problem works
+
+\ni We first find the primary decomposition of the given group.
+Each of the generators occuring in the given word is then 
+re-expressed in terms of the new generators that have been
+obtained in the primary decomposition, leading to a representation
+of the given word in terms of the primary decomposition, i.e.,
+its primary form.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+

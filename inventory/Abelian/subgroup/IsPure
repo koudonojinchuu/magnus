@@ -1,0 +1,48 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	subgroup H 
+
+Other objects present:  group A
+
+Name in the menu:	Is H pure in A ?
+
+Problem type:		problem object
+
+Help file:		AbelianSGPurityProblem.help
+
+
+
+			     Algorithms:
+
+
+1. Compute abelian invariants of A
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of A
+
+2. Find the primary decomposition of A
+	
+   Links:
+
+        Click here to see the generators of the primary decomposition of A
+
+3. Compute abelian invariants of H
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of H
+
+4. For use of this problem
+

@@ -1,0 +1,33 @@
+.TH chom_stats 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBchom_stats \-
+Creates a script for use in \fImagma\fR to calculate Homology of a group
+for mappings from different dimensions.  Also produces statistical
+information, usually used for debugging of the homology library.
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBchom\fR [\fI-v\fR] \fIstart end inputfile\fR [\fIoutputfile\fR]
+
+.SH \fINOTE:
+The program is almost identical to \fIchom\fR, except that it creates a
+file "inputfile.stats" containing statistical information.
+
+This program is slower than \fIchom\fR because of the
+extra statistical information stored and tracked.  Generally you should use \fIchom\fR.
+
+See \fIchom\fR for details on options.
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+\fIchom(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (6/10/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

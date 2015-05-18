@@ -1,0 +1,55 @@
+Running RKBPackage with parameter 10
+Estimated no. of words of length 1: 4
+Estimated no. of words of length 2: 12
+Estimated no. of words of length 3: 21.12
+Estimated no. of words of length 4: 35.76
+Estimated no. of words of length 5: 61.44
+Estimated no. of words of length 6: 85.44
+Estimated no. of words of length 7: 149.76
+Estimated no. of words of length 8: 211.68
+Estimated no. of words of length 9: 363.84
+Estimated no. of words of length 10: 508.8
+Enter word to be reduced (terminated with a comma).
+a^4 rewrites using rkbp as a^4
+Enter word to be reduced (terminated with a comma).
+b^4 rewrites using rkbp as a^-2 b
+Enter word to be reduced (terminated with a comma).
+b^5 rewrites using rkbp as a^-2 b^2
+Enter word to be reduced (terminated with a comma).
+a b^4 rewrites using rkbp as a^-1 b
+Enter word to be reduced (terminated with a comma).
+a b a b^3 rewrites using rkbp as a b a^-1
+Enter word to be reduced (terminated with a comma).
+a b a b^4 rewrites using rkbp as a b a^-1 b
+Enter word to be reduced (terminated with a comma).
+a^10 rewrites using rkbp as a^10
+Enter word to be reduced (terminated with a comma).
+b^10 rewrites using rkbp as a^-6 b
+Enter word to be reduced (terminated with a comma).
+b^11 rewrites using rkbp as a^-6 b^2
+Enter word to be reduced (terminated with a comma).
+a b a b a b rewrites using rkbp as a b a b a b
+Enter word to be reduced (terminated with a comma).
+1
+Running RKBPackage with parameter 4
+Estimated no. of words of length 1: 2
+Estimated no. of words of length 2: 2
+Estimated no. of words of length 3: 2
+Estimated no. of words of length 4: 2
+Enter word to be reduced (terminated with a comma).
+x^4 rewrites using rkbp as x^4
+Enter word to be reduced (terminated with a comma).
+1
+Running RKBPackage with parameter 8
+Estimated no. of words of length 1: 2
+Estimated no. of words of length 2: 0.88
+Estimated no. of words of length 3: 0
+Estimated no. of words of length 4: 0
+Estimated no. of words of length 5: 0
+Estimated no. of words of length 6: 0
+Estimated no. of words of length 7: 0
+Estimated no. of words of length 8: 0
+Enter word to be reduced (terminated with a comma).
+b a rewrites using rkbp as a b
+Enter word to be reduced (terminated with a comma).
+1

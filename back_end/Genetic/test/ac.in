@@ -1,0 +1,47 @@
+#
+# Congiguration file for Andrews-Curtis conjecture
+#
+
+Generations : 1000000 
+
+# If 1 then the fitness value will squared,
+# otherwise 0
+
+UseFitnessScale : 0
+
+# Chance of crossover in %
+
+CrossoverChance : 85
+
+# Chance of crossover in %
+
+MutationChance : 95
+
+UseElittestSelection : 1
+
+PenaltyRate : 0
+
+# Type of crossover to be used 
+# For now should always be 1
+
+CrossoverType : 1
+
+# If 1 the sum of relators will be used as a fitness function.
+# If 0 the minimum length of a relator is used
+
+UseSumFitnessFunction : 0
+
+# If 1 Whitehead transformations are used, too
+
+UseWhitehead : 1
+
+# following are chances of different types of mutation
+# sum MUST be 100
+
+MutationAppendChance : 75
+
+MutationInsertChance : 5
+
+MutationDeleteChance : 15
+
+MutationChangeChance : 5

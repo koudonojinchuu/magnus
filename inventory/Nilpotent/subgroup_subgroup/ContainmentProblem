@@ -1,0 +1,37 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	subgroup H1, subgroup H2 
+
+Other objects present:	group G
+
+Name in the menu:	Does H1 contain H2 ?
+
+Problem type:		problem object
+
+Help file:		SGOfNGcontainSubgroupProblem.help
+
+
+			     Algorithms:
+
+
+1. Does H1 contains H2
+  // @am should be contain ?
+
+2. Compute a basis of the free preimage of H1
+
+
+
+
+
+

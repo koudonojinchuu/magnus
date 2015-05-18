@@ -1,0 +1,29 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	automorphism h
+
+Other objects present:  group A
+
+Name in the menu:	Find the inverse of h
+
+Problem type:		problem object
+
+Help file:		AbelianInverseAuto.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+

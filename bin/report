@@ -1,0 +1,428 @@
+#!/usr/local/bin/perl
+
+## Copyright (C) 1994 The New York Group Theory Cooperative
+## See magnus/doc/COPYRIGHT for the full notice.
+
+## Contents: report, the magnus project status summarizer.
+##
+## Principal Author: Roger Needham
+##
+## Status: Useable.
+##
+## Revision History:
+##
+## Next implementation steps:
+##
+
+# This reports on the following:
+# - The current directory structure of the project
+# - Who is doing what lately
+# - The programmer-reported status of each source and header file
+# - Source statistics
+# - The results of regression tests
+
+
+$user = `whoami`; chop $user;
+$magnus_root = &find_magnus_root();
+
+
+@lt = gmtime(time);
+$mm = substr("0".($lt[4]+1),-2);
+$dd = substr("0".$lt[3],-2);
+$yy = $lt[5];
+
+$HH = substr("0".$lt[2],-2);
+$MM = substr("0".$lt[1],-2);
+
+print "\n\n";
+print "####################################################################\n";
+print "#                                                                  #\n";
+print "#         Magnus summary report $mm/$dd/$yy $HH:$MM GMT";
+print "                 #\n";
+print "#                                                                  #\n";
+print "####################################################################\n";
+print "\n\n";
+
+&menu;
+exit;
+
+
+## Subroutines:
+
+
+sub menu {
+  local($choices, $i, $option);
+
+  print "  Choose one or more options (default is all):\n\n";
+  print "   1) Display the current directory structure\n";
+  print "   2) Show status of each source and header file\n";
+  print "   3) Compute source statistics\n";
+  print "   4) Run regression tests\n";
+  print "\n  ? ";
+
+  $choices = <STDIN>;
+  chop $choices;
+
+  if ( $choices eq "" ) { $choices = "1234"; }
+
+  $i = 0;
+  while ( $i < length($choices) ) {
+    $option = substr($choices, $i, 1);
+    if ( $option eq "1" ) { &directory_structure; }
+    if ( $option eq "2" ) { &source_status; }
+    if ( $option eq "3" ) { &statistics; }
+    if ( $option eq "4" ) { &regression_tests; }
+    $i++;
+  }
+  print "\n\nDone.\n\n";
+}
+
+
+sub directory_structure {
+
+  print "\n\n";
+  print " ------------------------------------------------------------------ \n";
+  print "|                                                                  |\n";
+  print "|           Directory structure                                    |\n";
+  print "|                                                                  |\n";
+  print " ------------------------------------------------------------------ \n";
+  print "\n\n";
+
+  system("$magnus_root/bin/dtree");
+}
+
+
+sub source_status {
+  local($i, $name, $status);
+
+  print "\n\n";
+  print " ------------------------------------------------------------------ \n";
+  print "|                                                                  |\n";
+  print "|    Programmer-reported status of each source and header file     |\n";
+  print "|                                                                  |\n";
+  print " ------------------------------------------------------------------ \n";
+  print "\n\n";
+
+  open( FIND, "/bin/find $magnus_root -type f -print |")
+    || die "\n\nCouldn't run /bin/find $magnus_root -type f -print\n";
+
+  while ($name = <FIND>) {
+    chop $name;
+
+    if ( $name =~ /,v$|~$|^#.*#$/ ) { next; }         # To skip execs
+    if ( !($name =~ m:/README$|/Makefile$|\.([Chc]|mk|texi?|in|tcl)$:) &&
+         !((-x $name) && (-T $name)) ) { next; }
+
+    print " $name\n";
+  
+    if ( !open(FILE, $name) ) { print "** Couldn't open!\n"; next; }
+    $i = 0;
+    $status = "";
+    while(<FILE>) {
+      if ( /...Status:/ ) {
+        $status = substr($_,3);
+        last;
+      }
+      if ( ++$i > 99 ) { last; }
+    }
+    close(FILE);
+    if ( $status eq "" ) {
+      print " (no status line found)\n\n";
+    } else {
+      print " $status\n";
+    }
+  }
+  close(FIND);
+}
+
+
+sub statistics {
+  local($lc, $cc, $name);
+  local($lc_doc)         = 0;
+  local($cc_doc)         = 0;
+
+  local($lc_total)       = 0;
+  local($lc_front_end)   = 0;
+  local($lc_back_end)    = 0;
+  local($lc_black_boxes) = 0;
+  local($lc_experiments) = 0;
+  local($lc_submissions) = 0;
+  local($lc_legacy)      = 0;
+  local($lc_bin)         = 0;
+
+  local($fc_total)  = 0;
+  local($fc_header) = 0;
+  local($fc_source) = 0;
+  local($fc_make)   = 0;
+  local($fc_script) = 0;
+  local($fc_readme) = 0;
+  local($fc_tex)    = 0;
+  local($fc_config) = 0;
+  local($fc_tcl)    = 0;
+
+  print "\n\n";
+  print " ------------------------------------------------------------------ \n";
+  print "|                                                                  |\n";
+  print "|    Source statistics                                             |\n";
+  print "|                                                                  |\n";
+  print " ------------------------------------------------------------------ \n";
+  print "\n\n";
+
+  open( FIND, "/bin/find $magnus_root -type f -print |")
+    || die "\n\nCouldn't run /bin/find $magnus_root -type f -print\n";
+
+  while ($name = <FIND>) {
+    chop $name;
+
+    if ( $name =~ /,v$|~$|^#.*#$/ )         { next; }         # To skip execs
+    if ( $name =~ m:\.h$: )                 { ++$fc_header; }
+    elsif ( $name =~ m:\.[Cc]$: )           { ++$fc_source; }
+    elsif ( $name =~ m:\.mk$|/Makefile$: )  { ++$fc_make; }
+    elsif ( $name =~ m:/README$: )          { ++$fc_readme; }
+    elsif ( $name =~ m:\.tex$|\.texi$: )    { ++$fc_tex; }
+    elsif ( $name =~ m:\.in$: )             { ++$fc_config; }
+    elsif ( $name =~ m:\.tcl$: )            { ++$fc_tcl; }
+    elsif ((-x $name) && (-T $name))        { ++$fc_script; }
+    else                                    { next; }
+
+    if ( !open( WC, "wc $name |" ) ) {
+      print "\n** couldn't run wc $name\n";
+      next;
+    } elsif ( <WC> =~ /([0-9]+)\s*([0-9]+)\s*([0-9]+)/ ) {
+      $lc = $1;
+      $cc = $3;
+      close(WC);
+    }
+
+    if ( $name =~ /\.tex$|\.texi$|README/ ) {
+      $lc_doc += $lc;
+      $cc_doc += $cc;
+    } else {
+      if ( $name =~ m:/front_end/: )      { $lc_front_end += $lc; }
+      elsif ( $name =~ m:/black_boxes/: ) { $lc_black_boxes += $lc; }
+      elsif ( $name =~ m:/back_end/: )    { $lc_back_end += $lc; }
+      elsif ( $name =~ m:/experiments/: ) { $lc_experiments += $lc; }
+      elsif ( $name =~ m:/submissions/: ) { $lc_submissions += $lc; }
+      elsif ( $name =~ m:/legacy/: )      { $lc_legacy += $lc; }
+      elsif ((-x $name) && (-T $name))    { $lc_bin += $lc; }
+      $lc_total += $lc;
+      $cc_total += $cc;
+    }
+  }
+
+  close(FIND);
+
+  print "\n Source code line counts:\n\n";
+  printf "  %6d  %s\n", $lc_front_end, "front end";
+  printf "  %6d  %s\n", $lc_back_end, "back end";
+  printf "  %6d  %s\n", $lc_black_boxes, "black boxes";
+  printf "  %6d  %s\n", $lc_experiments, "experiments";
+  printf "  %6d  %s\n", $lc_submissions, "submissions";
+  printf "  %6d  %s\n", $lc_legacy, "legacy";
+  printf "  %6d  %s\n", $lc_bin, "script";
+  printf "  %6d  %s\n", $lc_total, "total";
+
+  $cc_total = $cc_total / 1024;
+  $cc_total =~ /^([0-9]+)\.([0-9]+)$/;
+  $cc_total = $1;
+
+  print "\n Total source: $cc_total";
+  print "K\n";
+
+  $cc_doc = $cc_doc / 1024;
+  $cc_doc =~ /^([0-9]+)\.([0-9]+)$/;
+  $cc_doc = $1;
+  print "\n Documentation: $lc_doc lines, for $cc_doc";
+  print "K\n";
+
+  $fc_total = $fc_header + $fc_source + $fc_make + $fc_script +
+              $fc_readme + $fc_tex + $fc_config + $fc_tcl;
+
+  print "\n File counts:\n\n";
+  printf "  %4d  %s\n", $fc_header, "header";
+  printf "  %4d  %s\n", $fc_source, "source";
+  printf "  %4d  %s\n", $fc_make, "make";
+  printf "  %4d  %s\n", $fc_script, "script";
+  printf "  %4d  %s\n", $fc_readme, "readme";
+  printf "  %4d  %s\n", $fc_tex, "TeX";
+  printf "  %4d  %s\n", $fc_config, "configuration";
+  printf "  %4d  %s\n", $fc_tcl, "Tcl";
+  printf "  %4d  %s\n", $fc_total, "total";
+}
+
+
+#             header  source  make  script  readme  TeX  config  Tcl  total
+#front_end
+#back_end
+#black_boxes
+#experiments
+#submissions
+#legacy
+#script
+#total
+
+
+
+sub regression_tests {
+
+  print "\n\n";
+  print " ------------------------------------------------------------------ \n";
+  print "|                                                                  |\n";
+  print "|           Results of regression tests                            |\n";
+  print "|                                                                  |\n";
+  print " ------------------------------------------------------------------ \n";
+  print "\n\n";
+
+
+  $bad_count = 0;
+  $high_level_bad_count = 0;
+  $compile_error_count = 0;
+  $crash_count = 0;
+
+  &regression_test("$magnus_root/back_end/Elt", "test-Word");
+  &regression_test("$magnus_root/back_end/general", "test-Associations");
+  &regression_test("$magnus_root/back_end/general", "test-List");
+  &regression_test("$magnus_root/back_end/general", "test-Set");
+  &regression_test("$magnus_root/back_end/general", "test-Vector");
+
+  &high_level_test("$magnus_root/back_end/FSA", "test-FSA");
+
+  &high_level_test("$magnus_root/back_end/KB", "test-Diff");
+  &high_level_test("$magnus_root/back_end/KB", "test-GenMult");
+  &high_level_test("$magnus_root/back_end/KB", "test-KBM");
+  &high_level_test("$magnus_root/back_end/KB", "test-KBmag");
+  &high_level_test("$magnus_root/back_end/KB", "test-RKBP");
+
+
+
+  print "\nSummary:\n\n";
+
+  if ( ($bad_count == 0) &&
+       ($compile_error_count == 0) &&
+       ($crash_count == 0) &&
+       ($high_level_bad_count == 0 ) ) {
+    print "  All regression tests pass :-)\n";
+  } else {
+    if ( $bad_count != 0 ) {
+      print "  $bad_count regression tests failed in total :-(\n";
+    }
+    if ( $high_level_bad_count != 0 ) {
+      print "  $high_level_bad_count high-level tests failed in total :-(\n";
+    }
+    if ( $compile_error_count != 0 ) {
+      print "  $compile_error_count tests failed to compile >:-[\n";
+    }
+    if ( $crash_count != 0 ) {
+      print "  $crash_count tests crashed and burned :-[\n";
+    }
+  }
+}
+
+
+sub make_test_exec {
+  local($component_dir, $test_name) = @_;
+  local($problem_p) = 0;
+
+  print "\n   (making $component_dir/test/bin/$test_name...)\n";
+
+  if ( !open(COMPILE, "cd $component_dir; make -s $test_name 2>&1 |") ) {
+    print "\n** report: problem opening pipe from make command.\n\n";
+    ++$compile_error_count;
+    return 0;
+  }
+
+  # Check for compiler errors
+
+  while ( <COMPILE> ) {
+    if ( /error/ || /Error/ ) {
+      print "\n** report: test program failed to compile:\n\n$_\n\n";
+      $problem_p = 1;
+    }
+    elsif ( /Stop.$/ ) {
+      print "\n** report: there was a make error:\n\n$_\n\n";
+      $problem_p = 1;
+    }
+    elsif ( /Undefined symbol/ ) {
+      print "\n** report: there was a link error:\n\n$_\n\n";
+      $problem_p = 1;
+    }
+    if ( $problem_p ) {
+      close(COMPILE);
+      ++$compile_error_count;
+      return 0;
+    }
+  }
+  close(COMPILE);
+  1
+}
+
+
+sub regression_test {
+  local($component_dir, $test_name) = @_;
+  local($finished_p) = 0;
+
+  if ( !&make_test_exec($component_dir, $test_name) ) { return; }
+
+  if ( !open( TEST, "$component_dir/test/bin/$test_name |" ) ) {
+    print "\n** report: couldn't run $component_dir/test/bin/$test_name\n";
+    return;
+  }
+  while ( <TEST> ) {
+    print;
+    if ( /([1-9][0-9]*) tests failed/ ) {
+      $bad_count += $1;
+      $finished_p = 1;
+    } elsif ( /^All tests pass.$/ ) { $finished_p = 1; }
+  }
+  close(TEST);
+
+  if ( !$finished_p ) {
+    print "\n** report: test program exited abnormally.";
+    ++$crash_count;
+  }
+  
+  print "\n\n";
+}
+
+
+sub high_level_test {
+  local($component_dir, $test_name) = @_;
+  local($dir) = "$component_dir/test";
+
+  if ( !&make_test_exec($component_dir, $test_name) ) { return; }
+
+  if ( !open(DIFF, "$dir/bin/$test_name < $dir/$test_name.data 2>&1 | diff - $dir/$test_name.mastertestout 2>&1 |") ) {
+    print "\n** report: couldn't run $component_dir/test/bin/$test_name\n";
+    return;
+  }
+  if ( <DIFF> ) {
+    print "\nHigh-level test failed.\n\n";
+    $high_level_bad_count += 1;
+  } else {
+    print "\nHigh-level test passed.\n\n";
+  }
+  close(DIFF);
+}
+
+
+sub find_magnus_root {
+  local($root_index, $pos, $cwd);
+  $cwd = `pwd`; chop $cwd;
+  $root_index = index($cwd, "magnus");
+  if ( $root_index == -1 ) {
+    print "Recoverable error: the current directory,\n  $cwd\n";
+    print "is not contained in a magnus root directory, i.e. one\n";
+    print "with name containing the substring \"magnus\"\n";
+    exit;
+  }
+  # Find the rightmost occurrence of "magnus"
+  $pos = $root_index;
+  while ( ($pos = index($cwd, "magnus", ++$pos)) != -1 ) {
+    $root_index = $pos;
+  }
+  if ( ($pos = index($cwd, "/", $root_index)) != -1 ) {
+    return substr($cwd, 0, $pos);
+  } else {
+    return $cwd;
+  }
+}

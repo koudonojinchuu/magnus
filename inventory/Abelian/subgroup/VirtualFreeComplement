@@ -1,0 +1,41 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	subgroup H 
+
+Other objects present:  group A
+
+Name in the menu:	Compute a virtual free complement of H in A
+
+Problem type:		problem object
+
+Help file:		virtualFreeComp.help
+
+
+
+			     Algorithms:
+
+
+1. Compute abelian invariants of A
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of A
+
+2. Find the primary decomposition of A
+	
+   Links:
+
+        Click here to see the generators of the primary decomposition of A
+
+

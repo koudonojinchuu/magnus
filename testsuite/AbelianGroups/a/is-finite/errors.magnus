@@ -1,0 +1,6 @@
+FrontEnd --> BackEnd :  -2 0 A1 < a ;  >
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -1 2 0 A1
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -2 25 0
+FrontEnd --> BackEnd :  -1 0

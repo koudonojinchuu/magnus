@@ -1,0 +1,43 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		nilpotent group 
+
+Objects highlighted:	word W1, word W2 
+
+Other objects present:	group G
+
+Name in the menu:	Is W1 = W2 ?
+
+Problem type:		problem object
+
+Help file:		AreEltsEqual.help
+
+
+			     Algorithms:
+
+
+1. For the use of this problem
+  
+2. Compute abelian invariants of G
+  
+3. Compute the lower central quotients for G
+  
+4. Solve using lower central quotients of G
+  
+5. Compute a basis of G
+  
+6. Solve using relation subgroup of G
+
+
+
+
+

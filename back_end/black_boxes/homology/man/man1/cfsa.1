@@ -1,0 +1,79 @@
+.TH cfsa 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+.B cfsa
+\- Creates a \fIfinite state automata\fR for a complete rewriting system.
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBcfsa\fR [\fI\-inv\fR] [\fIinputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP \-inv 15
+automatically inserts inverse rules for the group.  The default
+is to not do this.
+
+.IP inputfile
+the groups complete rewriting system that conforms to the Geometry Group Standard
+format, containing a list of generators and relators.  The default is to read this information from \fIstandard input\fR.
+
+
+.SH \fIOutput
+
+The output is a file with the same name as the input file, with extension
+.I ".fsa"
+to its name.
+If no input file is given, output is to \fIstandard output\fR.
+The output is in the same form as the output from \fIkbeqn\fR.
+
+
+.SH \fIUsage
+
+converts a rewriting system to it's FSA for use with the Homology
+programs.  Input should conform to the Geometry Group standard format,
+and should contain a list of generators and relators.  The output is in the
+same form as the output from \fIkbeqn\fR.
+
+It will \fInot\fR automatically put inverse relators in unless instructed by using the
+\fI\-inv\fR option.
+
+
+
+.SH \fIExample
+
+Suppose we have a groups rewriting system in a file "grpA".  We want
+to produce a FSA for the group, in the same format as that resulting
+from \fIkbeqn\fR.  We do this by:
+
+        cfsa grpA
+
+The file "grpA.fsa" results.
+
+
+
+.SH \fIBugs
+
+The algorithm automatically adds inverse generators (not relators), with
+or without the \fI\-inv\fR option.
+
+The program will crash if a group with a large number of generators is
+used.  It seems to handle to at least 50 though.
+
+.SH \fISee also
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+
+.SH \fIAuthor
+
+This is basically a hack of Derek's code (from
+.I kbeqn
+) with Jamie's
+modifications!  The code is pretty awful, but I can't be blamed
+for this one as I cut and pasted other people's.
+
+Jamie P. Curmi (7/6/94)

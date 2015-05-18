@@ -1,0 +1,5 @@
+@@How this problem works
+
+\ni The given group is decomposed into a direct product of
+finitely many cyclic groups. The number of infinite cyclic
+groups is the torsion-free rank of the group.

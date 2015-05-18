@@ -1,0 +1,11 @@
+@@How this problem works
+
+
+\ni In order to determine whether the elements represented by two
+words are equal, we compute their canonical decompositions. The
+elements are equal if and only if their canonical decompositions
+coincide. For a general discussion see 
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+

@@ -1,0 +1,25 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free group
+
+Objects highlighted:	group F
+
+Name in the menu:	Another Presentation of F
+
+Problem type:		fast problem
+
+Help file:		none
+
+// @dp This algorithm prints a message:
+//
+//     The current version of the Tietze Trasformation Package 
+//     does not allow us to have a free generator in a group presentation.

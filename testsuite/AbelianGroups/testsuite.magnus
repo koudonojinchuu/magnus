@@ -1,0 +1,17 @@
+# Ordered list of tests in test suite. Add as appropriate
+
+
+# 
+a
+
+# 
+a-a7
+
+# 
+a-b-b7
+
+# 
+a-b--a=B
+
+# 
+a-b--Bab=ab-Aba=ab

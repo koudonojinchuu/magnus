@@ -1,0 +1,49 @@
+@@How this problem works
+@@FP
+
+@@ABELIAN
+
+\ni In order to see if a map from the generators of any
+group given by generators and defining relations extends 
+to a homomorphism, we check to see if the images of the 
+defining relators are equal to 1 in the target
+group. If they are, the map extends to a homomorphism. If not,
+the map does not extend to a homomorphism.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@
+
+@@FREE_NILPOTENT
+
+\ni As usual a map of the generators of a group given by a finite 
+presentation defines a homomorphism if and only if the images of 
+the generators satisfy the given given defining relations. 
+Consequently, every map from the generators of a free nilpotent 
+group of class c into a nilpotent group of class at most c extends 
+to a homomorphism. In particular, every map of the generators 
+of such a group into itself extends to a homomorphism.
+
+@@NILPOTENT
+
+\ni As usual a map of the generators of a group given by a finite 
+presentation defines a homomorphism if and only if the images of 
+the generators satisfy the given given defining relations. If the
+target group has a solvable word problem, in particular if it is
+a finitely generated nilpotent group, it is possible to
+decide if the given map extends to a homomorphism.
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+@@How this problem works
+
+There is no documentation for this problem yet.
+

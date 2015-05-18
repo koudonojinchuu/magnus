@@ -1,0 +1,57 @@
+.TH cboundn 1 "Computational Tools For Homology of Groups Project"
+.SH \fIName
+\fBcboundn \-
+Calculates the boundary of an n-tuple formed by the directed graph of the
+supplied rewriting system starting at that tuple.
+
+
+
+
+
+.SH \fISyntax
+.IP "" 15
+\fBcboundn\fR [\fI-leftaction | -trivial\fR] [\fIinputfile\fR]
+
+
+
+
+.SH \fIOptions
+.IP -leftaction 15
+Left actions are retained in boundary calculations.
+.IP -trivial 15
+(Default) Left actions are regarded as trivial and not retained.
+.IP inputfile
+the groups complete rewriting system file that conforms to the Geometry Group Standard
+format (including finite state automata), and in particular should be of the form outputted by
+\fIkbeqn\fR or \fIcfsa\fR - that is, we can just use the output from \fIkbeqn\fR as
+the input to our program.
+If no file name is given \fIStandard Output\fR is used.
+
+
+
+.SH \fIUsage
+
+The program will ask for a word, from which it will calculate the boundary of
+the directed graph of the supplied rewriting system, starting at this word.
+The program is used primarily for testing of the library, but is a 
+relatively short demonstration of a program making use of the Homology C
+library.  It does, however, have many limitations (see \fINotes\fR below).
+
+.SH \fINotes
+
+The program will use the first \fIn\fR rewriting rules encountered from the
+left in its calculations.  The current implementation does not allow
+for users to choose which rewriting rules to use.  It determines the dimension
+\fIn\fR based on the number of rewriting rules it finds.
+
+
+.SH \fISee also
+\fIcfsa(1)\fR
+\fIkbeqn(1)\fR
+\fIkbeqn2(1)\fR
+\fIcbound(1)\fR
+
+.SH \fIAuthor
+Jamie P. Curmi (4/11/94)
+
+for the \fIComputational Tools for Homolgy of Groups\fR Project

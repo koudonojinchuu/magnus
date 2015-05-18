@@ -1,0 +1,28 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free group
+
+Objects highlighted:	homomorphism h
+
+Other objects present:	group F
+
+//Name in the menu:	Find Whitehead decomposition of h
+
+Name in the menu:	Express h as a product of Whitehead automorphisms
+
+Problem type:		fast problem
+
+Help file:		none
+
+
+   Links:
+	Click here to see the Whitehead decomposition of the automorpisms h.

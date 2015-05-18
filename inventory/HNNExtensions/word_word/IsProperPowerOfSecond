@@ -1,0 +1,23 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Pechkin
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		HNN-extension of free group
+
+Objects highlighted:	word W1, word W2
+
+Other objects present:	group G
+
+Name in the menu:	Is W1 a proper power of W2 ?
+			Is W2 a proper power of W1 ?
+
+Problem type:		fast problem
+
+Help file:		none

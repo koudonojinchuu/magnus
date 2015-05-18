@@ -1,0 +1,10 @@
+SIZE=87
+data 'STR#' (129, "Memory Warnings") {
+	$"0001 544D 656D 6F72 7920 6973 2072 756E"            /* ..TMemory is run */
+	$"6E69 6E67 206C 6F77 2E20 506C 6561 7365"            /* ning low. Please */
+	$"2063 6C6F 7365 2077 696E 646F 7773 2061"            /*  close windows a */
+	$"6E64 2073 6176 6520 646F 6375 6D65 6E74"            /* nd save document */
+	$"7320 746F 2061 766F 6964 206C 6F73 696E"            /* s to avoid losin */
+	$"6720 6461 7461 2E"                                  /* g data. */
+};
+

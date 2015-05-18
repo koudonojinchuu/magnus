@@ -1,0 +1,16 @@
+@@How this problem works
+
+@@ABELIAN
+
+\ni Let { u_1 , ... , u_k } and { v_1 , ... , v_n } be generators
+for two subgroups. We take preimages, so we add the relators to
+these tuples. Any element of intersection can be obtained as a
+word  u_1^x_1 ... u_k^x_k  or  v_1^y_1 ... v_n^y_n where x_i and
+y_j are such that  u_1^x_1 ... u_k^x_k = v_1^y_1 ... v_n^y_n.
+
+We find all solutions for this equation and then using the basic
+solutions x_1 , ... , x_k we have the set of left parts 
+u_1^x_1 ... u_k^x_k. This set generates intersection of the
+subgroups.
+
+\ni See also @General_abelian_groups@General_abelian_groups::General discussion@ for a general discussion of abelian groups.

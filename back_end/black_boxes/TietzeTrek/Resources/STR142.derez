@@ -1,0 +1,12 @@
+SIZE=120
+data 'STR#' (142, "static strs") {
+	$"0008 0D73 6574 7469 6E67 2075 702E 2E2E"            /* ..Âsetting up... */
+	$"0646 696E 6974 650A 636C 6F6E 696E 672E"            /* .Finite.cloning. */
+	$"2E2E 0A67 726F 7769 6E67 2E2E 2E0A 666F"            /* ...growing....fo */
+	$"6C64 696E 672E 2E2E 0E73 7761 7070 6564"            /* lding....swapped */
+	$"206F 7574 2E2E 2E19 2F20 6F72 6967 696E"            /*  out..../ origin */
+	$"616C 204E 6965 6C73 656E 2062 6173 6973"            /* al Nielsen basis */
+	$"3A16 2F20 6164 6465 6420 7472 6976 6961"            /* :./ added trivia */
+	$"6C20 776F 7264 733A"                                /* l words: */
+};
+

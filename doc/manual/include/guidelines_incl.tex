@@ -1,0 +1,713 @@
+%% This is AMSLaTeX source, included by guidelines.tex.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Project Guidelines}
+
+%%--------------------------------------------------------------------
+\section{Organisation of Code}
+
+It is essential to bear in mind that your code will have to be read
+and understood by other people, at first to be properly integrated into
+the system, and possibly later to be modified, extended, or otherwise
+adapted.
+
+Therefore, one should strive to keep the implementation as modular as
+possible with clearly defined interfaces. Beyond this general
+principle, the following practices are important.
+
+%%....................................................................
+\subsection{Naming conventions}
+
+Public identifiers should be as self-documenting as possible.  This is a
+matter of taste and judgement: we considered \code{FPGroup} to be too
+terse, writing \code{FinitelyPresentedGroup} instead, but this made
+source lines too long to read.
+
+Our spelling conventions for {\em public} identifiers are:
+
+\begin{itemize}
+\item
+Type and class names start with upper case.
+\item
+Names of constants are in all capitals.
+\item
+Member and method names start with lower case, but significant subwords
+start with upper case. No underscores.
+\end{itemize}
+
+Local identifiers need not be as descriptive as public ones, but
+should still convey their meaning and use.
+
+%%....................................................................
+\subsection{Files and Banners}
+
+The program source is broken into files \code{*.[hC]}, generally
+containing the implementation of a single class, with possibly in
+addition closely related local servant classes.
+
+Each file starts with a banner, containing the following mandatory
+parts: revision identification and number, brief description of the
+contents, principal author, status, and history of implementation and
+modifications with authors. Blanks are in 
+\file{magnus/doc/templates/Blank.[Ch]}.
+
+Additionally, you may want to add, according to the circumstances,
+other entries such as literature references, testing report summary,
+implementation notes, next implementation steps, and bugs (suspected
+and known).
+
+%%....................................................................
+\subsection{Comments}
+
+\begin{itemize}
+\item
+Comment each data member and method of a class, in the header file.
+Say what it is used for or what it does. Detailed information which is
+not of interest to the user of the class goes in the source file or
+the reference manual.
+\item
+Comment your source code so that those with a sufficient background in
+infinite group theory and C++ can understand it as though they wrote
+it.
+\item
+Some comments are not explanatory, but are meant to flag lines which are
+questionable, or are `to do' reminders, etc. Mark these with a comment
+containing `@' followed by your initials. That way we know who wrote
+it, and no one has to sift through all comments to find problems; they
+can be \code{grep}-ed.
+
+Do not use @-marked comments purely for traceability, e.g., to mark
+code you've added and are sure of. Those comments belong in the
+revision history.
+
+When you alter code written by someone else, you can address your
+comments on the change to that person with, e.g., {\tt @rn:@stc}.
+
+\end{itemize}
+
+%%....................................................................
+\subsection{Writing Up the Documentation to Your Code}
+
+Apart from the comments and general structure of your code, the
+quality of the documentation you write is of crucial importance,
+because to begin with your code will have to be integrated into the
+\magnus\ system, and later it may become necessary or desirable to
+modify or extend it or localise later bugs.
+
+Roughly, your documentation for each part of your implementation
+should be divided into two parts: a general part and a reference part.
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{The General Part}
+
+Here you discuss what other implementers need and want to know about
+your code in order to use it, without necessarily understanding its
+inner workings.
+
+\begin{quote}
+The worst possible documentation to create for an object-oriented
+system is a stand-alone description of the semantics of each method on
+a class-by-class basis. This approach tends to generate a great deal
+of useless documentation that no one reads or trusts, and fails to
+document the more important architectural issues that transcend
+individual classes, namely, the collaborations among classes and
+objects. It is far better to document these higher-level structures,
+which can be expressed in diagrams of the notation but have no direct
+linguistic expression in the programming language, and then refer
+developers to the interfaces of certain important classes for tactical
+details.
+\footnote{Grady Booch, ``Object-Oriented Analysis and Design'', 2nd ed.}
+\end{quote}
+
+Thus you might give
+
+	\begin{itemize}
+	\item
+		A description of the public classes (those intended for
+		further use) and their features (such as for instance
+		special efficiency and memory considerations);
+	\item
+		Important parts of the public class interfaces.
+	\item
+        Diagrams of derivation and owns-uses relationships among
+        classes.
+	\end{itemize}
+
+Booch diagrams may be appropriate for the last. There is a simple
+example in \S\ref{user_classes}; several others are in the reference
+manual. Here is a brief list of the notation:
+
+\vspace{20pt}
+
+\epsfbox{ps/booch.ps}
+
+\vspace{20pt}
+
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{The Reference Part}
+
+Here you discuss the inner workings of your code, i.e. what people
+need and want to know to understand and possibly modify or extend your
+code in any way.  This may include:
+
+	\begin{itemize}
+	\item
+		implementation ideas, principles, and techniques;
+	\item
+		algorithms;
+	\item
+		altenatives to implementation decisions;
+	\item
+		possible extensions;
+	\item
+		any other information as appropriate.
+	\end{itemize}
+
+
+%%--------------------------------------------------------------------
+\section{Special Restrictions}
+
+This section explains miscellaneous requirements and restrictions of
+the system.
+
+\begin{itemize}
+\item
+The final version of your code must {\em never} write to \code{cout}.
+The session manager uses \code{cout} for communication with the front
+end, and would be confused by any unofficial chatter.  This
+restriction does not apply to test programs.
+
+\item
+Your debugging code, compiled conditionally on \code{DEBUG}, may write
+to \code{cerr}, but all error messages and warnings intended for the
+production version should be passed to the global functions
+\code{error(char*)} and \code{warn(char*)}, resp.
+\end{itemize}
+
+
+%%--------------------------------------------------------------------
+\section{Error Checking}
+
+%%....................................................................
+\subsection{Levels of Error Checking: \code{SAFETY} switch}
+
+There are currently 3 levels of run-time error checking which can be
+switched with the compiler flag \code{SAFETY}, defined in
+\file{magnus/back\_end/global/global.h}.
+
+The values of \code{SAFETY} currently defined mean:
+
+\begin{enumerate}
+\setcounter{enumi}{0}
+
+\item
+Maximal efficiency and speed, no error checking at all;
+`garbage in --- garbage out'.
+
+\item
+Simple, inexpensive (fast) error checking, such as array bounds.
+
+\item
+More systematic and thorough error checking, tending among things to also
+capture semantic errors.
+
+\end{enumerate}
+
+We do not expect level 2 to catch all possible errors.
+
+Trap class interface errors quietly wherever reasonable. For example,
+if an integer parameter \code{size} which suggests an initial hash table
+size should be of the form $2^{n-1}$, but is not, just use the least such
+integer greater than \code{size}.
+
+%%....................................................................
+\subsection{Dealing with Errors}
+
+
+\magnus\ will doubtless migrate to exception generation and
+handling. As there are no widely available compilers with these
+features yet, do the following: Report fatal errors by calling the
+global function \code{error(char*)} with an appropriate message. This
+function will print the message and terminate the program.
+If some condition is probably an error on the caller's part,
+but can be safely overlooked (at least locally), you may call the global
+function \code{warn(char*)}, which does not terminate the program,
+instead of \code{error}.
+
+%%....................................................................
+\subsection{\code{DEBUG} toggle}
+
+Whereas the \code{SAFETY} switch permits safer albeit slower execution,
+the idea of the \code{DEBUG} toggle is to provide somewhat systematic
+features to set traps, monitor the progression of execution and
+localise semantic as well as coding errors in algorithms.
+% @rn See the discussion in \S\ref{low_level_tests}.
+
+
+%%--------------------------------------------------------------------
+\section{Testing Procedures}
+
+This section describes the testing procedures for \magnus.
+Roughly, one may distinguish two levels of tests.
+
+\begin{itemize}
+\item
+General `external' tests, which test the behaviour
+of the system or its components
+with respect to their external calling interfaces, viz.~for classes
+their public methods.
+
+\item
+Specific low-level tests, which may be more specialised in their
+way of verifying the internal functioning of (functions of) the
+system. For instance, if a \code{SetOf} class constructs hash tables,
+the implementer may desire or need to devise specific tests which
+verify the internal layout of the tables.
+
+\end{itemize}
+
+The external tests (with as the need arises their associated test data
+sets) are mandatory, as these are necessary to know whether the system
+functions at all. Low level tests are a function of their necessity in
+the course of implementation and not an end in themselves. For these, the 
+guiding principle is to write them only as need dictates, for instance
+when debugging; but if writing some, then to keep these for possible
+reuse.
+
+
+The aim is to 
+
+\begin{itemize}
+\item
+build up a set of tests for \magnus\ concurrently
+to the development of the system;
+
+\item
+organise this set as a reusable library of standard tests for
+the system.
+
+\end{itemize}
+
+The reasons are the obvious:
+
+\begin{itemize}
+
+\item
+Tests are onerous to devise and implement;
+
+\item
+Better results are obtained by testing from the beginning onwards;
+
+\item
+Tests need not be rebuilt from scratch to localise later bugs;
+
+\end{itemize}
+
+%%....................................................................
+\subsection{External Interface Tests}
+
+The external interface tests are mandatory.
+For at least one class \code{MyClass} in a given hierarchy there should be
+an executable \file{test-MyClass}.
+It should send output to \code{cout}, which is read by a report script.
+The only {\em required} output is a line
+\begin{verbatim}
+  n tests failed.
+\end{verbatim}
+when $n > 0$ tests fail.
+
+In general, for every public method in the hierarchy,
+\file{test-MyClass} should output a line of the form
+
+\code{[+-] <function prototype>}
+
+\noindent where \code{+} or \code{-} indicates whether the tests for this
+method were successful. Additional tests which do not focus on a
+particular method may be appropriate; see, e.g., \\
+\file{magnus/back\_end/general/test/test-List.C}.
+
+Note that for container classes such as \code{ListOf} and
+\code{SetOf}, it is straightforward to test each method in isolation,
+but in the case of non-trivial group theoretic code this may not be
+feasible. Here are some alternative techniques we have employed:
+
+\begin{itemize}
+\item
+For Knuth-Bendix, we have a fixed suite of test inputs along with the
+expected output; the latter can be mechanically compared to the actual
+output.
+
+\item
+For the one relator word problem, we have a program which generates
+relators and trivial words at random. Since the expected output is
+known regardless of the input, the actual output is easy to test
+mechanically for correctness. The parameters of the random generation
+are fixed at compile time, so we can repeat the test.
+\end{itemize}
+
+
+Other conventions:
+
+\begin{itemize}
+\item
+The tests must be defined exclusively in terms of the
+public interfaces of the classes in the hierarchy.
+
+\item
+If the test requires input data from a file, this data must
+be in a file
+\file{test-MyClass.data}
+
+\item
+If the test requires another program to generate data, the
+external program must of course also be provided, and called from
+\file{test-MyClass} with a system call. If some data is
+generated randomly, the random generator must be seeded the same way for
+each invocation of \file{test-MyClass}.
+
+\item
+If the test produces output on \code{cout} which should be compared with
+a file of correct output, the latter should be called
+\file{test-MyClass.mastertestout}.
+If the output needs to be evaluated by an external program, then
+of course this program should also be provided, and called from
+\file{test-MyClass} with a system call.
+
+\end{itemize}
+
+%%....................................................................
+\subsection{Low Level Tests} % @rn\label{low_level_tests}
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{General Principle}
+
+In the course of implementation, you may find yourself creating ad hoc
+low-level tests as you go along to debug or to test the correct
+low-level functioning of your implementation.  Typically, this may
+involve adding special, not-for-the-final-implementation friend and
+(static) member functions with access to the private parts of a class
+or several classes.  These should be considered part of the
+implementation, and should be conditionally compiled with the flag
+\code{DEBUG}, defined in \file{magnus/back\_end/global/global.h}, set.
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Procedure}
+
+Instead of `throwing away' such effort after use,
+try to keep the functions and programs for reuse.
+
+\begin{itemize}
+\item
+Special friend and member
+functions should be made part of the permanent code but
+conditionally compilable
+dependent on the compiler toggle \code{DEBUG} being defined.
+
+\item
+Instead of writing \code{main()} functions, give these global
+functions another name, and keep them in file
+\file{debug-MyClass.C}
+
+\item
+Data goes into files
+\file{debug-MyClass.[...]}
+
+\end{itemize}
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Documentation}
+
+As these tests are supposed be reusable, it is essential for them to
+be sufficiently documented, through a description and adequate
+comments in the testing code.  The description is in an appropriate
+subsection of the Reference Manual.
+
+
+\input{include/cvs_tutorial}
+
+
+%%--------------------------------------------------------------------
+\section{Templates and \code{gcc 2.6.3}}
+
+The usual hack to work around a broken template implementation (e.g.
+any version of \code{gcc}) is to make every single member function of
+the template class inline, and just live with the massive overhead.
+But this is not always possible; for example, class \code{SetOf}
+cannot be completely inlined.
+
+\code{gcc 2.6.3} doesn't have a proper template repository, so we face
+the following problem: suppose you have two source files, \file{foo.C}
+and \file{bar.C}, each of which make the same instantiation of a
+template class, say, \code{Baz<char>}. In what object file does poor
+\code{gcc} put the member functions for \code{Baz<char>}? Both
+\file{foo.o} and \file{bar.o}? Then the linker complains of multiply
+defined symbols (justifiably), so that's not what \code{gcc} does. Instead,
+the `repository' for the member functions of the template instance is,
+by convention, the object file corresponding to the source file for
+the template class. How does \code{gcc} know which instances to put in
+the `repository'? It doesn't. {\em You have to explicitly instantiate
+every conceivable instance of the template in the source file for the
+template!}
+
+What this means for us is that if you want to use, say,
+\code{SetOf<Word>} {\em anywhere}, then \file{Set.C} must contain
+the lines
+
+\begin{verbatim}
+#include "Word.h"
+template class SetOf<Word>;
+\end{verbatim}
+
+But that's not all. How does \file{Set.C} know where to find
+\file{Word.h}? The makefiles as of 3/1/95 put include search paths in
+one-to-one correspondence with library dependencies. As it happens,
+\file{libgeneral} (where \file{Set.o} is) depends on \file{libElt} (where
+\file{Word.o} is), so there is no problem with this example.
+
+Now suppose that some file in \file{FSA/} wants to use a
+\code{SetOf<StatePair>}, where class \code{StatePair} is defined somewhere
+in \file{FSA/}, as you might expect. Then \file{Set.C} must contain
+the lines
+
+\begin{verbatim}
+#include "StatePair.h"
+template class SetOf<StatePair>;
+\end{verbatim}
+
+\noindent
+But then \file{Set.C} must be compiled with include path containing
+\file{FSA/include/}, but without \file{libgeneral} depending on
+\file{libFSA}. The makefiles don't allow for this yet, and won't be
+easy to fix.
+
+A quick kludge might be to hard-wire the path, so the above would be:
+
+\begin{verbatim}
+#include MAGNUS_HOME "/back_end/FSA/include/StatePair.h"
+\end{verbatim}
+
+\noindent
+but this must be done for any nested inclusions too.
+
+
+
+
+%%--------------------------------------------------------------------
+\section{Writing User Classes}\label{user_classes}
+
+%%....................................................................
+\subsection{Introduction}
+
+In C++, a class usually contains data members along with methods
+which operate on the data. In our scheme, we put the data for a user
+class in a separate data representation class, and our user classes
+contain (by derivation) precisely one data member: a private pointer to a data
+representation object. Moreover, our user classes have no virtual methods;
+overridable methods are delegated to the data representation.
+
+Because objects in user classes occupy only as much memory as a
+pointer, they can be efficiently passed as parameters, copied,
+assigned, etc.  These operations involve manipulating a reference
+count in the data representation, the cost of which is negligible.
+The benefits are
+
+\begin{itemize}
+\item
+We use a single mode: automatic variables and parameters to public
+methods are always objects, rather than explicit pointers to objects.
+
+\item
+Memory is automatically protected and deallocated.
+
+\item
+User objects can be copied and assigned without explicit casts.
+
+\item
+The data representation is hidden, so the user has no choice
+but to access it safely through the public interface.
+
+\item
+The data representation can change without changes higher up.
+
+\item
+Important low-level code, such as that for reference counting, need only
+be written once.
+
+\end{itemize}
+
+%%....................................................................
+\subsection{Data Hiding}
+
+We discuss in general how to convert the `usual' sort of class
+hierarchy to our scheme.
+
+Let \code{H} be a class hierarchy in which there is at least one
+class, \code{Root}, which does not derive from a class in \code{H},
+and such that every class in \code{H} with no subclasses derives from
+\code{Root}. Each class in \code{H} may contain data members and/or
+(pure) virtual methods, and derivation may be virtual.
+
+We build a user object hierarchy \code{HObj} and a data representation
+hierarchy \code{HRep} from \code{H}. It may be helpful to think of the
+case where \code{H} consists of an abstract root with two concrete
+subclasses:
+
+\lskip
+\begin{verbatim}
+  class Root;            // abstract
+  class X : public Root; // concrete
+  class Y : public Root; // concrete
+\end{verbatim}
+\lskip
+
+The corresponding class diagrams are:
+
+%\lskip
+%\begin{verbatim}
+%          RefCounter            ObjectOf<RootRep>
+%              |                        |
+%  XData    RootRep    YData         RootObj
+%       \  /       \  /             /       \
+%       XRep       YRep           XObj     YObj
+%\end{verbatim}
+%\lskip
+
+\vspace{20pt}
+
+\epsfbox{ps/ObjectOf.ps}
+
+\vspace{20pt}
+
+
+Corresponding to \code{Root}, \code{HRep} contains a class
+\code{RootRep} which derives directly from \code{RefCounter}.
+\code{HObj} contains a class \code{RootObj} which derives directly
+from \code{ObjectOf<RootRep>}.  Thus the compiler automatically makes
+a copy constructor, a destructor, and an assignment operator for
+\code{RootObj} from those of \code{ObjectOf<RootRep>}.  Subclasses of
+\code{RootObj} should not define these.  \code{ObjectOf<RootRep>} has
+a pointer to a \code{RootRep} which is {\em private}, so
+\code{RootObj} can't use it directly. However, \code{RootObj} inherits
+protected methods
+
+\lskip
+\begin{verbatim}
+  const RootRep *look() const;
+  RootRep *change();
+  RootRep *enhance();
+\end{verbatim}
+\lskip
+
+\noindent from \code{ObjectOf<RootRep>}. The \code{look()} method simply
+returns the pointer; since it is \code{const}, only \code{const}
+methods of \code{RootRep} can be called through it, so no cloning is
+necessary to protect the data.  The \code{change()} method ensures
+that \code{RootRep} clones its data if necessary before returning the
+pointer.  The \code{*enhance()} method is a `non-const' version of
+\code{look}, to be used with extreme caution to alter a \code{Rep} in
+a semantically constant way.  \code{RootObj} and its derivatives can
+use these to safely look at and change the data in a (subclass of)
+\code{RootRep}, via the latter's public interface. \code{RootRep} must
+declare
+
+\begin{verbatim}
+  virtual RootRep *clone( ) const = 0;
+\end{verbatim}
+
+\noindent the instantiations in concrete subclasses do a deep copy.
+
+Now let \code{C} be a class in \code{H}. \code{HObj} contains a
+corresponding class \code{CObj} with no data members.  If \code{C} has
+any data members, then \code{HRep} contains a class \code{CData} in
+which the data is put.  If \code{C} has any virtual methods, then
+\code{HRep} contains a class \code{CRep} in which {\em only} these
+virtual methods are defined, and \code{CObj} has corresponding
+non-virtual methods which delegate to the ones in \code{CRep}. If
+\code{CData} exists then \code{CRep} derives directly from it.
+
+Except for the \code{CRep}/\code{CData} duality, the derivation structures of
+\code{HObj} and \code{HRep} both match that of \code{H}.
+
+Now we turn to what must and must not be in each of \code{CObj},
+\code{CRep}, and \code{CData}.
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Object classes}
+
+A class \code{CObj} contains no data members (besides the inherited
+one) and no virtual methods. Any method which is common to all \code{
+C}'s, i.e. a method which one would want to declare virtual in \code{
+CObj}, will instead {\em delegate} to a corresponding virtual method
+in \code{CRep}. We call these {\em pseudo-virtual} methods. Note that
+pseudo-virtual methods are not overridden in \code{HObj} -- their
+delegates are overridden in \code{HRep}. Two examples of delegation:
+
+\lskip
+\begin{verbatim}
+   virtual CRep *CRep::f(...) const;
+   CObj CObj::f(...) const { return CObj( look()->f(...) ); }
+\end{verbatim}
+\lskip
+\begin{verbatim}
+   virtual int CRep::g(...);
+   int CObj::g(...) { return change()->g(...); }
+\end{verbatim}
+\lskip
+
+Any non-virtual methods in \code{C} go in \code{CObj}, and are defined
+in terms of the public interface(s) of \code{CData} and/or \code{CRep}
+via \code{look()} and \code{change()}. Unless \code{CObj} is \code{
+RootObj}, it must shadow the inherited \code{look()}, \code{change()}
+and \code{enhance()} methods so that they return a \code{CRep*}.
+Since \code{look()} and \code{change()} are protected, \code{CObj}
+must provide explicit data access methods to the user.
+
+The names of the classes in \code{HObj} may as well match those in
+\code{H}; we use the \code{Obj} suffix here to avoid confusion.
+
+\code{CObj} may need to provide a cast constructor which takes a
+{\em superclass}. This makes sense because the only data members in
+\code{CObj} and its superclass is a (castable) pointer. For example,
+
+\lskip
+\begin{verbatim}
+class Word : public Elt {
+public:  
+  Word( const Elt& e ) : Elt( e ) { }
+}
+\end{verbatim}
+\lskip
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Representation classes}
+
+The \code{CRep} class contains any data members which do not belong in
+\code{CData}. The only methods it contains are initialization
+constructors as appropriate, and virtual methods which mirror any
+pseudo-virtual ones in \code{CObj}.  These are either instantiated or
+overridden in a subclass of \code{CRep}. Methods which construct a new
+\code{CRep} should return a \code{CRep*}. This is wrapped by
+\code{CObj} using the \code{ObjectOf<RootRep>} constructor which takes
+a \code{RootRep*}.
+
+The real purpose of \code{CRep} is to avoid re-coding the virtual
+methods of \code{C} in each \code{CData} class, as we may want several
+implementations of \code{CData} for a given \code{C}.  The virtual
+methods can be written once in terms of \code{CData}'s (fixed) public
+interface.\footnote{A virtual method might be too inefficient this
+way, and have to be pushed up to \code{CData}.} When the virtual
+methods are simple (or there are none), the \code{CRep} and
+\code{CData} classes may be amalgamated into one.
+
+%% . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+\subsubsection{Data classes}
+
+The \code{CData} class contains and maintains {\em all} of the data for
+a \code{C}. Its public interface provides only access methods, a copy
+constructor which does deep copy, other constructors as appropriate,
+and a destructor. The data members are private; it must be impossible
+for any function besides a \code{CData} method to assume anything
+about the structure of the data beyond what is indicated in the public
+interface.

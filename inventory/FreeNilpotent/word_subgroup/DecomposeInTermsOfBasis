@@ -1,0 +1,32 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		free nilpotent group 
+
+Objects highlighted:	subgroup H, word W
+
+Other objects present:	group N
+
+Name in the menu:	Decompose W in terms of a basis of H
+
+Problem type:		problem object
+
+Help file:		SGOfNGDecomposeWordProblem.help
+
+
+			     Algorithms:
+
+
+1. Decompose W in N
+
+2. Compute a basis of H
+
+3. For the use of this problem

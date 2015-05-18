@@ -1,0 +1,17 @@
+@@How this problem works
+@@FP
+@@ABELIAN
+
+\ni The torsion-free rank of a subgroup is the number of
+infinite cyclic factors in a decomposition of that subgroup
+into a direct product of  cyclic groups.
+
+\ni For a general discussion see 
+@General_abelian_groups@General_abelian_groups::General discussion@
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR

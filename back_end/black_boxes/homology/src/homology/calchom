@@ -1,0 +1,116 @@
+#! /bin/csh -f
+#############################################################################
+# CALCHOM:
+# ========
+# Calculates homology for a given group for mappings from different dimensions
+# by using 'chom' and running the resulting script through 'magma'.
+#
+# Usage:  calchom [-v] [-s] start end inputfile [outputfile]
+#         where end >= start > 1
+#
+#    -v              Verbose mode.  Extra information.
+#    -s              Statistics mode.  Performance statistics are included.
+#    start           the starting dimension (> 1)
+#    end             the end dimension (>= start)
+#    inputfile       the groups complete rewriting system file that conforms
+#                    to the Geometry Group Standard format (including finite
+#                    state automata), and in particular should be of the form
+#                    outputted by kbeqn or cfsa - that is, we can just use the
+#                    output from kbeqn as the input to our program.
+#    outputfile      file for output.  If no file name is given Standard
+#                    Output is used.
+#
+# This script makes use of three programs, 'chom', 'magma' and 'chom_stats'
+# if statistical information is required, such as in debugging.  It should be
+# run from the machine 'chom' is installed on.  It can handle 'magma' being
+# on a remote machine provided you have an account on that remote machine.
+#
+# This script assumes you have 'chom', 'chom_stats' and 'magma' on the same
+# machine.  If 'magma' is on a different machine, you should set the
+# environment variable MAGMA_MACHINE to the full name of the machine 'magma'
+# is on.  You must also place the full name of the machine running 'chom'
+# into your # .rhosts file on the MAGMA_MACHINE
+#
+# The default locations of 'magma', 'chom' and 'chom_stats' are given below:
+#
+set MAGMA_DEF=/usr/local/bin/magma
+set CHOM_DEF=/usr/local/public/homology/bin/chom
+set CHOM_STATS_DEF=/usr/local/public/homology/bin/chom_stats
+#
+# If these are different for your system, they should be set here, or you
+# should set the environment variables MAGMA, CHOM and CHOM_STATS to the
+# correct paths (including filename).
+#############################################################################
+
+set USAGE1='Usage: calchom [-v] [-s] start end inputfile [outputfile]'
+set USAGE2='       where end >= start > 1'
+set TMP="/tmp/calc.tmp.`date +%M%S`"
+
+if ($#argv > 6 || $#argv < 3) then
+	echo "$USAGE1"
+	echo "$USAGE2"
+	exit 1
+endif
+
+set VERBOSE=""
+# NOW check for the -v or -s option
+foreach loop (1 2)
+	switch ($1)
+		case "-v":
+			set VERBOSE="-v"
+			shift
+			breaksw
+		case "-s"
+			set STATS=""
+			shift
+			breaksw
+	endsw
+end
+
+if ($?MAGMA == 0) then
+	set MAGMA=$MAGMA_DEF
+endif
+
+if ($?STATS == 0) then
+	if ($?CHOM == 0) then
+		set CHOM_PROG=$CHOM_DEF
+	else
+		set CHOM_PROG=$CHOM
+	endif
+else
+	if ($?CHOM_STATS == 0) then
+		set CHOM_PROG=$CHOM_STATS_DEF
+	else
+		set CHOM_PROG=$CHOM_STATS
+	endif
+endif
+
+date +"Calchom: Start: %A %d %B %Y (%H:%M:%S)" > $TMP
+
+if ($?MAGMA_MACHINE) then
+	# If 'magma' is on a different machine than this script....
+	$CHOM_PROG $VERBOSE $1 $2 $3 | (rsh $MAGMA_MACHINE ${MAGMA}) >> $TMP
+else
+	# If 'magma' is on the same machine....
+	$CHOM_PROG $VERBOSE $1 $2 $3 | $MAGMA >> $TMP
+endif
+
+
+date +"Calchom: End: %A %d %B %Y (%H:%M:%S)" >> $TMP
+
+# NOW add in the stats
+if ($?STATS == 1) then
+	echo "" >> $TMP
+	cat $3.stats >> $TMP
+endif
+
+if ($#argv == 4) then
+	# Save in specified file
+	/bin/cp $TMP $argv[4]
+else
+	# Display to standard output
+	cat $TMP
+endif
+
+# Clean up
+/bin/rm -f $TMP

@@ -1,0 +1,19 @@
+ENUMeration: F
+GRoup generators: 3;
+RELators: -3*1*3*1^-2,-1*2*1*(-2)^2,-2*3*2*3^-2;
+SUBGroup: H
+GENerators: ;
+PARameters:
+        COMpact:0;
+         MAX Cosets (min,max,step):0;
+         CT factor:0;
+         RT factor:0;
+         TIme:0;
+         FIll factor (min,max,step):0;
+         NO. of relators in subgroup (min,max,step):0;
+         MEssages:0;
+         WOrkspace:1600000;
+         DIagnostics:0;
+END
+AO:tc.out
+

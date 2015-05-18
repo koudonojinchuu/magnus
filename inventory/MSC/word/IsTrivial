@@ -1,0 +1,25 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Dmitry Bormotov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		metric small cancellation group
+
+Objects highlighted:	word W 
+
+Other objects present:	group G
+
+Name in the menu:	Is W trivial in G ?
+
+Problem type:		fast problem
+
+Help file:		none
+
+//@db the algorithm might need to be implemented as a problem object
+// or be optimized to its linear version

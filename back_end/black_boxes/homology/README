@@ -1,0 +1,48 @@
+Computational Tools for Homology of Groups
+==========================================
+
+These directories contain the Homology C library, programs that make
+use of this library and man pages for these programs.
+
+For those who are interested, a detailed function-by-function manual
+for the Homology C Library is available in Word 2.0 format (PC), or
+hard copy from Dr John Groves.
+
+Please also read the README files in many of the sub directories.
+
+lib
+---
+This contains the Homology C Library source, and upon making is
+where the libraries are stored.
+
+src
+---
+This contains two subdirectories containing the source of programs
+that were created for the project.
+
+bin
+---
+This is where the executables will go on making files in the src
+sub-directories.  You can then move them to where ever you like.
+
+man
+---
+These are the man pages, which need to be installed in the appropriate manual
+area.
+
+A NOTE ON MAN PAGES
+===================
+
+Because of a bug in the 'man' program on DECS, it is not possible to put
+the man pages in any directory.  They must go in the directory that all
+other man pages are placed.  If for some reason this is not possible, you
+will need to use the -P option on 'man' to tell 'man' where the pages
+can be found...for example:
+
+man -P /usr/local/public/man rank
+
+This bug may be fixed in more recent executables, so that one can make use
+of the MAN_PATH environment variable.  See your OS documentation for details.
+
+Jamie (4/11/94)
+

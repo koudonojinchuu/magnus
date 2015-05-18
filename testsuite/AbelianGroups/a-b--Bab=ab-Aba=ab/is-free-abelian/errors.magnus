@@ -1,0 +1,35 @@
+FrontEnd --> BackEnd :  -2 0 A1 < a,b;B a b=a b,A b a=a b >
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -1 2 0 A1
+getLine() obtains : A1
+FrontEnd --> BackEnd :  -2 26 0
+FrontEnd --> BackEnd :  -1 2 2 {A1 free ?}
+getLine() obtains : {A1
+FrontEnd --> BackEnd :  2 1 1 15
+3 is accepting 15 ARCs from 2 for ARCSlotID 1 (overrides)
+
+FrontEnd --> BackEnd :  2 2
+debug point 6-1
+debug point 6-4
+debug point 6-3
+debug point 6-2
+
+Fatal error: Cannot open an output file /home/users/yegor/magnus/texttest_tmp/results.1941
+
+Here are all Resources in ResourceManager::usedARCs, for 3:
+
+From: 2
+ASI: 1
+ARCs: 15
+State: Liquid
+
+
+
+3 is about to use 1
+Looking at Resources:
+From: 2
+ASI: 1
+ARCs: 15
+State: Liquid
+
+FrontEnd --> BackEnd :  -1 0

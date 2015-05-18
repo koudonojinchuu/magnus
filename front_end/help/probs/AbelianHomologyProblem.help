@@ -1,0 +1,10 @@
+@@How this problem works
+
+@@ABELIAN
+
+\ni We compute the canonical decomposition for the group
+and then use the Kunneth formula, which gives the integral 
+homology of a direct product of two groups in terms of tensor 
+products of the integral homology of the factors.
+
+\ni See also @General_abelian_groups@General_abelian_groups::General discussion@ for a general discussion of abelian groups. 

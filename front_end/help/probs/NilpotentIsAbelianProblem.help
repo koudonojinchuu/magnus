@@ -1,0 +1,44 @@
+@@How this problem works
+
+@@FP
+
+
+
+@@ABELIAN
+
+@@NILPOTENT
+
+\ni We check to see if all of the commutators of all of the generators
+are trivial in the group, using the solution of the word problem.
+If they are, the given group is abelian.
+
+\ni For a general discussion of finitely generated nilpotent groups, see
+@Nilpotent_groups@Nilpotent_groups::
+General discussion@
+
+@@FREE
+
+@@AP_FREE
+
+@@AP_FREE_CYCLIC
+
+@@SMALL_CANCELLATION
+
+@@ONE_RELATOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+@@General discussion
+
+\ni Let G=<X;R> be a finite, symmetrized presentation, i.e., R is closed
+under inverses, cyclic permutations and each of the elements in R is
+cyclically reduced. A reduced X-word p is termed a piece if there exist
+two defining relators u, v, which are not inverses of each other, such that 
+u is identically of the form p w and  v is identically of the form z p^-1,
+i.e., p is an initial subword of u and p^-1 is a terminal subword of v.
+We say that such a word p is a piece of u.
+
+\ni A presentation satisfies the metric 1/n-th condition if the length of
+every piece of a defining relator is at most (1/n)m, where m is the length 
+of the relator involved.
+
+\ni Now let G=<x_1,...,x_j; r_1,...,r_k>
+be a symmetrized presentation of a finitely presented group G sasifying the
+metric 1/n-th condition, where n is at least 6. Then it turns out that if 
+a cylically reduced word w=1 in G, it must contain a piece, say p, of one
+of the defining relators, say r, such that the length of p is greater 
+than half the length of r. So, r = p s^-1, where the sum of the 
+lengths of p and s is the length of r. This means that if we replace p by s
+in w, the resultant word w' is shorter than w and represents the same 
+element of G as w. Thus if we continue with this process, termed Dehn's 
+algorithm, then w=1 in G if and only if we arrive at the empty word. 
+This result was first proved by M. Greendlinger (see the book Combinatorial
+Group Theory, by R.C. Lyndon and P.E. Schupp for more details).
+
+\ni There is also a similar algorithm that shows that a group with a
+presentation satisfying the (1/n)-th condition, where again n is at least
+6, has a solvable conjugacy problem.
+
+@@The word problem
+
+\ni The word problem for groups given by a small cancellation presentation satisfying the
+(1/n)-th condition, with n at least 6, is solvable, where the
+algorithm invoked here goes back to Dehn (see  
+@General discussion@General_small_cancellation::General discussion@). 
+
+@@Equality of two words
+
+\ni We simply invoke Dehn's solution of the word problem to determine if
+two words represent equal elements (see  
+@General discussion@General_small_cancellation::General discussion@).
+
+@@The conjugacy problem
+
+\ni The conjugacy problem for groups given by a small cancellation presentation satisfying the
+(1/n)-th condition, with n at least 6, is solvable, where the
+algorithm invoked here goes back to Dehn (see  
+@General discussion@General_small_cancellation::General discussion@).
+
+
+@@Is the given group abelian?
+
+\ni A group given by a small cancellation presentation satisfying the
+(1/n)-th condition, with n at least 6, is abelian if and only if there
+is only a single generator in the presentation.
+
+@@Is the given group finite?
+
+\ni A group given by a small cancellation presentation satisfying the
+(1/n)-th condition, with n at least 6, is finite if and only if there
+is only a single generator in the presentation and there is a single 
+defining relator, specifying its order.
+
+@@Find the order of the given group 
+
+\ni A group given by a small cancellation presentation satisfying the
+(1/n)-th condition, with n at least 6, is finite if and only if there
+is only a single generator in the presentation and there is a single 
+defining relator, specifying its order.
+
+@@The center 
+
+\ni A group given by a small cancellation presentation satisfying the
+(1/n)-th condition, with n at least 6, has a non-trivial center if and 
+only if there is only a single generator in the presentation, in which 
+case it is abelian.
+
+
+@@Is the given  group hyperbolic? 
+
+\ni All groups which satisfy a (1/n)-th metric small cancellation condition,
+with n at least 6, are hyperbolic (see  
+@General discussion@General_small_cancellation::General discussion@).
+
+@@Presenting a finitely generated subgroup
+
+\ni If a group given by a finite presentation has  solvable word problem,
+we can enumerate the relations between the generators of a given subgroup by first 
+enumerating the words in the given generators and then listing those
+that are equal to 1 in the group. The algorithm that is invoked here is
+Dehn's algorithm (see  
+@General discussion@General_small_cancellation::General discussion@).
+
+

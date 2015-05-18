@@ -1,0 +1,23 @@
+@@How this problem works
+
+@@ONE_RELATOR
+
+\ni A one-relator group is free if and only if its defining
+relator is part of a free basis for the ambient free group.
+There is an algorithm of Whitehead which determines whether 
+or not an element in a free group is part of a basis. This
+algorithm is invoked here.
+
+\ni For a general discussion see 
+@General_discussion@General_one_relator_groups::General discussion@.
+
+@@Deciding if a one-relator group is free
+
+\ni A one-relator group is free if and only if its defining
+relator is part of a free basis for the ambient free group.
+There is an algorithm of Whitehead which determines whether 
+or not an element in a free group is part of a basis. This
+algorithm is invoked here.
+
+\ni For a general discussion see 
+@General_discussion@General_one_relator_groups::General discussion@

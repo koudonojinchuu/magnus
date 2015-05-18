@@ -1,0 +1,8 @@
+gr:   a,b,c;
+rel:  a^11,b^2,c^2,(ab)^3,(ac)^3,(bc)^10,cbcbabcbc=a^5;
+subg: Id;
+gen:  ;
+
+mess:25000;
+end; 
+

@@ -1,0 +1,17 @@
+@@How this problem works
+
+
+\ni The primary  decomposition of a subgroup can be obtained by
+firs finding a presentation for it and then using the algorithm
+for finding the primary decomposition for a given finitely generated
+abelian group.
+
+\ni For a general discussion, see
+@General_abelian_groups@General_abelian_groups::General discussion@.
+
+
+
+
+
+
+

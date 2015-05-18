@@ -1,0 +1,37 @@
+// Copyright (C) 1998 The New York Group Theory Cooperative
+// See magnus/doc/COPYRIGHT for the full notice.
+//
+// Principal Author: Alexei Myasnikov
+//
+// Status: in progress
+//
+// Revision History:
+//
+
+
+Check-in type:		abelian group
+
+Objects highlighted:	group A 
+
+Name in the menu:	Compute the order of A
+
+Problem type:		problem object
+
+Help file:		AbelianOrderProblem.help
+
+
+			     Fast checks:
+
+
+
+			     Algorithms:
+
+
+1. Compute abelian invariants of A
+
+   Links:
+
+        Click here to see the generators of the canonical decomposition of A
+
+  
+
