@@ -1,2 +1,52 @@
 #!/bin/sh
-%WISH% -f /usr/share/magnus/front_end/magnus.tcl
+
+# --- Dynamic Tcl script path resolution ---
+# Get the directory where the generated script itself will be located.
+# This allows finding magnus.tcl relative to the script when run from the build directory.
+_script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+_tcl_script_name="magnus.tcl"
+_target_tcl_script="" # This variable will hold the determined path to magnus.tcl
+
+# 1. Check MAGNUS_HOME environment variable first.
+#    This is useful for development or overriding the Tcl script location.
+#    MAGNUS_HOME should be set to the root of your project (e.g., .../magnus-koudonojinchuu/magnus).
+if [ -n "$MAGNUS_HOME" ] && [ -f "$MAGNUS_HOME/front_end/$_tcl_script_name" ]; then
+  _target_tcl_script="$MAGNUS_HOME/front_end/$_tcl_script_name"
+# 2. If not found via MAGNUS_HOME, check if magnus.tcl is in the same directory as this script.
+#    This is for running directly from the .../front_end/ build directory.
+elif [ -f "$_script_dir/$_tcl_script_name" ]; then
+  _target_tcl_script="$_script_dir/$_tcl_script_name"
+# 3. Fallback to the default installed path (as originally hardcoded in magnus.in).
+#    This allows the script to work if it's installed system-wide via 'make install'
+#    and MAGNUS_HOME isn't set and it's not being run from the build directory.
+#    If your build system actually substitutes this hardcoded path with another
+#    placeholder (e.g., %pkgdatadir%/front_end/magnus.tcl), you would use that
+#    placeholder here. Given your magnus.in, it seems to be a literal path.
+elif [ -f "/usr/share/magnus/front_end/$_tcl_script_name" ]; then
+  _target_tcl_script="/usr/share/magnus/front_end/$_tcl_script_name"
+else
+  # 4. If the Tcl script is still not found after all checks, print a detailed error and exit.
+  echo "Error: Magnus Tcl script '$_tcl_script_name' could not be found." >&2
+  echo "Search attempts:" >&2
+  if [ -n "$MAGNUS_HOME" ]; then
+    echo "  Tried: \$MAGNUS_HOME/front_end/ ($_MAGNUS_HOME/front_end/$_tcl_script_name)" >&2
+  else
+    echo "  Info: \$MAGNUS_HOME environment variable was not set." >&2
+  fi
+  echo "  Tried: Script's directory ($_script_dir/$_tcl_script_name)" >&2
+  echo "  Tried: Default installed path (/usr/share/magnus/front_end/$_tcl_script_name)" >&2
+  echo ""
+  echo "To run from the build directory:" >&2
+  echo "  1. Ensure '$_tcl_script_name' is in '$_script_dir/'." >&2
+  echo "  2. (Recommended) Export MAGNUS_HOME to your project root: export MAGNUS_HOME=/path/to/project/root" >&2
+  echo "To run from an installed location, ensure Magnus is correctly installed (e.g., '$_tcl_script_name' exists at the default installed path)." >&2
+  exit 1
+fi
+# --- End of dynamic Tcl script path resolution ---
+
+# This line executes the Tcl interpreter.
+# %WISH% is the placeholder for the 'wish' executable path, which your build system will substitute.
+# "$@" ensures any command-line arguments passed to this 'magnus' script are forwarded to the Tcl script.
+echo "Launching Magnus with Tcl script: $_target_tcl_script"
+exec %WISH% -f "$_target_tcl_script" "$@"
