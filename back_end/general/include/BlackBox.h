@@ -119,6 +119,7 @@ private:
   }
   BlackBox& operator = ( const BlackBox& ) {
 	 error("called BlackBox op=");
+   return *this;
   }
   
 };

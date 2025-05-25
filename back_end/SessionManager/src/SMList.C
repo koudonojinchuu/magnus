@@ -310,7 +310,7 @@ LIC::status_type::status_type( int arg_s ):
 			      PROT_READ | PROT_WRITE, MAP_SHARED, 
 			      status_file, 0); 
     
-  if ( status_buffer < 0 )
+  if ( status_buffer == MAP_FAILED )
     error("LIC::status_type::status_type( int s ) :"
 	  "error couldn't map the file.");
 }

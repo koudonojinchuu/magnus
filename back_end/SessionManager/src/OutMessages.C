@@ -317,7 +317,7 @@ void Warning::print(ostream& ostr) const
 	 //ostrstream& o = (ostrstream&)*this;  // Cast away constness
 
 	 //*this << ends;
-	 ostr << "warn_ {" << *this << '}';
+	 ostr << "warn_ {" << rdbuf() << '}';
 
 	 timer.reset( 1000 );
   }
