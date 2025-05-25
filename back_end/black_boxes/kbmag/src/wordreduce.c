@@ -61,11 +61,16 @@ void  add_word_to_buffer();
 void  printbuffer();
 void  process_names();
 void  fsa_clear();
+void  read_ident();
+void  check_next_char(FILE*, int);
+void  read_delim();
+void  rws_clear();
    
 FILE *rfile,
      *wfile,
      *fopen();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

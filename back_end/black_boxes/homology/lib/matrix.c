@@ -22,7 +22,7 @@
 extern int Num_rules, Num_gens;
 extern char **Word1, **Word2;
 
-static int cmp(void *a, void *b);
+static int cmp(const void *a, const void *b);
 static int make_row(BOUNDARY *boundary, CRITICALS *lower_dim_tuples, double **row);
 static void make_row_rec(BOUNDARY *boundary, CRITICALS *lower_dim_tuples, double *row);
 
@@ -248,7 +248,7 @@ void make_row_rec(BOUNDARY *boundary, CRITICALS *lower_dim_tuples, double *row)
 }
 
 static
-int cmp(void *a, void *b)
+int cmp(const void *a, const void *b)
 /* Comparison function used in bsearch */
 {
 			int scomp;

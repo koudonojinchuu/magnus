@@ -50,10 +50,12 @@ public:
   //bool operator !=( const PropertyType& p ) { return type != p.type; }
   
   friend ostream& operator<<(ostream& ostr, const PropertyType& p) { 
-    ostr << p.type; 
+    ostr << p.type;
+    return ostr; //SAMO
   }
   friend istream& operator>>(istream& istr, PropertyType& p) { 
-    istr >> p.type; 
+    istr >> p.type;
+    return istr; //SAMO
   }
 
 private:

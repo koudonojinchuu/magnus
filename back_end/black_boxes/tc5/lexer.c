@@ -4,9 +4,13 @@
 #include "parser.h"
 #include "stdio.h"
 #include <stdlib.h>
+#include <ctype.h>
 extern int lineno;
 extern char *eemalloc(); 
 extern	Keyword keywords[];
+extern void execerror(char*, char*);
+int lookup(char*);
+int
 tclex()  /* tc lexical analyzer  */
 {
 /* recognize comments started with #.  3/2/93 */
@@ -68,6 +72,7 @@ int	s;
 				exit(1);
 	}
 }
+int
 lookup(s)
 char *s;
 {

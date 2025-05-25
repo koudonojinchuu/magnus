@@ -154,14 +154,14 @@ public:
   void unbind( const Key& k ) {
     EltType *elt = 0;
     if( seek(k, elt) ) {
-      removeElement( *elt );
+      this->removeElement( *elt );
       delete elt;
     }
   }
 
   void bind( const Key& k, const Val& v ) {
     unbind(k);
-    adjoinElement( EltType(k, v) );
+    this->adjoinElement( EltType(k, v) );
   }
 
   Val val( const Key& k ) const {
@@ -211,7 +211,7 @@ private:
 
   const bool seek( const Key& k, EltType* &elt ) const {
     EltType qa(k);
-    int index = abs(hashElement(qa)) % this->numberOfBuckets;
+    int index = abs(this->hashElement(qa)) % this->numberOfBuckets;
     Cell< QuickAssociation<Key,Val> > * search = this->hashTable[index];
     while ( search ) {
       if ( k == search->getContents().key ) {

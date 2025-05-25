@@ -243,6 +243,10 @@ CHANGES TO KBPROG
 	[-wd] [-vwd] [-mwd maxwdiffs] [-mt min_time] [-hf halting_factor]\n\
 	[-rk minlen mineqns] [-cn confnum] [-op] [groupname]\n"
 
+/* defined elsewhere */
+void rk_add_lhs();
+void  fsa_print();
+/* --- */
 
 int 	        tidyint = TIDYINT,
                 maxeqns = MAXEQNS,
@@ -392,6 +396,7 @@ interrupt()
 	signal(SIGQUIT, SIG_DFL);
 }
 
+void
 main(argc, argv)
 	int             argc;
 	char           *argv[];

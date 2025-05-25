@@ -39,13 +39,14 @@ int fsa_count();
 boolean fsa_enumerate();
 
 /* Functions used in this file and defined elsewhere */
+void add_to_buffer();
 void hash_init();
 void hash_clear();
 int *hash_rec();
 int hash_rec_len();
 int hash_locate();
 void add_word_to_buffer();
-void add_iword_to_buffer();
+int add_iword_to_buffer();
 int int_len();
 fsa * fsa_and();
 

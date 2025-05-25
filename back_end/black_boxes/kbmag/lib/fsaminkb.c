@@ -51,6 +51,10 @@ unsigned short* short_hash_rec();
 void diff_reduce();
 void calculate_inverses();
 int diff_no();
+void compressed_transitions_read();
+void unlink();
+boolean srec_equal();
+void	fsa_table_init();
 
 fsa *
 fsa_minred(waptr,op_table_type,destroy,tempfilename)

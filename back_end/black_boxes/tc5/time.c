@@ -1,8 +1,11 @@
 #include "sys/time.h"
 #include "sys/resource.h"
 #include "stdio.h"
+#include <time.h>
 extern FILE *fout;
 /* #include "tctime.h"*/
+
+void gethostname();
 
 void tc_time(end_enum)
 int	end_enum;

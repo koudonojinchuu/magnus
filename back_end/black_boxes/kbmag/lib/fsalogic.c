@@ -73,6 +73,10 @@ int* hash_rec();
 unsigned short* short_hash_rec();
 int hash_rec_len();
 int short_hash_rec_len();
+void fsa_clear_rws();
+void compressed_transitions_read();
+void unlink(); // ??
+void fsa_delete_state();
 
 boolean
 srec_equal(srptr1,srptr2)

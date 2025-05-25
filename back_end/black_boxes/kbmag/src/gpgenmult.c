@@ -71,6 +71,7 @@ boolean add_wd_fsa();
 void  calculate_inverses();
 void fsa_table_dptr_init();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

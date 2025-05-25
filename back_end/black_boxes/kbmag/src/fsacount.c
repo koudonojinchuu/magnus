@@ -28,6 +28,7 @@ void  fsa_read();
 int   fsa_count();
 void  fsa_clear();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

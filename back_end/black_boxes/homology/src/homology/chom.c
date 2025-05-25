@@ -65,6 +65,7 @@ void    command_input(FILE **fin, FILE **fout, int *start, int *end,
 #endif
 
 
+int
 #ifndef NO_CMD_LINE /* version that does not use command line - such as Mac */
 main(int argc, char *argv[])
 #else

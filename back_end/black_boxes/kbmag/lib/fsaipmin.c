@@ -22,6 +22,9 @@ void hash_clear();
 int *hash_rec();
 int hash_rec_len();
 int hash_locate();
+void srec_clear();
+void unlink();
+void fsa_table_init();
 
 void
 fsa_ip_minimize(fsaptr)

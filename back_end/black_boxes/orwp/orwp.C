@@ -3121,6 +3121,7 @@ bool treatRelatorTestWord()
 
 }
 
+int
 main()
 {
 	int pairCount = 0;

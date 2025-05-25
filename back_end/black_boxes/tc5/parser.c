@@ -7,6 +7,25 @@
 extern	FILE    *fin, *fout;
 extern  Word_pt *w_pt, word_;
 extern	Gen_stk_type gen_stk[];
+int tclex();
+void follow_ai();
+void follow_wo();
+void follow_ao();
+void follow_dr_ds();
+void follow_gen();
+void follow_rc();
+void follow_tw();
+void follow();
+void add_new();
+void del_rel_sg();
+void del_r_s();
+int yylex();
+int yyerror(char *);
+void put_gen();
+extern void execerror(char*, char*);
+void diagnostic();
+void init_gen_stk();
+extern char *eemalloc();
 #define	ExecErrorInt	execerror("syntax error, expect an integer","")
 #define ExecErrorDtm	execerror("syntax error, expect ';'","")
 int
@@ -168,6 +187,7 @@ tc_parse()
 	return 0;
 }
 				
+void
 follow(ch)
 int *ch;
 {
@@ -203,9 +223,11 @@ int 	c;
 	
 }	
 
+void
 follow_rc()
 {
 int	c;
+char c_str[8];
 	c = yylex();
 	if(c == ';' || c == '\n') {
 		Rcn = 0;
@@ -237,10 +259,13 @@ int	c;
 			RcStop = 0;
 			RcDesire = 0;
 			return;
-		} else
-			execerror("syntax error", c);
+		} else {
+      sprintf(c_str, "%d", c);
+			execerror("syntax error", c_str);
+    }
 	}	
 }	
+void
 diagnostic(s)
 char *s;
 {
@@ -294,6 +319,7 @@ char *s;
         }
 }
 
+void
 follow_dr_ds(ch)
 Rel_stk_type **ch;
 {
@@ -309,7 +335,7 @@ int	l;
 		n = yylval.vali;
 		if (ch == &Relators)
 			if (n > Rel_no || n <= 0)
-                        	yyerror(5);
+                        	yyerror("5");
 			else {
 				del_rel_sg(n, ch);
 				l++;
@@ -317,7 +343,7 @@ int	l;
 			}
 		else
 			if (n > Sgen_no || n <= 0)
-				yyerror(5);
+				yyerror("5");
 			else {
 				del_rel_sg(n, ch);
 				l++;
@@ -340,6 +366,7 @@ int	l;
 	}
 	execerror("syntax error", "");
 }	
+void
 del_rel_sg(n,ptt)
 int     n;
 Rel_stk_type **ptt;
@@ -351,6 +378,7 @@ Rel_stk_type **ptt;
                         ft = ft->next;
         if (ft) ft->len = 0;
 }
+void
 del_r_s(ptt)
 Rel_stk_type **ptt;
 {
@@ -386,13 +414,14 @@ Rel_stk_type **ptt;
                 free(ft);
         }
 }
+void
 follow_gen()
 {
 int	c;
 	c = yylex();
 	if (c == TOKEN_INT) {
 		if (yylval.vali <= 0)
-			yyerror(2);
+			yyerror("2");
 		else {
 			Gen_no = yylval.vali;
 			 gen_stk[1].gen = '0'; 
@@ -425,6 +454,7 @@ int	c;
 	} else
 		ExecErrorDtm;
 }
+void
 add_new(pt_ori, pt_new)
 Rel_stk_type **pt_ori;
 Rel_stk_type *pt_new;
@@ -439,6 +469,7 @@ Rel_stk_type *pt_new;
 	return;
 }
 
+void
 follow_tw()
 {
 	int 	c;
@@ -457,6 +488,7 @@ follow_tw()
 	} else
 		execerror("syntax error", "");
 }	
+void
 follow_ai()
 {
 char sbuf[BUF_LEN], *p = sbuf;
@@ -489,6 +521,7 @@ int  c;
 	return;
 }
 
+void
 follow_ao()
 {
 char sbuf[BUF_LEN], *p = sbuf;
@@ -520,12 +553,13 @@ FILE	*ftmp;
 	}
 	return;
 }
+void
 follow_wo()
 {
 int 	c;
 	if ((c = yylex()) == TOKEN_INT) {
 		if (c < 0) { 
-			yyerror(2);
+			yyerror("2");
 			Workspace = 200000;
 		} else
 			Workspace = yylval.vali;

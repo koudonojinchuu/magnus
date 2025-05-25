@@ -38,7 +38,12 @@ void read_int();
 void read_word();
 void read_delim();
 int int_len();
+int sparse_target();
 void fsa_init();
+void check_next_char(FILE*, int);
+void process_names();
+void table_read();
+void fsa_table_init();
 
 void
 srec_print(wfile,srptr,name,offset,endstring)

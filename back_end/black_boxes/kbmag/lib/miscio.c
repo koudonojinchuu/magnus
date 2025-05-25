@@ -12,6 +12,7 @@
 #include "defs.h"
 #include "fsa.h"
 #include "externals.h"
+#include <ctype.h>
 
 /* Functions defined in this file: */
 boolean isdelim();
@@ -31,6 +32,9 @@ int add_word_to_buffer();
 int add_iword_to_buffer();
 int int_len();
 boolean is_int();
+
+/* Defined elsewhere*/
+/* --- */
 
 boolean
 isdelim(c)
@@ -677,6 +681,7 @@ add_word_to_buffer(wfile,word,symbols)
   return nln;
 }
 
+int
 add_iword_to_buffer(wfile,word,symbols)
 	FILE *wfile;
 	int *word;

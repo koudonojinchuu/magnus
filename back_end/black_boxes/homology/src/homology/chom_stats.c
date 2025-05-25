@@ -71,6 +71,11 @@ void command_input(FILE **fin, FILE **fout, int *start, int *end,
 										int *verbose, char *statsfilename);
 #endif
 
+/* defined elsewhere */
+void get_stats();
+/* --- */
+
+int
 #ifndef NO_CMD_LINE /* version that does not use command line - such as Mac */
 main(int argc, char *argv[])
 #else

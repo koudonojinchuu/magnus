@@ -29,6 +29,7 @@ void	fsa_init();
 void	fsa_table_init();
 void	fsa_table_dptr_init();
 int	add_word_to_buffer();
+void srec_copy();
 
 void
 initialise_wd_fsa(wd_fsaptr,alphptr,maxwdiffs)

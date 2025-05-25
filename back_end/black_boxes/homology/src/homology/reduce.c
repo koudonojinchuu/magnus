@@ -53,6 +53,11 @@ void	command_line(FILE **fp, int argc, char *argv[]);
 void    command_input(FILE **fp);
 #endif
 
+/* defined elsewhere */
+void printword();
+/* --- */
+
+int
 #ifndef NO_CMD_LINE /* version that does not use command line - such as Mac */
 main(int argc, char *argv[])
 #else
@@ -86,7 +91,7 @@ main()
 	test = NEW(char, 1000);
 	string = NEW(char, 1000);
 	printf("Enter word seperating generators by spaces (then return):\n");
-	gets(string);
+	fgets(string, sizeof(string), stdin);
 	string[strlen(string)] = ' ';
 	string[strlen(string) + 1] = '\0';
 	for(i = 0, count = 0; sscanf(string + count, "%s%n", aw, &n) == 1;
@@ -137,7 +142,7 @@ void command_input(FILE **fp)
         printf("Enter the name of the file containing the group's complete rewriting system.\n(Press 'Enter' for default (standard input)): ");
 		*fp = stdin;
         *s = '\0';
-        if (*gets(s) == 0)
+        if (*fgets(s, sizeof(s), stdin) == 0)
             break;
         if ((*fp = fopen(s, "r")) == NULL) {
             printf("** An error occured opening that file (does it exist?)\n\n");

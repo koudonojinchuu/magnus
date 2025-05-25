@@ -38,7 +38,9 @@ fsa  *fsa_and();
 fsa  *fsa_nosub_exists();
 void  fsa_print();
 void  fsa_clear();
+void  fsa_minimize();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

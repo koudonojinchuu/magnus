@@ -31,6 +31,12 @@ int short_hash_locate();
 void short_hash_clear();
 unsigned short* short_hash_rec();
 
+/* defined elsewhere */
+void  fsa_table_dptr_init();
+void unlink();
+void compressed_transitions_read();
+/* --- */
+
 fsa *
 fsa_triples(waptr,diffptr,op_table_type,destroy,tempfilename,eqnptr,maxeqns,
 						     idlabel,eqnstop,readback)

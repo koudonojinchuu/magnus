@@ -21,6 +21,7 @@ register Int	*t;
 	STDCT = TRUE;
 	return;
 }
+void
 tc_unrenumber(tc_pvar)
 struct  tc_str_vars     *tc_pvar;
 {

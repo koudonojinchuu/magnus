@@ -27,10 +27,48 @@ FILE 	*fin; 		/* input file pointer */
 FILE	*fout;		/* output file pointer  */
 int	lineno = 1; 
 char	*eemalloc();
+void tc_time();
+void run();
+int tc_parse();
+void del_r_s();
+void printt();
+void tc_text();
+void tc_compact();
+void tc_save();
+void tc_restore();
+void tc_ctrenumber();
+void tc_mst();
+void tc_print_ct();
+void tc_add_cc();
+void tc_cycles();
+void tc_sc();
+void check_relator();
+void relator_by_gennumb();
+int tc_tracew();
+void tc_normcl();
+void tc_o();
+void tc_rc();
+void free_reduce_n();
+void sort();
+void free_reduce();
+void check_involutory();
+void get_exp();
+void get_length();
+void tc_todd_coxeter();
+void free_space_r();
+void free_space_s();
+void print_rel_n();
+void print_rel();
+void put_gen();
+void check_gen();
+int tc_cosrep();
+void tc_unrenumber();
+void tc_coinc();
 
 /* the printing format of relators and subgens has been changed - add a ',' 
 *  at the end of relators and subgens. 10/8/92.
 */
+void
 init() /* initiate structure enumb by default value */ 
 { 
 #define	Init_(n)	for(i=0;i<2;i++) n[i]=0; n[2] = 1
@@ -85,7 +123,9 @@ int 	i;
 	fout = stdout;
 } 
 
+int
 main(argc, argv) /* enumerate cosets by todd coxeter algorithm */ 
+int argc;
 char *argv[]; 
 {	progname = argv[0];
 
@@ -99,6 +139,7 @@ char *argv[];
 	return 0; 
 } 
 
+void
 run() /* execute until EOF */ 
 {
 struct  tc_str_vars     tc_pvar;
@@ -379,6 +420,7 @@ int	i,j,k,l,m;
 		fprintf(fout,"\n");
 	}
 } 
+void
 free_space_r()
 {
 /* deallocate the space used by relators */
@@ -396,6 +438,7 @@ free_space_r()
 		free(it); 
 	} 
 }
+void
 free_space_s()
 {
 /* deallocate the space used by subgroup generators */
@@ -413,6 +456,7 @@ free_space_s()
                 free(it);
         } 
 }
+void
 print_rel_n(relpp, n)
 Rel_stk_type *relpp;
 int n;
@@ -469,6 +513,7 @@ int n;
                 }
                 fprintf(fout,";\n");
 }
+void
 print_rel(relpp, n)
 Rel_stk_type *relpp;
 int n;
@@ -528,6 +573,7 @@ int n;
                 fprintf(fout,";\n");
 }
 
+void
 printt()
 {
         Rel_stk_type *relp; 
@@ -586,6 +632,7 @@ char s[];
 	gen_stk[numb].gen_inv = 0; /* assume it is not involutory */ 
 	return numb; 
 } 
+void
 put_gen() /* allocate space for group generators and move them from 
            * gen_stk into Gen_st. 
            */ 
@@ -610,6 +657,7 @@ put_gen() /* allocate space for group generators and move them from
 		      Gen_st[i].gen_inv = -i; 
 		}
 } 
+void
 free_reduce() /* free reduction and cyclic reduction for relators  */ 
 { 
 	Rel_stk_type 	*ptr; 
@@ -732,6 +780,7 @@ free_reduce() /* free reduction and cyclic reduction for relators  */
 	}
 	free(ct); 
 } 
+void
 sort_relators(c) /* sort relators chain in increasing order */ 
 char c; 
 { 
@@ -770,11 +819,13 @@ char c;
 	else 
 		S_gens = this; 
 } 
+void
 sort()  /* sort relators and subgroup generators in increasing order */ 
 { 
 	sort_relators('r'); 
 	sort_relators('g'); 
 } 
+void
 check_relator(ptt) 
 Rel_stk_type **ptt;
 {	
@@ -785,6 +836,7 @@ Rel_stk_type **ptt;
                 for(ct = ptr->rel; *ct != '\0'; ct++) 
 			check_gen(*ct); /* check every letter */  
 } 
+void
 check_gen(c) /* check c to tell if it is a generator of this group */ 
 char c; 
 { 
@@ -795,6 +847,7 @@ char c;
 	fprintf(fout,"%c is not a generator\n",c);
 	exit(1);
 } 
+void
 relator_by_gennumb(ptt) 
 Rel_stk_type **ptt;
 {
@@ -823,6 +876,7 @@ Rel_stk_type **ptt;
         }
 }
 
+void
 check_involutory()
 {
         Rel_stk_type *ptr;
@@ -835,6 +889,7 @@ check_involutory()
                 Gen_st[i].gen_inv = i;
         }
 }
+void
 base_exp(ptr) /* get exponent of a relator  */
 Rel_stk_type    *ptr;
 {
@@ -876,6 +931,7 @@ TryAnother:   ;
     }
 }
 
+void
 get_exp() /* get the exponent of a relator.  */
 {
         Rel_stk_type *ptr;
@@ -884,6 +940,7 @@ get_exp() /* get the exponent of a relator.  */
 	for(ptr = S_gens;ptr != (Rel_stk_type *) 0;ptr=ptr->next)
                 base_exp(ptr);
 }
+void
 get_length() /* get the total length of relators and subgrp generators
                 and put they into Rel_len and Sgn_len respectively. */
 {
@@ -899,6 +956,7 @@ get_length() /* get the total length of relators and subgrp generators
                 i += ptr->len;
         Sgn_len = i;
 }
+void
 free_reduce_n()
 {
         int *ct,*st,i,j;
@@ -956,6 +1014,7 @@ free_reduce_n()
 	}
 	free(ct);
 }
+void
 add_relators()
 {	
 	Rel_stk_type *p;
@@ -966,6 +1025,7 @@ add_relators()
 		Relators = rel_pt;
 	return;
 }
+void
 add_sg()
 {
 	Rel_stk_type *p;
@@ -976,6 +1036,7 @@ add_sg()
 		S_gens = rel_pt;
         return;
 }
+void
 tc_add_cc(n, tc_pvar)
 int	n;
 struct  tc_str_vars     *tc_pvar;

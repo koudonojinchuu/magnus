@@ -28,7 +28,7 @@
 static void			initnext(char *p);
 static int			search(char *p, char *a);
 static CRITICALS	*find_n_criticals_rec(char *word, int n);
-static int 			cmp(void *a, void *b);
+static int 			cmp(const void *a, const void *b);
 
 /**** GLOBALS ****/
 extern int		Num_rules,		/* Number of Rewriting rules */
@@ -375,7 +375,7 @@ CRITICALS *find_n_criticals(int n)
 
 
 static
-int cmp(void *a, void *b)
+int cmp(const void *a, const void *b)
 /* Comparison function used in qsort */
 {
     int scomp;

@@ -35,6 +35,7 @@ boolean   fsa_enumerate();
 void  fsa_clear();
 boolean is_int();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

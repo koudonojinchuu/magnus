@@ -44,7 +44,9 @@ fsa  *fsa_minkb();
 fsa  *fsa_diff1c();
 void  fsa_print();
 void  fsa_clear();
+void  fsa_minimize();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

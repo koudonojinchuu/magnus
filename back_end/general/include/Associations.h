@@ -149,9 +149,10 @@ public:
 
   void bind( const Key& k, const Val& v ) {
 	 CellType* where = seek(k);
-	 if ( where )
-		where->getContents().val = v;
-	 else {
+	 if ( where ) {
+		auto x = where->getContents();
+    x.val = v;
+	 } else {
 		//@rn g++2.5.8 can get confused by:
 		// theList = new CellType(Association<Key,Val>(k, v), theList);
 

@@ -81,7 +81,10 @@ boolean add_wd_fsa();
 void  make_full_wd_fsa();
 void  calculate_inverses();
 void fsa_table_dptr_init();
+void  add_word_to_buffer();
+void  fsa_print();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

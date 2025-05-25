@@ -39,6 +39,10 @@ int* hash_rec();
 unsigned short* short_hash_rec();
 int hash_rec_len();
 int short_hash_rec_len();
+void compressed_transitions_read();
+void unlink();
+boolean srec_equal();
+void srec_clear();
 
 fsa *
 fsa_genmult2(genmultptr,op_table_type,destroy,genmult2filename,readback)

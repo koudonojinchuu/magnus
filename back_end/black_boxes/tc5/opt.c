@@ -5,7 +5,23 @@
 #include "miscellaneous.h"
 #include "ct.h"
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 #define	MST(i,j)	MST_T[i+i+j-3]
+
+char * eemalloc();
+int tc_tracew();
+void tc_unrenumber();
+void tc_compact();
+void tc_coinc();
+void tc_text();
+void tc_restore();
+void unlink();
+void tc_ctrenumber();
+void tc_print_ct();
+void tc_todd_coxeter();
+
+void
 tc_mst(tc_pvar)
 struct  tc_str_vars     *tc_pvar;
 {
@@ -217,6 +233,7 @@ Int	*ct;
 	}
 	return i;
 }			
+void
 tc_rc(coset,stop,desire,tc_pvar)
 Int	coset;
 Int	stop;
@@ -308,6 +325,7 @@ char	*tc_save();
 	}
 	}
 }
+void
 tc_normcl(parmtr, tc_pvar)
 Int 	parmtr;
 struct  tc_str_vars     *tc_pvar;

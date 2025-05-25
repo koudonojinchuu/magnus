@@ -83,9 +83,17 @@ fsa  *fsa_composite();
 void  diff_reduce();
 void  diff_reduce_wl();
 boolean fsa_equal();
-void fsa_clear();
-void rws_clear();
+void  fsa_clear();
+void  rws_clear();
+void  fsa_read();
+void  fsa_labeled_minimize();
+void  fsa_ip_labeled_minimize();
+void  fsa_print();
+void  unlink();
+void  fsa_minimize();
+void  fsa_ip_minimize();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

@@ -46,6 +46,11 @@ void	command_line(FILE **fp, int argc, char *argv[], int *n);
 void    command_input(FILE **fp, int *n);
 #endif
 
+/* defined elsewhere */
+void printword(FILE *fp, char *word);
+/* --- */
+
+int
 #ifndef NO_CMD_LINE /* version that does not use command line - such as Mac */
 main(int argc, char *argv[])
 #else

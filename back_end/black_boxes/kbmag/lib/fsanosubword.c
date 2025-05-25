@@ -52,6 +52,8 @@ int short_hash_locate();
 void short_hash_clear();
 unsigned short* short_hash_rec();
 int short_hash_rec_len();
+void compressed_transitions_read();
+void unlink();
 
 fsa *
 fsa_nosub_exists(fsaptr,op_table_type,destroy,tempfilename)

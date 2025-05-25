@@ -2,6 +2,9 @@
 #include "todd_coxeter.h"
 #include <stdlib.h>
 
+void tc_unrenumber();
+void tc_newrel_newsg();
+
 Void
 tc_todd_coxeter(restart,tc_pvar)
 Int 	restart;

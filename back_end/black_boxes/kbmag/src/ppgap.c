@@ -34,6 +34,7 @@ void printbuffer();
 void add_to_buffer();
 void rws_clear();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

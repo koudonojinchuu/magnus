@@ -18,7 +18,7 @@
 template <class T>
 void QueueOf<T>::push( const T& t ) 
 { 
-  append(t); 
+  this->append(t); 
 }
 
 template class QueueOf<int>;

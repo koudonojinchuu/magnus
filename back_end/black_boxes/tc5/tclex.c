@@ -25,6 +25,7 @@ char match[] = {
 'A' ,'A' ,'A' ,'A' ,'A' ,'A' ,'A' ,'A' ,
 'A' ,'A' ,'A' ,01  ,01  ,01  ,01  ,01  ,
 0};
+int
 yylex(){
 register	int     c;
 register	int     s;

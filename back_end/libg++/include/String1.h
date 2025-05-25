@@ -323,9 +323,9 @@ public:
   //                        const Regex&  sep);
 
   friend String     common_prefix(const String& x, const String& y, 
-                                  int startpos = 0);
+                                  int startpos /* = 0 */);
   friend String     common_suffix(const String& x, const String& y, 
-                                  int startpos = -1);
+                                  int startpos /* = -1 */);
   friend String     replicate(char        c, int n);
   friend String     replicate(const String&     y, int n);
   friend String     join(String src[], int n, const String& sep);
@@ -365,8 +365,8 @@ public:
   friend istream&   operator>>(istream& s, String& x);
 
   friend int        readline(istream& s, String& x, 
-                             char terminator = '\n',
-                             int discard_terminator = 1);
+                             char terminator /* = '\n' */,
+                             int discard_terminator /* = 1 */);
 
 // status
 

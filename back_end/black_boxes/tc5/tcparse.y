@@ -11,7 +11,12 @@ extern	char *progname;
 Rel_stk_type *rel_pt, *rel_end; 
 extern	Word_pt *w_pt, word_;
 extern Enum_def  enumd, *pt;
-int numb;
+extern int numb;
+
+int yylex();
+int yyerror(char *);
+void init_gen_stk();
+void int_power();
 
 char* eemalloc(unsigned n); /* check return from malloc */ 
 
@@ -32,19 +37,19 @@ words:	  ';'  { /* no words */
                 NumOfWord = 0;
                 Pt2Word = (Rel_stk_type *) 0;
                 init_gen_stk(); /* initialize generator stack */
-                return;
+                return 0;
                           }
 	| ordwords ';' {
                 NumOfWord = numb;
                 Pt2Word = rel_pt;
                 init_gen_stk(); /* initialize generator stack */
-                return;
+                return 0;
                 }
 	| numwords ';' {
                 NumOfWord = numb;
                 Pt2Word = rel_pt;
                 init_gen_stk(); /* initialize generator stack */
-                return;
+                return 0;
                 }
         ;
 ordwords: word {  /* get word one by one.  */
@@ -294,13 +299,9 @@ num_aterm:  '(' num_word ')' {
 extern Gen_stk_type gen_stk[]; 
 extern Word_pt *w_pt, word_;
 extern Enum_def  enumd, *pt;
-char 	*infile;	/* input file name */ 
-int numb,lineno; 
-execerror(s,t) /* print error message then exit */
-char *s, *t;
-{       warning(s,t);
-        exit(1); /* cause normal program termination. */
-}
+extern char 	*infile;	/* input file name */ 
+extern int numb,lineno; 
+void
 warning(s, t)
 /* print warning massege */
 char *s, *t;
@@ -311,6 +312,12 @@ char *s, *t;
                 fprintf(stderr, " in %s", infile);
         fprintf(stderr, " near line %d\n", lineno);
         exit(1);
+}
+void
+execerror(s,t) /* print error message then exit */
+char *s, *t;
+{       warning(s,t);
+        exit(1); /* cause normal program termination. */
 }
 
 char *eemalloc(n) /* check return from malloc */ 
@@ -323,6 +330,7 @@ unsigned n;
 	}
         return p;
 }  
+void
 init_gen_stk() /* initialize group generator stack */
 { 
 	int i;
@@ -348,6 +356,7 @@ char *s;
 	p->next = (Rel_stk_type *) 0;
  	return p; 
 } 
+void
 int_power(p, cs, n) /* deal with integer power for a word */ 
 char *p;
 char *cs; 

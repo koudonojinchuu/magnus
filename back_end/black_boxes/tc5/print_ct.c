@@ -3,6 +3,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+char* eemalloc(unsigned n);
+int tc_cosrep();
+int tc_normal();
+int tc_compact();
+void tc_ctrenumber();
+void tc_mst();
+
 #define CT_T(i,j)	ct[(i-1) * NCOL + j + 1]
 Void
 tc_print_ct(n1, n2, n3, tc_pvar)
@@ -87,6 +94,7 @@ Int 	o;
 	}
 }
 /* End File */
+void
 tc_sc(n, tc_pvar)
 Int     n;
 struct  tc_str_vars     *tc_pvar;
@@ -162,6 +170,7 @@ Int	o;
 	if (sc_flag == 0)
 		fprintf(fout," No stabilising cosets.\n");
 }
+void
 tc_cycles(tc_pvar)
 struct  tc_str_vars     *tc_pvar;
 {
@@ -243,6 +252,7 @@ char	tem[30];
 	for (; y < p; y++)
 		*y = (*y < 0) ? -*y : *y;
 }	
+void
 tc_o(o, tc_pvar)
 Int	o;
 struct  tc_str_vars     *tc_pvar;

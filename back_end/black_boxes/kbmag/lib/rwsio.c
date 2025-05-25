@@ -30,6 +30,7 @@
 #include "fsa.h"
 #include "rws.h"
 #include "externals.h"
+#include <time.h>
 
 extern int 	tidyint,
 		maxeqns,
@@ -96,6 +97,8 @@ void fsa_init();
 void fsa_table_init();
 void srec_copy();
 void fsa_print();
+void check_next_char(FILE*, int);
+void read_word();
 
 void
 initialise_reduction_fsa()

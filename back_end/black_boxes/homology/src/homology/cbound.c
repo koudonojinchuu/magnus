@@ -50,6 +50,7 @@
 #include <homcommon.h>
 #include <grpinput.h>
 #include <2dimbdry.h>
+#include <string.h>
 
 /***********************************************************************/
 /* De-comment the line below if the system you are using does not make */
@@ -74,13 +75,13 @@ void    command_input(FILE **fp);
 
 
 /**** GLOBALS USED BY THE LIBRARY FUNCTIONS ****/
-int			Num_states,		/* Number states in Fsa */
+extern int			Num_states,		/* Number states in Fsa */
 			Num_gens,		/* Number of generators in group */
 			Num_rules,		/* Number of Rewriting rules */
 			Start,			/* Start state of the Fsa */
 			**Fsa;			/* Finite State Automata */
 
-char		**Word1,		/* LHS of rewriting rules */
+extern char		**Word1,		/* LHS of rewriting rules */
 			**Word2,		/* RHS of rewriting rules */
 			**Alphabet;		/* Gives the string version of a generator's
 				       								numeric value */
@@ -89,6 +90,7 @@ char		**Word1,		/* LHS of rewriting rules */
 int			Boundary_type = TRIVIAL;			/* default */
 
 
+void
 #ifndef NO_CMD_LINE /* version that does not use command line - such as Mac */
 main(int argc, char *argv[])
 #else

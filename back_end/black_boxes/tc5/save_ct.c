@@ -4,6 +4,13 @@
 #include "tcyacc.h"
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
+int yyerror(char *);
+void free_space_r();
+void free_space_s();
+void init_pointer();
+extern char *eemalloc();
 char *
 tc_save(tc_pvar)
 struct tc_str_vars	*tc_pvar;
@@ -43,7 +50,7 @@ struct tc_str_vars	*tc_pvar;
 /* now out_file is in format: Enum_name.hour:minute  */
 	tcout = fopen(out_file, "w");
 	if (tcout == (FILE *) 0) {
-		yyerror(7);
+		yyerror("7");
 		return out_file;
 	}
 	fprintf(fout, "This enumeration information is saved in %s\n",out_file);
@@ -150,6 +157,7 @@ struct tc_str_vars	*tc_pvar;
 	fclose(tcout);
 	return out_file;
 }
+void
 tc_restore(tc_pvar)
 struct tc_str_vars       *tc_pvar;
 {
@@ -171,7 +179,7 @@ struct tc_str_vars       *tc_pvar;
 	Int *p;
 
 	if ((tcout = fopen(FILE_NAME, "r")) == (FILE *) 0) {
-                yyerror(7);
+                yyerror("7");
                 return;
         }
 	fscanf(tcout,"%d %d", &c_tab, &info_space);
@@ -373,6 +381,7 @@ struct tc_str_vars       *tc_pvar;
 	fclose(tcout);
 	return;
 }
+void
 init_pointer(tc_pvar)
 struct tc_str_vars       *tc_pvar;
 {

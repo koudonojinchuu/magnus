@@ -41,6 +41,7 @@ void  fsa_print();
 void  fsa_clear();
 void  fsa_table_dptr_init();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];

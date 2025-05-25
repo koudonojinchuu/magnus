@@ -36,7 +36,8 @@ void skip_gap_expression();
 void read_int();
 void read_string();
 void process_names();
-void read_words();
+void read_word();
+void check_next_char(FILE*, int);
 
 void
 read_kbinput_simple(rfile,check)

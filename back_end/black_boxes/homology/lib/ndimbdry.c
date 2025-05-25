@@ -66,12 +66,13 @@
 int Subcube_nd_count, Topcube_nd_count, Topcube_d_count, Subcube_d_count;
 int Max_level;
 
-/* Functions used.... */
-extern void printword(FILE *fp, char *word);
-
 static void init_stats(void);
 
 #endif
+
+/* defined elsewhere */
+extern void printword(FILE *fp, char *word);
+/* --- */
 
 
 /************************************************************/

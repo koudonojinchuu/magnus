@@ -33,7 +33,9 @@ void  fsa_read();
 fsa  *fsa_exists();
 void  fsa_print();
 void  fsa_clear();
+void  fsa_minimize();
 
+void
 main(argc, argv)
         int             argc;
         char           *argv[];
