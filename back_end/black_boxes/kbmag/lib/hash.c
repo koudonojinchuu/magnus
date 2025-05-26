@@ -28,22 +28,22 @@
 /* if less space than this in hash-table, re-allocate */
 
 /* The following functions are defined in this file and visible externally */
-void 	hash_init();
-void	short_hash_init();
-void	hash_clear();
-void	short_hash_clear();
-int	hash_rec_len();
-int	short_hash_rec_len();
-int	*hash_rec();
-unsigned short	*short_hash_rec();
-int	hash_locate();
-int	short_hash_locate();
+void 	hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+void	short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+void	hash_clear(hash_table *htptr);
+void	short_hash_clear(short_hash_table *htptr);
+int	hash_rec_len(hash_table *htptr, int n);
+int	short_hash_rec_len(short_hash_table *htptr, int n);
+int	*hash_rec(hash_table *htptr, int n);
+unsigned short	*short_hash_rec(short_hash_table *htptr, int n);
+int	hash_locate(hash_table *htptr, int reclen);
+int	short_hash_locate(short_hash_table *htptr, int reclen);
 
 /* The following functions should be used only within this file */
-void hash_morerecs();
-void short_hash_morerecs();
-void hash_morespace();
-void short_hash_morespace();
+void hash_morerecs(hash_table *htptr);
+void short_hash_morerecs(short_hash_table *htptr);
+void hash_morespace(hash_table *htptr);
+void short_hash_morespace(short_hash_table *htptr);
 
 void
 hash_init(htptr,fixed,len,num_recs_inc,space_inc)

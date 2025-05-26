@@ -35,25 +35,25 @@
    /* if less space than this in hash-table, re-allocate */
 
 /* Functions defined in this file: */
-fsa * fsa_nosub_exists();
-fsa * fsa_nosub_exists_short();
-fsa * fsa_nosub_exists_int();
+fsa * fsa_nosub_exists(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa * fsa_nosub_exists_short(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa * fsa_nosub_exists_int(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
 
 /* Functions used in this file and defined elsewhere */
-int sparse_target();
-void fsa_init();
-void fsa_table_dptr_init();
-void fsa_set_is_initial();
-void fsa_set_is_accepting();
-void srec_copy();
-void fsa_clear();
-void short_hash_init();
-int short_hash_locate();
-void short_hash_clear();
-unsigned short* short_hash_rec();
-int short_hash_rec_len();
-void compressed_transitions_read();
-void unlink();
+int sparse_target(int g, int *p1, int *p2);
+void fsa_init(fsa *fsaptr);
+void fsa_table_dptr_init(fsa *fsaptr);
+/* void fsa_set_is_initial(); // Not directly used in this file's provided code */
+void fsa_set_is_accepting(fsa *fsaptr);
+void srec_copy(srec *srptr1, srec *srptr2);
+void fsa_clear(fsa *fsaptr);
+void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+int short_hash_locate(short_hash_table *htptr, int reclen);
+void short_hash_clear(short_hash_table *htptr);
+unsigned short* short_hash_rec(short_hash_table *htptr, int n);
+int short_hash_rec_len(short_hash_table *htptr, int n);
+void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
+/* void unlink(); // System function, remove local prototype */
 
 fsa *
 fsa_nosub_exists(fsaptr,op_table_type,destroy,tempfilename)

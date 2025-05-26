@@ -12,24 +12,24 @@
 #include "externals.h"
 
 
-extern void 	(*reduce_word)();
+extern void 	(*reduce_word)(char *w);
 static char	testword[4096]; /* Used for reducing words */
 
 /* Functions defined in this file: */
-void	initialise_wd_fsa();
-void 	build_wd_fsa();
-boolean	add_wd_fsa();
-void 	make_full_wd_fsa();
-void 	clear_wd_fsa();
-int	diff_no();
-void    calculate_inverses();
+void	initialise_wd_fsa(fsa *wd_fsaptr, srec *alphptr, int maxwdiffs);
+void 	build_wd_fsa(fsa *wd_fsaptr, rewriting_system rws, boolean *new_wd);
+boolean	add_wd_fsa(fsa *wd_fsaptr, reduction_equation *eqn, int *inv, boolean reverse);
+void 	make_full_wd_fsa(fsa *wd_fsaptr, int *inv, int start_no);
+void 	clear_wd_fsa(fsa *wd_fsaptr);
+int	diff_no(fsa *wd_fsaptr, char *w);
+void    calculate_inverses(int **invptr, int ngens);
 
 /* Functions used in this file defined in other files: */
-void	fsa_init();
-void	fsa_table_init();
-void	fsa_table_dptr_init();
-int	add_word_to_buffer();
-void srec_copy();
+void	fsa_init(fsa *fsaptr);
+void	fsa_table_init(table_struc *tableptr, int maxstates, int ne);
+void	fsa_table_dptr_init(fsa *fsaptr);
+int	add_word_to_buffer(FILE *wfile, char *word, char **symbols);
+void    srec_copy(srec *srptr1, srec *srptr2);
 
 void
 initialise_wd_fsa(wd_fsaptr,alphptr,maxwdiffs)

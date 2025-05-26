@@ -31,17 +31,18 @@
 #include "hash.h"
 #include "externals.h"
 
-int  fsa_checkmult();
-int  fsa_checkmult_short();
-int  fsa_checkmult_int();
+/* Functions defined in this file: */
+int  fsa_checkmult(fsa *multptr, reduction_equation *eqnptr, int maxeqns);
+int  fsa_checkmult_short(fsa *multptr, reduction_equation *eqnptr, int maxeqns);
+int  fsa_checkmult_int(fsa *multptr, reduction_equation *eqnptr, int maxeqns);
 
 /* Functions used in this file and defined elsewhere */
-int sparse_target();
-void short_hash_init();
-int  short_hash_locate();
-void short_hash_clear();
-unsigned short* short_hash_rec();
-int short_hash_rec_len();
+int sparse_target(int g, int *p1, int *p2);
+void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+int  short_hash_locate(short_hash_table *htptr, int reclen);
+void short_hash_clear(short_hash_table *htptr);
+unsigned short* short_hash_rec(short_hash_table *htptr, int n);
+int short_hash_rec_len(short_hash_table *htptr, int n);
 
 int
 fsa_checkmult(multptr,eqnptr,maxeqns)

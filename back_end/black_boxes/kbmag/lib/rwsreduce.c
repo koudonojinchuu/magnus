@@ -13,14 +13,11 @@ extern int	maxslowhistoryspace,
 extern rewriting_system	rws;
 
 /* Functions defined in this file: */
-void rws_reduce();
-void slow_rws_reduce();
-boolean slow_check_rws_reduce();
+void rws_reduce(char *w);
+void slow_rws_reduce(char *w);
+boolean slow_check_rws_reduce(char *w, int i);
 
-void
-rws_reduce(w)
-	char     	      	*w;
-
+void rws_reduce(char *w)
 /* Reduce "w", by replacing any occurrences of the LHS of the current
  * equations in the rewriting system by their RHS.
  * The reduction fsa for the rewriting system rws is used for this,and it is

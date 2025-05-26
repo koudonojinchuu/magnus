@@ -13,28 +13,27 @@
 #include "externals.h"
 
 /* Functions defined in this file: */
-fsa * fsa_triples();
-
+fsa * fsa_triples(fsa *waptr, fsa *diffptr, storage_type op_table_type, boolean destroy, char *tempfilename, reduction_equation *eqnptr, int maxeqns, boolean idlabel, boolean eqnstop, boolean readback);
 
 /* Functions used in this file and defined elsewhere */
-boolean srec_equal();
-boolean table_equal();
-boolean fsa_equal();
-int sparse_target();
-void fsa_init();
-void fsa_set_is_initial();
-void fsa_set_is_accepting();
-void srec_copy();
-void fsa_clear();
-void short_hash_init();
-int short_hash_locate();
-void short_hash_clear();
-unsigned short* short_hash_rec();
+boolean srec_equal(srec *srptr1, srec *srptr2);
+/* boolean table_equal(); // Not used in this file's provided code */
+/* boolean fsa_equal(); // Not used in this file's provided code */
+/* int sparse_target(); // Not directly called */
+void fsa_init(fsa *fsaptr);
+/* void fsa_set_is_initial(); // Not used in this file's provided code */
+/* void fsa_set_is_accepting(); // Not used in this file's provided code */
+void srec_copy(srec *srptr1, srec *srptr2);
+void fsa_clear(fsa *fsaptr);
+void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+int short_hash_locate(short_hash_table *htptr, int reclen);
+void short_hash_clear(short_hash_table *htptr);
+unsigned short* short_hash_rec(short_hash_table *htptr, int n);
 
 /* defined elsewhere */
-void  fsa_table_dptr_init();
-void unlink();
-void compressed_transitions_read();
+void  fsa_table_dptr_init(fsa *fsaptr);
+/* void unlink(); // System function, remove local prototype */
+void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
 /* --- */
 
 fsa *

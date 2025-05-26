@@ -21,11 +21,10 @@ extern int      weight[];
 extern int      maxreducelen;
 
 /* Functions defined in this file */
-void diff_reduce_wl();
-void make_substitution();
+void diff_reduce_wl(char *w);
+void make_substitution(char *w, int start, int end);
 void
-diff_reduce_wl(w)
-	char *w;
+diff_reduce_wl(char *w)
 /* w is the word to be reduced using the word-difference machine  wd_fsa.
  * We first use the word-acceptor to locate reducible strings, and then use
  * the function make_substituion to make the actual substitution.

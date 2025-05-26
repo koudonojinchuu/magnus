@@ -10,39 +10,34 @@
 #include "externals.h"
 
 /* Functions defined in this file: */
-fsa  *fsa_genmult2();
-fsa  *fsa_genmult2_short();
-fsa  *fsa_genmult2_int();
-fsa  *fsa_genmult3();
-fsa  *fsa_genmult3_short();
-fsa  *fsa_genmult3_int();
-void  fsa_makemult();
-void  fsa_makemult2();
-fsa  *fsa_composite();
-fsa  *fsa_composite_short();
-fsa  *fsa_composite_int();
+fsa  *fsa_genmult2(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback);
+fsa  *fsa_genmult2_short(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback);
+fsa  *fsa_genmult2_int(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback);
+fsa  *fsa_genmult3(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback);
+fsa  *fsa_genmult3_short(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback);
+fsa  *fsa_genmult3_int(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback);
+void  fsa_makemult(fsa *genmultptr, int g);
+void  fsa_makemult2(fsa *genmult2ptr, int g1, int g2);
+fsa  *fsa_composite(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback);
+fsa  *fsa_composite_short(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback);
+fsa  *fsa_composite_int(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback);
 
 /* Functions used in this file and defined elsewhere */
-boolean fsa_equal();
-int sparse_target();
-void fsa_init();
-void fsa_set_is_accepting();
-void srec_copy();
-void fsa_clear();
-void hash_init();
-void short_hash_init();
-int  hash_locate();
-int  short_hash_locate();
-void hash_clear();
-void short_hash_clear();
-int* hash_rec();
-unsigned short* short_hash_rec();
-int hash_rec_len();
-int short_hash_rec_len();
-void compressed_transitions_read();
-void unlink();
-boolean srec_equal();
-void srec_clear();
+boolean fsa_equal(fsa *fsaptr1, fsa *fsaptr2);
+int sparse_target(int g, int *p1, int *p2);
+void fsa_init(fsa *fsaptr);
+void fsa_set_is_accepting(fsa *fsaptr);
+void srec_copy(srec *srptr1, srec *srptr2);
+void fsa_clear(fsa *fsaptr);
+void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+int  short_hash_locate(short_hash_table *htptr, int reclen);
+void short_hash_clear(short_hash_table *htptr);
+unsigned short* short_hash_rec(short_hash_table *htptr, int n);
+int short_hash_rec_len(short_hash_table *htptr, int n);
+void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
+/* void unlink(); // System function, ensure <unistd.h> or similar is included if needed, and remove this local prototype */
+boolean srec_equal(srec *srptr1, srec *srptr2);
+void srec_clear(srec *srptr);
 
 fsa *
 fsa_genmult2(genmultptr,op_table_type,destroy,genmult2filename,readback)

@@ -19,31 +19,30 @@ char 		*wbuffer; /* used only for calls of read_word - this can
                            */
 
 /* Functions defined in this file: */
-void srec_print();
-void table_print();
-void fsa_print();
-void srec_read();
-void table_read();
-void fsa_read();
-void compressed_transitions_read();
-
+void srec_print(FILE *wfile, srec *srptr, char *name, int offset, char *endstring);
+void table_print(FILE *wfile, table_struc *tableptr, char *name, int offset, char *endstring, int ns, int ne);
+void fsa_print(FILE *wfile, fsa *fsaptr, char *name);
+void srec_read(FILE *rfile, srec *srptr, int maxsize);
+void table_read(FILE *rfile, table_struc *tableptr, storage_type table_storage_type, int dr, int ns, int maxstates, int ne);
+void fsa_read(FILE *rfile, fsa *fsaptr, storage_type table_storage_type, int dr, int maxstates, boolean assignment, char *name);
+void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
 
 /* Functions used in this file defined outside this file: */
-void printbuffer();
-void add_to_buffer();
-int add_word_to_buffer();
-void read_ident();
-void read_string();
-void read_int();
-void read_word();
-void read_delim();
-int int_len();
-int sparse_target();
-void fsa_init();
-void check_next_char(FILE*, int);
-void process_names();
-void table_read();
-void fsa_table_init();
+void printbuffer(FILE *wfile);
+void add_to_buffer(int n, char *w);
+int add_word_to_buffer(FILE *wfile, char *word, char **symbols);
+void read_ident(FILE *rfile, char *ident, int *delim, boolean inv);
+void read_string(FILE *rfile, char *string, int *delim);
+void read_int(FILE *rfile, int *integ, int *delim);
+void read_word(FILE *rfile, char *gen_word, char *end_word, int *delim, char **name, int num_names, boolean check);
+void read_delim(FILE *rfile, int *delim);
+int int_len(int n);
+int sparse_target(int g, int *p1, int *p2);
+void fsa_init(fsa *fsaptr);
+void check_next_char(FILE *rfile, int c);
+void process_names(char **name, int num_names);
+/* void table_read(); // This is defined within fsaio.c, so not an external function here */
+void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
 
 void
 srec_print(wfile,srptr,name,offset,endstring)

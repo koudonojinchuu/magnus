@@ -39,44 +39,43 @@
 typedef enum {AND, OR, AND_NOT} binop;
 
 /* Functions defined in this file: */
-boolean srec_equal();
-boolean table_equal();
-boolean fsa_equal();
-fsa *fsa_and();
-fsa *fsa_or();
-fsa *fsa_and_not();
-fsa *fsa_binop();
-fsa *fsa_or();
-fsa *fsa_not();
-fsa *fsa_exists();
-fsa *fsa_exists_short();
-fsa *fsa_exists_int();
-fsa *fsa_greater_than();
+boolean srec_equal(srec *srptr1, srec *srptr2);
+boolean table_equal(table_struc *tableptr1, table_struc *tableptr2, int ne, int ns);
+boolean fsa_equal(fsa *fsaptr1, fsa *fsaptr2);
+fsa *fsa_and(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa *fsa_or(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa *fsa_and_not(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa *fsa_binop(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename, binop op);
+fsa *fsa_not(fsa *fsaptr, storage_type op_table_type);
+fsa *fsa_exists(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa *fsa_exists_short(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa *fsa_exists_int(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
+fsa *fsa_greater_than(srec *alphptr);
 
 /* Functions used in this file and defined elsewhere */
-int sparse_target();
-void fsa_init();
-void fsa_table_init();
-void fsa_table_dptr_init();
-void fsa_set_is_initial();
-void fsa_set_is_accepting();
-void srec_copy();
-void fsa_copy();
-void fsa_clear();
-void hash_init();
-void short_hash_init();
-int  hash_locate();
-int  short_hash_locate();
-void hash_clear();
-void short_hash_clear();
-int* hash_rec();
-unsigned short* short_hash_rec();
-int hash_rec_len();
-int short_hash_rec_len();
-void fsa_clear_rws();
-void compressed_transitions_read();
-void unlink(); // ??
-void fsa_delete_state();
+int sparse_target(int g, int *p1, int *p2);
+void fsa_init(fsa *fsaptr);
+void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
+void fsa_table_dptr_init(fsa *fsaptr);
+void fsa_set_is_initial(fsa *fsaptr);
+void fsa_set_is_accepting(fsa *fsaptr);
+void srec_copy(srec *srptr1, srec *srptr2);
+void fsa_copy(fsa *fsaptr1, fsa *fsaptr2);
+void fsa_clear(fsa *fsaptr);
+void hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+int  hash_locate(hash_table *htptr, int reclen);
+int  short_hash_locate(short_hash_table *htptr, int reclen);
+void hash_clear(hash_table *htptr);
+void short_hash_clear(short_hash_table *htptr);
+int* hash_rec(hash_table *htptr, int n);
+unsigned short* short_hash_rec(short_hash_table *htptr, int n);
+int hash_rec_len(hash_table *htptr, int n);
+int short_hash_rec_len(short_hash_table *htptr, int n);
+void fsa_clear_rws(fsa *fsaptr);
+void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
+/* void unlink(); // System function, ensure <unistd.h> or similar is included, remove this local prototype */
+void fsa_delete_state(fsa *fsaptr, int stateno);
 
 boolean
 srec_equal(srptr1,srptr2)

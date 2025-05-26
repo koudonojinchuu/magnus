@@ -13,18 +13,18 @@
 #include "externals.h"
 
 /* Functions defined in this file */
-void fsa_ip_minimize();
-void fsa_ip_labeled_minimize();
+void fsa_ip_minimize(fsa *fsaptr);
+void fsa_ip_labeled_minimize(fsa *fsaptr);
 
 /* Functions used in this file and defined elsewhere */
-void hash_init();
-void hash_clear();
-int *hash_rec();
-int hash_rec_len();
-int hash_locate();
-void srec_clear();
-void unlink();
-void fsa_table_init();
+void hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+void hash_clear(hash_table *htptr);
+int *hash_rec(hash_table *htptr, int n);
+int hash_rec_len(hash_table *htptr, int n);
+int hash_locate(hash_table *htptr, int reclen);
+void srec_clear(srec *srptr);
+/* void unlink(); // System function, ensure <unistd.h> or similar is included if needed, and remove this local prototype */
+void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
 
 void
 fsa_ip_minimize(fsaptr)

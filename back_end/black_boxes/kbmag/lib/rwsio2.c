@@ -23,21 +23,21 @@ extern boolean  maxreducelenset;
 extern rewriting_system rws;
 
 /* Functions defined in this file */
-void read_kbinput_simple();
-void read_gens();
-void read_inverses();
-void read_eqns_simple();
-void rws_clear();
+void read_kbinput_simple(FILE *rfile, boolean check);
+void read_gens(FILE *rfile);
+void read_inverses(FILE *rfile);
+void read_eqns_simple(FILE *rfile, boolean check);
+void rws_clear(rewriting_system *rwsptr);
 
 /* Functions used in this file defined in other files: */
-void read_ident();
-void read_delim();
-void skip_gap_expression();
-void read_int();
-void read_string();
-void process_names();
-void read_word();
-void check_next_char(FILE*, int);
+void read_ident(FILE *rfile, char *ident, int *delim, boolean inv);
+void read_delim(FILE *rfile, int *delim);
+void skip_gap_expression(FILE *rfile, int *delim);
+void read_int(FILE *rfile, int *integ, int *delim);
+void read_string(FILE *rfile, char *string, int *delim);
+void process_names(char **name, int num_names);
+void read_word(FILE *rfile, char *gen_word, char *end_word, int *delim, char **name, int num_names, boolean check);
+void check_next_char(FILE *rfile, int c);
 
 void
 read_kbinput_simple(rfile,check)

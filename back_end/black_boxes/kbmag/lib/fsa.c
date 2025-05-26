@@ -16,39 +16,39 @@ char *type_names[] = {"simple", "identifiers", "words", "strings",
 char *flag_names[] = {"DFA","NFA","minimized","BFS","accessible","trim","RWS"};
 
 /* Functions defined in this file: */
-int sparse_target();
-void fsa_init();
-void fsa_table_init();
-void fsa_set_is_initial();
-void fsa_set_is_accepting();
-void fsa_table_dptr_init();
-void srec_copy();
-void table_copy();
-void fsa_copy();
-void srec_clear();
-void table_clear();
-void fsa_clear();
-void fsa_delete_state();
-void fsa_permute_states();
-void fsa_clear_rws();
-void fsa_make_accessible();
-void fsa_minimize();
-void fsa_labeled_minimize();
-void fsa_bfs();
-int fsa_count();
-boolean fsa_enumerate();
+int sparse_target(int g, int *p1, int *p2);
+void fsa_init(fsa *fsaptr);
+void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
+void fsa_set_is_initial(fsa *fsaptr);
+void fsa_set_is_accepting(fsa *fsaptr);
+void fsa_table_dptr_init(fsa *fsaptr);
+void srec_copy(srec *srptr1, srec *srptr2);
+void table_copy(table_struc *tableptr1, table_struc *tableptr2, int ne, int ns);
+void fsa_copy(fsa *fsaptr1, fsa *fsaptr2);
+void srec_clear(srec *srptr);
+void table_clear(table_struc *tableptr, int ns);
+void fsa_clear(fsa *fsaptr);
+void fsa_delete_state(fsa *fsaptr, int stateno);
+void fsa_permute_states(fsa *fsaptr, int *perm);
+void fsa_clear_rws(fsa *fsaptr);
+void fsa_make_accessible(fsa *fsaptr);
+void fsa_minimize(fsa *fsaptr);
+void fsa_labeled_minimize(fsa *fsaptr);
+void fsa_bfs(fsa *fsaptr);
+int fsa_count(fsa *fsaptr);
+boolean fsa_enumerate(FILE *wfile, fsa *fsaptr, int min, int max, boolean putcomma);
 
 /* Functions used in this file and defined elsewhere */
-void add_to_buffer();
-void hash_init();
-void hash_clear();
-int *hash_rec();
-int hash_rec_len();
-int hash_locate();
-void add_word_to_buffer();
-int add_iword_to_buffer();
-int int_len();
-fsa * fsa_and();
+void add_to_buffer(int n, char *w);
+void hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+void hash_clear(hash_table *htptr);
+int *hash_rec(hash_table *htptr, int n);
+int hash_rec_len(hash_table *htptr, int n);
+int hash_locate(hash_table *htptr, int reclen);
+int add_word_to_buffer(FILE *wfile, char *word, char **symbols);
+int add_iword_to_buffer(FILE *wfile, int *word, char **symbols);
+int int_len(int n);
+fsa * fsa_and(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
 
 int
 sparse_target(g,p1,p2)
