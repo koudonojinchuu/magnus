@@ -17,20 +17,14 @@
 #include <stdio.h>
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
+#include "fsalogic.h"
 #include "definitions.h"
 
 FILE *rfile,
-     *wfile,
-     *fopen();
+     *wfile;
 
 void  badusage();
-
-/* Functions defined in other files used in this file */
-void  fsa_read();
-fsa  *fsa_not();
-void  fsa_print();
-void  fsa_clear();
-void  fsa_minimize();
 
 void
 main(argc, argv)

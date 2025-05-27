@@ -7,35 +7,22 @@
  */
 
 #include <stdlib.h>
+#include <unistd.h> // For unlink()
 #include "defs.h"
 #include "fsa.h"
 #include "hash.h"
 #include "externals.h"
-
-/* Functions defined in this file */
-void fsa_ip_minimize(fsa *fsaptr);
-void fsa_ip_labeled_minimize(fsa *fsaptr);
-
-/* Functions used in this file and defined elsewhere */
-void hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-void hash_clear(hash_table *htptr);
-int *hash_rec(hash_table *htptr, int n);
-int hash_rec_len(hash_table *htptr, int n);
-int hash_locate(hash_table *htptr, int reclen);
-void srec_clear(srec *srptr);
-/* void unlink(); // System function, ensure <unistd.h> or similar is included if needed, and remove this local prototype */
-void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
+#include "fsaipmin.h"
 
 void
-fsa_ip_minimize(fsaptr)
-	fsa	*fsaptr;
+fsa_ip_minimize(fsa *fsaptr)
 /* Minimize the fsa *fsaptr, of which transitions are stored externally */
 { int *block_numa, *block_numb, *block_swap, i, j, k, l, len,
        *ptr, *ptr2, *ptr2e, *ht_ptr,
        ne, ns_orig, *fsarow, **table, ns_final, ns_new, num_iterations;
   hash_table ht;
   boolean fixed;
-  FILE *rfile, *fopen();
+  FILE *rfile;
 
   if (fsaptr->table->table_type==SPARSE && fsaptr->table->denserows>0) {
     fprintf(stderr,
@@ -227,8 +214,7 @@ fsa_ip_minimize(fsaptr)
 }
 
 void
-fsa_ip_labeled_minimize(fsaptr)
-	fsa	*fsaptr;
+fsa_ip_labeled_minimize(fsa *fsaptr)
 /* This is the minimization function for fsa's which misght have more than
  * two categories of states. 
  * We use the labeled set-record type to identify the categories, so *fsaptr
@@ -240,7 +226,7 @@ fsa_ip_labeled_minimize(fsaptr)
        ne, ns_orig, *fsarow, **table, ns_final, ns_new, num_iterations;
   hash_table ht;
   boolean fixed, *occurs;
-  FILE *rfile, *fopen();
+  FILE *rfile;
 
   if (fsaptr->table->table_type==SPARSE && fsaptr->table->denserows>0) {
     fprintf(stderr,

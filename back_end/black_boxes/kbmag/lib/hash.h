@@ -4,6 +4,9 @@
  * 24/10/94.
  */
 
+#ifndef BLACKBOX_HASH_H
+#define BLACKBOX_HASH_H
+
 typedef struct {
   boolean fixed_len; /* true if the records have fixed length */
   int rec_len;       /* the length of the records - used when fixed_len true */
@@ -126,3 +129,18 @@ typedef struct {
  * For variable length records, this will have length 0.
  */
 } short_hash_table;
+
+
+/* The following functions are defined in this hash.c and visible externally */
+void hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+void hash_clear(hash_table *htptr);
+void short_hash_clear(short_hash_table *htptr);
+int hash_rec_len(hash_table *htptr, int n);
+int short_hash_rec_len(short_hash_table *htptr, int n);
+int *hash_rec(hash_table *htptr, int n);
+unsigned short *short_hash_rec(short_hash_table *htptr, int n);
+int hash_locate(hash_table *htptr, int reclen);
+int short_hash_locate(short_hash_table *htptr, int reclen);
+
+#endif

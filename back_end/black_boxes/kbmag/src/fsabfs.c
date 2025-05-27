@@ -21,19 +21,13 @@
 #include <stdio.h>
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
 #include "definitions.h"
    
 FILE *rfile,
-     *wfile,
-     *fopen();
+     *wfile;
 
 void badusage();
-
-/* Functions defined in other files used in this file */
-void  fsa_read();
-void  fsa_bfs();
-void  fsa_print();
-void  fsa_clear();
 
 void
 main(argc, argv)

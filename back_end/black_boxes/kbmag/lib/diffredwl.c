@@ -9,20 +9,21 @@
 #include "defs.h"
 #include "fsa.h"
 #include "externals.h"
+#include <string.h> // For strlen
+#include <stdio.h>  // For fprintf, stderr
+#include <stdlib.h> // For exit
+#include "diffredwl.h"
 
 #define MLEN 32768 /* the longest word allowed in reduction process */
 #define MAXV 65536 /* The maximum number of vertices allowed. */
-static int mlen = MLEN;
-static int maxv = MAXV;
+// static int mlen = MLEN; // mlen not used
+// static int maxv = MAXV; // maxv redefined locally in make_substitution
    
-extern fsa	wd_fsa;
-extern fsa	wa;
-extern int      weight[];
-extern int      maxreducelen;
+extern fsa wd_fsa;
+extern fsa wa;
+extern int weight[];
+extern int maxreducelen;
 
-/* Functions defined in this file */
-void diff_reduce_wl(char *w);
-void make_substitution(char *w, int start, int end);
 void
 diff_reduce_wl(char *w)
 /* w is the word to be reduced using the word-difference machine  wd_fsa.
@@ -64,7 +65,7 @@ diff_reduce_wl(char *w)
 }
 
 void
-make_substitution(w,start,end)
+make_substitution(char *w, int start, int end)
 /* Find and make a substitution in the word w, using wd_fsa, beginning at
  * position 'start' and ending at position 'end'.
  * This may make the word shorter or longer.
@@ -72,20 +73,20 @@ make_substitution(w,start,end)
  * This function allocates its own space.
  * NOTE: No checks on the validity of the word are carried out.
  */
- char *w;
- int start, end;
-{ int ndiff, ngens, identity, padsymbol, wordlen, ***difftab,
+{
+  int ndiff, ngens, identity, padsymbol, wordlen, ***difftab,
       gct, *gpref, level, gen1, gen2, diff, diffct, newdiff,
       shift, cwordwt, csubwt, i, j;
-  boolean  *cf, clexprec;
+  boolean *cf, clexprec;
+  int maxv_local = MAXV; // Use a local variable for maxv
+
   struct vertexd {
-       char genno;
-       int diffno;
-       int subwt;
-       boolean lexprec;
-       struct vertexd *backptr;
-  }
-       *gptr, *ngptr, *substruc, *cstruc;
+    char genno;
+    int diffno;
+    int subwt;
+    boolean lexprec;
+    struct vertexd *backptr;
+  } *gptr, *ngptr, *substruc, *cstruc;
 
 /* vertexd is the structure used to store a vertex in the graph of strings
    for possible substitution. The components are as follows.
@@ -130,7 +131,7 @@ make_substitution(w,start,end)
  * We start by allocating space for maxv vertices, and setting the
  * vertex that we start with.
  */
-  tmalloc(gptr,struct vertexd,maxv);
+  tmalloc(gptr, struct vertexd, maxv_local);
   gptr[0].genno=0; gptr[0].diffno=identity;
   gptr[0].subwt=0; gptr[0].lexprec=FALSE; gptr[0].backptr=0;
 
@@ -231,14 +232,14 @@ make_substitution(w,start,end)
    graph.
 */
           { gct++;
-            if (gct >= maxv) {
+            if (gct >= maxv_local) {
 /* We need more space for vertices. Allocate twice the preceding space and
    copy existing data.
 */
-              tmalloc(ngptr,struct vertexd,2*maxv);
+              tmalloc(ngptr,struct vertexd,2*maxv_local);
               if (print_level>=3)
                 printf("    #Allocating more space in diff_reduce.\n");
-              for (i=0;i<maxv;i++) {
+              for (i=0;i<maxv_local;i++) {
                 ngptr[i].genno = gptr[i].genno;
                 ngptr[i].diffno = gptr[i].diffno;
                 ngptr[i].subwt = gptr[i].subwt;
@@ -254,7 +255,7 @@ make_substitution(w,start,end)
               }
               tfree(gptr);
               gptr=ngptr;
-              maxv *= 2;
+              maxv_local *= 2;
             }
 /* Define the new vertexd. */
             substruc = gptr+gct;

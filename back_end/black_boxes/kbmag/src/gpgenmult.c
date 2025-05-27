@@ -45,31 +45,23 @@
 #include <stdio.h>
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
+#include "fsaipmin.h"
+#include "fsatriples.h"
 #include "rws.h"
+#include "diffreduce.h"
+#include "worddiff.h"
 #include "definitions.h"
 #define MAXWDIFFS 2048
 #define MAXEQNS 512
 
 FILE *rfile,
-     *wfile,
-     *fopen();
+     *wfile;
 
 fsa wd_fsa; /* This is for the case that we correct the diff1 machine */
 
 void  badusage();
 void  (*reduce_word)();
-
-/* Functions defined in other files used in this file */
-void  fsa_read();
-fsa  *fsa_triples();
-void  fsa_print();
-void  fsa_labeled_minimize();
-void  fsa_ip_labeled_minimize();
-void  fsa_clear();
-void  diff_reduce();
-boolean add_wd_fsa();
-void  calculate_inverses();
-void fsa_table_dptr_init();
 
 void
 main(argc, argv)

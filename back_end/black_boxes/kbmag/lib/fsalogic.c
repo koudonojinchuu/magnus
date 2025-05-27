@@ -31,55 +31,16 @@
  */
 
 #include <stdio.h>
+#include <unistd.h> // For unlink()
 #include "defs.h"
 #include "fsa.h"
 #include "hash.h"
 #include "externals.h"
-
-typedef enum {AND, OR, AND_NOT} binop;
-
-/* Functions defined in this file: */
-boolean srec_equal(srec *srptr1, srec *srptr2);
-boolean table_equal(table_struc *tableptr1, table_struc *tableptr2, int ne, int ns);
-boolean fsa_equal(fsa *fsaptr1, fsa *fsaptr2);
-fsa *fsa_and(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa *fsa_or(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa *fsa_and_not(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa *fsa_binop(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename, binop op);
-fsa *fsa_not(fsa *fsaptr, storage_type op_table_type);
-fsa *fsa_exists(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa *fsa_exists_short(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa *fsa_exists_int(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa *fsa_greater_than(srec *alphptr);
-
-/* Functions used in this file and defined elsewhere */
-int sparse_target(int g, int *p1, int *p2);
-void fsa_init(fsa *fsaptr);
-void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
-void fsa_table_dptr_init(fsa *fsaptr);
-void fsa_set_is_initial(fsa *fsaptr);
-void fsa_set_is_accepting(fsa *fsaptr);
-void srec_copy(srec *srptr1, srec *srptr2);
-void fsa_copy(fsa *fsaptr1, fsa *fsaptr2);
-void fsa_clear(fsa *fsaptr);
-void hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-int  hash_locate(hash_table *htptr, int reclen);
-int  short_hash_locate(short_hash_table *htptr, int reclen);
-void hash_clear(hash_table *htptr);
-void short_hash_clear(short_hash_table *htptr);
-int* hash_rec(hash_table *htptr, int n);
-unsigned short* short_hash_rec(short_hash_table *htptr, int n);
-int hash_rec_len(hash_table *htptr, int n);
-int short_hash_rec_len(short_hash_table *htptr, int n);
-void fsa_clear_rws(fsa *fsaptr);
-void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
-/* void unlink(); // System function, ensure <unistd.h> or similar is included, remove this local prototype */
-void fsa_delete_state(fsa *fsaptr, int stateno);
+#include "fsalogic.h"
+#include "fsaio.h"
 
 boolean
-srec_equal(srptr1,srptr2)
-	srec *srptr1, *srptr2;
+srec_equal(srec *srptr1, srec *srptr2)
 /* Test equality of set records *srptr1 and *srptr2 */
 { int i;
   if (srptr1->type != srptr2->type)
@@ -112,9 +73,7 @@ srec_equal(srptr1,srptr2)
 }
 
 boolean
-table_equal(tableptr1,tableptr2,ne,ns)
-	table_struc *tableptr1, *tableptr2;
-	int ne, ns;
+table_equal(table_struc *tableptr1, table_struc *tableptr2, int ne, int ns)
 /* Test equality of the transition tables *tableptr1 and *tableptr2.
  * The storage-types don't need to be equal.
  */
@@ -136,8 +95,7 @@ table_equal(tableptr1,tableptr2,ne,ns)
 }
 
 boolean
-fsa_equal(fsaptr1,fsaptr2)
-	fsa *fsaptr1, *fsaptr2;
+fsa_equal(fsa *fsaptr1, fsa *fsaptr2)
 /* Test equality of the fsa's fsaptr1 and fsaptr2 */
 { int ns, ne, ni, na, i;
 
@@ -191,11 +149,7 @@ fsa_equal(fsaptr1,fsaptr2)
  */
 
 fsa *
-fsa_and(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename)
-	fsa *fsaptr1, *fsaptr2;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_and(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   if (print_level>=3)
     printf("    #Calling fsa_and.\n");
@@ -204,11 +158,7 @@ fsa_and(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_or(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename)
-	fsa *fsaptr1, *fsaptr2;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_or(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   if (print_level>=3)
     printf("    #Calling fsa_or.\n");
@@ -217,11 +167,7 @@ fsa_or(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_and_not(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename)
-	fsa *fsaptr1, *fsaptr2;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_and_not(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   if (print_level>=3)
     printf("    #Calling fsa_and_not.\n");
@@ -230,19 +176,14 @@ fsa_and_not(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_binop(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename,op)
-	fsa *fsaptr1, *fsaptr2;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
-	binop op;
+fsa_binop(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename, binop op)
 {
   int **table1, **table2, ne, ns, dr1, dr2, *fsarow,
       nt, cstate, csa, csb, im, i, g, len, ct, *ht_ptr, *tab_ptr, **table;
   boolean dense_ip1, dense_ip2, dense_op, accept;
   fsa *and_or_not;
   hash_table ht;
-  FILE *tempfile, *fopen();
+  FILE *tempfile;
 
   if (print_level>=3)
     printf("    #Calling fsa_binop.\n");
@@ -427,9 +368,7 @@ fsa_binop(fsaptr1,fsaptr2,op_table_type,destroy,tempfilename,op)
 }
 
 fsa *
-fsa_not(fsaptr,op_table_type)
-	fsa *fsaptr;
-	storage_type op_table_type;
+fsa_not(fsa *fsaptr, storage_type op_table_type)
 /* This function ought to be easy - just interchange accept and non-accept
  * states. In fact it is complicated slightly by the fact that we are
  * working with partial fsa's, so the 0 state has to become a new state,
@@ -551,11 +490,7 @@ fsa_not(fsaptr,op_table_type)
 }
 
 fsa *
-fsa_exists(fsaptr,op_table_type,destroy,tempfilename)
-	fsa *fsaptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_exists(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename)
 /* *fsaptr must be a 2-variable fsa.
  * The returned fsa accepts a word w_1 iff (w_1,w_2) is accepted by *fsaptr,
  * for some word w_2 (with the usual padding conventions).
@@ -572,11 +507,7 @@ fsa_exists(fsaptr,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_exists_short(fsaptr,op_table_type,destroy,tempfilename)
-	fsa *fsaptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_exists_short(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   int **table, ne, ngens, nsi, ns, dr, *fsarow, e, es, ef,
       nt, cstate, cs, csi, im, i, g1, len, ct, *tab_ptr;
@@ -585,7 +516,7 @@ fsa_exists_short(fsaptr,op_table_type,destroy,tempfilename)
   boolean dense_ip, dense_op, got;
   short_hash_table ht;
   fsa *exists;
-  FILE *tempfile, *fopen();
+  FILE *tempfile;
 
   if (print_level>=3)
     printf("    #Calling fsa_exists_short.\n");
@@ -827,11 +758,7 @@ fsa_exists_short(fsaptr,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_exists_int(fsaptr,op_table_type,destroy,tempfilename)
-	fsa *fsaptr;
-	table_struc op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_exists_int(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   fprintf(stderr,"Sorry - fsa_exists is not yet implemented for machines.\n");
   fprintf(stderr,"with more than 65536 states.\n");
@@ -839,8 +766,7 @@ fsa_exists_int(fsaptr,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_greater_than(alphptr)
-	srec *alphptr;
+fsa_greater_than(srec *alphptr)
 /* This constructs the two-variable fsa with base-alphabet *alphptr
  * that accepts (w_1,w_2) iff w_1 > w_2 in the shortlex ordering.
  * The shorter of the two words (if any) is padded with the padding-symbol.

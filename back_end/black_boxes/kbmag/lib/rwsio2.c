@@ -15,34 +15,16 @@
 #include "fsa.h"
 #include "rws.h"
 #include "externals.h"
-
+#include "rwsio2.h"
+#include "miscio.h"
 
 extern int  	maxeqns,
          	maxreducelen;
 extern boolean  maxreducelenset;
 extern rewriting_system rws;
 
-/* Functions defined in this file */
-void read_kbinput_simple(FILE *rfile, boolean check);
-void read_gens(FILE *rfile);
-void read_inverses(FILE *rfile);
-void read_eqns_simple(FILE *rfile, boolean check);
-void rws_clear(rewriting_system *rwsptr);
-
-/* Functions used in this file defined in other files: */
-void read_ident(FILE *rfile, char *ident, int *delim, boolean inv);
-void read_delim(FILE *rfile, int *delim);
-void skip_gap_expression(FILE *rfile, int *delim);
-void read_int(FILE *rfile, int *integ, int *delim);
-void read_string(FILE *rfile, char *string, int *delim);
-void process_names(char **name, int num_names);
-void read_word(FILE *rfile, char *gen_word, char *end_word, int *delim, char **name, int num_names, boolean check);
-void check_next_char(FILE *rfile, int c);
-
 void
-read_kbinput_simple(rfile,check)
-        FILE *rfile;
-        boolean check;
+read_kbinput_simple(FILE *rfile, boolean check)
 /* This is a simplified version of read_kbinput() in rwsio.c.
  * It is used when a rewriting system will be read in but not altered.
  * If check is true, then the words in the equations are checked for
@@ -237,8 +219,7 @@ read_kbinput_simple(rfile,check)
 }
 
 void
-read_gens(rfile)
-        FILE * rfile;
+read_gens(FILE *rfile)
 /* Read the list of generator names into the array rws.gen_name, and
  * set rws.num_gens equal to the number of generators.
  */
@@ -273,8 +254,7 @@ read_gens(rfile)
 }
 
 void
-read_inverses(rfile)
-        FILE * rfile;
+read_inverses(FILE *rfile)
 /* The list of inverses is read.
  * An inverse inv(g) of a generator g satisfies g.inv(g) = inv(g).g = 1 -
  * i.e. this lists only 2-sided inverses
@@ -338,9 +318,7 @@ read_inverses(rfile)
 }
 
 void
-read_eqns_simple(rfile,check)
-        FILE *rfile;
-        boolean check;
+read_eqns_simple(FILE *rfile, boolean check)
 /* Read the initial reduction equations  -
  * simplified version of "read_eqns" in rwsio.c
  * Here we simply read them in and store them without any processing.
@@ -398,8 +376,7 @@ read_eqns_simple(rfile,check)
 }
 
 void
-rws_clear(rwsptr)
-        rewriting_system *rwsptr;
+rws_clear(rewriting_system *rwsptr)
 /* Free the assigned space associated with a rewriting-system,
  * excluding its reduction_automaton, which should be freed separately
  * with fsa_clear, if it is present.

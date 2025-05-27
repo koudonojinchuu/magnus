@@ -4,48 +4,19 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h> // For exit()
+#include <string.h> // For strlen()
+#include <unistd.h> // For unlink()
 #include "defs.h"
 #include "fsa.h"
 #include "hash.h"
 #include "externals.h"
-
-/* Functions defined in this file: */
-fsa  *fsa_genmult2(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback);
-fsa  *fsa_genmult2_short(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback);
-fsa  *fsa_genmult2_int(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback);
-fsa  *fsa_genmult3(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback);
-fsa  *fsa_genmult3_short(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback);
-fsa  *fsa_genmult3_int(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback);
-void  fsa_makemult(fsa *genmultptr, int g);
-void  fsa_makemult2(fsa *genmult2ptr, int g1, int g2);
-fsa  *fsa_composite(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback);
-fsa  *fsa_composite_short(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback);
-fsa  *fsa_composite_int(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback);
-
-/* Functions used in this file and defined elsewhere */
-boolean fsa_equal(fsa *fsaptr1, fsa *fsaptr2);
-int sparse_target(int g, int *p1, int *p2);
-void fsa_init(fsa *fsaptr);
-void fsa_set_is_accepting(fsa *fsaptr);
-void srec_copy(srec *srptr1, srec *srptr2);
-void fsa_clear(fsa *fsaptr);
-void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-int  short_hash_locate(short_hash_table *htptr, int reclen);
-void short_hash_clear(short_hash_table *htptr);
-unsigned short* short_hash_rec(short_hash_table *htptr, int n);
-int short_hash_rec_len(short_hash_table *htptr, int n);
-void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
-/* void unlink(); // System function, ensure <unistd.h> or similar is included if needed, and remove this local prototype */
-boolean srec_equal(srec *srptr1, srec *srptr2);
-void srec_clear(srec *srptr);
+#include "fsacomposite.h"
+#include "fsalogic.h"
+#include "fsaio.h"
 
 fsa *
-fsa_genmult2(genmultptr,op_table_type,destroy,genmult2filename,readback)
-	fsa *genmultptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *genmult2filename;
-	boolean readback;
+fsa_genmult2(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback)
 /* *genmultptr should be the general multiplier fsa of an automatic group.
  * This function calculates the transition table of the general multiplier for
  * products of two generators. This is output (in unformatted form) to the
@@ -74,12 +45,7 @@ fsa_genmult2(genmultptr,op_table_type,destroy,genmult2filename,readback)
 }
 
 fsa *
-fsa_genmult2_short(genmultptr,op_table_type,destroy,genmult2filename,readback)
-	fsa *genmultptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *genmult2filename;
-	boolean readback;
+fsa_genmult2_short(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback)
 {
   int **table, ne, ngens, ngens1, ns, *fsarow, e, e1, e2, es1, ef1, dr,
       nt, cstate, im, csa, csb, csima, csimb,
@@ -91,7 +57,7 @@ fsa_genmult2_short(genmultptr,op_table_type,destroy,genmult2filename,readback)
   short_hash_table ht, labelht;
   fsa *genmult2ptr;
   srec *labelset;
-  FILE *tablefile, *fopen();
+  FILE *tablefile;
 
   if (print_level>=3)
     printf("    #Calling fsa_genmult2_short.\n");
@@ -463,12 +429,7 @@ fsa_genmult2_short(genmultptr,op_table_type,destroy,genmult2filename,readback)
 }
 
 fsa *
-fsa_genmult2_int(genmultptr,op_table_type,destroy,genmult2filename,readback)
-	fsa *genmultptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *genmult2filename;
-	boolean readback;
+fsa_genmult2_int(fsa *genmultptr, storage_type op_table_type, boolean destroy, char *genmult2filename, boolean readback)
 {
   fprintf(stderr,"Sorry - fsa_genmult2 is not yet implemented for machines.\n");
   fprintf(stderr,"with more than 65536 states.\n");
@@ -476,13 +437,7 @@ fsa_genmult2_int(genmultptr,op_table_type,destroy,genmult2filename,readback)
 }
 
 fsa *
-fsa_genmult3(genmultptr,genmult2ptr,op_table_type,destroy,
-                                                 genmult3filename,readback)
-	fsa *genmultptr, *genmult2ptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *genmult3filename;
-	boolean readback;
+fsa_genmult3(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback)
 /* *genmultptr should be the general multiplier fsa of an automatic group.
  * and *genmult2ptr the length 2-multiplier.
  * This function calculates the transition table of the general multiplier for
@@ -508,13 +463,7 @@ fsa_genmult3(genmultptr,genmult2ptr,op_table_type,destroy,
 }
 
 fsa *
-fsa_genmult3_short(genmultptr,genmult2ptr,op_table_type,destroy,
-                                             genmult3filename,readback)
-	fsa *genmultptr, *genmult2ptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *genmult3filename;
-	boolean readback;
+fsa_genmult3_short(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback)
 {
   int **table1, **table2, ne, ngens, ngens1, ns, *fsarow,
       e, e1, e2, es1, ef1, dr1, dr2, nt, cstate, im, csa, csb, csima, csimb,
@@ -527,7 +476,7 @@ fsa_genmult3_short(genmultptr,genmult2ptr,op_table_type,destroy,
   short_hash_table ht, labelht;
   fsa *genmult3ptr;
   srec *labelset;
-  FILE *tablefile, *fopen();
+  FILE *tablefile;
 
   if (print_level>=3)
     printf("    #Calling fsa_genmult3_short.\n");
@@ -915,13 +864,7 @@ fsa_genmult3_short(genmultptr,genmult2ptr,op_table_type,destroy,
 }
 
 fsa *
-fsa_genmult3_int(genmultptr,genmult2ptr,op_table_type,
-                                          destroy,genmult3filename,readback)
-	fsa *genmultptr, *genmult2ptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *genmult3filename;
-	boolean readback;
+fsa_genmult3_int(fsa *genmultptr, fsa *genmult2ptr, storage_type op_table_type, boolean destroy, char *genmult3filename, boolean readback)
 {
   fprintf(stderr,"Sorry - fsa_genmult3 is not yet implemented for machines.\n");
   fprintf(stderr,"with more than 65536 states.\n");
@@ -929,9 +872,7 @@ fsa_genmult3_int(genmultptr,genmult2ptr,op_table_type,
 }
 
 void
-fsa_makemult(genmultptr,g)
-        fsa *genmultptr;
-        int g;
+fsa_makemult(fsa *genmultptr, int g)
 /* This procedure takes the fsa *genmultptr produced by fsa_triples, 
  * and builds a particular  multiplier Mult_g1.
  * This merely involves setting the accept states of *genmultptr
@@ -990,9 +931,7 @@ fsa_makemult(genmultptr,g)
 }
 
 void
-fsa_makemult2(genmult2ptr,g1,g2)
-        fsa *genmult2ptr;
-        int g1, g2;
+fsa_makemult2(fsa *genmult2ptr, int g1, int g2)
 /* This procedure takes the fsa *genmult2ptr produced by fsa_genmult2, 
  * and builds a particular length-2 multiplier Mult_g1g2.
  * This merely involves locating the accept states.
@@ -1077,12 +1016,7 @@ fsa_makemult2(genmult2ptr,g1,g2)
 }
 
 fsa *
-fsa_composite(mult1ptr,mult2ptr,op_table_type,destroy,compfilename,readback)
-	fsa *mult1ptr, *mult2ptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *compfilename;
-        boolean readback;
+fsa_composite(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback)
 /* *mult1ptr and *mult2ptr should be multiplier fsa's of an automatic group.
  * This function calculates the composite of these two multipliers.
  * So if *mult1ptr is the mutiplier for the word w1 and *mult2ptr for w2,
@@ -1100,13 +1034,7 @@ fsa_composite(mult1ptr,mult2ptr,op_table_type,destroy,compfilename,readback)
 }
 
 fsa *
-fsa_composite_short(mult1ptr,mult2ptr,op_table_type,
-                                                  destroy,compfilename,readback)
-	fsa *mult1ptr, *mult2ptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *compfilename;
-        boolean readback;
+fsa_composite_short(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback)
 {
   int **table1, **table2, ne, ngens, ngens1, ns, *fsarow,
       e, e1, e2, es1, ef1, dr1, dr2, nt, cstate, im, csa, csb, csima, csimb,
@@ -1116,7 +1044,7 @@ fsa_composite_short(mult1ptr,mult2ptr,op_table_type,
   boolean dense_ip1, dense_ip2, dense_op, got, leftpad, rightpad;
   short_hash_table ht;
   fsa *compositeptr;
-  FILE *tempfile, *fopen();
+  FILE *tempfile;
 
   if (print_level>=3)
     printf("    #Calling fsa_composite_short.\n");
@@ -1442,12 +1370,7 @@ fsa_composite_short(mult1ptr,mult2ptr,op_table_type,
 }
 
 fsa *
-fsa_composite_int(mult1ptr,mult2ptr,op_table_type,destroy,compfilename,readback)
-	fsa *mult1ptr, *mult2ptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *compfilename;
-        boolean readback;
+fsa_composite_int(fsa *mult1ptr, fsa *mult2ptr, storage_type op_table_type, boolean destroy, char *compfilename, boolean readback)
 {
  fprintf(stderr,"Sorry - fsa_composite is not yet implemented for machines.\n");
   fprintf(stderr,"with more than 65536 states.\n");

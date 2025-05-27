@@ -26,41 +26,36 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h> // For exit()
+#include <unistd.h> // For unlink()
 #include "defs.h"
 #include "fsa.h"
 #include "hash.h"
 #include "externals.h"
+#include "fsanosubword.h"
+#include "fsaio.h"
 
 #define HTMARGIN        4096
    /* if less space than this in hash-table, re-allocate */
 
-/* Functions defined in this file: */
-fsa * fsa_nosub_exists(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa * fsa_nosub_exists_short(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
-fsa * fsa_nosub_exists_int(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename);
-
 /* Functions used in this file and defined elsewhere */
-int sparse_target(int g, int *p1, int *p2);
-void fsa_init(fsa *fsaptr);
-void fsa_table_dptr_init(fsa *fsaptr);
-/* void fsa_set_is_initial(); // Not directly used in this file's provided code */
-void fsa_set_is_accepting(fsa *fsaptr);
-void srec_copy(srec *srptr1, srec *srptr2);
-void fsa_clear(fsa *fsaptr);
-void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-int short_hash_locate(short_hash_table *htptr, int reclen);
-void short_hash_clear(short_hash_table *htptr);
-unsigned short* short_hash_rec(short_hash_table *htptr, int n);
-int short_hash_rec_len(short_hash_table *htptr, int n);
-void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
-/* void unlink(); // System function, remove local prototype */
+// These should be declared correctly in their respective headers (fsa.h, hash.h)
+// int sparse_target(int g, int *p1, int *p2);
+// void fsa_init(fsa *fsaptr);
+// void fsa_table_dptr_init(fsa *fsaptr);
+// void fsa_set_is_initial(fsa *fsaptr);
+// void fsa_set_is_accepting(fsa *fsaptr);
+// void srec_copy(srec *srptr1, srec *srptr2);
+// void fsa_clear(fsa *fsaptr);
+// void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
+// int short_hash_locate(short_hash_table *htptr, int reclen);
+// void short_hash_clear(short_hash_table *htptr);
+// unsigned short* short_hash_rec(short_hash_table *htptr, int n);
+// int short_hash_rec_len(short_hash_table *htptr, int n);
+// void compressed_transitions_read(fsa *fsaptr, FILE *rfile); // Declaration for the missing function
 
 fsa *
-fsa_nosub_exists(fsaptr,op_table_type,destroy,tempfilename)
-	fsa *fsaptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_nosub_exists(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   if (print_level>=3)
     printf("    #Calling fsa_nosub_exists.\n");
@@ -71,11 +66,7 @@ fsa_nosub_exists(fsaptr,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_nosub_exists_short(fsaptr,op_table_type,destroy,tempfilename)
-	fsa *fsaptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_nosub_exists_short(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   int ***dtable, ne, ngens, nsi, ns, *fsarow,
       nt, cstate, cs, csi, im, i, g1, g2, len, ct, *tab_ptr;
@@ -84,7 +75,7 @@ fsa_nosub_exists_short(fsaptr,op_table_type,destroy,tempfilename)
   boolean dense_op, no_trans;
   short_hash_table ht;
   fsa *nosub;
-  FILE *tempfile, *fopen();
+  FILE *tempfile;
 
   if (print_level>=3)
     printf("    #Calling fsa_nosub_exists_short.\n");
@@ -271,11 +262,7 @@ fsa_nosub_exists_short(fsaptr,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_nosub_exists_int(fsaptr,op_table_type,destroy,tempfilename)
-	fsa *fsaptr;
-	table_struc op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_nosub_exists_int(fsa *fsaptr, storage_type op_table_type, boolean destroy, char *tempfilename) // Changed table_struc to storage_type
 {
   fprintf(stderr,"Sorry - fsa_nosub_exists is not yet implemented.\n");
   fprintf(stderr,"for machines with more than 65536 states.\n");

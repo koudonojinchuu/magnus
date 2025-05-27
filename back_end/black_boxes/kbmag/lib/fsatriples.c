@@ -6,48 +6,18 @@
 */
 
 #include <stdio.h>
+#include <unistd.h> // For unlink()
 #include "defs.h"
 #include "fsa.h"
 #include "hash.h"
 #include "rws.h"
 #include "externals.h"
-
-/* Functions defined in this file: */
-fsa * fsa_triples(fsa *waptr, fsa *diffptr, storage_type op_table_type, boolean destroy, char *tempfilename, reduction_equation *eqnptr, int maxeqns, boolean idlabel, boolean eqnstop, boolean readback);
-
-/* Functions used in this file and defined elsewhere */
-boolean srec_equal(srec *srptr1, srec *srptr2);
-/* boolean table_equal(); // Not used in this file's provided code */
-/* boolean fsa_equal(); // Not used in this file's provided code */
-/* int sparse_target(); // Not directly called */
-void fsa_init(fsa *fsaptr);
-/* void fsa_set_is_initial(); // Not used in this file's provided code */
-/* void fsa_set_is_accepting(); // Not used in this file's provided code */
-void srec_copy(srec *srptr1, srec *srptr2);
-void fsa_clear(fsa *fsaptr);
-void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-int short_hash_locate(short_hash_table *htptr, int reclen);
-void short_hash_clear(short_hash_table *htptr);
-unsigned short* short_hash_rec(short_hash_table *htptr, int n);
-
-/* defined elsewhere */
-void  fsa_table_dptr_init(fsa *fsaptr);
-/* void unlink(); // System function, remove local prototype */
-void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
-/* --- */
+#include "fsatriples.h"
+#include "fsaio.h"
+#include "fsalogic.h"
 
 fsa *
-fsa_triples(waptr,diffptr,op_table_type,destroy,tempfilename,eqnptr,maxeqns,
-						     idlabel,eqnstop,readback)
-	fsa *waptr, *diffptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
-	reduction_equation *eqnptr;
-	int maxeqns;
-        boolean idlabel;
-        boolean eqnstop;
-	boolean readback;
+fsa_triples(fsa *waptr, fsa *diffptr, storage_type op_table_type, boolean destroy, char *tempfilename, reduction_equation *eqnptr, int maxeqns, boolean idlabel, boolean eqnstop, boolean readback)
 /* *waptr is assumed to be the word-acceptor of an automatic group.
  * (In particular, all states should be accepting.)
  * *diffptr is assumed to be a word-difference machine of the same automatic
@@ -85,7 +55,7 @@ fsa_triples(waptr,diffptr,op_table_type,destroy,tempfilename,eqnptr,maxeqns,
   fsa *triples;
   srec *labels;
   short_hash_table ht;
-  FILE *tempfile, *fopen();
+  FILE *tempfile;
   char g1, g2, bg1, bg2;
   int maxv = 65536;
   struct vertexd {

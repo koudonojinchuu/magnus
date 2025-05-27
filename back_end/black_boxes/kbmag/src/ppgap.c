@@ -12,6 +12,8 @@
 #include "defs.h"
 #include "fsa.h"
 #include "rws.h"
+#include "rwsio2.h"
+#include "miscio.h"
 #include "definitions.h"
 
 #define MAXEQNS		1024
@@ -27,12 +29,6 @@ FILE *rfile, *wfile;
 
 /* Functions defined in this file */
 void badusage();
-
-/* Functions used in this file defined in other files: */
-void read_kbinput_simple();
-void printbuffer();
-void add_to_buffer();
-void rws_clear();
 
 void
 main(argc, argv)

@@ -6,6 +6,7 @@
 #include "defs.h"
 #include "fsa.h"
 #include "externals.h"
+#include "diffreduce.h"
 
 #define MLEN 32768 /* the longest word allowed in reduction process */
 #define MAXV 65536 /* The maximum number of vertices allowed. */
@@ -15,8 +16,7 @@ static int maxv = MAXV;
 extern fsa	wd_fsa;
 
 void
-diff_reduce(w)
-	char *w;
+diff_reduce(char *w)
 /* w is the word to be reduced using the word-difference machine  wd_fsa.
  * It is assumed that wd_fsa.table->table_data_dptr is set up.
  * This function allocates its own space.

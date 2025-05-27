@@ -27,18 +27,6 @@
 #define HTMARGIN	4096
 /* if less space than this in hash-table, re-allocate */
 
-/* The following functions are defined in this file and visible externally */
-void 	hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-void	short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-void	hash_clear(hash_table *htptr);
-void	short_hash_clear(short_hash_table *htptr);
-int	hash_rec_len(hash_table *htptr, int n);
-int	short_hash_rec_len(short_hash_table *htptr, int n);
-int	*hash_rec(hash_table *htptr, int n);
-unsigned short	*short_hash_rec(short_hash_table *htptr, int n);
-int	hash_locate(hash_table *htptr, int reclen);
-int	short_hash_locate(short_hash_table *htptr, int reclen);
-
 /* The following functions should be used only within this file */
 void hash_morerecs(hash_table *htptr);
 void short_hash_morerecs(short_hash_table *htptr);
@@ -46,11 +34,7 @@ void hash_morespace(hash_table *htptr);
 void short_hash_morespace(short_hash_table *htptr);
 
 void
-hash_init(htptr,fixed,len,num_recs_inc,space_inc)
-	hash_table *htptr;
-	boolean fixed;
-	int len;
-	int num_recs_inc, space_inc;
+hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc)
 /* Note: len = record-length is ignored if fixed is FALSE
  * If num_recs_inc and/or space_inc is zero, they are given default values,
  * depending on whether large or huge is true.
@@ -107,11 +91,7 @@ hash_init(htptr,fixed,len,num_recs_inc,space_inc)
 }
 
 void
-short_hash_init(htptr,fixed,len,num_recs_inc,space_inc)
-	short_hash_table *htptr;
-	boolean fixed;
-	int len;
-	int num_recs_inc, space_inc;
+short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc)
 /* Note: len = record-length is ignored if fixed is FALSE
  * If num_recs_inc and/or space_inc is zero, they are given default values,
  * depending on whether large or huge is true.
@@ -168,8 +148,7 @@ short_hash_init(htptr,fixed,len,num_recs_inc,space_inc)
 }
 
 void
-hash_clear(htptr)
-	hash_table *htptr;
+hash_clear(hash_table *htptr)
 { int i;
   for (i=0;i<htptr->num_blocks;i++)
     tfree(htptr->table_block[i]);
@@ -184,8 +163,7 @@ hash_clear(htptr)
 }
 
 void
-short_hash_clear(htptr)
-	short_hash_table *htptr;
+short_hash_clear(short_hash_table *htptr)
 { int i;
   for (i=0;i<htptr->num_blocks;i++)
     tfree(htptr->table_block[i]);
@@ -200,9 +178,7 @@ short_hash_clear(htptr)
 }
 
 int
-hash_rec_len(htptr,n)
-	hash_table  *htptr;
-	int n;
+hash_rec_len(hash_table *htptr, int n)
 /* The length of hash-record number n. Only useful for variable-length tables */
 { int *ptr, *ptre, *bn, ct;
   if (htptr->fixed_len)
@@ -232,9 +208,7 @@ hash_rec_len(htptr,n)
 }
 
 int
-short_hash_rec_len(htptr,n)
-	short_hash_table  *htptr;
-	int n;
+short_hash_rec_len(short_hash_table *htptr, int n)
 /* The length of hash-record number n. Only useful for variable-length tables */
 { unsigned short *ptr, *ptre;
   int  *bn, ct;
@@ -265,9 +239,7 @@ short_hash_rec_len(htptr,n)
 }
 
 int *
-hash_rec(htptr,n)
-	hash_table  *htptr;
-        int n;
+hash_rec(hash_table *htptr, int n)
 /* Pointer to record number n */
 { int *ptr, *bn, ct;
   if (htptr->fixed_len)
@@ -288,9 +260,7 @@ hash_rec(htptr,n)
 }
 
 unsigned short *
-short_hash_rec(htptr,n)
-	short_hash_table  *htptr;
-        int n;
+short_hash_rec(short_hash_table *htptr, int n)
 /* Pointer to record number n */
 { unsigned short *ptr;
   int *bn, ct;
@@ -312,9 +282,7 @@ short_hash_rec(htptr,n)
 }
 
 int
-hash_locate(htptr,reclen)
-	hash_table *htptr;
-	int reclen;
+hash_locate(hash_table *htptr, int reclen)
 /* This is the basic search function, using the hash-table.
  * It is assumed that the entry for which we are searching is already
  * in the table, and pointed at by htptr->current_ptr
@@ -379,9 +347,7 @@ hash_locate(htptr,reclen)
 }
 
 int
-short_hash_locate(htptr,reclen)
-	short_hash_table *htptr;
-	int reclen;
+short_hash_locate(short_hash_table *htptr, int reclen)
 /* This is the basic search function, using the short_hash-table.
  * It is assumed that the entry for which we are searching is already
  * in the table, and pointed at by htptr->table_data[htptr->num_recs+1]
@@ -447,8 +413,7 @@ short_hash_locate(htptr,reclen)
 }
 
 void
-hash_morerecs(htptr)
-	hash_table  *htptr;
+hash_morerecs(hash_table *htptr)
 /* Allocate space for more records. */
 { int *new, **newp, *ptr, *ptre, *ptrc, **dptr, **dptre, **dptrc;
 
@@ -479,8 +444,7 @@ hash_morerecs(htptr)
 }
 
 void
-short_hash_morerecs(htptr)
-	short_hash_table  *htptr;
+short_hash_morerecs(short_hash_table *htptr)
 /* Allocate space for more records. */
 { int *new, *ptr, *ptre, *ptrc;
   unsigned short **newp, **dptr, **dptre, **dptrc;
@@ -513,8 +477,7 @@ short_hash_morerecs(htptr)
 }
 
 void
-hash_morespace(htptr)
-	hash_table *htptr;
+hash_morespace(hash_table *htptr)
 /* Allocate more table space */
 { int nb, nr;
 
@@ -541,8 +504,7 @@ hash_morespace(htptr)
 }
 
 void
-short_hash_morespace(htptr)
-	short_hash_table *htptr;
+short_hash_morespace(short_hash_table *htptr)
 /* Allocate more table space */
 { int  nb, nr;
   htptr->num_blocks++;

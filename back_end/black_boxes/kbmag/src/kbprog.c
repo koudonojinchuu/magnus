@@ -217,6 +217,8 @@ CHANGES TO KBPROG
 
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
+#include "rabkar.h"
 #include "rws.h"
 #include "definitions.h"
 
@@ -242,11 +244,6 @@ CHANGES TO KBPROG
 	[-lex] [-rec] [-rtrec] [-wtlex] [-wreath]\n\
 	[-wd] [-vwd] [-mwd maxwdiffs] [-mt min_time] [-hf halting_factor]\n\
 	[-rk minlen mineqns] [-cn confnum] [-op] [groupname]\n"
-
-/* defined elsewhere */
-void rk_add_lhs();
-void  fsa_print();
-/* --- */
 
 int 	        tidyint = TIDYINT,
                 maxeqns = MAXEQNS,

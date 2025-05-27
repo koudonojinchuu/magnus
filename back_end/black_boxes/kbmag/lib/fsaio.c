@@ -13,49 +13,19 @@
 #include "defs.h"
 #include "fsa.h"
 #include "externals.h"
+#include "fsaio.h"
+#include "miscio.h"
 
 char 		*wbuffer; /* used only for calls of read_word - this can
                            * be allocated temporarily.
                            */
 
-/* Functions defined in this file: */
-void srec_print(FILE *wfile, srec *srptr, char *name, int offset, char *endstring);
-void table_print(FILE *wfile, table_struc *tableptr, char *name, int offset, char *endstring, int ns, int ne);
-void fsa_print(FILE *wfile, fsa *fsaptr, char *name);
-void srec_read(FILE *rfile, srec *srptr, int maxsize);
-void table_read(FILE *rfile, table_struc *tableptr, storage_type table_storage_type, int dr, int ns, int maxstates, int ne);
-void fsa_read(FILE *rfile, fsa *fsaptr, storage_type table_storage_type, int dr, int maxstates, boolean assignment, char *name);
-void compressed_transitions_read(fsa *fsaptr, FILE *rfile);
-
-/* Functions used in this file defined outside this file: */
-void printbuffer(FILE *wfile);
-void add_to_buffer(int n, char *w);
-int add_word_to_buffer(FILE *wfile, char *word, char **symbols);
-void read_ident(FILE *rfile, char *ident, int *delim, boolean inv);
-void read_string(FILE *rfile, char *string, int *delim);
-void read_int(FILE *rfile, int *integ, int *delim);
-void read_word(FILE *rfile, char *gen_word, char *end_word, int *delim, char **name, int num_names, boolean check);
-void read_delim(FILE *rfile, int *delim);
-int int_len(int n);
-int sparse_target(int g, int *p1, int *p2);
-void fsa_init(fsa *fsaptr);
-void check_next_char(FILE *rfile, int c);
-void process_names(char **name, int num_names);
-/* void table_read(); // This is defined within fsaio.c, so not an external function here */
-void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
-
 void
-srec_print(wfile,srptr,name,offset,endstring)
+srec_print(FILE *wfile, srec *srptr, char *name, int offset, char *endstring)
 /* Print the set record *srptr. Follows corresponding GAP routine.
  * Currently, rather arbitrarily, identifiers and strings names are
  * printed in dense format, and words in sparse format.
  */
-	FILE *wfile;
-	srec *srptr;
-	char *name;
-	int  offset;
-	char *endstring;
-	
 { int ct;
   srec sr;
   boolean first;
@@ -228,15 +198,8 @@ srec_print(wfile,srptr,name,offset,endstring)
 }
 
 void
-table_print(wfile,tableptr,name,offset,endstring,ns,ne)
+table_print(FILE *wfile, table_struc *tableptr, char *name, int offset, char *endstring, int ns, int ne)
 /* Print the table record *tableptr. */
-	FILE *wfile;
-	table_struc  *tableptr;
-	char *name;
-	int  offset;
-	char *endstring;
-	int ns, ne;
-	
 { int **table, ct, g, i, j, k, nl, dr, *ptr, *ptre;
   boolean dense, densepf, first, firstg;
   
@@ -377,10 +340,7 @@ table_print(wfile,tableptr,name,offset,endstring,ns,ne)
 }
 
 void
-fsa_print(wfile,fsaptr,name)
-	FILE *wfile;
-	fsa *fsaptr;
-	char *name;
+fsa_print(FILE *wfile, fsa *fsaptr, char *name)
 { int i, ns, ne;
   boolean first;
   
@@ -463,16 +423,12 @@ fsa_print(wfile,fsaptr,name)
 }
 
 void
-srec_read(rfile,srptr,maxsize)
+srec_read(FILE *rfile, srec *srptr, int maxsize)
 /* Read the set record *srptr from rfile, assigning space as required.
  * If maxsize is larger than srptr->size, and space is allocated for
  * names or labels, then space is allocated for maxsize of these.
  * This allows for possible later expansion.
  */
-	FILE *rfile;
-	srec *srptr;
-	int maxsize;
-	
 { int delim, i, n, r;
   boolean typeset, sizeset, baseset, arityset, paddingset, namesset, formatset,
           labelsset, alphabetset, setToLabelsset;
@@ -794,19 +750,13 @@ srec_read(rfile,srptr,maxsize)
 }
 
 void
-table_read(rfile,tableptr,table_storage_type,dr,ns,maxstates,ne)
+table_read(FILE *rfile, table_struc *tableptr, storage_type table_storage_type, int dr, int ns, int maxstates, int ne)
 /* Read the table_struc *tableptr from rfile, assigning space as required.
  * dr is the number of rows stored densely if storage_type=SPARSE.
  * ns and ne are the sizes of the state-set and alphabet-set.
  * maxstates is the maximum number of states that we allocate space for
  * in dense-storage mode.
  */
-	FILE *rfile;
-	table_struc *tableptr;
-	storage_type table_storage_type;
-	int dr;
-	int ns, maxstates, ne;
-	
 { int delim, i, j, k, ntleft, dt = 0;
   boolean  filenameset, formatset, numTransitionsset, transitionsset;
   int **table, *sparseptr;
@@ -987,7 +937,7 @@ table_read(rfile,tableptr,table_storage_type,dr,ns,maxstates,ne)
 }
 
 void
-fsa_read(rfile,fsaptr,table_storage_type,dr,maxstates,assignment,name)
+fsa_read(FILE *rfile, fsa *fsaptr, storage_type table_storage_type, int dr, int maxstates, boolean assignment, char *name)
 /* Read the fsa *fsaptr from rfile, assigning space as required.
  * If maxstates is greater than the actual number of states, then
  * space will be assigned for maxstates states, to allow more states
@@ -995,14 +945,6 @@ fsa_read(rfile,fsaptr,table_storage_type,dr,maxstates,assignment,name)
  * If assignment is true, an assignment to an fsa is read.
  * The name is returned in *name, which is assumed to have enough space.
  */
-	FILE *rfile;
-	fsa *fsaptr;
-	storage_type table_storage_type;
-	int dr;
-	int maxstates;
-	boolean assignment;
-	char *name;
-	
 { int delim, i, j, k, ct, ns, ne, *ia, *buf1, *buf2, *swapbuf, bufsize;
   boolean isFSAset, statesset, alphabetset, initialset, acceptingset,
           flagsset, tableset, in, compressed;
@@ -1193,7 +1135,8 @@ fsa_read(rfile,fsaptr,table_storage_type,dr,maxstates,assignment,name)
         k = -1;
       if (maxstates < ns)
         maxstates = ns;
-      table_read(rfile,fsaptr->table,table_storage_type,dr,ns,maxstates,ne,k);
+      //table_read(rfile,fsaptr->table,table_storage_type,dr,ns,maxstates,ne,k);
+      table_read(rfile,fsaptr->table,table_storage_type,dr,ns,maxstates,ne);
       read_delim(rfile,&delim);
     }
     else 
@@ -1210,9 +1153,7 @@ fsa_read(rfile,fsaptr,table_storage_type,dr,maxstates,assignment,name)
 }
 
 void
-compressed_transitions_read(fsaptr,rfile)
-	fsa *fsaptr;
-        FILE *rfile;
+compressed_transitions_read(fsa *fsaptr, FILE *rfile)
 /* Read the transition-table of the fsa *fsaptr which is stored in the
  * file with *file in unformatted form.
  * *file should be opened and closed externally to the function.

@@ -23,22 +23,16 @@
 #include <stdio.h>
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
+#include "fsacomposite.h"
 #include "rws.h"
 #include "definitions.h"
 #include <ctype.h>
 
 FILE *rfile,
-     *wfile,
-     *fopen();
+     *wfile;
 
 void  badusage();
-
-/* Functions defined in other files used in this file */
-void  fsa_read();
-void  fsa_makemult2();
-void  fsa_minimize();
-void  fsa_print();
-void  fsa_clear();
 
 void
 main(argc, argv)

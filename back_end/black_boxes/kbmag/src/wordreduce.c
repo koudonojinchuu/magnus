@@ -31,7 +31,12 @@
 #include <stdio.h>
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
+#include "diffreduce.h"
+#include "miscio.h"
 #include "rws.h"
+#include "rwsio2.h"
+#include "rwsreduce.h"
 #include "definitions.h"
 
 #define MAXEQNS         32767
@@ -49,26 +54,9 @@ fsa	reduction_fsa;
 fsa	wd_fsa;
 
 void  badusage();
-
-/* Functions defined in other files used in this file */
-void  read_kbinput_simple();
-void  fsa_read();
-void  fsa_table_dptr_init();
-void  read_word();
-void  diff_reduce();
-void  rws_reduce();
-void  add_word_to_buffer();
-void  printbuffer();
-void  process_names();
-void  fsa_clear();
-void  read_ident();
-void  check_next_char(FILE*, int);
-void  read_delim();
-void  rws_clear();
    
 FILE *rfile,
-     *wfile,
-     *fopen();
+     *wfile;
 
 void
 main(argc, argv)

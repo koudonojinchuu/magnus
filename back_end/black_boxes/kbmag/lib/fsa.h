@@ -10,6 +10,9 @@
  * and macros for accessing and setting entries in the transition table.
  */
 
+#ifndef BLACKBOX_FSA_H
+#define BLACKBOX_FSA_H
+
 typedef enum {SIMPLE, IDENTIFIERS, WORDS, STRINGS, LABELED, PRODUCT} srec_type;
 extern
 char *type_names[];
@@ -168,3 +171,27 @@ typedef struct {
  */
 #define dense_dtarget(dtable,g1,g2,s) (dtable[g1][g2][s])
 #define set_dense_dtarget(dtable,g1,g2,s,t) (dtable[g1][g2][s] = t)
+
+int sparse_target(int g, int *p1, int *p2);
+void fsa_init(fsa *fsaptr);
+void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
+void fsa_set_is_initial(fsa *fsaptr);
+void fsa_set_is_accepting(fsa *fsaptr);
+void fsa_table_dptr_init(fsa *fsaptr);
+void srec_copy(srec *srptr1, srec *srptr2);
+void table_copy(table_struc *tableptr1, table_struc *tableptr2, int ne, int ns);
+void fsa_copy(fsa *fsaptr1, fsa *fsaptr2);
+void srec_clear(srec *srptr);
+void table_clear(table_struc *tableptr, int ns);
+void fsa_clear(fsa *fsaptr);
+void fsa_delete_state(fsa *fsaptr, int stateno);
+void fsa_permute_states(fsa *fsaptr, int *perm);
+void fsa_clear_rws(fsa *fsaptr);
+void fsa_make_accessible(fsa *fsaptr);
+void fsa_minimize(fsa *fsaptr);
+void fsa_labeled_minimize(fsa *fsaptr);
+void fsa_bfs(fsa *fsaptr);
+int fsa_count(fsa *fsaptr);
+boolean fsa_enumerate(FILE *wfile, fsa *fsaptr, int min, int max, boolean putcomma);
+
+#endif

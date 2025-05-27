@@ -30,25 +30,10 @@
 #include "rws.h"
 #include "hash.h"
 #include "externals.h"
-
-/* Functions defined in this file: */
-int  fsa_checkmult(fsa *multptr, reduction_equation *eqnptr, int maxeqns);
-int  fsa_checkmult_short(fsa *multptr, reduction_equation *eqnptr, int maxeqns);
-int  fsa_checkmult_int(fsa *multptr, reduction_equation *eqnptr, int maxeqns);
-
-/* Functions used in this file and defined elsewhere */
-int sparse_target(int g, int *p1, int *p2);
-void short_hash_init(short_hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-int  short_hash_locate(short_hash_table *htptr, int reclen);
-void short_hash_clear(short_hash_table *htptr);
-unsigned short* short_hash_rec(short_hash_table *htptr, int n);
-int short_hash_rec_len(short_hash_table *htptr, int n);
+#include "fsacheckmult.h"
 
 int
-fsa_checkmult(multptr,eqnptr,maxeqns)
-	fsa *multptr;
-        reduction_equation *eqnptr;
-	int maxeqns;
+fsa_checkmult(fsa *multptr, reduction_equation *eqnptr, int maxeqns)
 /* If the checking fails, the failing words will be returned in the lhs of
  * eqnptr[i], and the associated generator in the rhs, for i=0,1,...
  * If more than maxeqns such words are found, we abort.
@@ -63,10 +48,7 @@ fsa_checkmult(multptr,eqnptr,maxeqns)
 }
 
 int
-fsa_checkmult_short(multptr,eqnptr,maxeqns)
-	fsa *multptr;
-        reduction_equation *eqnptr;
-	int maxeqns;
+fsa_checkmult_short(fsa *multptr, reduction_equation *eqnptr, int maxeqns)
 /* If the checking fails, the failing word will be returned in the lhs of
  * *eqnptr, and the associated generator in the rhs.
  */
@@ -324,10 +306,7 @@ fsa_checkmult_short(multptr,eqnptr,maxeqns)
 }
 
 int
-fsa_checkmult_int(multptr,eqnptr,maxeqns)
-	fsa *multptr;
-        reduction_equation *eqnptr;
-	int maxeqns;
+fsa_checkmult_int(fsa *multptr, reduction_equation *eqnptr, int maxeqns)
 {
   fprintf(stderr,
     "Sorry - fsa_checkmult is not yet implemented for machines.\n");

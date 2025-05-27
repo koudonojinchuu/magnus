@@ -26,11 +26,19 @@
  * course this will be considerably slower for long lists of words.
  */
 
+#include <time.h>
 #include "defs.h"
 #include "fsa.h"
 #include "rws.h"
 #include "externals.h"
-#include <time.h>
+#include "rwsio.h"
+#include "miscio.h"
+#include "fsaio.h"
+#include "rwsio2.h"
+
+void build_quicktable();
+int modify_table(int);
+int insert(char **, char **);
 
 extern int 	tidyint,
 		maxeqns,
@@ -64,41 +72,6 @@ int 		*eqn_no;
 		 * equation number j. (usually i=j) - needed only if the
 		 * "done" values are read in.
 		 */
-
-/* Functions defined in this file: */
-void initialise_reduction_fsa();
-void initialise_eqns();
-void read_eqns();
-void read_done();
-void read_kbinput();
-void read_extra_kbinput();
-void print_kboutput();
-void print_wdoutput();
-
-/* Functions defined in other files called from this file: */
-boolean isdelim();
-boolean isvalid();
-void read_delim();
-void skip_gap_expression();
-void read_ident();
-void read_int();
-void read_string();
-void read_gens();
-void read_inverses();
-void process_names();
-void build_quicktable();
-int modify_table();
-int insert();
-void printbuffer();
-void add_to_buffer();
-int add_word_to_buffer();
-int int_len();
-void fsa_init();
-void fsa_table_init();
-void srec_copy();
-void fsa_print();
-void check_next_char(FILE*, int);
-void read_word();
 
 void
 initialise_reduction_fsa()
@@ -174,9 +147,7 @@ initialise_eqns()
 }
 
 void
-read_eqns(rfile,check)
-	FILE *rfile;
-	boolean check;
+read_eqns(FILE *rfile, boolean check)
 /* Read the initial reduction equations and install them. */
 { int delim, i, ct, iv;
   char *test1 = rws.testword1, *test2 = rws.testword2;
@@ -241,8 +212,7 @@ read_eqns(rfile,check)
 }
 
 void
-read_done(rfile)
-	FILE *rfile;
+read_done(FILE *rfile)
 /* Read the list of equation numbers that have already been processed. */
 { int delim, i, j, n;
   check_next_char(rfile,'[');
@@ -277,9 +247,7 @@ read_done(rfile)
 }
 
 void
-read_kbinput(rfile,check)
-	FILE *rfile;
-	boolean check;
+read_kbinput(FILE *rfile, boolean check)
 /* This function reads the full input for the Knuth-Bendix program 
  * from the file rfile, which should already be open..
  * The rewriting system is read into the externally defined rws.
@@ -576,9 +544,7 @@ read_kbinput(rfile,check)
 }
 
 void
-read_extra_kbinput(rfile,check)
-        FILE *rfile;
-        boolean check;
+read_extra_kbinput(FILE *rfile, boolean check)
 /* This function reads the additional equations (from the original
  * input file), when these are to be re-adjoined to the output equations
  * (which is what happens under the -ro option of kbprog).
@@ -625,8 +591,7 @@ read_extra_kbinput(rfile,check)
 
 
 void
-print_kboutput(wfile)
-	FILE *wfile;
+print_kboutput(FILE *wfile)
 /* This function prints the output from the KB program to the file named
  * wfile, which should already be open for writing.
  * Note that the rewriting system rws and its reduction-fsa are
@@ -824,9 +789,7 @@ print_kboutput(wfile)
 }
 
 void
-print_wdoutput(wfile,suffix)
-	FILE *wfile;
-	char *suffix;
+print_wdoutput(FILE *wfile, char *suffix)
 /* This function prints the word-difference from the KB program to the file
  * named wfile, which should already be open for writing.
  * The fsa function fsa_print is used to print this.

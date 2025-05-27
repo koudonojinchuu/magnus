@@ -26,10 +26,19 @@
  */
 
 #include <stdio.h>
+#include <unistd.h> // For unlink()
 
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
+#include "fsaipmin.h"
+#include "fsalogic.h"
+#include "fsacomposite.h"
+#include "diffreduce.h"
+#include "diffredwl.h"
+#include "miscio.h"
 #include "rws.h"
+#include "rwsio2.h"
 #include "definitions.h"
 
 #define MAXEQNS		1024
@@ -68,30 +77,6 @@ void check_short_relation();
 char *file_suffix();
 void long_word_multiplier();
 void badusage();
-
-/* Functions used in this file defined in other files: */
-void read_kbinput_simple();
-void printbuffer();
-void add_to_buffer();
-int add_word_to_buffer();
-int int_len();
-void fsa_table_dptr_init();
-fsa  *fsa_genmult2();
-void  fsa_makemult();
-void  fsa_makemult2();
-fsa  *fsa_composite();
-void  diff_reduce();
-void  diff_reduce_wl();
-boolean fsa_equal();
-void  fsa_clear();
-void  rws_clear();
-void  fsa_read();
-void  fsa_labeled_minimize();
-void  fsa_ip_labeled_minimize();
-void  fsa_print();
-void  unlink();
-void  fsa_minimize();
-void  fsa_ip_minimize();
 
 void
 main(argc, argv)

@@ -21,19 +21,14 @@
 #include <stdlib.h>
 #include "defs.h"
 #include "fsa.h"
+#include "fsaio.h"
+#include "miscio.h"
 #include "definitions.h"
 
 FILE *rfile,
-     *wfile,
-     *fopen();
+     *wfile;
 
 void  badusage();
-
-/* Functions defined in other files used in this file */
-void  fsa_read();
-boolean   fsa_enumerate();
-void  fsa_clear();
-boolean is_int();
 
 void
 main(argc, argv)

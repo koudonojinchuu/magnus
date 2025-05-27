@@ -3,21 +3,21 @@
  * using a rewriting system.
  */
 
+#include <stdio.h>  // For fprintf, printf (if print_level controls it)
+#include <stdlib.h> // For exit
+#include <string.h> // For strlen
 #include "defs.h"
 #include "fsa.h"
 #include "rws.h"
 #include "externals.h"
+#include "rwsreduce.h"
 
 extern int	maxslowhistoryspace,
 		maxreducelen;
 extern rewriting_system	rws;
 
-/* Functions defined in this file: */
-void rws_reduce(char *w);
-void slow_rws_reduce(char *w);
-boolean slow_check_rws_reduce(char *w, int i);
-
-void rws_reduce(char *w)
+void
+rws_reduce(char *w)
 /* Reduce "w", by replacing any occurrences of the LHS of the current
  * equations in the rewriting system by their RHS.
  * The reduction fsa for the rewriting system rws is used for this,and it is
@@ -85,8 +85,7 @@ void rws_reduce(char *w)
 
 
 void
-slow_rws_reduce(w)
-	char     	      	*w;
+slow_rws_reduce(char *w)
 /* The version of reduce for the reduction automaton that recognises
  * left hand sides of relations only.
  * This is both slower, and needs more space, since the history has to
@@ -185,10 +184,7 @@ restart:
 }
 
 boolean
-slow_check_rws_reduce(w,i)
-	char           		*w;
-	int            		i;
-
+slow_check_rws_reduce(char *w, int i)
 /* This is similar to slow_rws_reduce, but it does not change the word  w.
  * It merely checks whether it is reduced or not, and returns true or false.
  * If the second parameter i is greater than 0, then the check is for

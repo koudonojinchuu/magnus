@@ -19,56 +19,30 @@
  */
 
 #include <stdio.h>
+#include <unistd.h> // For unlink()
 #include "defs.h"
 #include "fsa.h"
 #include "hash.h"
 #include "externals.h"
-
-/* Functions defined in this file: */
-fsa *fsa_minred();
-fsa *fsa_minkb();
-fsa *fsa_diff1c();
+#include "fsaminkb.h"
+#include "worddiff.h"
+#include "diffreduce.h"
+#include "fsalogic.h"
+#include "fsaio.h"
 
 extern fsa	wd_fsa;
-void  (*reduce_word)();
+void  (*reduce_word)(char *);
 static char     testword[4096]; /* Used for reducing words */
 
-/* Functions used in this file and defined elsewhere */
-int sparse_target();
-void fsa_init();
-void fsa_table_dptr_init();
-void fsa_set_is_accepting();
-void srec_copy();
-void fsa_clear();
-void hash_init();
-void short_hash_init();
-int  hash_locate();
-int  short_hash_locate();
-void hash_clear();
-void short_hash_clear();
-int* hash_rec();
-unsigned short* short_hash_rec();
-void diff_reduce();
-void calculate_inverses();
-int diff_no();
-void compressed_transitions_read();
-void unlink();
-boolean srec_equal();
-void	fsa_table_init();
-
 fsa *
-fsa_minred(waptr,op_table_type,destroy,tempfilename)
-	fsa *waptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_minred(fsa *waptr, storage_type op_table_type, boolean destroy, char *tempfilename)
 {
   int **table, ne, nsi, nsi1, ns, dr, *fsarow,
       nt, cstate, csa, csb, im, i, g, len, ct, *ht_ptr, *tab_ptr;
   boolean dense_ip, dense_op, accept;
   fsa *minred;
   hash_table ht;
-  FILE *tempfile, *fopen();
+  FILE *tempfile;
 
   if (print_level>=3)
     printf("    #Calling fsa_minred.\n");
@@ -216,11 +190,7 @@ fsa_minred(waptr,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_minkb(minredptr,waptr,diffptr,op_table_type,destroy,tempfilename)
-	fsa *minredptr, *waptr, *diffptr;
-	storage_type op_table_type;
-	boolean destroy;
-	char *tempfilename;
+fsa_minkb(fsa *minredptr, fsa *waptr, fsa *diffptr, storage_type op_table_type, boolean destroy, char *tempfilename)
 /* *waptr is assumed to be the word-acceptor of an automatic group.
  * and *minredptr the fsa which accepts minimal reducible words 
  * (computed using fsa_minred above).
@@ -255,7 +225,7 @@ fsa_minkb(minredptr,waptr,diffptr,op_table_type,destroy,tempfilename)
   fsa *minkbptr;
   srec *labels;
   short_hash_table ht;
-  FILE *tempfile, *fopen();
+  FILE *tempfile;
   char g1, g2, bg1, bg2;
 
   if (print_level>=3)
@@ -449,9 +419,7 @@ fsa_minkb(minredptr,waptr,diffptr,op_table_type,destroy,tempfilename)
 }
 
 fsa *
-fsa_diff1c(minkbptr,op_table_type)
-	fsa  *minkbptr;
-        storage_type op_table_type;
+fsa_diff1c(fsa *minkbptr, storage_type op_table_type)
 /* *minkbptr should be the minimal KB-reduction machine output by fsa_minkb.
  * The correct word-difference machine for the minimal set of KB-reduction
  * equations is calculated from this machine. Note that wd_fsa must be defined

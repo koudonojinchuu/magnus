@@ -8,6 +8,7 @@
 #include "fsa.h"
 #include "rws.h"
 #include "externals.h"
+#include "rabkar.h"
 
 extern int      maxslowhistoryspace,
                 maxreducelen;
@@ -35,17 +36,8 @@ static unsigned *bighashvaleqn;
    * correspond.
    */
 
-/* Functions defined in this file: */
-void rk_init();
-void rk_reset();
-void rk_clear();
-void rk_add_lhs();
-void slow_rws_reduce_rk();
-boolean slow_check_rws_reduce_rk();
-
 void
-rk_init(maxeqns)
-	int maxeqns;
+rk_init(int maxeqns)
 /* Initialize hash-table and lookup tables for this value of maxeqns */
 { int ng, i, j, tp;
   /* First select a suitable prime */
@@ -89,8 +81,7 @@ rk_init(maxeqns)
 }
 
 void
-rk_reset(maxeqns)
-	int maxeqns;
+rk_reset(int maxeqns)
 { int i;
   for (i=0;i<hashmod;i++)
     first_tail[i] = 0;
@@ -112,8 +103,7 @@ rk_clear()
 }
     
 void
-rk_add_lhs(n)
-	int n;
+rk_add_lhs(int n)
 /* Calculate the hash-value of the tail of the lhs of equation number n
  * (it is assumed that the length of this lhs is at least rws.rkminlen),
  * and adjoin it to the hash-table.
@@ -140,8 +130,7 @@ rk_add_lhs(n)
 }
 
 void
-slow_rws_reduce_rk(w)
-	char     	      	*w;
+slow_rws_reduce_rk(char *w)
 /* This is the routine slow_rws_reduce (from rwsreduce.c) adapted to deal
  * in addition with reductions arising from the Rabin-Karp table.
  */
@@ -288,9 +277,7 @@ restart:
 }
 
 boolean
-slow_check_rws_reduce_rk(w,i)
-	char     	      	*w;
-	int			i;
+slow_check_rws_reduce_rk(char *w, int i)
 /* This is the routine slow_check_rws_reduce (from rwsreduce.c) adapted to deal
  * in addition with reductions arising from the Rabin-Karp table.
  */

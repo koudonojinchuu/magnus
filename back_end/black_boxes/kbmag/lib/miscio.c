@@ -9,37 +9,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> // For strcmp, strlen, strcat
+#include <ctype.h>  // For isalpha, isdigit
 #include "defs.h"
 #include "fsa.h"
 #include "externals.h"
-#include <ctype.h>
-
-/* Functions defined in this file: */
-boolean isdelim(int c);
-boolean isvalid(int c);
-int read_char(FILE *rfile);
-void check_next_char(FILE *rfile, int c);
-void read_delim(FILE *rfile, int *delim);
-void read_token(FILE *rfile, char *token, int *delim);
-void skip_gap_expression(FILE *rfile, int *delim);
-void read_ident(FILE *rfile, char *ident, int *delim, boolean inv);
-void read_int(FILE *rfile, int *integ, int *delim);
-void read_string(FILE *rfile, char *string, int *delim);
-void process_names(char **name, int num_names);
-void read_word(FILE *rfile, char *gen_word, char *end_word, int *delim, char **name, int num_names, boolean check);
-void printbuffer(FILE *wfile);
-void add_to_buffer(int n, char *w);
-int add_word_to_buffer(FILE *wfile, char *word, char **symbols);
-int add_iword_to_buffer(FILE *wfile, int *word, char **symbols);
-int int_len(int n);
-boolean is_int(char *x);
-
-/* Defined elsewhere*/
-/* --- */
+#include "miscio.h"
 
 boolean
-isdelim(c)
-        int c;
+isdelim(int c)
 /* Note: '.' is not included in list of delimiters, since identifiers may
  * contain dots.
  * Integers are exceptional, however, in that they may be terminated by a
@@ -51,15 +29,13 @@ isdelim(c)
 }
 
 boolean
-isvalid(c)
-        int c;
+isvalid(int c)
 /* Checks if symbol is valid in an identifier */
 { return isalpha(c) || isdigit(c) || c=='_' || c=='.';
 }
 
 int
-read_char(rfile)
-        FILE * rfile;
+read_char(FILE *rfile)
 /* This is the basic character-reading function, which all other routines
  * call.
  * It skips over a backslash '\' followed by a newline '\n'.
@@ -91,9 +67,7 @@ read_char(rfile)
 }
 
 void
-check_next_char(rfile, c)
-        FILE * rfile;
-        int c;
+check_next_char(FILE * rfile, int c)
 /* The next non-white character is expected to be 'c'.
    If not exit with error message.
 */
@@ -106,9 +80,7 @@ check_next_char(rfile, c)
 }
 
 void
-read_delim(rfile,delim)
-        FILE * rfile;
-        int * delim;
+read_delim(FILE *rfile, int *delim)
 /* Read next delimiter. */
 { int n;
   while ((n=read_char(rfile))==' ');
@@ -120,10 +92,7 @@ read_delim(rfile,delim)
 }
 
 void
-read_token(rfile,token,delim)
-        FILE * rfile;
-	char * token;
-        int * delim;
+read_token(FILE *rfile, char *token, int *delim)
 /* Read stuff into token up to next delimiter or space  -
  * leading spaces are removed from stuff.
  */
@@ -138,9 +107,7 @@ read_token(rfile,token,delim)
 }
 
 void
-skip_gap_expression(rfile,delim)
-        FILE * rfile;
-        int * delim;
+skip_gap_expression(FILE *rfile, int *delim)
 /* Skip the next GAP expression -
  * probably not perfect, but should be adequate for the use intended.
  */
@@ -224,11 +191,7 @@ skip_gap_expression(rfile,delim)
 }
 
 void
-read_ident(rfile,ident,delim,inv)
-        FILE * rfile;
-        char * ident;
-        int * delim;
-	boolean inv;
+read_ident(FILE *rfile, char *ident, int *delim, boolean inv)
 /* Read next identifier, field name, etc.
  * if inv is true, it is allowed to end ^-1.
  */
@@ -258,10 +221,7 @@ read_ident(rfile,ident,delim,inv)
 }
 
 void
-read_int(rfile,integ,delim)
-        FILE * rfile;
-        int * integ;
-        int * delim;
+read_int(FILE *rfile, int *integ, int *delim)
 /* Read next integer - may be empty, when 0 is returned as *integ.
  * NOTE integer can be terminated by a '.' as well as a delimiter
  */
@@ -296,10 +256,7 @@ read_int(rfile,integ,delim)
 
 
 void
-read_string(rfile,string,delim)
-        FILE * rfile;
-        char * string;
-        int * delim;
+read_string(FILE *rfile, char *string, int *delim)
 /* Read next string (enclosed in quotes) - if delim comes first, return
  * empty string as string.
  */
@@ -335,9 +292,7 @@ read_string(rfile,string,delim)
 }
 
 void
-process_names(name,num_names)
-	char **name;
-	int num_names;
+process_names(char **name, int num_names)
 /* name is a list of num_names names (probbaly names of monoid generators).
  * First they are checked for validity - they must start with a letter or
  * underscore, and all characters must be alphanumeric '_' or '.'.
@@ -439,14 +394,7 @@ process_names(name,num_names)
 }
 
 void
-read_word(rfile,gen_word,end_word,delim,name,num_names,check)
-        FILE * rfile;
-        char * gen_word;
-        char * end_word;
-        int * delim;
-	char **name;
-	int num_names;
-        boolean check;
+read_word(FILE *rfile, char *gen_word, char *end_word, int *delim, char **name, int num_names, boolean check)
 /* A word is read into gen_word.
    It is assumed that space is already allocated for the word beginning at
    gen_word and ending at end_word.
@@ -603,8 +551,7 @@ read_word(rfile,gen_word,end_word,delim,name,num_names,check)
 }
 
 void
-printbuffer(wfile)
-	FILE *wfile;
+printbuffer(FILE *wfile)
 /* prints contents of buffer, followed by new-line to wfile
  * and then clears buffer.
  */
@@ -613,9 +560,7 @@ printbuffer(wfile)
 }
 
 void
-add_to_buffer(n,w)
-	int n;
-	char *w;
+add_to_buffer(int n, char *w)
 /* w should be a string.
  * Add at least n characters to the end of the string buffer, with w at the end,
  * padding with spaces at beginning
@@ -628,10 +573,7 @@ add_to_buffer(n,w)
 }
 
 int
-add_word_to_buffer(wfile,word,symbols)
-	FILE *wfile;
-	char *word;
-	char **symbols;
+add_word_to_buffer(FILE *wfile, char *word, char **symbols)
 /* word is a string of chars. to be printed as a word in GAP syntax.
  * If char number i appears in the string, then
  * the char is to be printed as the string symbols[i].
@@ -683,10 +625,7 @@ add_word_to_buffer(wfile,word,symbols)
 }
 
 int
-add_iword_to_buffer(wfile,word,symbols)
-	FILE *wfile;
-	int *word;
-	char **symbols;
+add_iword_to_buffer(FILE *wfile, int *word, char **symbols)
 /* This is the same as add_word_to_buffer, except that "word" is a string of
  * integers instead of characters.
  */
@@ -733,8 +672,7 @@ add_iword_to_buffer(wfile,word,symbols)
 }
 
 int
-int_len(n)
-	int n;
+int_len(int n)
 /* The length of the  integer  n */
 { int l=0;
   if (n < 0){
@@ -748,8 +686,7 @@ int_len(n)
 }
 
 boolean
-is_int(x)
-        char *x;
+is_int(char *x)
 /* returns true if the string x is an integer */
 { int i, l;
   l = strlen(x);

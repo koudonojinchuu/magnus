@@ -5,55 +5,21 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // For exit() and NULL if not in defs.h
+#include <string.h> // For strlen, strcpy if used directly (though srec_copy handles strings)
 #include "defs.h"
 #include "fsa.h"
-#include "hash.h"
+#include "hash.h"   // For hash_table and related functions if fsa_minimize uses them directly
 #include "externals.h"
+#include "miscio.h"
+#include "fsalogic.h"
 
 char *type_names[] = {"simple", "identifiers", "words", "strings",
                       "labeled", "product" };
 char *flag_names[] = {"DFA","NFA","minimized","BFS","accessible","trim","RWS"};
 
-/* Functions defined in this file: */
-int sparse_target(int g, int *p1, int *p2);
-void fsa_init(fsa *fsaptr);
-void fsa_table_init(table_struc *tableptr, int maxstates, int ne);
-void fsa_set_is_initial(fsa *fsaptr);
-void fsa_set_is_accepting(fsa *fsaptr);
-void fsa_table_dptr_init(fsa *fsaptr);
-void srec_copy(srec *srptr1, srec *srptr2);
-void table_copy(table_struc *tableptr1, table_struc *tableptr2, int ne, int ns);
-void fsa_copy(fsa *fsaptr1, fsa *fsaptr2);
-void srec_clear(srec *srptr);
-void table_clear(table_struc *tableptr, int ns);
-void fsa_clear(fsa *fsaptr);
-void fsa_delete_state(fsa *fsaptr, int stateno);
-void fsa_permute_states(fsa *fsaptr, int *perm);
-void fsa_clear_rws(fsa *fsaptr);
-void fsa_make_accessible(fsa *fsaptr);
-void fsa_minimize(fsa *fsaptr);
-void fsa_labeled_minimize(fsa *fsaptr);
-void fsa_bfs(fsa *fsaptr);
-int fsa_count(fsa *fsaptr);
-boolean fsa_enumerate(FILE *wfile, fsa *fsaptr, int min, int max, boolean putcomma);
-
-/* Functions used in this file and defined elsewhere */
-void add_to_buffer(int n, char *w);
-void hash_init(hash_table *htptr, boolean fixed, int len, int num_recs_inc, int space_inc);
-void hash_clear(hash_table *htptr);
-int *hash_rec(hash_table *htptr, int n);
-int hash_rec_len(hash_table *htptr, int n);
-int hash_locate(hash_table *htptr, int reclen);
-int add_word_to_buffer(FILE *wfile, char *word, char **symbols);
-int add_iword_to_buffer(FILE *wfile, int *word, char **symbols);
-int int_len(int n);
-fsa * fsa_and(fsa *fsaptr1, fsa *fsaptr2, storage_type op_table_type, boolean destroy, char *tempfilename);
-
 int
-sparse_target(g,p1,p2)
-	int g;
-	int *p1, *p2;
+sparse_target(int g, int *p1, int *p2)
 /* p1 points to the beginning of the row of targets from the required state
  * in a sparsely stored fsa, and p2 to the location beyond the end.
  * g is the generator number for which we seek the target.
@@ -68,8 +34,7 @@ sparse_target(g,p1,p2)
 }
 
 void
-fsa_init(fsaptr)
-	fsa *fsaptr;
+fsa_init(fsa *fsaptr)
 /* Allocate space for the sub-structures of fsaptr, and zero all pointers. */
 { int i;
   fsaptr->initial = 0;
@@ -102,10 +67,7 @@ fsa_init(fsaptr)
 }
 
 void
-fsa_table_init(tableptr,maxstates,ne)
-	table_struc *tableptr;
-	int maxstates;
-	int ne;
+fsa_table_init(table_struc *tableptr, int maxstates, int ne)
 /* Intialize the table_data and table_data_ptr fields of fsaptr->table,
  * for maxstates states, with table-type dense.
  * ne is the size of the alphabet.
@@ -121,9 +83,8 @@ fsa_table_init(tableptr,maxstates,ne)
 }
 
 void
-fsa_set_is_initial(fsaptr)
+fsa_set_is_initial(fsa *fsaptr)
 /* Set the is_initial field in fsa *fsaptr - should be freed after use  */
-	fsa *fsaptr;
 { int ns, i;
   ns = fsaptr->states->size;
   tmalloc(fsaptr->is_initial,boolean,ns+1);
@@ -141,9 +102,8 @@ fsa_set_is_initial(fsaptr)
 }
  
 void
-fsa_set_is_accepting(fsaptr)
+fsa_set_is_accepting(fsa *fsaptr)
 /* Set the is_accepting field in fsa *fsaptr - should be freed after use */
-	fsa *fsaptr;
 { int ns, i;
   ns = fsaptr->states->size;
   tmalloc(fsaptr->is_accepting,boolean,ns+1);
@@ -161,11 +121,10 @@ fsa_set_is_accepting(fsaptr)
 }
  
 void
-fsa_table_dptr_init(fsaptr)
+fsa_table_dptr_init(fsa *fsaptr)
 /* Set the field fsaptr->table->table_data_dptr.
  * This is used for fast access to table entries in 2-variable machines.
  */
-	fsa *fsaptr;
 { int i, ngens;
   if (fsaptr->alphabet->type!=PRODUCT || fsaptr->alphabet->arity!=2) {
     fprintf(stderr,"Error in fsa_table_dptr_init: fsa must be 2-variable.\n");
@@ -186,9 +145,8 @@ fsa_table_dptr_init(fsaptr)
 }
 
 void
-srec_clear(srptr)
+srec_clear(srec *srptr)
 /* Deallocate all space used by the set-record fsaptr */
-	srec *srptr;
 { int i;
   if (srptr==0)
     return;
@@ -213,8 +171,7 @@ srec_clear(srptr)
 }
 
 void
-srec_copy(srptr1,srptr2)
-	srec *srptr1, *srptr2;
+srec_copy(srec *srptr1, srec *srptr2)
 /* Copy the information in *srptr2 to *srptr1 (same way round as strcpy!)
  * It is assumed that srptr1 points to a zeroed set-record.
  */
@@ -253,9 +210,7 @@ srec_copy(srptr1,srptr2)
 
 
 void
-table_copy(tableptr1,tableptr2,ne,ns)
-	table_struc *tableptr1, *tableptr2;
-	int ne, ns;
+table_copy(table_struc *tableptr1, table_struc *tableptr2, int ne, int ns)
 /* Copy the information in *tableptr2 to *tableptr1 (same way round as strcpy!)
  * It is assumed that tableptr1 points to a zeroed table_struc.
  * ne and ns are the sizes of the alphabet and state-set.
@@ -314,8 +269,7 @@ table_copy(tableptr1,tableptr2,ne,ns)
 
 
 void
-fsa_copy(fsaptr1,fsaptr2)
-	fsa *fsaptr1, *fsaptr2;
+fsa_copy(fsa *fsaptr1, fsa *fsaptr2)
 /* Copy the information in *fsaptr2 to *fsaptr1 (same way round as strcpy!)
  * It is assumed that fsaptr1 points to a zeroed fsa.
  */
@@ -346,10 +300,8 @@ fsa_copy(fsaptr1,fsaptr2)
 }
 
 void
-table_clear(tableptr,ns)
+table_clear(table_struc *tableptr, int ns)
 /* Deallocate all space used by the table-struc fsaptr */
-	table_struc *tableptr;
-	int ns;
 {
   if (tableptr==0)
     return;
@@ -365,9 +317,8 @@ table_clear(tableptr,ns)
 }
 
 void
-fsa_clear(fsaptr)
+fsa_clear(fsa *fsaptr)
 /* Deallocate all space used by the fsa *fsaptr */
-	fsa	*fsaptr;
 { int ns;
   if (fsaptr==0)
     return;
@@ -385,10 +336,8 @@ fsa_clear(fsaptr)
 }
 
 void
-fsa_delete_state(fsaptr,stateno)
+fsa_delete_state(fsa *fsaptr, int stateno)
 /* Delete state number stateno from the fsa *fsaptr - works for all fsa's. */
-	fsa     *fsaptr;
-	int	stateno;
 { int ns, ne, **table, *ptr, *ptr2, *ptr2e, i, j, k, l;
   srec *srptr;
 
@@ -512,13 +461,11 @@ fsa_delete_state(fsaptr,stateno)
 }
 
 void
-fsa_permute_states(fsaptr,perm)
+fsa_permute_states(fsa *fsaptr, int *perm)
 /* permute the states of fsa *fsaptr, using perm - works for all fsa's
  * perm should be a permutation of the integers 1 to ns - this is not checked
  * ALSO - perm[0] should be 0 !!
  */
-	fsa     *fsaptr;
-	int	*perm;
 { int ns, ne, *newtable, **newtableptr, **table, *perminv,
       *ptr, *ptr2, *ptr2e, i, j;
   srec *srptr;
@@ -601,13 +548,12 @@ fsa_permute_states(fsaptr,perm)
 }
 
 void
-fsa_clear_rws(fsaptr)
+fsa_clear_rws(fsa *fsaptr)
 /* If *fsaptr is an rws (rewriting-system) automaton, then it may have
  * negative targets, which point to reduction equations.
  * This function simply replaces all of these tagets by 0, to make it
  * into a conventional fsa.
  */
-	fsa *fsaptr;
 { int ns, ne, **table, *ptr, *ptr2, *ptr2e, i, j;
 
   if (fsaptr->table->table_type==SPARSE && fsaptr->table->denserows>0) {
@@ -647,10 +593,9 @@ fsa_clear_rws(fsaptr)
 }
 
 void
-fsa_make_accessible(fsaptr)
+fsa_make_accessible(fsa *fsaptr)
 /* Make the fsa *fsaptr accessible - i.e. all states reachable from start-state
  */
-        fsa     *fsaptr;
 { int ns, ct, ne, *gotlist, **table, i, j, k, l, *ptr, *ptre; 
   boolean *got;
   storage_type st = fsaptr->table->table_type;
@@ -731,8 +676,7 @@ fsa_make_accessible(fsaptr)
 }
 
 void
-fsa_minimize(fsaptr)
-	fsa	*fsaptr;
+fsa_minimize(fsa *fsaptr)
 /* Minimize the fsa *fsaptr. */
 { int *block_numa, *block_numb, *block_swap, i, j, k, l, len,
        *ptr, *ptr2, *ptr2e, *ht_ptr,
@@ -919,8 +863,7 @@ fsa_minimize(fsaptr)
 }
 
 void
-fsa_labeled_minimize(fsaptr)
-	fsa	*fsaptr;
+fsa_labeled_minimize(fsa *fsaptr)
 /* This is the minimization function for fsa's which misght have more than
  * two categories of states. 
  * We use the labeled set-record type to identify the categories, so *fsaptr
@@ -1089,8 +1032,7 @@ fsa_labeled_minimize(fsaptr)
 
 
 void
-fsa_bfs(fsaptr)
-	fsa	*fsaptr;
+fsa_bfs(fsa *fsaptr)
 /* Put the fsa *fsapt into bfs form. */
 {  int ns, ne, *perm, *perminv, **table, ct, i, j, s, t;
    boolean *got, dense;
@@ -1155,8 +1097,7 @@ fsa_bfs(fsaptr)
 }
 
 int
-fsa_count(fsaptr)
-	fsa *fsaptr;
+fsa_count(fsa *fsaptr)
 /* Count the size of the accepted language of the fsa *fsaptr.
  * Return this size, or -1 if infinite.
  */
@@ -1250,11 +1191,7 @@ fsa_count(fsaptr)
 }
 
 boolean
-fsa_enumerate(wfile,fsaptr,min,max,putcomma)
-	FILE *wfile;
-	fsa *fsaptr;
-	int min, max;
-	boolean putcomma;
+fsa_enumerate(FILE *wfile, fsa *fsaptr, int min, int max, boolean putcomma)
 /* Enumerate the subset of the language of the finite state automaton *fsaptr,
  * consisting of those words having length l satisfying min <= l <= max.
  * Since there is no point in storing these words currently, they are

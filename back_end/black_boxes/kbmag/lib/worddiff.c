@@ -8,34 +8,15 @@
 
 #include "defs.h"
 #include "fsa.h"
-#include "rws.h"
+#include "worddiff.h"
 #include "externals.h"
+#include "miscio.h"
 
-
-extern void 	(*reduce_word)(char *w);
+extern void 	(*reduce_word)(char *);
 static char	testword[4096]; /* Used for reducing words */
 
-/* Functions defined in this file: */
-void	initialise_wd_fsa(fsa *wd_fsaptr, srec *alphptr, int maxwdiffs);
-void 	build_wd_fsa(fsa *wd_fsaptr, rewriting_system rws, boolean *new_wd);
-boolean	add_wd_fsa(fsa *wd_fsaptr, reduction_equation *eqn, int *inv, boolean reverse);
-void 	make_full_wd_fsa(fsa *wd_fsaptr, int *inv, int start_no);
-void 	clear_wd_fsa(fsa *wd_fsaptr);
-int	diff_no(fsa *wd_fsaptr, char *w);
-void    calculate_inverses(int **invptr, int ngens);
-
-/* Functions used in this file defined in other files: */
-void	fsa_init(fsa *fsaptr);
-void	fsa_table_init(table_struc *tableptr, int maxstates, int ne);
-void	fsa_table_dptr_init(fsa *fsaptr);
-int	add_word_to_buffer(FILE *wfile, char *word, char **symbols);
-void    srec_copy(srec *srptr1, srec *srptr2);
-
 void
-initialise_wd_fsa(wd_fsaptr,alphptr,maxwdiffs)
-	fsa  *wd_fsaptr;
-	srec *alphptr;
-	int maxwdiffs;
+initialise_wd_fsa(fsa *wd_fsaptr, srec *alphptr, int maxwdiffs)
 /* Initialise a word-difference automaton, using  *alphptr as base-alphabet.
  * First state is empty word, which is initial and only accepting state.
  */
@@ -78,10 +59,7 @@ initialise_wd_fsa(wd_fsaptr,alphptr,maxwdiffs)
 }
 
 void
-build_wd_fsa(wd_fsaptr,rws,new_wd)
-	fsa *wd_fsaptr;
-	rewriting_system 	rws;
-	boolean *new_wd;
+build_wd_fsa(fsa *wd_fsaptr, rewriting_system rws, boolean *new_wd)
 /* Make the word-difference machine from the rewriting system rws */
 { int i, **table;
   boolean new;
@@ -109,11 +87,7 @@ build_wd_fsa(wd_fsaptr,rws,new_wd)
 }
 
 boolean
-add_wd_fsa(wd_fsaptr,eqn,inv,reverse)
-        fsa			*wd_fsaptr;
-	reduction_equation	*eqn;
-	int			*inv;
-	boolean			reverse;
+add_wd_fsa(fsa *wd_fsaptr, reduction_equation *eqn, int *inv, boolean reverse)
 /* Alter the word-difference machine to make it accept the equation *eqn
  * If reverse is true, then for all transitions added, the inverse transition
  * is also added.
@@ -175,10 +149,7 @@ add_wd_fsa(wd_fsaptr,eqn,inv,reverse)
 }
 
 void
-make_full_wd_fsa(wd_fsaptr,inv,start_no)
-	fsa *wd_fsaptr;
-	int *inv;
-        int start_no;
+make_full_wd_fsa(fsa *wd_fsaptr, int *inv, int start_no)
 /* Close the set of word-differences under inversion, and add all possible
  * transitions, starting at state number start_no.
  */
@@ -250,8 +221,7 @@ make_full_wd_fsa(wd_fsaptr,inv,start_no)
 
 
 void
-clear_wd_fsa(wd_fsaptr)
-	fsa *wd_fsaptr;
+clear_wd_fsa(fsa *wd_fsaptr)
 /* Clear the state-names for all states except the first. */
 { int i, ns;
   char **wdn;
@@ -264,9 +234,7 @@ clear_wd_fsa(wd_fsaptr)
 
 
 int
-diff_no(wd_fsaptr,w)
-	fsa *wd_fsaptr;
-	char *w;
+diff_no(fsa *wd_fsaptr, char *w)
 /* See if w is in the list of word-differences (state-names of wd_diff).
  * If so, return the number of the state.
  * If not, return 0.
@@ -285,9 +253,7 @@ diff_no(wd_fsaptr,w)
 }
 
 void
-calculate_inverses(invptr,ngens)
-	int **invptr;
-	int ngens;
+calculate_inverses(int **invptr, int ngens)
 /* Use reduction in the word-difference machine to calculate
  * inverses of generators.
  */
