@@ -72,8 +72,6 @@ void  (*reduce_word)(char *);
 
 void
 main(int argc, char *argv[])
-        int             argc;
-        char           *argv[];
 { int arg, i, *inv, ngens, maxwdiffs, numeqns, old_ndiff;
   fsa *wa, *genmultptr;
   char inf1[100], inf2[100], outf1[100], outf2[100], fsaname[100],
