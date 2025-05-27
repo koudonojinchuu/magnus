@@ -140,7 +140,7 @@ boolean         ordgens = FALSE;
  * *fsa, where the length of each vector is equal to the current number of
  * states. mstates is the maximum number of states that we have room for. */
 
-interrupt()
+interrupt(int not_used)
 {
 	if (onintr == 1) {
 		output();
@@ -155,9 +155,7 @@ interrupt()
 	signal(SIGQUIT, SIG_DFL);
 }
 
-main(argc, argv)
-	int             argc;
-	char           *argv[];
+main(int argc, char *argv[])
 {
 	int             len,
 	                i,

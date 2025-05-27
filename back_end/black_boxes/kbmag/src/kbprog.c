@@ -344,7 +344,7 @@ int halting_factor = 0;
 
 
 /* Functions defined in this file: */
-void interrupt();
+void interrupt(int);
 int insert(char **lhs, char **rhs);
 void consider(int k, int l);
 int tidyup(int crelno);
@@ -368,7 +368,7 @@ void badusage();
 void add_lhs();
 
 void
-interrupt()
+interrupt(int not_used)
 /* When the program receives an interrupt  signal, it continues until the
  * next tidying, and then stops and outputs.
  */
