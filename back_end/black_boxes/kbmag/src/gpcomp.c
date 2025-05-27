@@ -32,9 +32,7 @@ FILE *rfile,
 void  badusage();
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg, i, g1, g2;
   fsa mult1, mult2, *compmult;
   char inf1[100], inf2[100], outf[100], fsaname[100],

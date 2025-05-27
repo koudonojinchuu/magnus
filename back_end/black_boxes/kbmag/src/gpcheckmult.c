@@ -73,13 +73,11 @@ FILE *rfile,
 fsa wd_fsa; /* This is for the case that we correct the diff2 machine */
 boolean outputwords = FALSE;
 
-void  badusage();
-void  (*reduce_word)();
+void badusage();
+void (*reduce_word)(char *);
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg, i, *inv, old_ndiff, maxeqns, numeqns, ngens, maxwdiffs;
   fsa  genmult;
   char inf1[100], inf2[100], outf[100], outfwg[100], fsaname[100];

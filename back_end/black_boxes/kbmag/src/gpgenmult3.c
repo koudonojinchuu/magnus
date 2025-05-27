@@ -33,9 +33,7 @@ FILE *rfile1, *rfile2,
 void  badusage();
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg, i, g1, g2;
   fsa genmult, genmult2, *genmult3ptr;
   char inf1[100], inf2[100], outf[100], fsaname[100], tablefilename[100];

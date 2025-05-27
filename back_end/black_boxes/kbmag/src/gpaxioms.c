@@ -51,7 +51,7 @@ fsa		wd_fsa;
 fsa		wa; /* for word-acceptor in wtlex case */
 rewriting_system  rws;
 int weight[MAXCHAR+1]; /* The weights of the generators in the wtlex case */
-void (*reduce_word)();
+void (*reduce_word)(char *);
 
 static char gpname[100], inf[100], inf2[100], outf[100], fsaname[100],
        tablefilename[100];
@@ -74,14 +74,12 @@ FILE *rfile, *wfile;
 void redundant_gen_check();
 void balance_equations();
 void check_short_relation();
-char *file_suffix();
-void long_word_multiplier();
+char *file_suffix(char *w);
+void long_word_multiplier(char *w, char *s);
 void badusage();
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv)
 { int arg, i, j, l, ct;
   char *suffl, *suffr;
   boolean gotl, gotr;
@@ -560,8 +558,7 @@ check_short_relation()
 }
 
 char *
-file_suffix(w)
-	char *w;
+file_suffix(char *w)
 /* For a word w in the generators, this function returns a corresponding
  * string with the terms of w replaced by integers separated by '_'.
  * This is used as a suffix in the filenames used for storing the
@@ -590,8 +587,7 @@ file_suffix(w)
 }
 
 void
-long_word_multiplier(w,s)
-	char *w, *s;
+long_word_multiplier(char *w, char *s)
 /* Calculate the multiplier associated with the word w.
  * s is the suffix of the file in which it will be stored.
  * (s has been derived from w by a call of file_suffix).

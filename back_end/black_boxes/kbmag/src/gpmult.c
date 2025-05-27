@@ -31,9 +31,7 @@ FILE *rfile,
 void  badusage();
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg, g, nlabels;
   fsa genmult, *mult;
   char groupname[100], inf[100], outf[100], fsaname[100];

@@ -24,9 +24,7 @@ FILE *rfile,
 void  badusage();
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg, ct;
   fsa testfsa;
   char inf[100],fsaname[100];

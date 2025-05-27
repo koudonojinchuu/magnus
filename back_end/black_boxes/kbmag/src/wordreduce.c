@@ -59,14 +59,12 @@ FILE *rfile,
      *wfile;
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int delim, arg, num_gens;
   char gpname[100], inf1[100], fsaname[100], inf2[100], outf[100],
 	**names;
   boolean rws_ip, diff1_ip, diff2_ip, diff1c_ip, file_ip, open, first;
-  void (*reduce_word)();
+  void (*reduce_word)(char *);
 
   setbuf(stdout,(char*)0);
   setbuf(stderr,(char*)0);

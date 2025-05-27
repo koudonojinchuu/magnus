@@ -39,9 +39,7 @@ fsa   wd_fsa; /* for word reduction */
 void  badusage();
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg;
   fsa wa, *minred, *minkb, *diff1c;
   char gpname[100], inf[100], outf[100], fsaname[100], tempfilename[100];

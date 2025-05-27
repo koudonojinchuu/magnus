@@ -31,9 +31,7 @@ FILE *rfile, *wfile;
 void badusage();
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int  i, l, ct;
   boolean first;
 

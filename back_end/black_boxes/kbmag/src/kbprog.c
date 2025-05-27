@@ -311,7 +311,7 @@ fsa		reduction_fsa;
 fsa		wd_fsa; /* The word-difference machine if required. */		
 rewriting_system  rws;
 
-void (*reduce_word)(); /* The word-reduction function - it can be any of
+void  (*reduce_word)(char *); /* The word-reduction function - it can be any of
 			* rws_reduce, slow_rws_reduce, slow_rws_reduce_rk.
                         */
 boolean (*check_reduce_word)();/* The functionthat checks if a word is reduced.
@@ -345,21 +345,23 @@ int halting_factor = 0;
 
 /* Functions defined in this file: */
 void interrupt();
-int insert();
-void consider();
-int tidyup();
+int insert(char **lhs, char **rhs);
+void consider(int k, int l);
+int tidyup(int crelno);
 void build_quicktable();
-int modify_table();
+int modify_table(int relno);
 void build_fulltable();
-int lex_compare();
-int rec_compare();
-int rt_rec_compare();
-int compare();
+int lex_compare(char *w1, char *w2);
+int rec_compare(char *w1, char *w2);
+int rt_rec_compare(char *w1, char *w2);
+int compare(char *w1, char *w2);
 int conf_check();
-void sort_eqns();
-int wd_sort_eqns();
+void sort_eqns(int n);
+int wd_sort_eqns(int x);
 void should_we_halt();
-void output_and_exit();
+void output_and_exit(boolean make_wd);
+int wreath_compare(char *w1, char *w2);
+int wtlex_compare(char *w1, char *w2);
 void badusage();
 
 //
@@ -378,9 +380,7 @@ interrupt()
 }
 
 void
-main(argc, argv)
-	int             argc;
-	char           *argv[];
+main(int argc, char *argv[])
 {
 	int             i,
 	                j,
@@ -842,9 +842,7 @@ restart:
 }
 
 int
-insert(lhs,rhs)
-	char             **lhs, **rhs;
-
+insert(char **lhs, char **rhs)
 /* Look at the words in rws.testword1 and rws.testword2, and remove any
  * common prefixes and suffixes of generators with inverses.
  * If they are not both empty at that stage, then use procedure
@@ -944,10 +942,7 @@ insert(lhs,rhs)
 
 
 void
-consider(k, l)
-	int             k,
-	                l;
-
+consider(int k, int l)
 /* The left hand sides of the relations k and l are considered for common
  * parts, according to the Knuth-Bendix procedure, and any new relations
  * produced are processed.
@@ -1068,9 +1063,7 @@ consider(k, l)
 }
 
 int
-tidyup(crelno)
-	int             crelno;
-
+tidyup(int crelno)
 /* Remove redundant relations. "crelno" is the current relation being
  * processed.
  * Return value is the new value of crelano, which may have changed as
@@ -1260,9 +1253,7 @@ build_quicktable()
 }
 
 int
-modify_table(relno)
-	int             relno;
-
+modify_table(int relno)
 /* This version returns a table which only rejects the left hand sides
  * of the rws.eqns themselves.
  * Return value is -1 if current_maxstates is exceeded -  otherwise 1.
@@ -1368,10 +1359,7 @@ build_fulltable()
 }
 
 int
-lex_compare(w1,w2)
-	char		*w1,
-			*w2;
-
+lex_compare(char *w1, char *w2)
 /* Compare words w1 and w2 to see which is bigger according to the ordering.
  * The ordering used here is longer words are bigger, and amongst equal
  * length words, lexicographical ordering according to the order of the
@@ -1406,10 +1394,7 @@ lex_compare(w1,w2)
 } 
 
 int
-wtlex_compare(w1,w2)
-	char		*w1,
-			*w2;
-
+wtlex_compare(char *w1, char *w2)
 /* Compare words w1 and w2 to see which is bigger according to the ordering.
  * The ordering used here is longer words are bigger, where length is computed
  * by adding up the weights of the generators in the words, and amongst equal
@@ -1452,10 +1437,7 @@ wtlex_compare(w1,w2)
 } 
 
 int
-rec_compare(w1, w2)
-	char           *w1,
-	               *w2;
-
+rec_compare(char *w1, char *w2)
 /* Compare words w1 and w2 to see which is 'bigger' according to the
    ordering. The ordering used here is recursive path ordering (based on
    that described in the book "Confluent String Rewriting" by Matthias Jantzen,
@@ -1510,10 +1492,7 @@ rec_compare(w1, w2)
 }
 
 int
-rt_rec_compare(w1, w2)
-	char           *w1,
-	               *w2;
-
+rt_rec_compare(char *w1, char *w2)
 /* Compare words w1 and w2 to see which is 'bigger' according to the
    ordering. The ordering used here is recursive path ordering (based on
    that described in the book "Confluent String Rewriting" by Matthias Jantzen,
@@ -1566,8 +1545,7 @@ rt_rec_compare(w1, w2)
 }
 
 int
-wreath_compare(w1,w2)
-        char *w1, *w2;
+wreath_compare(char *w1, char *w2)
 /* Compare w1 and w2 to see which comes first in the wreath-product ordering
  * (as defined in Sims' book), using the level function rws.level.
  * Note that the recursive ordering is the special case of this with
@@ -1677,7 +1655,7 @@ wreath_compare(w1,w2)
 }
 
 int
-compare(w1,w2)
+compare(char *w1, char *w2)
 /* COMPARE: Compares two words 'w1' and 'w2' to see which is 'bigger'
  * according to the ordering to be used (Set by the global 'ordering').
  * If more ordering options are to be provided, the new function should
@@ -1685,7 +1663,6 @@ compare(w1,w2)
  * function.
  * Returns  0 if w1=w2, 1 if w1 is bigger than w2, otherwise 2.
  */
-	char *w1, *w2;
 {
 	switch (rws.ordering) {
 
@@ -1855,8 +1832,7 @@ conf_check()
 }
 
 void
-sort_eqns(n)
-	int n;
+sort_eqns(int n)
 /* The equations are re-ordered into order of increasing LHS.
  * Only equations up to length n are output.
  */
@@ -1911,8 +1887,7 @@ sort_eqns(n)
 }
 
 int
-wd_sort_eqns(x)
-	int x;
+wd_sort_eqns(int x)
 /* The equations are re-ordered so that those that resulted in new entries
  * in the word-difference table come first.
  * Those are recorded in the boolean array new_wd.
@@ -2016,8 +1991,7 @@ should_we_halt()
 }
 
 void
-output_and_exit(make_wd)
-	boolean make_wd;
+output_and_exit(boolean make_wd)
 {
 	int ndiff1, ndiff2;
 	if (worddiffs){

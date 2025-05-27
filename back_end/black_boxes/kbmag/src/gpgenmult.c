@@ -61,12 +61,10 @@ FILE *rfile,
 fsa wd_fsa; /* This is for the case that we correct the diff1 machine */
 
 void  badusage();
-void  (*reduce_word)();
+void  (*reduce_word)(char *);
 
 void
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg, i, *inv, ngens, maxwdiffs, maxeqns;
   fsa wa, diff, *genmultptr;
   char inf1[100], inf2[100], inf3[100], outf[100], fsaname[100],

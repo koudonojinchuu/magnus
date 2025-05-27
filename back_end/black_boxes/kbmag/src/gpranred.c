@@ -39,11 +39,9 @@ FILE *rfile,
 fsa wd_fsa; /* This is for the case that we correct the diff1 machine */
 
 void  badusage();
-void  (*reduce_word)();
+void  (*reduce_word)(char *);
 
-main(argc, argv)
-        int             argc;
-        char           *argv[];
+main(int argc, char *argv[])
 { int arg, i, r, g, s, *inv, trial, len, ngens, **table, *validgen, nvg;
   int sc, **tablec;
   fsa wa, diff1, *gpranred, wac;
