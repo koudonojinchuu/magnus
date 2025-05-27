@@ -1,6 +1,8 @@
 #ifndef BLACKBOX_RWSIO_H
 #define BLACKBOX_RWSIO_H
 
+#include "rws.h"
+
 void initialise_reduction_fsa();
 void initialise_eqns();
 void read_eqns(FILE *rfile, boolean check);
