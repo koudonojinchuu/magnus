@@ -220,6 +220,10 @@ CHANGES TO KBPROG
 #include "fsaio.h"
 #include "rabkar.h"
 #include "rws.h"
+#include "rwsio.h"
+#include "rwsio2.h"
+#include "rwsreduce.h"
+#include "worddiff.h"
 #include "definitions.h"
 
 #ifdef SYSTEMV
@@ -358,28 +362,8 @@ void should_we_halt();
 void output_and_exit();
 void badusage();
 
-/* Functions used in this file defined in other files: */
-void read_kbinput();
-void read_extra_kbinput();
-void print_kboutput();
-void print_wdoutput();
-void rws_reduce();
-void slow_rws_reduce();
-boolean slow_check_rws_reduce();
-void initialise_wd_fsa();
-void build_wd_fsa();
-void make_full_wd_fsa();
-void fsa_table_init();
-void fsa_table_dptr_init();
-void clear_wd_fsa();
-void rws_clear();
-void fsa_clear();
-void rk_init();
-void rk_reset();
-void rk_clear();
+//
 void add_lhs();
-void slow_rws_reduce_rk();
-boolean slow_check_rws_reduce_rk();
 
 void
 interrupt()
