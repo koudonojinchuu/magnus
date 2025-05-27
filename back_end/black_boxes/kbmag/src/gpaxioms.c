@@ -265,11 +265,11 @@ main(int argc, char *argv)
         add_word_to_buffer(stdout,lhs,rws.gen_name);
         add_to_buffer(0," = ");
         if ((l=strlen(buffer))>44) {
-           printbuffer(stdout,buffer);
+           printbuffer(stdout);
            add_to_buffer(21,"");
         }
         add_word_to_buffer(stdout,rhs,rws.gen_name);
-        printbuffer(stdout,buffer);
+        printbuffer(stdout);
       }
       suffl = file_suffix(lhs); suffr = file_suffix(rhs);
       gotl = gotr = FALSE;
@@ -307,7 +307,7 @@ main(int argc, char *argv)
         add_word_to_buffer(stdout,lhs,rws.gen_name);
         add_to_buffer(0," = ");
         add_word_to_buffer(stdout,rhs,rws.gen_name);
-        printbuffer(stdout,buffer);
+        printbuffer(stdout);
         exit(2);
       }
       if (keepfiles) {
@@ -519,7 +519,7 @@ check_short_relation()
     add_word_to_buffer(stdout,lhs,rws.gen_name);
     add_to_buffer(0," = ");
     add_word_to_buffer(stdout,rhs,rws.gen_name);
-    printbuffer(stdout,buffer);
+    printbuffer(stdout);
   }
 /* pad rhs to length 2 if necessary */
   if (strlen(rhs)==0){
@@ -548,10 +548,10 @@ check_short_relation()
       add_word_to_buffer(stdout,lhs,rws.gen_name);
       add_to_buffer(0," = ");
       add_word_to_buffer(stdout,rhs,rws.gen_name);
-      printbuffer(stdout,buffer);
+      printbuffer(stdout);
       sprintf(buffer,"Label number %d:  ",i);
       add_word_to_buffer(stdout,lab,rws.gen_name);
-      printbuffer(stdout,buffer);
+      printbuffer(stdout);
       exit(2);
     }
   }
@@ -599,7 +599,7 @@ long_word_multiplier(char *w, char *s)
     buffer[0] = '\0';
     add_to_buffer(0,"  #Calculating multiplier for word:  ");
     add_word_to_buffer(stdout,w,rws.gen_name);
-    printbuffer(stdout,buffer);
+    printbuffer(stdout);
   }
   l = strlen(w);
 
