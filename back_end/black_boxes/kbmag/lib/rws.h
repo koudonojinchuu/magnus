@@ -1,3 +1,6 @@
+#ifndef BLACKBOX_RWS_H
+#define BLACKBOX_RWS_H
+
 /* file rws.h 
  * 18/12/95 change for V1.4.2 name of wtshortlex ordering changed to wtlex
  * throughout.
@@ -57,3 +60,5 @@ typedef struct {
   int maxoplen;			/* max length of equations output -
 				 * only used if sorteqns is true */
 } rewriting_system;
+
+#endif

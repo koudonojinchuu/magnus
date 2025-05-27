@@ -1,3 +1,6 @@
+#ifndef BLACKBOX_DEFS_H
+#define BLACKBOX_DEFS_H
+
 /* file defs.h - 13. 9. 94.  */
 
 #include <stdio.h>
@@ -21,3 +24,5 @@ typedef  char boolean;
 
 /* The following macro is used for finding base-prefix of names of fsa's */
 #define base_prefix(w) {char * p=w; while (*p) if (*p=='.') *p='\0'; else p++;}
+
+#endif

@@ -1,11 +1,11 @@
+#ifndef BLACKBOX_HASH_H
+#define BLACKBOX_HASH_H
+
 /* file hash.h 
  * 23.12.94. Changed storage method to having separate blocks, to avoid
  * having to copy large chunks of data.
  * 24/10/94.
  */
-
-#ifndef BLACKBOX_HASH_H
-#define BLACKBOX_HASH_H
 
 typedef struct {
   boolean fixed_len; /* true if the records have fixed length */

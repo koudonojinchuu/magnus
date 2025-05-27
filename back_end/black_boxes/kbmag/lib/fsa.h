@@ -1,3 +1,6 @@
+#ifndef BLACKBOX_FSA_H
+#define BLACKBOX_FSA_H
+
 /* file fsa.h  16.9.94.
  * 5. 12. 94. - added sparse table storage with some rows stored densely.
  *            - designed macros for all accessing of table entries.
@@ -9,9 +12,6 @@
  * of the fsa (finite state automaton) and srec (set record) structures.
  * and macros for accessing and setting entries in the transition table.
  */
-
-#ifndef BLACKBOX_FSA_H
-#define BLACKBOX_FSA_H
 
 typedef enum {SIMPLE, IDENTIFIERS, WORDS, STRINGS, LABELED, PRODUCT} srec_type;
 extern
