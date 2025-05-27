@@ -79,7 +79,7 @@ void long_word_multiplier(char *w, char *s);
 void badusage();
 
 void
-main(int argc, char *argv)
+main(int argc, char *argv[])
 { int arg, i, j, l, ct;
   char *suffl, *suffr;
   boolean gotl, gotr;
