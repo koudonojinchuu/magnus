@@ -314,7 +314,7 @@ rewriting_system  rws;
 void  (*reduce_word)(char *); /* The word-reduction function - it can be any of
 			* rws_reduce, slow_rws_reduce, slow_rws_reduce_rk.
                         */
-boolean (*check_reduce_word)();/* The functionthat checks if a word is reduced.
+boolean (*check_reduce_word)(char*, int);/* The functionthat checks if a word is reduced.
 			     * slow_check_rws_reduce or slow_check_rws_reduce_rk
 			     */
 /* The following items are used to record progress of calculation,

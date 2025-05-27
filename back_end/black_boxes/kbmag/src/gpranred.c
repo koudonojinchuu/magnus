@@ -172,7 +172,7 @@ sc = tablec[validgen[g]][sc];
       if (print_level>1)
         printf("  #Altering wd-machine to make it accept new equation.\n");
       changed = TRUE;
-      add_wd_fsa(&diff1,*eqnptr,inv,FALSE);
+      add_wd_fsa(&diff1,eqnptr,inv,FALSE);
       if (print_level>=2)
         printf("  #Word-difference machine now has %d states.\n",
                wd_fsa.states->size);

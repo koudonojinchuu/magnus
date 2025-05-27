@@ -271,7 +271,7 @@ main(int argc, char *argv[])
     
           i=0;
           while (eqnptr[i].lhs && i<maxeqns1) {
-            add_wd_fsa(&wd_fsa,eqnptr[i],inv,FALSE);
+            add_wd_fsa(&wd_fsa,eqnptr+i,inv,FALSE);
             i++;
           }
     
