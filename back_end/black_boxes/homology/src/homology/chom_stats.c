@@ -71,10 +71,6 @@ void command_input(FILE **fin, FILE **fout, int *start, int *end,
 										int *verbose, char *statsfilename);
 #endif
 
-/* defined elsewhere */
-void get_stats();
-/* --- */
-
 int
 #ifndef NO_CMD_LINE /* version that does not use command line - such as Mac */
 main(int argc, char *argv[])
@@ -178,6 +174,7 @@ main()
 						tuples->info[i]->vert, n), TRIVIAL | RETAIN_INV_TUPLES);
 						/* We are ignoring inverse tuples */
 				time2 = time(NULL);
+        #ifdef _STATS
 				{
 				int top_nd, sub_nd, top_d, sub_d, max_level;
 				get_stats(&top_nd, &sub_nd, &top_d, &sub_d, &max_level);
@@ -188,6 +185,7 @@ main()
 				fprintf(fstats, "\tMaximum level of recursion achieved = %d\n", max_level);
 /*				fprintf(fstats, "\tTime Taken (nearest second) = %.0f\n", difftime(time2, time1));*/
 				}
+        #endif
 				fprintf(fstats, "\tCalculated Boundary:\n");
 				display_boundary(fstats, boundary[i]);
 				delete_cube(cube);

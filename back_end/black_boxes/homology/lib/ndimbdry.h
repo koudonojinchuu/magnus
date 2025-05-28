@@ -1,3 +1,6 @@
+#ifndef H_NDIMBDRY
+#define H_NDIMBDRY			/* Make sure it is only included once! */
+
 /* ndimbdry.h     - header file for applications decomposing cubes for
                   homology of groups.
    ===========================================================================
@@ -14,9 +17,6 @@
 	These should be created through the use of functions in grpinput.h
 
 */
-
-#ifndef H_NDIMBDRY
-#define H_NDIMBDRY			/* Make sure it is only included once! */
 
 #include "homcommon.h"
 
