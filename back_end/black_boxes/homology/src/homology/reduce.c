@@ -26,6 +26,7 @@
 #include <string.h>
 #include <grpinput.h>
 #include <ndimbdry.h>
+#include <2dimbdry.h>
 #include <rewrite.h>
 
 #define VERSION_NUM 1.3
@@ -52,10 +53,6 @@ void	command_line(FILE **fp, int argc, char *argv[]);
 #else
 void    command_input(FILE **fp);
 #endif
-
-/* defined elsewhere */
-void printword();
-/* --- */
 
 int
 #ifndef NO_CMD_LINE /* version that does not use command line - such as Mac */
@@ -101,12 +98,12 @@ main()
 	test[i] = '\0';
 
 	printf("\nThe initial word: ");
-	printword(test);
+	printword(stdout, test);
 	printf("\n");
 
 	printf("\nThe reduced word: ");
 	reduce(test);
-	printword(test);
+	printword(stdout, test);
 	printf("\n");
 
 	free(test);
