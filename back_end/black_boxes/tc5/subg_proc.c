@@ -1,12 +1,11 @@
 /* File subg_proc.c  */
 #include "tc.h"
 #include "coset_def.h"
-
-Void
-tc_subg_proc(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
-{
 #include "tc_void.h"
+
+void
+tc_subg_proc(struct tc_str_vars *tc_pvar)
+{
 register Int	subg;
 register Int	*beg;
 register Int	*end;
@@ -72,9 +71,8 @@ Int     base_len, cyclic_perms, cyclic_count;
 	return;
 }
 
-Void
-tc_newrel_newsg(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+void
+tc_newrel_newsg(struct tc_str_vars *tc_pvar)
 {
 #include "tc_void.h"
 register Int subg;

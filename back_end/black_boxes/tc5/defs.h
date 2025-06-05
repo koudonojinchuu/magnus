@@ -1,3 +1,6 @@
+#ifndef BLACKBOX_TC5_DEFS_H
+#define BLACKBOX_TC5_DEFS_H
+
 #ifndef __GROUP__
 #define __GROUP__
 #define TRUE    1
@@ -22,6 +25,4 @@
 #define max0(x,y)	(((x) > (y)) ? (x) : (y))
 #endif
 
-
-
-
+#endif

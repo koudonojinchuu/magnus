@@ -2,13 +2,12 @@
 #ifdef __DI
 #include "tcyacc.h"
 #endif
+#include "tc_void.h"
 #include "proc_ded.h"
 
-Void
-tc_proc_ded(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+void
+tc_proc_ded(struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
 register Int    *beg;
 register Int    *f_end;
 register Int    *b_end;

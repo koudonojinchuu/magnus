@@ -7,8 +7,7 @@ extern FILE *fout;
 
 void gethostname();
 
-void tc_time(end_enum)
-int	end_enum;
+void tc_time(int end_enum)
 {
 /* end_enum==1 means enumerations end.  */
 /* get date and time, get information about resource utilization */

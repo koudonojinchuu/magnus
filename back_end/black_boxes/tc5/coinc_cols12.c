@@ -2,27 +2,24 @@
 #ifdef __DI
 #include "tcyacc.h"
 #endif
+#include "tc_void.h"
 #include "coinc_cols12.h"
 
-Void
-tc_coinc_cols12(lows, highs,tc_pvar)
-Int	lows;
-Int	highs;
-struct  tc_str_vars     *tc_pvar;
+void
+tc_coinc_cols12(int lows, int highs, struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
-register Int	low;
-register Int 	high;
-register Int	*ct;
-register Int 	j;
-register Int	high1;
-register Int	low1;
-register Int	high2;
-register Int	low2;
-register Int 	k;
-register Int	i;
-register Int 	l;
-register Int    low1s,low2s,high1s,high2s;
+register int	low;
+register int 	high;
+register int	*ct;
+register int 	j;
+register int	high1;
+register int	low1;
+register int	high2;
+register int	low2;
+register int 	k;
+register int	i;
+register int 	l;
+register int    low1s,low2s,high1s,high2s;
 /*
 * subroutine to process columns 1 and 2 of coincident cosets
 * coset lows = coset highs and its consequences.

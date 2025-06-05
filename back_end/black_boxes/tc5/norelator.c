@@ -3,18 +3,17 @@
 #include "tcyacc.h"
 #endif
 #include "norelator.h"
-
-Void
-tc_norelator(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
-{
 #include "tc_void.h"
-register Int	*ct;
-register Int    ncol;
-register Int    col;
-register Int    icol;
-register Int    k;
-Int		*inv_to_col;
+
+void
+tc_norelator(struct tc_str_vars *tc_pvar)
+{
+register int	*ct;
+register int    ncol;
+register int    col;
+register int    icol;
+register int    k;
+int		*inv_to_col;
 /* subroutine to fill coset table when there are no group relators
 *  and coset table is incomplete after completing subgroup generators
 *  tables. this subroutine stops at space overflow and gives a

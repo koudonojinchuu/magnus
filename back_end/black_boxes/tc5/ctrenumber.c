@@ -3,9 +3,8 @@
 #include "tc.h"
 #include "miscellaneous.h"
 
-Void
-tc_ctrenumber(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+void
+tc_ctrenumber(struct tc_str_vars *tc_pvar)
 {
 /* subroutine to change the addresses of cosets back into the number. */
 register Int    *p;
@@ -22,8 +21,7 @@ register Int	*t;
 	return;
 }
 void
-tc_unrenumber(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+tc_unrenumber(struct tc_str_vars *tc_pvar)
 {
 register Int    *p;
 register Int    *ct;

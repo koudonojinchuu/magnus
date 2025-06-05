@@ -1,12 +1,11 @@
 /* File set_relators.c  */
 #include "tcyacc.h"
 #include "tc.h"
-
-Void
-tc_set_relators(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
-{
 #include "tc_void.h"
+
+void
+tc_set_relators(struct tc_str_vars *tc_pvar)
+{
 register Int    j;
 register Int    m;
 register Int    i;

@@ -1,11 +1,10 @@
 /* File compact.c */
+#include "tc_void.h"
 #include "compact.h"
 
-Void
-tc_compact(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+void
+tc_compact(struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
 register Int    *ct;
 register Int    *inv_to_col;
 register Int    ncol;

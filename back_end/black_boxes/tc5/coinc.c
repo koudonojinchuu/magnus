@@ -2,15 +2,12 @@
 #ifdef __DI
 #include "tcyacc.h"
 #endif
+#include "tc_void.h"
 #include "coinc.h"
 
-Void
-tc_coinc(lows,highs,tc_pvar)
-Int	lows;
-Int 	highs;
-struct  tc_str_vars     *tc_pvar;
+void
+tc_coinc(Int lows, Int highs, struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
 register Int 	*ct;
 register Int 	low;
 register Int 	high;

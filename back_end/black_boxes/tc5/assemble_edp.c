@@ -1,11 +1,10 @@
 /* File assemble_edp.c  */
 #include "tc.h"
-
-Void
-tc_assemble_edp(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
-{
 #include "tc_void.h"
+
+void
+tc_assemble_edp(struct tc_str_vars *tc_pvar)
+{
 register Int    i;
 register Int    k;
 register Int    l;

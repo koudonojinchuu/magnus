@@ -1,29 +1,22 @@
 /* file opt.c  */
 #include "tcyacc.h"
 #include "tc.h"
+#include "tc_void.h"
 #include "tcyacc.h"
 #include "miscellaneous.h"
 #include "ct.h"
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <unistd.h> // For unlink()
+#include "save_ct.h"
+#include "opt.h"
 #define	MST(i,j)	MST_T[i+i+j-3]
 
 char * eemalloc();
-int tc_tracew();
-void tc_unrenumber();
-void tc_compact();
-void tc_coinc();
-void tc_text();
-void tc_restore();
-void unlink();
-void tc_ctrenumber();
-void tc_print_ct();
-void tc_todd_coxeter();
 
 void
-tc_mst(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+tc_mst(struct tc_str_vars *tc_pvar)
 {
 /* subroutine to build a minimal spanning tree that is stored in MST[]
 *  and set MSTFLG TRUE.
@@ -112,10 +105,7 @@ Int	*ct;
 	MSTFLG = TRUE;
 }
 
-Int tc_cosrep(coseth, order, tc_pvar)
-Int	coseth;
-Int	*order;
-struct  tc_str_vars     *tc_pvar;
+Int tc_cosrep(Int coseth, Int *order, struct tc_str_vars *tc_pvar)
 {
 register Int    i;
 register Int    kn;
@@ -183,9 +173,7 @@ register Int    j;
 	return i;
 }
 Int
-tc_normal(n, tc_pvar)
-Int 	n;
-struct  tc_str_vars     *tc_pvar;
+tc_normal(Int n, struct tc_str_vars *tc_pvar)
 {
 register Int    subg;
 register Int    *beg;
@@ -208,11 +196,7 @@ register Int    *end;
 	return 1;
 }
 Int
-tc_tracew(n, beg, end, tc_pvar)
-Int 	n;
-Int	*beg;
-Int	*end;
-struct  tc_str_vars     *tc_pvar;
+tc_tracew(Int n, Int *beg, Int *end, struct tc_str_vars *tc_pvar)
 {
 register Int ifront;
 register Int	*forscan;
@@ -234,11 +218,7 @@ Int	*ct;
 	return i;
 }			
 void
-tc_rc(coset,stop,desire,tc_pvar)
-Int	coset;
-Int	stop;
-Int 	desire;
-struct  tc_str_vars     *tc_pvar;
+tc_rc(Int coset, Int stop, Int desire, struct tc_str_vars *tc_pvar)
 {
 char	*tc_save();
 /* this subroutine finds non trival subgroups in the coset table with index a
@@ -326,9 +306,7 @@ char	*tc_save();
 	}
 }
 void
-tc_normcl(parmtr, tc_pvar)
-Int 	parmtr;
-struct  tc_str_vars     *tc_pvar;
+tc_normcl(Int parmtr, struct tc_str_vars *tc_pvar)
 {
 register Int 	conji;
 register Int	i;

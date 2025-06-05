@@ -3,15 +3,10 @@
 #include "tcyacc.h"
 #endif
 #include "apply.h"
-Void
-tc_apply(hcoset, beg, end, defflg, tc_pvar)
-Int     hcoset;
-Int     *beg;
-Int     *end;
-Logical	defflg;
-struct  tc_str_vars     *tc_pvar;
-{
 #include "tc_void.h"
+void
+tc_apply(int hcoset, int *beg, int *end, Logical defflg, struct tc_str_vars *tc_pvar)
+{
 register Int	*forscan;
 register Int	*backscan;
 register Int	col;

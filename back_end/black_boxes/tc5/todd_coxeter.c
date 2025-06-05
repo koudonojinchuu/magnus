@@ -1,16 +1,14 @@
 /* File todd_coxeter.c */
 #include "todd_coxeter.h"
 #include <stdlib.h>
+#include "tc_void.h"
 
 void tc_unrenumber();
 void tc_newrel_newsg();
 
-Void
-tc_todd_coxeter(restart,tc_pvar)
-Int 	restart;
-struct  tc_str_vars     *tc_pvar;
+void
+tc_todd_coxeter(Int restart, struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
 register Int	*y;
 register Int	spsize;
 register Float	sttime;

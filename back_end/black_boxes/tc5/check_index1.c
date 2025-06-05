@@ -1,12 +1,11 @@
 /* File check_index1.c */
 #include "tc.h"
+#include "tc_void.h"
 #include "ct.h"
 
-Void
-tc_check_index1(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+void
+tc_check_index1(struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
 register Int	*ct;
 register Int	j;
 register Int	i;

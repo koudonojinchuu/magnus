@@ -3,15 +3,13 @@
 #include "coset_def.h"
 #include "tc.h"
 #include "miscellaneous.h"
+#include "tc_void.h"
 /*#include "tctime.h"*/
 
 
-Void
-tc_text(arg, tc_pvar)
-Int	arg;
-struct  tc_str_vars     *tc_pvar;
+void
+tc_text(Int arg, struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
 register Int	i;
 /*
 * Subroutine to write out various messages.

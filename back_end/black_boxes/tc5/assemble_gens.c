@@ -1,12 +1,11 @@
 /* File assemble_gens.c  */
 #include "tc.h"
 #include "tcyacc.h"
-
-Void
-tc_assemble_gens(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
-{
 #include "tc_void.h"
+
+void
+tc_assemble_gens(struct tc_str_vars *tc_pvar)
+{
 register Int 	k;
 register Int	ncol;
 register Int	i;

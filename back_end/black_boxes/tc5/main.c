@@ -9,9 +9,12 @@
 #include "stdio.h" 
 #include "tcyacc.h" 
 #include "tc.h"
+#include "tc_void.h"
+#include "save_ct.h"
 #include "sys/types.h"
 #include "miscellaneous.h"
 #include "parser.h"
+#include "opt.h"
 #include <stdlib.h>
 #include <string.h>
 extern Rel_stk_type *rel_pt;
@@ -26,44 +29,28 @@ char 	*infile;	/* input file name */
 FILE 	*fin; 		/* input file pointer */ 
 FILE	*fout;		/* output file pointer  */
 int	lineno = 1; 
-char	*eemalloc();
-void tc_time();
+
+/* functions defined in this file */
+void tc_add_cc(int n, struct tc_str_vars *tc_pvar);
 void run();
-int tc_parse();
-void del_r_s();
-void printt();
-void tc_text();
-void tc_compact();
-void tc_save();
-void tc_restore();
-void tc_ctrenumber();
-void tc_mst();
-void tc_print_ct();
-void tc_add_cc();
-void tc_cycles();
-void tc_sc();
-void check_relator();
-void relator_by_gennumb();
-int tc_tracew();
-void tc_normcl();
-void tc_o();
-void tc_rc();
-void free_reduce_n();
 void sort();
-void free_reduce();
-void check_involutory();
+void relator_by_gennumb(Rel_stk_type **ptt);
+void print_rel(Rel_stk_type *relpp, int n);
+void print_rel_n(Rel_stk_type *relpp, int n);
 void get_exp();
 void get_length();
-void tc_todd_coxeter();
+void put_gen();
+void printt();
+void free_reduce();
+void free_reduce_n();
 void free_space_r();
 void free_space_s();
-void print_rel_n();
-void print_rel();
-void put_gen();
-void check_gen();
-int tc_cosrep();
-void tc_unrenumber();
-void tc_coinc();
+void check_relator(Rel_stk_type **ptt);
+void check_involutory();
+void check_gen(char c);
+/* --- */
+
+char *eemalloc();
 
 /* the printing format of relators and subgens has been changed - add a ',' 
 *  at the end of relators and subgens. 10/8/92.
@@ -457,9 +444,7 @@ free_space_s()
         } 
 }
 void
-print_rel_n(relpp, n)
-Rel_stk_type *relpp;
-int n;
+print_rel_n(Rel_stk_type *relpp, int n)
 {
 	Rel_stk_type *relp;
 	int     i,j,len;
@@ -514,9 +499,7 @@ int n;
                 fprintf(fout,";\n");
 }
 void
-print_rel(relpp, n)
-Rel_stk_type *relpp;
-int n;
+print_rel(Rel_stk_type *relpp, int n)
 {
         Rel_stk_type *relp;
         int     i,j,len;
@@ -826,8 +809,7 @@ sort()  /* sort relators and subgroup generators in increasing order */
 	sort_relators('g'); 
 } 
 void
-check_relator(ptt) 
-Rel_stk_type **ptt;
+check_relator(Rel_stk_type **ptt)
 {	
 	Rel_stk_type *ptr; 
 	char	     *ct; 
@@ -837,8 +819,7 @@ Rel_stk_type **ptt;
 			check_gen(*ct); /* check every letter */  
 } 
 void
-check_gen(c) /* check c to tell if it is a generator of this group */ 
-char c; 
+check_gen(char c) /* check c to tell if it is a generator of this group */ 
 { 
 	int i; 
 	for(i = 0; i <= Gen_no; i++) 
@@ -848,8 +829,7 @@ char c;
 	exit(1);
 } 
 void
-relator_by_gennumb(ptt) 
-Rel_stk_type **ptt;
+relator_by_gennumb(Rel_stk_type **ptt)
 {
 /* replace letters in relators by corresponding subsript in Gen_st[]. */
         Rel_stk_type *ptr;
@@ -1037,9 +1017,7 @@ add_sg()
         return;
 }
 void
-tc_add_cc(n, tc_pvar)
-int	n;
-struct  tc_str_vars     *tc_pvar;
+tc_add_cc(int n, struct tc_str_vars *tc_pvar)
 {
 	Rel_stk_type *p;
 	int length,i;

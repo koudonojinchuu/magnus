@@ -1,3 +1,6 @@
+#ifndef BLACKBOX_TC5_TC_H
+#define BLACKBOX_TC5_TC_H
+
 /*
  * Include file which MUST be included by every tc source file. 
  */
@@ -195,4 +198,4 @@ Int	tabrow;
 #define TABROW		tc_pvar->tabrow
 #endif
 
-
+#endif

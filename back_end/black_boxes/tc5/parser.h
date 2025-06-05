@@ -1,3 +1,7 @@
+#ifndef BLACKBOX_TC5_PARSER_H
+#define BLACKBOX_TC5_PARSER_H
+
+
 #include "tcyacc1.h"
 #define   AI    127
 #define   AO    128
@@ -91,3 +95,19 @@ typedef struct Word_pt {  /* word pointer and the number of words  */
 } Word_pt;	
 #define NumOfWord  w_pt->numb
 #define Pt2Word   w_pt->rel_pt
+
+void add_new(Rel_stk_type **pt_ori, Rel_stk_type *pt_new);
+void del_r_s(Rel_stk_type **ptt);
+void del_rel_sg(int n, Rel_stk_type **ptt);
+void diagnostic(char *s);
+void follow(int *ch);
+void follow_ai();
+void follow_ao();
+void follow_dr_ds(Rel_stk_type **ch);
+void follow_gen();
+void follow_rc();
+void follow_tw();
+void follow_wo();
+int tc_parse();
+
+#endif

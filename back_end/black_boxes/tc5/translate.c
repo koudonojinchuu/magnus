@@ -1,11 +1,10 @@
 /* File translate.c  */
 #include "tc.h"
-
-Void
-tc_translate(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
-{
 #include "tc_void.h"
+
+void
+tc_translate(struct tc_str_vars *tc_pvar)
+{
 Int	*pt;
 Int	i;
 Int	k;

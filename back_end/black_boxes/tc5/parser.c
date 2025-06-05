@@ -1,9 +1,9 @@
 #include "stdio.h"
-#include "parser.h"
 #include "y.tab.h"
 #include "tcyacc.h"
 #include <stdlib.h>
 #include <string.h>
+#include "parser.h"
 extern	FILE    *fin, *fout;
 extern  Word_pt *w_pt, word_;
 extern	Gen_stk_type gen_stk[];
@@ -11,19 +11,19 @@ int tclex();
 void follow_ai();
 void follow_wo();
 void follow_ao();
-void follow_dr_ds();
+void follow_dr_ds(Rel_stk_type **ch);
 void follow_gen();
 void follow_rc();
 void follow_tw();
-void follow();
-void add_new();
-void del_rel_sg();
-void del_r_s();
+void follow(int *ch);
+void add_new(Rel_stk_type **pt_ori, Rel_stk_type *pt_new);
+void del_rel_sg(int n, Rel_stk_type **ptt);
+void del_r_s(Rel_stk_type **ptt);
 int yylex();
 int yyerror(char *);
 void put_gen();
 extern void execerror(char*, char*);
-void diagnostic();
+void diagnostic(char *s);
 void init_gen_stk();
 extern char *eemalloc();
 #define	ExecErrorInt	execerror("syntax error, expect an integer","")
@@ -188,8 +188,7 @@ tc_parse()
 }
 				
 void
-follow(ch)
-int *ch;
+follow(int *ch)
 {
 int 	c;
 	c = yylex();
@@ -266,8 +265,7 @@ char c_str[8];
 	}	
 }	
 void
-diagnostic(s)
-char *s;
+diagnostic(char *s)
 {
         int i,length;
         for(i=0; i<=9; i++)
@@ -320,8 +318,7 @@ char *s;
 }
 
 void
-follow_dr_ds(ch)
-Rel_stk_type **ch;
+follow_dr_ds(Rel_stk_type **ch)
 {
 int 	c;
 int	n;
@@ -367,9 +364,7 @@ int	l;
 	execerror("syntax error", "");
 }	
 void
-del_rel_sg(n,ptt)
-int     n;
-Rel_stk_type **ptt;
+del_rel_sg(int n, Rel_stk_type **ptt)
 {
         Rel_stk_type *ft;
         int     i;
@@ -379,8 +374,7 @@ Rel_stk_type **ptt;
         if (ft) ft->len = 0;
 }
 void
-del_r_s(ptt)
-Rel_stk_type **ptt;
+del_r_s(Rel_stk_type **ptt)
 {
         Rel_stk_type *st,*ft;
 /* ft points to the prior of st */
@@ -455,9 +449,7 @@ int	c;
 		ExecErrorDtm;
 }
 void
-add_new(pt_ori, pt_new)
-Rel_stk_type **pt_ori;
-Rel_stk_type *pt_new;
+add_new(Rel_stk_type **pt_ori, Rel_stk_type *pt_new)
 {
 	Rel_stk_type *p;
 	p = *pt_ori;

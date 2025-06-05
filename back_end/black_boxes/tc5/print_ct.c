@@ -1,24 +1,16 @@
 /* File print_ct.c */
-#include "print_ct.h"
 #include <string.h>
 #include <stdlib.h>
+#include "tc_void.h"
+#include "opt.h"
+#include "print_ct.h"
 
 char* eemalloc(unsigned n);
-int tc_cosrep();
-int tc_normal();
-int tc_compact();
-void tc_ctrenumber();
-void tc_mst();
 
 #define CT_T(i,j)	ct[(i-1) * NCOL + j + 1]
-Void
-tc_print_ct(n1, n2, n3, tc_pvar)
-Int	n1;
-Int	n2;
-Int	n3;
-struct  tc_str_vars     *tc_pvar;
+void
+tc_print_ct(Int n1, Int n2, Int n3, struct tc_str_vars *tc_pvar)
 {
-/* #include "tc_void.h" */
 char    gen_l;
 Int     gen_n;
 Int     i,j;
@@ -95,9 +87,7 @@ Int 	o;
 }
 /* End File */
 void
-tc_sc(n, tc_pvar)
-Int     n;
-struct  tc_str_vars     *tc_pvar;
+tc_sc(Int n, struct tc_str_vars *tc_pvar)
 {
 char    gen_l;
 Int     gen_n;
@@ -171,8 +161,7 @@ Int	o;
 		fprintf(fout," No stabilising cosets.\n");
 }
 void
-tc_cycles(tc_pvar)
-struct  tc_str_vars     *tc_pvar;
+tc_cycles(struct tc_str_vars *tc_pvar)
 {
 #define  LINEWIDTH	76
 register Int i;
@@ -253,9 +242,7 @@ char	tem[30];
 		*y = (*y < 0) ? -*y : *y;
 }	
 void
-tc_o(o, tc_pvar)
-Int	o;
-struct  tc_str_vars     *tc_pvar;
+tc_o(Int o, struct tc_str_vars *tc_pvar)
 {
 register Int    j;
 register Int    i;

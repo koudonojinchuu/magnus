@@ -1,15 +1,13 @@
 /* file enum.c */
+#include "tc_void.h"
 #include "enum.h"
 #ifdef __DI
 #include "tcyacc.h"
 #endif
 
-Void
-tc_enum(restart, tc_pvar)
-Int	restart;
-struct  tc_str_vars     *tc_pvar;
+void
+tc_enum(Int restart, struct tc_str_vars *tc_pvar)
 {
-#include "tc_void.h"
 register Int 	*ct;
 Int  	*inv_to_col;
 register Int	iback;

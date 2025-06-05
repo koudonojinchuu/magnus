@@ -6,14 +6,14 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
+#include "save_ct.h"
 int yyerror(char *);
 void free_space_r();
 void free_space_s();
 void init_pointer();
 extern char *eemalloc();
 char *
-tc_save(tc_pvar)
-struct tc_str_vars	*tc_pvar;
+tc_save(struct tc_str_vars *tc_pvar)
 {
 	FILE    *tcout, *fopen();
         Int     i,j;
@@ -158,8 +158,7 @@ struct tc_str_vars	*tc_pvar;
 	return out_file;
 }
 void
-tc_restore(tc_pvar)
-struct tc_str_vars       *tc_pvar;
+tc_restore(struct tc_str_vars *tc_pvar)
 {
 /* subroutine to restore all information about a enumeration so that
 *  user will be able to recover it and resume this enumeration.
@@ -382,8 +381,7 @@ struct tc_str_vars       *tc_pvar;
 	return;
 }
 void
-init_pointer(tc_pvar)
-struct tc_str_vars       *tc_pvar;
+init_pointer(struct tc_str_vars *tc_pvar)
 {
 int	i;
 #define Init_(n)        for(i=0;i<2;i++) n[i]=0; n[2] = 1
